@@ -11,7 +11,14 @@ public class GameManagerScript : MonoBehaviour
 
     private void Start()
     {
+        player.gameObject.SetActive(false);
+    }
+
+    public void StartNewGame()
+    {
         TerrainManager.GetComponent<GenerateTerrainScript>().StartTerrainGeneration();
+        Camera.main.gameObject.transform.SetParent(player.transform);
+        player.gameObject.SetActive(true);
     }
 
     private void Update()
