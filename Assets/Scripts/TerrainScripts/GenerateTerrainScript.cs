@@ -4,18 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class GenerateTerrainScript : MonoBehaviour {
+public class GenerateTerrainScript : MonoBehaviour
+{
 
     public GameObject[] stoneObjects;
     public GameObject[] dirtObjects;
 
-    
+
     public GameObject coal;
     public GameObject copper;
     public GameObject silver;
     public GameObject gold;
     public GameObject diamond;
-    
+
 
     private GameObject[,] frontTiles;
     private GameObject[,] backTiles;
@@ -57,13 +58,11 @@ public class GenerateTerrainScript : MonoBehaviour {
     public float diamondChangeInHeight;
 
 
-
-
-    private void Start()
+    public void StartTerrainGeneration()
     {
         frontTiles = new GameObject[xDimension, heightAddition + 50];
         chunkArray = new GameObject[xDimension % chunkSize];
-        for(int i = 0; i < chunkArray.GetLength(0); i++)
+        for (int i = 0; i < chunkArray.GetLength(0); i++)
         {
             chunkArray[i] = new GameObject("chunk" + i);
         }
@@ -73,16 +72,20 @@ public class GenerateTerrainScript : MonoBehaviour {
         GenerateCaves();
         GenerateGrass();
 
-        GenerateResources(coal,    coalChance,    coalNeighChance,    coalChangeInHeight);
-        GenerateResources(copper,  copperChance,  copperNeighChance,  copperChangeInHeight);
-        GenerateResources(silver,  silverChance,  silverNeighChance,  silverChangeInHeight);
-        GenerateResources(gold,    goldChance,    goldNeighChance,    goldChangeInHeight);
+        GenerateResources(coal, coalChance, coalNeighChance, coalChangeInHeight);
+        GenerateResources(copper, copperChance, copperNeighChance, copperChangeInHeight);
+        GenerateResources(silver, silverChance, silverNeighChance, silverChangeInHeight);
+        GenerateResources(gold, goldChance, goldNeighChance, goldChangeInHeight);
         GenerateResources(diamond, diamondChance, diamondNeighChance, diamondChangeInHeight);
 
         GenerateChunk();
 
         DisplayTerrain();
+
+        this.GetComponent<TerrainManagerScript>().SetFrontTiles(frontTiles);
+
     }
+
 
     private void GenerateTerrainNoise()
     {
@@ -136,7 +139,7 @@ public class GenerateTerrainScript : MonoBehaviour {
                     {
                         stoneArray[x, y] = 1;
                     }
-                    else if(neighborCount < stoneMinNeighReq)
+                    else if (neighborCount < stoneMinNeighReq)
                     {
                         stoneArray[x, y] = 0;
                     }
@@ -161,12 +164,12 @@ public class GenerateTerrainScript : MonoBehaviour {
 
     private void GenerateCaves()
     {
-        
+
     }
 
     private void GenerateGrass()
     {
-        
+
     }
 
     private void GenerateResources(GameObject resource, int resourceChance, int resourceNeighChance, float resourceChangeInHeight)
@@ -215,7 +218,7 @@ public class GenerateTerrainScript : MonoBehaviour {
                 if (resourceArray[x, y] == 1)
                 {
                     Destroy(frontTiles[x, y]);
-                    frontTiles[x,y] = Instantiate(resource, new Vector2(x, y), Quaternion.identity);
+                    frontTiles[x, y] = Instantiate(resource, new Vector2(x, y), Quaternion.identity);
                 }
             }
         }
@@ -224,12 +227,12 @@ public class GenerateTerrainScript : MonoBehaviour {
     private void GenerateChunk()
     {
         int chunkArrayIndex = 0;
-        Debug.Log(frontTiles.GetLength(0)+ " " + frontTiles.GetLength(1));
+        Debug.Log(frontTiles.GetLength(0) + " " + frontTiles.GetLength(1));
         for (int x = 0; x < frontTiles.GetLength(0); x++)
         {
-            for(int y = 0; y < frontTiles.GetLength(1); y++)
+            for (int y = 0; y < frontTiles.GetLength(1); y++)
             {
-                if(frontTiles[x,y] != null)
+                if (frontTiles[x, y] != null)
                 {
                     frontTiles[x, y].gameObject.transform.parent = chunkArray[chunkArrayIndex].transform;// SetParent(chunkArray[chunkArrayIndex].transform);
                 }
@@ -259,17 +262,17 @@ public class GenerateTerrainScript : MonoBehaviour {
 
     //HELPER FUNCTIONS
 
-    private int GetNeighBorhood(byte [,] neighArray, int x, int y, int checkID)
+    private int GetNeighBorhood(byte[,] neighArray, int x, int y, int checkID)
     {
         int neighbors = 0;
 
-        if((x-1) >= 0 && (y-1) >= 0 && (x+2) < neighArray.GetLength(0) && (y+2) < neighArray.GetLength(1))
+        if ((x - 1) >= 0 && (y - 1) >= 0 && (x + 2) < neighArray.GetLength(0) && (y + 2) < neighArray.GetLength(1))
         {
-            if(neighArray[x - 1,y - 1] == checkID)//left bottom
+            if (neighArray[x - 1, y - 1] == checkID)//left bottom
             {
                 neighbors++;
             }
-            if (neighArray[x - 1, y  ] == checkID)//left center
+            if (neighArray[x - 1, y] == checkID)//left center
             {
                 neighbors++;
             }
@@ -277,11 +280,11 @@ public class GenerateTerrainScript : MonoBehaviour {
             {
                 neighbors++;
             }
-            if (neighArray[x    , y - 1] == checkID)//center bottom
+            if (neighArray[x, y - 1] == checkID)//center bottom
             {
                 neighbors++;
             }
-            if (neighArray[x    , y + 1] == checkID)//center top
+            if (neighArray[x, y + 1] == checkID)//center top
             {
                 neighbors++;
             }
@@ -289,7 +292,7 @@ public class GenerateTerrainScript : MonoBehaviour {
             {
                 neighbors++;
             }
-            if (neighArray[x + 1, y    ] == checkID)//right center
+            if (neighArray[x + 1, y] == checkID)//right center
             {
                 neighbors++;
             }
