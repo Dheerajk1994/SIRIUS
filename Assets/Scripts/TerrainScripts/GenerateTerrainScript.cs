@@ -9,6 +9,9 @@ public class GenerateTerrainScript : MonoBehaviour
 
     public GameObject[] stoneObjects;
     public GameObject[] dirtObjects;
+    public GameObject[] grass;
+    public GameObject[] flowers;
+    public GameObject tree;
 
 
     public GameObject coal;
@@ -57,6 +60,9 @@ public class GenerateTerrainScript : MonoBehaviour
     public int diamondNeighChance;
     public float diamondChangeInHeight;
 
+    public int flowerChance;
+    public int treeChance;
+
 
     public void StartTerrainGeneration()
     {
@@ -69,8 +75,9 @@ public class GenerateTerrainScript : MonoBehaviour
 
         GenerateTerrainNoise();
         GenerateStone();
-        GenerateCaves();
         GenerateGrass();
+        GenerateCaves();
+        
 
         GenerateResources(coal, coalChance, coalNeighChance, coalChangeInHeight);
         GenerateResources(copper, copperChance, copperNeighChance, copperChangeInHeight);
@@ -162,12 +169,39 @@ public class GenerateTerrainScript : MonoBehaviour
 
     }
 
-    private void GenerateCaves()
+    private void GenerateGrass()
     {
+        for(int x = 0; x < frontTiles.GetLength(0); x++)
+        {
+            for(int y = 0; y < frontTiles.GetLength(1); y++)
+            {
+                if(frontTiles[x,y + 1] == null)
+                {
+                    GameObject grassObj = Instantiate(grass[UnityEngine.Random.Range(0, 4)], new Vector2(x, y), Quaternion.identity);
+                    grassObj.GetComponent<SpriteRenderer>().sortingOrder = 3;
 
+                    int chance = UnityEngine.Random.Range(0, 100);
+                    if(chance <= flowerChance)
+                    {
+                        GameObject flowerObj = Instantiate(flowers[UnityEngine.Random.Range(0, 4)], new Vector2(x, y+1), Quaternion.identity);
+                        flowerObj.GetComponent<SpriteRenderer>().sortingOrder = 3;
+                    }
+
+                    chance = UnityEngine.Random.Range(0, 100);
+                    if(chance < treeChance)
+                    {
+                        GameObject treeObj = Instantiate(tree, new Vector2(x, y + 1), Quaternion.identity);
+                    }
+
+
+
+                    break;
+                }
+            }
+        }
     }
 
-    private void GenerateGrass()
+    private void GenerateCaves()
     {
 
     }

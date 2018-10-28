@@ -8,10 +8,15 @@ public class GameManagerScript : MonoBehaviour
     public GameObject player;
     public GameObject TerrainManager;
     public GameObject stone;
+    public bool isInDemoMode;
 
     private void Start()
     {
         player.gameObject.SetActive(false);
+        if (isInDemoMode)
+        {
+            StartNewGame();
+        }
     }
 
     public void StartNewGame()

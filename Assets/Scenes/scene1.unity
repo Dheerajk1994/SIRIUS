@@ -205,6 +205,7 @@ MonoBehaviour:
   player: {fileID: 485184603}
   TerrainManager: {fileID: 680721632}
   stone: {fileID: 1857664707528882, guid: 166ee35a87d2b0348b0cfb1f8b47cd8c, type: 2}
+  isInDemoMode: 1
 --- !u!4 &134921671
 Transform:
   m_ObjectHideFlags: 0
@@ -250,9 +251,9 @@ RectTransform:
   m_Father: {fileID: 1772961459}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 168.15, y: -149.6}
   m_SizeDelta: {x: 197, y: 47.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &210682170
@@ -433,7 +434,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 485184603}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c949c7fbe3cc2d04caa20515eebe76ec, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -672,9 +673,9 @@ RectTransform:
   m_Father: {fileID: 1772961459}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 168.15, y: -100}
   m_SizeDelta: {x: 197, y: 47.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &585419885
@@ -818,12 +819,23 @@ MonoBehaviour:
   - {fileID: 1961061265238306, guid: 2653318181896214aad51859f55bff11, type: 2}
   - {fileID: 1388234397514544, guid: 3a9975e031f7803469ef91b0f91809bc, type: 2}
   - {fileID: 1935891212128696, guid: 1b9b2cf9906d089418e2bdf7b5d91e71, type: 2}
+  grass:
+  - {fileID: 1147847452662578, guid: 81cbd5df97638ba48bfbbaee79c72d02, type: 2}
+  - {fileID: 1289579156322202, guid: 99e943bd32e79b1419600cffdb727a05, type: 2}
+  - {fileID: 1336601157171444, guid: 5300c59c3b8797a43a53721b88cd8291, type: 2}
+  - {fileID: 1086542754000140, guid: 496e17bb383c45b41a60d921fd22c996, type: 2}
+  flowers:
+  - {fileID: 1288983557608434, guid: 8ed66addb64b8e848b08626cf19ae1d6, type: 2}
+  - {fileID: 1460683419082884, guid: 633cb3294d61ab9458226947fbab72fa, type: 2}
+  - {fileID: 1336119762759380, guid: 9380ad20009851046915824a7ce32167, type: 2}
+  - {fileID: 1888704002428804, guid: cee269f056e123049929a7a66df2d5bf, type: 2}
+  tree: {fileID: 1990798288985944, guid: f491b18beb1fbc54883288380a3563b0, type: 2}
   coal: {fileID: 1002037512885184, guid: ed3e464f8ec7af94ab1c0a09c8001c6a, type: 2}
   copper: {fileID: 1816122398459096, guid: ee1a2de691c5c054d9ae8cdcae81db8b, type: 2}
   silver: {fileID: 1342432692097644, guid: f6f0328eb5ea6fb4f8af5b0425a8eddc, type: 2}
   gold: {fileID: 1444934275431416, guid: ddabd6119e182a543a683fbc5e62b7d0, type: 2}
   diamond: {fileID: 1895697507877374, guid: cef27dcd248af8c4191a4ffc5db32161, type: 2}
-  xDimension: 300
+  xDimension: 50
   smoothness: 40
   heightMultiple: 20
   heightAddition: 50
@@ -839,15 +851,17 @@ MonoBehaviour:
   copperChance: 15
   copperNeighChance: 15
   copperChangeInHeight: 0
-  silverChance: 5
+  silverChance: 15
   silverNeighChance: 5
   silverChangeInHeight: 0.5
-  goldChance: 2
+  goldChance: 10
   goldNeighChance: 2
   goldChangeInHeight: 0.7
-  diamondChance: 1
+  diamondChance: 5
   diamondNeighChance: 0
   diamondChangeInHeight: 1
+  flowerChance: 100
+  treeChance: 10
 --- !u!4 &680721634
 Transform:
   m_ObjectHideFlags: 0
@@ -1063,9 +1077,9 @@ RectTransform:
   m_Father: {fileID: 1772961459}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 168.15, y: -50.400005}
   m_SizeDelta: {x: 197, y: 47.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1505906423
@@ -1199,7 +1213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1754475267
 MonoBehaviour:
   m_ObjectHideFlags: 0
