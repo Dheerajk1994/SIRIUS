@@ -829,7 +829,13 @@ MonoBehaviour:
   - {fileID: 1460683419082884, guid: 633cb3294d61ab9458226947fbab72fa, type: 2}
   - {fileID: 1336119762759380, guid: 9380ad20009851046915824a7ce32167, type: 2}
   - {fileID: 1888704002428804, guid: cee269f056e123049929a7a66df2d5bf, type: 2}
-  tree: {fileID: 1990798288985944, guid: f491b18beb1fbc54883288380a3563b0, type: 2}
+  tree1Base: {fileID: 1576205482675570, guid: 90f89ced8b0f05f4b821a3ba78956b60, type: 2}
+  tree1Top: {fileID: 1624293563353494, guid: 73d2d3f843e63c542aa0858fee3635cf, type: 2}
+  tree1Core:
+  - {fileID: 1877179025606374, guid: 9162fed3ecd8a404f9154e6eb7794fdb, type: 2}
+  - {fileID: 1929804583520076, guid: d106d517efa3e0a40bd0c602b92ef7ae, type: 2}
+  - {fileID: 1160366329413018, guid: 495031f0fd0050944a58f8a6d21ea7c2, type: 2}
+  - {fileID: 1830711470946446, guid: 64d5a5aa8e5ed6a4c90668713b0e33e6, type: 2}
   coal: {fileID: 1002037512885184, guid: ed3e464f8ec7af94ab1c0a09c8001c6a, type: 2}
   copper: {fileID: 1816122398459096, guid: ee1a2de691c5c054d9ae8cdcae81db8b, type: 2}
   silver: {fileID: 1342432692097644, guid: f6f0328eb5ea6fb4f8af5b0425a8eddc, type: 2}
@@ -861,7 +867,9 @@ MonoBehaviour:
   diamondNeighChance: 0
   diamondChangeInHeight: 1
   flowerChance: 100
-  treeChance: 10
+  treeChance: 50
+  minTreeHeight: 5
+  maxTreeHeight: 20
 --- !u!4 &680721634
 Transform:
   m_ObjectHideFlags: 0

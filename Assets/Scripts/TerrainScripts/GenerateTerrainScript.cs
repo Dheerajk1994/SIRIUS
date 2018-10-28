@@ -11,7 +11,9 @@ public class GenerateTerrainScript : MonoBehaviour
     public GameObject[] dirtObjects;
     public GameObject[] grass;
     public GameObject[] flowers;
-    public GameObject tree;
+    public GameObject tree1Base;
+    public GameObject tree1Top;
+    public GameObject[] tree1Core;
 
 
     public GameObject coal;
@@ -62,6 +64,8 @@ public class GenerateTerrainScript : MonoBehaviour
 
     public int flowerChance;
     public int treeChance;
+    public int minTreeHeight;
+    public int maxTreeHeight;
 
 
     public void StartTerrainGeneration()
@@ -190,7 +194,7 @@ public class GenerateTerrainScript : MonoBehaviour
                     chance = UnityEngine.Random.Range(0, 100);
                     if(chance < treeChance)
                     {
-                        GameObject treeObj = Instantiate(tree, new Vector2(x, y + 1), Quaternion.identity);
+                        CreateTree(x, y + 1);
                     }
 
 
@@ -339,6 +343,21 @@ public class GenerateTerrainScript : MonoBehaviour
 
 
         return neighbors;
+    }
+
+    private void CreateTree(int x, int y)
+    {
+        int height = UnityEngine.Random.Range(minTreeHeight, maxTreeHeight);
+        GameObject tree = Instantiate(tree1Base, new Vector2(x, y), Quaternion.identity);
+        tree.GetComponent<SpriteRenderer>().sortingLayerName = "backTileLayer";
+        for(int i = 0; i < height; i++)
+        {
+            tree = Instantiate(tree1Core[UnityEngine.Random.Range(0, tree1Core.Length)], new Vector2(x, y + 1 + i), Quaternion.identity);
+            tree.GetComponent<SpriteRenderer>().sortingLayerName = "backTileLayer";
+        }
+        tree = Instantiate(tree1Top, new Vector2(x, y + 1 + height), Quaternion.identity);
+        tree.GetComponent<SpriteRenderer>().sortingLayerName = "grassLayer";
+
     }
 
 }

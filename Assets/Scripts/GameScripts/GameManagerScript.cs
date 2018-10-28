@@ -24,6 +24,7 @@ public class GameManagerScript : MonoBehaviour
         TerrainManager.GetComponent<GenerateTerrainScript>().StartTerrainGeneration();
         Camera.main.gameObject.transform.SetParent(player.transform);
         player.gameObject.SetActive(true);
+        player.GetComponent<SpriteRenderer>().sortingLayerName = "frontTileLayer";
     }
 
     private void Update()
