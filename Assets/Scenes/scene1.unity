@@ -869,7 +869,7 @@ MonoBehaviour:
   flowerChance: 100
   treeChance: 50
   minTreeHeight: 5
-  maxTreeHeight: 20
+  maxTreeHeight: 50
 --- !u!4 &680721634
 Transform:
   m_ObjectHideFlags: 0
