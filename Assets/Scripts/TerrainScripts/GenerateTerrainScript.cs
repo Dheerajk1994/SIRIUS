@@ -71,7 +71,7 @@ public class GenerateTerrainScript : MonoBehaviour
     public void StartTerrainGeneration()
     {
         frontTiles = new GameObject[xDimension, heightAddition + 50];
-        chunkArray = new GameObject[xDimension % chunkSize];
+        chunkArray = new GameObject[50];
         for (int i = 0; i < chunkArray.GetLength(0); i++)
         {
             chunkArray[i] = new GameObject("chunk" + i);
