@@ -205,7 +205,7 @@ MonoBehaviour:
   player: {fileID: 485184603}
   TerrainManager: {fileID: 680721632}
   stone: {fileID: 1857664707528882, guid: 166ee35a87d2b0348b0cfb1f8b47cd8c, type: 2}
-  isInDemoMode: 0
+  isInDemoMode: 1
 --- !u!4 &134921671
 Transform:
   m_ObjectHideFlags: 0
@@ -251,9 +251,9 @@ RectTransform:
   m_Father: {fileID: 1772961459}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 168.15, y: -149.6}
   m_SizeDelta: {x: 197, y: 47.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &210682170
@@ -439,8 +439,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.07938194, y: 0}
-  m_Size: {x: 1.039856, y: 3}
+  m_Offset: {x: 0.07938194, y: 0.026893616}
+  m_Size: {x: 1, y: 2.9462128}
   m_Direction: 0
 --- !u!50 &485184605
 Rigidbody2D:
@@ -704,9 +704,9 @@ RectTransform:
   m_Father: {fileID: 1772961459}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 168.15, y: -100}
   m_SizeDelta: {x: 197, y: 47.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &585419885
@@ -872,11 +872,19 @@ MonoBehaviour:
   silver: {fileID: 1342432692097644, guid: f6f0328eb5ea6fb4f8af5b0425a8eddc, type: 2}
   gold: {fileID: 1444934275431416, guid: ddabd6119e182a543a683fbc5e62b7d0, type: 2}
   diamond: {fileID: 1895697507877374, guid: cef27dcd248af8c4191a4ffc5db32161, type: 2}
-  xDimension: 200
+  xDimension: 100
   smoothness: 40
   heightMultiple: 20
   heightAddition: 50
   chunkSize: 40
+  backTileLayerID: 12
+  frontTileLayerID: 13
+  grassLayerID: 15
+  caveChanceVal: 55
+  caveSimRep: 2
+  caveMinNeighReq: 2
+  caveMaxNeighReq: 6
+  caveChangeInHeight: 0.2
   stoneChanceVal: 60
   stoneSimRep: 3
   stoneMinNeighReq: 4
@@ -925,6 +933,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93bf2d72d5140ff438844a69f3c21626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backTileLayerID: 12
+  frontTileLayerID: 13
+  grassLayerID: 15
 --- !u!1 &837532441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,9 +1127,9 @@ RectTransform:
   m_Father: {fileID: 1772961459}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 168.15, y: -50.400005}
   m_SizeDelta: {x: 197, y: 47.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1505906423
@@ -1252,7 +1263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1754475267
 MonoBehaviour:
   m_ObjectHideFlags: 0

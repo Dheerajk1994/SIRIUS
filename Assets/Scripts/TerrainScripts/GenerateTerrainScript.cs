@@ -36,6 +36,16 @@ public class GenerateTerrainScript : MonoBehaviour
 
     public int chunkSize;
 
+    public int backTileLayerID;
+    public int frontTileLayerID;
+    public int grassLayerID;
+
+    public int caveChanceVal;
+    public int caveSimRep;
+    public int caveMinNeighReq;
+    public int caveMaxNeighReq;
+    public float caveChangeInHeight;
+
     public int stoneChanceVal;                      //CHANCE FOR A STONE TO GENERATE 
     public int stoneSimRep;                         //HOW MANY TIMES IT RUNS
     public int stoneMinNeighReq;                       //NEIGHBORS REQUIRED TO REMAIN 1
@@ -71,6 +81,7 @@ public class GenerateTerrainScript : MonoBehaviour
     public void StartTerrainGeneration()
     {
         frontTiles = new GameObject[xDimension, heightAddition + 50];
+        backTiles = new GameObject[xDimension, heightAddition + 50];
         chunkArray = new GameObject[50];
         for (int i = 0; i < chunkArray.GetLength(0); i++)
         {
@@ -110,7 +121,11 @@ public class GenerateTerrainScript : MonoBehaviour
 
             for (int y = 0; y < height; y++)
             {
-                frontTiles[x, y] = Instantiate(dirtObjects[UnityEngine.Random.Range(0, dirtObjects.Length)], new Vector2(x, y), Quaternion.identity);
+                GameObject tile1 = Instantiate(dirtObjects[UnityEngine.Random.Range(0, dirtObjects.Length)], new Vector2(x, y), Quaternion.identity);
+                frontTiles[x, y] = tile1;
+
+                GameObject tile2 = Instantiate(dirtObjects[UnityEngine.Random.Range(0, dirtObjects.Length)], new Vector2(x, y), Quaternion.identity);
+                backTiles[x, y] = tile2;
             }
         }
     }
@@ -182,13 +197,13 @@ public class GenerateTerrainScript : MonoBehaviour
                 if(frontTiles[x,y + 1] == null)
                 {
                     GameObject grassObj = Instantiate(grass[UnityEngine.Random.Range(0, 4)], new Vector2(x, y), Quaternion.identity);
-                    grassObj.GetComponent<SpriteRenderer>().sortingOrder = 3;
+                    grassObj.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
 
                     int chance = UnityEngine.Random.Range(0, 100);
                     if(chance <= flowerChance)
                     {
                         GameObject flowerObj = Instantiate(flowers[UnityEngine.Random.Range(0, 4)], new Vector2(x, y+1), Quaternion.identity);
-                        flowerObj.GetComponent<SpriteRenderer>().sortingOrder = 3;
+                        flowerObj.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
                     }
 
                     chance = UnityEngine.Random.Range(0, 100);
@@ -207,6 +222,58 @@ public class GenerateTerrainScript : MonoBehaviour
 
     private void GenerateCaves()
     {
+        byte[,] caveArray = new byte[frontTiles.GetLength(0), frontTiles.GetLength(1)];
+
+        for (int x = 0; x < frontTiles.GetLength(0); x++)
+        {
+            for (int y = 0; y < frontTiles.GetLength(1); y++)
+            {
+                if (frontTiles[x, y] != null)
+                {
+                    if (UnityEngine.Random.Range(1, 100) <= (caveChanceVal - y * caveChangeInHeight))
+                    {
+                        caveArray[x, y] = 1;
+                    }
+                }
+            }
+        }
+
+        for (int repetition = 0; repetition < caveSimRep; repetition++)
+        {
+            int neighborCount = 0;
+
+            for (int x = 1; x < frontTiles.GetLength(0) - 1; x++)
+            {
+                for (int y = 1; y < frontTiles.GetLength(1) - 1; y++)
+                {
+                    if (/*StoneChance[x,y] == 0 ||*/ frontTiles[x, y] == null) continue;
+
+                    neighborCount = GetNeighBorhood(caveArray, x, y, 1);
+
+
+                    if (neighborCount > stoneMinNeighReq)// && neighborCount <= stoneMaxNeighReq)
+                    {
+                        caveArray[x, y] = 1;
+                    }
+                    else if (neighborCount < stoneMinNeighReq)
+                    {
+                        caveArray[x, y] = 0;
+                    }
+
+                }
+            }
+        }
+
+        for (int x = 0; x < frontTiles.GetLength(0); x++)
+        {
+            for (int y = 0; y < frontTiles.GetLength(1); y++)
+            {
+                if (caveArray[x, y] == 1)
+                {
+                    Destroy(frontTiles[x, y]);
+                }
+            }
+        }
 
     }
 
@@ -291,6 +358,14 @@ public class GenerateTerrainScript : MonoBehaviour
                 if (frontTiles[x, y] != null)
                 {
                     frontTiles[x, y].transform.position = new Vector2(x, y);
+                    frontTiles[x,y].GetComponent<SpriteRenderer>().sortingOrder = 10;
+                }
+                if (backTiles[x, y] != null)
+                {
+                    backTiles[x, y].transform.position = new Vector2(x, y);
+                    backTiles[x, y].GetComponent<SpriteRenderer>().sortingOrder = 9;
+                    backTiles[x, y].GetComponent<Collider2D>().enabled = false;
+                    backTiles[x, y].GetComponent<SpriteRenderer>().color = Color.gray;
                 }
             }
         }
@@ -353,10 +428,10 @@ public class GenerateTerrainScript : MonoBehaviour
         for(int i = 0; i < height; i++)
         {
             tree = Instantiate(tree1Core[UnityEngine.Random.Range(0, tree1Core.Length)], new Vector2(x, y + 1 + i), Quaternion.identity);
-            tree.GetComponent<SpriteRenderer>().sortingLayerName = "backTileLayer";
+            tree.GetComponent<SpriteRenderer>().sortingOrder = backTileLayerID;
         }
         tree = Instantiate(tree1Top, new Vector2(x, y + 1 + height), Quaternion.identity);
-        tree.GetComponent<SpriteRenderer>().sortingLayerName = "grassLayer";
+        tree.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
 
     }
 
