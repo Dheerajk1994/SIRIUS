@@ -419,6 +419,7 @@ GameObject:
   - component: {fileID: 485184609}
   - component: {fileID: 485184608}
   - component: {fileID: 485184604}
+  - component: {fileID: 485184610}
   m_Layer: 0
   m_Name: Sam
   m_TagString: Untagged
@@ -438,8 +439,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.07938194, y: 0}
-  m_Size: {x: 1.039856, y: 3}
+  m_Offset: {x: 0.07938194, y: 0.026893616}
+  m_Size: {x: 1, y: 2.9462128}
   m_Direction: 0
 --- !u!50 &485184605
 Rigidbody2D:
@@ -496,7 +497,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 86b47fe64540af94eaab2df0b61b39e6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3fa3429325e0cfa428af7c4b90b63144, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -514,7 +515,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 485184603}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.4, y: 76.2, z: 0}
+  m_LocalPosition: {x: 30.39, y: 76.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1763470508}
@@ -534,6 +535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 485184609}
+  animator: {fileID: 485184610}
   runSpeed: 100
 --- !u!114 &485184609
 MonoBehaviour:
@@ -558,7 +560,18 @@ MonoBehaviour:
   m_CrouchDisableCollider: {fileID: 0}
   OnLandEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 485184608}
+        m_MethodName: OnLanding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnCrouchEvent:
@@ -566,6 +579,24 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: CharacterController2D+BoolEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!95 &485184610
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 485184603}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 05063fec1b716db4096f4ce4a33cb5ef, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &580509999
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,11 +872,23 @@ MonoBehaviour:
   silver: {fileID: 1342432692097644, guid: f6f0328eb5ea6fb4f8af5b0425a8eddc, type: 2}
   gold: {fileID: 1444934275431416, guid: ddabd6119e182a543a683fbc5e62b7d0, type: 2}
   diamond: {fileID: 1895697507877374, guid: cef27dcd248af8c4191a4ffc5db32161, type: 2}
+<<<<<<< HEAD
   xDimension: 200
+=======
+  xDimension: 100
+>>>>>>> 5b6a23bcdeec9d60526a3edc8453324648ecf31c
   smoothness: 40
   heightMultiple: 20
   heightAddition: 50
   chunkSize: 40
+  backTileLayerID: 12
+  frontTileLayerID: 13
+  grassLayerID: 15
+  caveChanceVal: 55
+  caveSimRep: 2
+  caveMinNeighReq: 2
+  caveMaxNeighReq: 6
+  caveChangeInHeight: 0.2
   stoneChanceVal: 60
   stoneSimRep: 3
   stoneMinNeighReq: 4
@@ -868,7 +911,11 @@ MonoBehaviour:
   diamondChangeInHeight: 1
   flowerChance: 100
   treeChance: 10
+<<<<<<< HEAD
   minTreeHeight: 5
+=======
+  minTreeHeight: 15
+>>>>>>> 5b6a23bcdeec9d60526a3edc8453324648ecf31c
   maxTreeHeight: 20
 --- !u!4 &680721634
 Transform:
@@ -894,6 +941,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93bf2d72d5140ff438844a69f3c21626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backTileLayerID: 12
+  frontTileLayerID: 13
+  grassLayerID: 15
 --- !u!1 &837532441
 GameObject:
   m_ObjectHideFlags: 0

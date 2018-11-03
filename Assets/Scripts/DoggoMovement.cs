@@ -5,6 +5,8 @@ using UnityEngine;
 public class DoggoMovement : MonoBehaviour {
 
     public CharacterController2D controller;
+    public Animator animator;
+
     public float runSpeed = 40f;
 
     float horizontalMove = 0f;
@@ -14,11 +16,20 @@ public class DoggoMovement : MonoBehaviour {
 	void Update () {
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+
         if(Input.GetButtonDown("Jump"))
         {
             jump = true;
+            animator.SetBool("isJump", true);
         }
 	}
+
+    // Stops repeated jumping 
+    public void OnLanding()
+    {
+        animator.SetBool("isJump", false);
+    }
    
     void FixedUpdate () {
         //Move the character

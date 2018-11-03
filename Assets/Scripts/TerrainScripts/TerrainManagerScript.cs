@@ -12,6 +12,10 @@ public class TerrainManagerScript : MonoBehaviour
     private int backTilesXdim;
     private int backTilesYdim;
 
+    public int backTileLayerID;
+    public int frontTileLayerID;
+    public int grassLayerID;
+
 
     public void SetFrontTiles(GameObject[,] fTiles)
     {
@@ -40,7 +44,9 @@ public class TerrainManagerScript : MonoBehaviour
     {
         if (x >= 0 && x < frontTilesXdim && y >= 0 && y < frontTilesYdim && frontTiles[x, y] == null)
         {
-            frontTiles[x, y] = Instantiate(tile, new Vector2(x, y), Quaternion.identity);
+            GameObject t  = Instantiate(tile, new Vector2(x, y), Quaternion.identity);
+            t.GetComponent<SpriteRenderer>().sortingOrder = frontTileLayerID;
+            frontTiles[x, y] = t;
             return true;
         }
         return false;

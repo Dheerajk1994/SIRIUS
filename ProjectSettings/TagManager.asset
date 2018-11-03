@@ -14,11 +14,11 @@ TagManager:
   - 
   - 
   - 
+  - backgroundLayer
   - 
   - 
-  - 
-  - 
-  - 
+  - backTileLayer
+  - frontTileLayer
   - 
   - grass
   - 
