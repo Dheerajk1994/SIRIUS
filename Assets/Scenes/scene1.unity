@@ -897,13 +897,13 @@ MonoBehaviour:
   copperNeighChance: 15
   copperChangeInHeight: 0
   silverChance: 15
-  silverNeighChance: 5
+  silverNeighChance: 15
   silverChangeInHeight: 0.5
   goldChance: 10
-  goldNeighChance: 2
+  goldNeighChance: 10
   goldChangeInHeight: 0.7
   diamondChance: 5
-  diamondNeighChance: 0
+  diamondNeighChance: 5
   diamondChangeInHeight: 1
   flowerChance: 100
   treeChance: 10

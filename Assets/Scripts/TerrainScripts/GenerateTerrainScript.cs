@@ -90,15 +90,16 @@ public class GenerateTerrainScript : MonoBehaviour
 
         GenerateTerrainNoise();
         GenerateStone();
-        GenerateGrass();
-        GenerateCaves();
-        
-
+              
         GenerateResources(coal, coalChance, coalNeighChance, coalChangeInHeight);
         GenerateResources(copper, copperChance, copperNeighChance, copperChangeInHeight);
         GenerateResources(silver, silverChance, silverNeighChance, silverChangeInHeight);
         GenerateResources(gold, goldChance, goldNeighChance, goldChangeInHeight);
         GenerateResources(diamond, diamondChance, diamondNeighChance, diamondChangeInHeight);
+
+        GenerateCaves();
+
+        GenerateGrass();
 
         GenerateChunk();
 
@@ -181,7 +182,9 @@ public class GenerateTerrainScript : MonoBehaviour
                 if (stoneArray[x, y] == 1)
                 {
                     Destroy(frontTiles[x, y]);
+                    Destroy(backTiles[x, y]);
                     frontTiles[x, y] = Instantiate(stoneObjects[UnityEngine.Random.Range(0, dirtObjects.Length)], new Vector2(x, y), Quaternion.identity);
+                    backTiles[x, y] = Instantiate(stoneObjects[UnityEngine.Random.Range(0, dirtObjects.Length)], new Vector2(x, y), Quaternion.identity);
                 }
             }
         }
@@ -194,26 +197,23 @@ public class GenerateTerrainScript : MonoBehaviour
         {
             for(int y = 0; y < frontTiles.GetLength(1); y++)
             {
-                if(frontTiles[x,y + 1] == null)
+                if(frontTiles[x,y + 1] == null && frontTiles[x,y] != null)
                 {
                     GameObject grassObj = Instantiate(grass[UnityEngine.Random.Range(0, 4)], new Vector2(x, y), Quaternion.identity);
                     grassObj.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
 
                     int chance = UnityEngine.Random.Range(0, 100);
-                    if(chance <= flowerChance)
+                    if (chance <= flowerChance)
                     {
-                        GameObject flowerObj = Instantiate(flowers[UnityEngine.Random.Range(0, 4)], new Vector2(x, y+1), Quaternion.identity);
+                        GameObject flowerObj = Instantiate(flowers[UnityEngine.Random.Range(0, 4)], new Vector2(x, y + 1), Quaternion.identity);
                         flowerObj.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
                     }
 
                     chance = UnityEngine.Random.Range(0, 100);
-                    if(chance < treeChance)
+                    if (chance < treeChance)
                     {
                         CreateTree(x, y + 1);
                     }
-
-
-
                     break;
                 }
             }
@@ -279,7 +279,8 @@ public class GenerateTerrainScript : MonoBehaviour
 
     private void GenerateResources(GameObject resource, int resourceChance, int resourceNeighChance, float resourceChangeInHeight)
     {
-        byte[,] resourceArray = new byte[frontTiles.GetLength(0), frontTiles.GetLength(1)];
+        byte[,] frontTileResourceArray = new byte[frontTiles.GetLength(0), frontTiles.GetLength(1)];
+        byte[,] backtTileResourceArray = new byte[frontTiles.GetLength(0), frontTiles.GetLength(1)];
         for (int x = 0; x < frontTiles.GetLength(0); x++)
         {
             for (int y = 0; y < frontTiles.GetLength(1); y++)
@@ -288,43 +289,63 @@ public class GenerateTerrainScript : MonoBehaviour
                 {
                     if (UnityEngine.Random.Range(1, 100) <= (resourceChance - y * resourceChangeInHeight))
                     {
-                        resourceArray[x, y] = 1;
+                        frontTileResourceArray[x, y] = 1;
+                    }
+                    if (UnityEngine.Random.Range(1, 100) <= (resourceChance - y * resourceChangeInHeight))
+                    {
+                        backtTileResourceArray[x, y] = 1;
                     }
                 }
             }
         }
 
-        for (int x = 0; x < resourceArray.GetLength(0); x++)
+        for (int x = 0; x < frontTileResourceArray.GetLength(0); x++)
         {
-            for (int y = 0; y < resourceArray.GetLength(1); y++)
+            for (int y = 0; y < frontTileResourceArray.GetLength(1); y++)
             {
-                if (frontTiles[x, y] != null && GetNeighBorhood(resourceArray, x, y, 1) > 1)
+                if (frontTiles[x, y] != null && GetNeighBorhood(frontTileResourceArray, x, y, 1) > 1)
                 {
-                    if (UnityEngine.Random.Range(1, 100) <= coalNeighChance)
+                    if (UnityEngine.Random.Range(1, 100) <= resourceNeighChance)
                     {
-                        resourceArray[x, y] = 1;
+                        frontTileResourceArray[x, y] = 1;
                     }
                     else
                     {
-                        resourceArray[x, y] = 0;
+                        frontTileResourceArray[x, y] = 0;
+                    }
+
+                    if (UnityEngine.Random.Range(1, 100) <= resourceNeighChance)
+                    {
+                        backtTileResourceArray[x, y] = 1;
+                    }
+                    else
+                    {
+                        backtTileResourceArray[x, y] = 0;
                     }
                 }
                 else
                 {
-                    resourceArray[x, y] = 0;
+                    frontTileResourceArray[x, y] = 0;
+                    backtTileResourceArray[x, y] = 0;
                 }
             }
         }
 
-        for (int x = 0; x < resourceArray.GetLength(0); x++)
+        for (int x = 0; x < frontTileResourceArray.GetLength(0); x++)
         {
-            for (int y = 0; y < resourceArray.GetLength(1); y++)
+            for (int y = 0; y < frontTileResourceArray.GetLength(1); y++)
             {
-                if (resourceArray[x, y] == 1)
+                if (frontTileResourceArray[x, y] == 1)
                 {
                     Destroy(frontTiles[x, y]);
                     frontTiles[x, y] = Instantiate(resource, new Vector2(x, y), Quaternion.identity);
                 }
+                if (backtTileResourceArray[x, y] == 1)
+                {
+                    Destroy(backTiles[x, y]);
+                    backTiles[x, y] = Instantiate(resource, new Vector2(x, y), Quaternion.identity);
+                }
+
             }
         }
     }
