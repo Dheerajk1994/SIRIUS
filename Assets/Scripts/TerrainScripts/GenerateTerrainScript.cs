@@ -200,16 +200,14 @@ public class GenerateTerrainScript : MonoBehaviour
                 if(frontTiles[x,y + 1] == null && frontTiles[x,y] != null)
                 {
                     GameObject grassObj = Instantiate(grass[UnityEngine.Random.Range(0, 4)], new Vector2(x, y), Quaternion.identity);
+                    grassObj.transform.parent = frontTiles[x, y].transform;
                     grassObj.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
 
-                    int chance = UnityEngine.Random.Range(0, 100);
-                    if (chance <= flowerChance)
-                    {
-                        GameObject flowerObj = Instantiate(flowers[UnityEngine.Random.Range(0, 4)], new Vector2(x, y + 1), Quaternion.identity);
-                        flowerObj.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
-                    }
+                    GameObject flowerObj = Instantiate(flowers[UnityEngine.Random.Range(0, 4)], new Vector2(x, y + 1), Quaternion.identity);
+                    flowerObj.transform.parent = frontTiles[x, y].transform;
+                    flowerObj.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
 
-                    chance = UnityEngine.Random.Range(0, 100);
+                    int chance = UnityEngine.Random.Range(0, 100);
                     if (chance < treeChance)
                     {
                         CreateTree(x, y + 1);
