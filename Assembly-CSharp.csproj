@@ -62,8 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameScripts\GameManagerScript.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\PlayerManagerScript.cs" />
     <Compile Include="Assets\Scripts\InvoScript\Inventory.cs" />
     <Compile Include="Assets\Scripts\InvoScript\InventoryEditor.cs" />
+    <Compile Include="Assets\Scripts\InvoScript\InventoryScript.cs" />
     <Compile Include="Assets\Scripts\NonStaticObjScripts\Character.cs" />
     <Compile Include="Assets\Scripts\NonStaticObjScripts\CharacterController2D.cs" />
     <Compile Include="Assets\Scripts\NonStaticObjScripts\DoggoMovement.cs" />
@@ -73,7 +75,11 @@
     <Compile Include="Assets\Scripts\StaticObjScripts\TileScript.cs" />
     <Compile Include="Assets\Scripts\TerrainScripts\GenerateTerrainScript.cs" />
     <Compile Include="Assets\Scripts\TerrainScripts\TerrainManagerScript.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\CraftingPanelScript.cs" />
     <Compile Include="Assets\Scripts\UIScripts\MainMenuScript.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\PlayerInventoryPanelScript.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\ToolBarPanelScript.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\UIScript.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Dheeraj/Documents/UnityProjects/SIRIUS/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

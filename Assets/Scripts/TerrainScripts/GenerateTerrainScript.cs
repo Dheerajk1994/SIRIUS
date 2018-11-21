@@ -377,12 +377,12 @@ public class GenerateTerrainScript : MonoBehaviour
                 if (frontTiles[x, y] != null)
                 {
                     frontTiles[x, y].transform.position = new Vector2(x, y);
-                    frontTiles[x,y].GetComponent<SpriteRenderer>().sortingOrder = 10;
+                    frontTiles[x,y].GetComponent<SpriteRenderer>().sortingOrder = frontTileLayerID;
                 }
                 if (backTiles[x, y] != null)
                 {
                     backTiles[x, y].transform.position = new Vector2(x, y);
-                    backTiles[x, y].GetComponent<SpriteRenderer>().sortingOrder = 9;
+                    backTiles[x, y].GetComponent<SpriteRenderer>().sortingOrder = backTileLayerID;
                     backTiles[x, y].GetComponent<Collider2D>().enabled = false;
                     backTiles[x, y].GetComponent<SpriteRenderer>().color = Color.gray;
                 }
@@ -443,14 +443,17 @@ public class GenerateTerrainScript : MonoBehaviour
     {
         int height = UnityEngine.Random.Range(minTreeHeight, maxTreeHeight);
         GameObject tree = Instantiate(tree1Base, new Vector2(x, y), Quaternion.identity);
-        tree.GetComponent<SpriteRenderer>().sortingLayerName = "backTileLayer";
+        tree.GetComponent<SpriteRenderer>().sortingOrder = backTileLayerID;
+        frontTiles[x, y] = tree;
         for(int i = 0; i < height; i++)
         {
             tree = Instantiate(tree1Core[UnityEngine.Random.Range(0, tree1Core.Length)], new Vector2(x, y + 1 + i), Quaternion.identity);
             tree.GetComponent<SpriteRenderer>().sortingOrder = backTileLayerID;
+            frontTiles[x, y + 1 + i] = tree;
         }
         tree = Instantiate(tree1Top, new Vector2(x, y + 1 + height), Quaternion.identity);
         tree.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
+        tree.transform.SetParent(frontTiles[x, y + height].transform);
 
     }
 

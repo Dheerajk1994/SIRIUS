@@ -16,6 +16,9 @@ public class TerrainManagerScript : MonoBehaviour
     public int frontTileLayerID;
     public int grassLayerID;
 
+    public GameObject player;
+    private InventoryScript playerInventoryScript;
+
 
     public void SetFrontTiles(GameObject[,] fTiles)
     {
@@ -32,9 +35,19 @@ public class TerrainManagerScript : MonoBehaviour
 
     public GameObject MineTile(int x, int y)
     {
-        if (x >= 0 && x < frontTilesXdim && y >= 0 && y < frontTilesYdim)
+        if (x >= 0 && x < frontTilesXdim && y >= 0 && y < frontTilesYdim && frontTiles[x,y] != null)
         {
-            Destroy(frontTiles[x, y]);
+            if(frontTiles[x,y].GetComponent<TileScript>().tileId == 2)
+            {
+                CutTree(x, y);
+            }
+            else
+            {
+                player.GetComponent<InventoryScript>().AddItemToInventory(frontTiles[x, y], 1);
+                Destroy(frontTiles[x, y]);
+            }
+
+            
         }
 
         return null;
@@ -44,14 +57,32 @@ public class TerrainManagerScript : MonoBehaviour
     {
         if (x >= 0 && x < frontTilesXdim && y >= 0 && y < frontTilesYdim && frontTiles[x, y] == null)
         {
-            GameObject t  = Instantiate(tile, new Vector2(x, y), Quaternion.identity);
-            t.GetComponent<SpriteRenderer>().sortingOrder = frontTileLayerID;
-            frontTiles[x, y] = t;
-            return true;
+            playerInventoryScript = player.GetComponent<InventoryScript>();
+
+            if(playerInventoryScript.CheckItemInInventory(tile, 1))
+            {
+                playerInventoryScript.RemoveItemFromInventory(tile, 1);
+                GameObject t = Instantiate(tile, new Vector2(x, y), Quaternion.identity);
+                t.GetComponent<SpriteRenderer>().sortingOrder = frontTileLayerID;
+                frontTiles[x, y] = t;
+                return true;
+            }
+
+            
         }
         return false;
     }
 
+
+    private void CutTree(int x, int y)
+    {
+        while(frontTiles[x,y] != null && frontTiles[x,y].GetComponent<TileScript>().tileId == 2 && y < frontTiles.GetLength(1))
+        {
+            player.GetComponent<InventoryScript>().AddItemToInventory(frontTiles[x, y], 1);
+            Destroy(frontTiles[x, y]);
+            y++;
+        }
+    }
 
 
 }
