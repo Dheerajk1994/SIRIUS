@@ -8,6 +8,12 @@ public class GameManagerScript : MonoBehaviour
     public GameObject player;
     public GameObject TerrainManager;
     public GameObject stone;
+
+    public GameObject UI;
+    public GameObject playerInvoPanel;
+    public GameObject craftingPanel;
+
+
     public bool isInDemoMode;
 
     private void Start()
@@ -31,6 +37,8 @@ public class GameManagerScript : MonoBehaviour
     {
         if (Input.GetMouseButton(0)) LeftMouseClicked();
         else if (Input.GetMouseButton(1)) RightMouseClicked();
+        else if(Input.GetKeyDown(KeyCode.I)) ToggleInventory();
+        else if (Input.GetKeyDown(KeyCode.C)) ToggleCrafting();
     }
 
     private void LeftMouseClicked()
@@ -45,7 +53,15 @@ public class GameManagerScript : MonoBehaviour
         TerrainManager.GetComponent<TerrainManagerScript>().PlaceTile(Mathf.RoundToInt(mPos.x), Mathf.RoundToInt(mPos.y), stone);
     }
 
+    private void ToggleInventory()
+    {
+        UI.GetComponent<UIScript>().TogglePlayerInventory();
+    }
 
+    private void ToggleCrafting()
+    {
+        UI.GetComponent<UIScript>().ToggleCraftingPanel();
+    }
 
 
 
