@@ -8,6 +8,13 @@ public class UIScript : MonoBehaviour
     public GameObject gameManager;
     private GameObject playerInvoPanel;
     private GameObject craftingPanel;
+    private Slider healthBar;
+    private Slider staminaBar;
+    private Slider hungerBar;
+
+    public Image attributeIcon;
+    public Sprite [] attributePanelStatusSprite;
+
     private void Start()
     {
         gameManager = GameObject.Find("GameManager");
@@ -17,6 +24,10 @@ public class UIScript : MonoBehaviour
 
         craftingPanel = gameManager.GetComponent<GameManagerScript>().craftingPanel;
         craftingPanel.gameObject.SetActive(false);
+
+        healthBar = gameManager.GetComponent<GameManagerScript>().healthBar;
+        staminaBar = gameManager.GetComponent<GameManagerScript>().staminaBar;
+        hungerBar = gameManager.GetComponent<GameManagerScript>().hungerBar;
 
     }
 
@@ -30,6 +41,42 @@ public class UIScript : MonoBehaviour
     {
         craftingPanel.gameObject.SetActive(!craftingPanel.gameObject.activeInHierarchy);
         craftingPanel.GetComponent<CraftingPanelScript>().UpdateCraftingPanel();
+    }
+
+    public void UpdateHealth(float health)
+    {
+        healthBar.value = health;
+        if(health <= 0)
+        {
+            attributeIcon.sprite = attributePanelStatusSprite[0];
+        }
+        else if(health <= 30)
+        {
+            attributeIcon.sprite = attributePanelStatusSprite[1];
+        }
+        else if (health <= 60)
+        {
+            attributeIcon.sprite = attributePanelStatusSprite[2];
+        }
+        else if (health <= 90)
+        {
+            attributeIcon.sprite = attributePanelStatusSprite[3];
+        }
+        else
+        {
+            attributeIcon.sprite = attributePanelStatusSprite[4];
+        }
+
+    }
+
+    public void UpdateStamina(float stamina )
+    {
+        staminaBar.value = stamina;
+    }
+
+    public void UpdateHunger(float hunger)
+    {
+        hungerBar.value = hunger;
     }
 
 }

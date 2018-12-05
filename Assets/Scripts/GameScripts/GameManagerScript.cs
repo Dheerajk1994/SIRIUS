@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class GameManagerScript : MonoBehaviour
     public GameObject UI;
     public GameObject playerInvoPanel;
     public GameObject craftingPanel;
+    public GameObject attributePanel;
+
+    public Slider healthBar;
+    public Slider staminaBar;
+    public Slider hungerBar;
 
 
     public bool isInDemoMode;
@@ -62,7 +68,6 @@ public class GameManagerScript : MonoBehaviour
     {
         UI.GetComponent<UIScript>().ToggleCraftingPanel();
     }
-
 
 
 }
