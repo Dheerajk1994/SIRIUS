@@ -1,0 +1,8 @@
+<<<<<<< HEAD
+This sample of beautiful emojis are provided by EmojiOne https://www.emojione.com/
+
+=======
+This sample of beautiful emojis are provided by EmojiOne https://www.emojione.com/
+
+>>>>>>> 5edef641f8b8a39d1f219e7ea686c074d81373f7
+Please visit their website to view the complete set of their emojis and review their licensing terms.
