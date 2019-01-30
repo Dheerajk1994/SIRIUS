@@ -579,6 +579,10 @@ MonoBehaviour:
   UI: {fileID: 1754475266}
   playerInvoPanel: {fileID: 779931697}
   craftingPanel: {fileID: 1598471940}
+  attributePanel: {fileID: 0}
+  healthBar: {fileID: 0}
+  staminaBar: {fileID: 0}
+  hungerBar: {fileID: 0}
   isInDemoMode: 1
 --- !u!4 &134921671
 Transform:
@@ -1702,6 +1706,7 @@ MonoBehaviour:
   controller: {fileID: 485184609}
   animator: {fileID: 485184610}
   runSpeed: 100
+  player: {fileID: 0}
 --- !u!114 &485184609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3426,7 +3431,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193ad254f1f23c4b8f85c023eff3650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resolut: 0
   GameManager: {fileID: 134921669}
+  myDropdown: {fileID: 0}
 --- !u!1001 &848844051
 Prefab:
   m_ObjectHideFlags: 0
@@ -6687,6 +6694,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 134921669}
+  attributeIcon: {fileID: 0}
+  attributePanelStatusSprite: []
 --- !u!1 &1763470507
 GameObject:
   m_ObjectHideFlags: 0
