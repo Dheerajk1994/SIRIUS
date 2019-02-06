@@ -49,7 +49,7 @@ public class NonStaticClassScript : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start()
+    protected virtual void Start()
     {
         // Load 
         CurrentHealth = MaxHealth;
