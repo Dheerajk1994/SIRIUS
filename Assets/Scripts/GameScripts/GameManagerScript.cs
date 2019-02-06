@@ -33,10 +33,11 @@ public class GameManagerScript : MonoBehaviour
 
     public void StartNewGame()
     {
-        TerrainManager.GetComponent<GenerateTerrainScript>().StartTerrainGeneration();
+        TerrainManager.GetComponent<TerrainManagerScript>().StartTerrainGen();
         Camera.main.gameObject.transform.SetParent(player.transform);
         player.gameObject.SetActive(true);
         player.GetComponent<SpriteRenderer>().sortingLayerName = "frontTileLayer";
+        player.transform.SetParent(GameObject.Find("PlayArea").transform);
     }
 
     private void Update()
@@ -45,6 +46,7 @@ public class GameManagerScript : MonoBehaviour
         else if (Input.GetMouseButton(1)) RightMouseClicked();
         else if(Input.GetKeyDown(KeyCode.I)) ToggleInventory();
         else if (Input.GetKeyDown(KeyCode.C)) ToggleCrafting();
+        TerrainManager.GetComponent<TerrainManagerScript>().DisplayChunks(player.transform.position);
     }
 
     private void LeftMouseClicked()

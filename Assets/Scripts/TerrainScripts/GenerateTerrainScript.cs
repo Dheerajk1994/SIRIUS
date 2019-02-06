@@ -11,14 +11,14 @@ public class GenerateTerrainScript : MonoBehaviour
     private ushort[,] vegetationTilesValue;
 
     //private GameObject[,] chunkTiles;
-    private GameObject[] chunkArray;
+    //private GameObject[] chunkArray;
 
-    public int xDimension;
+    public ushort xDimension;
     public float smoothness;
     public int heightMultiple;
-    public int heightAddition;
+    public ushort heightAddition;
 
-    public int chunkSize;
+    //public int chunkSize;
 
     public int backTileLayerID;
     public int frontTileLayerID;
@@ -62,17 +62,16 @@ public class GenerateTerrainScript : MonoBehaviour
     public int maxTreeHeight;
 
 
-    public void StartTerrainGeneration()
+    public void StartTerrainGeneration(TerrainManagerScript terrainManager, ushort xDim, ushort heightA, ushort chunkSize)
     {
-        frontTilesValue = new ushort[xDimension, heightAddition + 50];
-        backTilesValue = new ushort[xDimension, heightAddition + 50];
-        vegetationTilesValue = new ushort[xDimension, heightAddition + 50];
+        this.heightAddition = heightA;
+        Debug.Log(xDim + " % " + chunkSize + ": " + xDim % chunkSize);
+        //xDimension = (ushort)(xDim - (xDim - (chunkSize * (Mathf.Floor(xDim / chunkSize)))));   //MAKE SURE XDIMENSION IS DIVISIBLE BY CHUNKSIZE
+        xDimension = (ushort)(xDim - (xDim % chunkSize));
 
-        chunkArray = new GameObject[50];
-        for (int i = 0; i < chunkArray.GetLength(0); i++)
-        {
-            chunkArray[i] = new GameObject("chunk" + i);
-        }
+        frontTilesValue      = new ushort[xDimension, heightAddition + 50];
+        backTilesValue       = new ushort[xDimension, heightAddition + 50];
+        vegetationTilesValue = new ushort[xDimension, heightAddition + 50];
 
         GenerateTerrainNoise();
         GenerateStone();
@@ -90,7 +89,7 @@ public class GenerateTerrainScript : MonoBehaviour
 
         //CreateTileGameobjects();
 
-        this.GetComponent<TerrainManagerScript>().SetTiles(frontTilesValue, backTilesValue, vegetationTilesValue);
+        terrainManager.SetTiles(frontTilesValue, backTilesValue, vegetationTilesValue);
 
     }
 
@@ -107,11 +106,6 @@ public class GenerateTerrainScript : MonoBehaviour
 
             for (int y = 0; y < height; y++)
             {
-                //GameObject tile1 = Instantiate(dirtObjects[UnityEngine.Random.Range(0, dirtObjects.Length)], new Vector2(x, y), Quaternion.identity);
-                //frontTiles[x, y] = tile1;
-
-                //GameObject tile2 = Instantiate(dirtObjects[UnityEngine.Random.Range(0, dirtObjects.Length)], new Vector2(x, y), Quaternion.identity);
-                //backTiles[x, y] = tile2;
                 frontTilesValue[x, y] = 1;
                 backTilesValue[x, y] = 1;
 
@@ -169,8 +163,6 @@ public class GenerateTerrainScript : MonoBehaviour
             {
                 if (stoneArray[x, y] == 1)
                 {
-                    //frontTiles[x, y] = Instantiate(stoneObjects[UnityEngine.Random.Range(0, dirtObjects.Length)], new Vector2(x, y), Quaternion.identity);
-                    //backTiles[x, y] = Instantiate(stoneObjects[UnityEngine.Random.Range(0, dirtObjects.Length)], new Vector2(x, y), Quaternion.identity);
                     frontTilesValue [x, y] = 2;     //2 for stone
                     backTilesValue[x, y] = 2;       //2 for stone
                 }
@@ -185,7 +177,7 @@ public class GenerateTerrainScript : MonoBehaviour
         {
             for (int y = 0; y < frontTilesValue.GetLength(1); y++)
             {
-                if (frontTilesValue[x, y + 1] == 0 && frontTilesValue[x, y] != 0)
+                if ((y + 1) < frontTilesValue.GetLength(1) && frontTilesValue[x, y + 1] == 0 && frontTilesValue[x, y] != 0)
                 {
                     vegetationTilesValue[x, y + 1] = 19;
                     vegetationTilesValue[x, y] = 20;
@@ -207,13 +199,8 @@ public class GenerateTerrainScript : MonoBehaviour
         vegetationTilesValue[x, y] = 17;
         for (int i = 0; i < height; i++)
         {
-            //tree = Instantiate(tree1Core[UnityEngine.Random.Range(0, tree1Core.Length)], new Vector2(x, y + 1 + i), Quaternion.identity);
-            //tree.GetComponent<SpriteRenderer>().sortingOrder = backTileLayerID;
             vegetationTilesValue[x, y + 1 + i] = 17;
         }
-        //tree = Instantiate(tree1Top, new Vector2(x, y + 1 + height), Quaternion.identity);
-        //tree.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
-        //tree.transform.SetParent(frontTiles[x, y + height].transform);
         vegetationTilesValue[x, y + height] = 18;
 
     }
@@ -408,12 +395,6 @@ public class GenerateTerrainScript : MonoBehaviour
                 neighbors++;
             }
         }
-
-
-
         return neighbors;
     }
-
-    
-
 }
