@@ -2,6 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+enum TileEnum {
+    EMPTY = 0,
+    DIRT,
+    STONE,
+    WOOD,
+    TREETRUNK = 17,
+    TREELEAF,
+    FLOWER,
+    GRASS, 
+    COAL,
+    COPPER, 
+    SILVER,
+    GOLD, 
+    DIAMOND,
+    CAMPFIRE = 50
+};
+
+
 public class TerrainManagerScript : MonoBehaviour
 {
     public ushort xDimension;
@@ -84,167 +102,157 @@ public class TerrainManagerScript : MonoBehaviour
 
     public void DisplayChunks(Vector2 playerPos)
     {
-        for(int x = 0; x < chunks.GetLength(0); ++x)
-        {
-            for(int y = 0; y < chunks.GetLength(1); ++y)
-            {
-                if(Vector2.Distance(playerPos, chunks[x,y].transform.position) < 80)
-                {
-                    if (!chunksLoadedIntoMemory[x, y])
-                    {
-                        LoadChunk((ushort)x, (ushort)y, playerPos);
-                    }
-                    else if (!chunksCurrentlyDisplaying[x, y])
-                    {
-                        chunks[x, y].SetActive(true);
-                        chunksCurrentlyDisplaying[x, y] = true;
-                    }
-                    
-                }
-                else
-                {
-                    chunks[x, y].SetActive(false);
-                    chunksCurrentlyDisplaying[x, y] = false;
-                }
-            }
-        }
+        //(a % b + b) % b;
+        ushort chunkPosY = (ushort)Mathf.Floor(playerPos.y / chunkSize);
+
+        int xRelativel = Mathf.FloorToInt(((playerPos.x - chunkSize )% worldXDimension + worldXDimension) % worldXDimension);
+        int xRelativem = Mathf.FloorToInt(( playerPos.x              % worldXDimension + worldXDimension) % worldXDimension);
+        int xRelativer = Mathf.FloorToInt(((playerPos.x + chunkSize )% worldXDimension + worldXDimension) % worldXDimension);
+
+        ushort chunkToDisplayl = (ushort)Mathf.FloorToInt(xRelativel / chunkSize);
+        ushort chunkToDisplaym = (ushort)Mathf.FloorToInt(xRelativem / chunkSize);
+        ushort chunkToDisplayr = (ushort)Mathf.FloorToInt(xRelativer / chunkSize);
+
+        int cppxl = Mathf.FloorToInt((playerPos.x - chunkSize) / chunkSize) * chunkSize;
+        int cppxm = Mathf.FloorToInt((playerPos.x            ) / chunkSize) * chunkSize;
+        int cppxr = Mathf.FloorToInt((playerPos.x + chunkSize) / chunkSize) * chunkSize;
+
+        chunks[chunkToDisplayl, chunkPosY].transform.localPosition = new Vector2(cppxl, chunkPosY * chunkSize);
+        chunks[chunkToDisplaym, chunkPosY].transform.localPosition = new Vector2(cppxm, chunkPosY * chunkSize);
+        chunks[chunkToDisplayr, chunkPosY].transform.localPosition = new Vector2(cppxr, chunkPosY * chunkSize);
+
+
+        //Debug.Log(chunkToDisplayl + " " + chunkToDisplaym + " " + chunkToDisplayr);
+        Debug.Log(chunkPosY);
+        if(!chunksLoadedIntoMemory[chunkToDisplayl,chunkPosY]) LoadChunk(chunkToDisplayl, chunkPosY);
+        if(!chunksLoadedIntoMemory[chunkToDisplaym,chunkPosY]) LoadChunk(chunkToDisplaym, chunkPosY);
+        if(!chunksLoadedIntoMemory[chunkToDisplayr,chunkPosY]) LoadChunk(chunkToDisplayr, chunkPosY);
+        //if (!chunksLoadedIntoMemory[0, 1]) LoadChunk(0, 1);
+        //if (!chunksLoadedIntoMemory[1, 1]) LoadChunk(1, 1);
+        //if (!chunksLoadedIntoMemory[2, 1]) LoadChunk(2, 1);
+
     }
 
-    void LoadChunk(ushort cXpos, ushort cYpos, Vector2 pPos)        //LOADS A CHUNK - USE WHEN CHUNK IS NOT POPULATED YET
+    void LoadChunk(ushort cx, ushort cy)        //LOADS A CHUNK - USE WHEN CHUNK IS NOT POPULATED YET
     {
-        chunks[cXpos, cYpos].SetActive(true);
-        Debug.Log(cXpos + " " + cYpos);
-        int xPos = cXpos * chunkSize;
-        int yPos = cYpos * chunkSize;
-
-        for(int x = xPos; x < xPos + chunkSize; ++x)
+        //int cppx = Mathf.FloorToInt(ppos.x / chunkSize) * chunkSize;
+        //int cppy = Mathf.FloorToInt(ppos.y / chunkSize);
+        ushort fetchPosX = 0;
+        ushort fetchPosY = 0;
+        for (ushort x = 0; x < chunkSize; ++x)
         {
-            for(int y = yPos; y < yPos + chunkSize; ++y)
+            for (ushort y = 0; y < chunkSize; y++)
             {
-                GameObject fTile = null;
-                GameObject bTile = null;
-                GameObject vTile = null;
+                fetchPosX = (ushort)(x + (cx * chunkSize));
+                fetchPosY = (ushort)(y + (cy * chunkSize));
+                //PLACE TILES
+                GameObject tile;
 
-                //FRONT TILES
-                switch (frontTilesValue[x, y])
+                //FRONT TILE
+                tile = GetTileToPlace(fetchPosX, fetchPosY, frontTilesValue);
+                if (tile)
                 {
-                    case 0:
-                        break;
-                    case 1:
-                        fTile = Instantiate(dirtObjects[UnityEngine.Random.Range(0, dirtObjects.Length)], new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 2:
-                        fTile = Instantiate(stoneObjects[UnityEngine.Random.Range(0, stoneObjects.Length)], new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 3:
-                        break;
-                    case 21:
-                        fTile = Instantiate(coal, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 22:
-                        fTile = Instantiate(copper, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 23:
-                        fTile = Instantiate(silver, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 24:
-                        fTile = Instantiate(gold, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 25:
-                        fTile = Instantiate(diamond, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    default:
-                        Debug.LogError("INVALID ID IN FRONT TILE VALUE ARRAY " + frontTilesValue[x, y]);
-                        break;
-
+                    tile = Instantiate(tile);
+                    tile.transform.SetParent(chunks[cx, cy].transform);
+                    tile.transform.localPosition = new Vector2(x, y);
+                    PlaceTileInFrontLayer(tile);
                 }
                 //BACK TILES
-                switch (backTilesValue[x, y])
+                tile = GetTileToPlace(fetchPosX, fetchPosY, backTilesValue);
+                if (tile)
                 {
-                    case 0:
-                        break;
-                    case 1:
-                        bTile = Instantiate(dirtObjects[UnityEngine.Random.Range(0, dirtObjects.Length)], new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 2:
-                        bTile = Instantiate(stoneObjects[UnityEngine.Random.Range(0, stoneObjects.Length)], new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 3:
-                        break;
-                    case 21:
-                        bTile = Instantiate(coal, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 22:
-                        bTile = Instantiate(copper, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 23:
-                        bTile = Instantiate(silver, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 24:
-                        bTile = Instantiate(gold, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 25:
-                        bTile = Instantiate(diamond, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    default:
-                        Debug.LogError("INVALID ID IN BACK TILE VALUE ARRAY " + backTilesValue[x, y]);
-                        break;
-
+                    tile = Instantiate(tile);
+                    tile.transform.SetParent(chunks[cx, cy].transform);
+                    tile.transform.localPosition = new Vector2(x, y);
+                    PlaceTileInBackLayer(tile);
                 }
                 //VEGETATION TILES
-                switch (vegetationTilesValue[x, y])
+                tile = GetTileToPlace(fetchPosX, fetchPosY, vegetationTilesValue);
+                if (tile)
                 {
-                    case 0:
-                        break;
-                    case 17:
-                        vTile = Instantiate(tree1Core[UnityEngine.Random.Range(0, tree1Core.Length)], new Vector2(x, y), Quaternion.identity);
-                        vegetationTiles[x, y] = vTile;
-                        vTile.GetComponent<SpriteRenderer>().sortingOrder = backTileLayerID;
-                        break;
-                    case 18:
-                        vTile = Instantiate(tree1Top, new Vector2(x, y), Quaternion.identity);
-                        vegetationTiles[x, y] = vTile;
-                        vTile.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
-                        vTile.transform.SetParent(vegetationTiles[x, y - 1].transform);
-                        break;
-                    case 19:
-                        vTile = Instantiate(flowers[UnityEngine.Random.Range(0, 4)], new Vector2(x, y), Quaternion.identity);
-                        vTile.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
-                        break;
-                    case 20:
-                        vTile = Instantiate(grass[UnityEngine.Random.Range(0, 4)], new Vector2(x, y), Quaternion.identity);
-                        vTile.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
-                        break;
-                    default:
-                        Debug.LogError("INVALID ID IN BACK TILE VALUE ARRAY " + vegetationTilesValue[x, y]);
-                        break;
-                }
-
-                if (fTile != null)
-                {
-                    frontTiles[x, y] = fTile;
-                    //frontTiles[x, y].transform.position = new Vector2(x, y);
-                    fTile.GetComponent<SpriteRenderer>().sortingOrder = frontTileLayerID;
-                    fTile.transform.SetParent(chunks[cXpos, cYpos].transform);
-                }
-                if (bTile != null)
-                {
-                    backTiles[x, y] = bTile;
-                    //backTiles[x, y].transform.position = new Vector2(x, y);
-                    bTile.GetComponent<SpriteRenderer>().sortingOrder = backTileLayerID;
-                    bTile.GetComponent<Collider2D>().enabled = false;
-                    bTile.GetComponent<SpriteRenderer>().color = Color.gray;
-                    bTile.transform.SetParent(chunks[cXpos, cYpos].transform);
-                }
-                if(vTile != null)
-                {
-                    vTile.transform.SetParent(chunks[cXpos, cYpos].transform);
+                    tile = Instantiate(tile);
+                    tile.transform.SetParent(chunks[cx, cy].transform);
+                    tile.transform.localPosition = new Vector2(x, y);
+                    PlaceTileInVegetationtLayer(tile);
                 }
             }
         }
-        
-        chunksLoadedIntoMemory[cXpos, cYpos] = true;
-        chunksCurrentlyDisplaying[cXpos, cYpos] = true;
+        chunksLoadedIntoMemory[cx, cy] = true;
+        chunksCurrentlyDisplaying[cx, cy] = true;
+
+    }
+
+    GameObject GetTileToPlace (ushort x, ushort y, ushort [,] tileLayer)
+    {
+        GameObject tile = null;
+
+        switch (tileLayer[x,y])
+        {
+            case (ushort)TileEnum.EMPTY:
+                break;
+            case (ushort)TileEnum.DIRT:
+                tile = dirtObjects[UnityEngine.Random.Range(0, dirtObjects.Length)];
+                break;
+            case (ushort)TileEnum.STONE:
+                tile = stoneObjects[UnityEngine.Random.Range(0, dirtObjects.Length)];
+                break;
+            case (ushort)TileEnum.WOOD:
+                Debug.LogError("WOOD GAMEOBJECT MISSING");
+                break;
+            case (ushort)TileEnum.TREETRUNK:
+                tile = tree1Core[UnityEngine.Random.Range(0, tree1Core.Length)];
+                break;
+            case (ushort)TileEnum.TREELEAF:
+                tile = tree1Top;
+                break;
+            case (ushort)TileEnum.FLOWER:
+                tile = flowers[UnityEngine.Random.Range(0, 4)];
+                break;
+            case (ushort)TileEnum.GRASS:
+                tile = grass[UnityEngine.Random.Range(0, 4)];
+                break;
+            case (ushort)TileEnum.COAL:
+                tile = coal;
+                break;
+            case (ushort)TileEnum.COPPER:
+                tile = coal;
+                break;
+            case (ushort)TileEnum.SILVER:
+                tile = silver;
+                break;
+            case (ushort)TileEnum.GOLD:
+                tile = gold;
+                break;
+            case (ushort)TileEnum.DIAMOND:
+                tile = diamond;
+                break;
+            case (ushort)TileEnum.CAMPFIRE:
+                Debug.LogError("CAMPFIRE GAMEOBJECT MISSING");
+                break;
+            default:
+                Debug.LogError("INVALID VALUE RECEIVED IN FUNCTION TILETOPLACE : VALUE " + tileLayer[x, y]);
+                break;
+
+        }
+
+        return tile;
+    }
+
+    void PlaceTileInFrontLayer(GameObject tile)
+    {
+        tile.GetComponent<SpriteRenderer>().sortingOrder = frontTileLayerID;
+    }
+
+    void PlaceTileInBackLayer(GameObject tile)
+    {
+        tile.GetComponent<SpriteRenderer>().sortingOrder = backTileLayerID;
+        tile.GetComponent<Collider2D>().enabled = false;
+        tile.GetComponent<SpriteRenderer>().color = Color.gray;
+    }
+
+    void PlaceTileInVegetationtLayer(GameObject tile)
+    {
+        tile.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
     }
 
     public GameObject MineTile(int x, int y)

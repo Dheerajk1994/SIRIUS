@@ -25,7 +25,7 @@
 				float4 frag(v2f_img i) : COLOR {
 					float4 c = tex2D(_MainTex, i.uv);
 					float2 ratio = float2(3, 1 / _AspectRatio);
-					float delta = 0;
+					float delta = 0.2;
 
 					float ray = length((_Player.xy - i.uv.xy) * ratio);
 					delta += smoothstep(_Player.z, 0, ray) * _Player.w;

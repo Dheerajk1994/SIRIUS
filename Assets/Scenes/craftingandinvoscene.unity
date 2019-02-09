@@ -1920,7 +1920,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 485184603}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 125.7, y: 76, z: 0}
+  m_LocalPosition: {x: 60, y: 76, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1763470508}
@@ -2955,7 +2955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4cd56488e2614459e50ba265c8276c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDimension: 1000
+  xDimension: 160
   heightAddition: 50
   stoneObjects:
   - {fileID: 1601765989645798, guid: 467e9a3d2970a944e8193e1fa213e9cc, type: 2}
@@ -8991,7 +8991,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0.9622642, b: 0.64557004, a: 0}
+  m_BackGroundColor: {r: 0.025765404, g: 0.028301895, b: 0.027473653, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -9029,7 +9029,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2124198269}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 125.7, y: 75.4, z: -10}
+  m_LocalPosition: {x: 60, y: 75.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9047,4 +9047,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 372ed45e123fa97499d05916f4dde9b7, type: 2}
+  orange: {r: 1, g: 0.9041945, b: 0.7877358, a: 1}
   player: {fileID: 485184603}

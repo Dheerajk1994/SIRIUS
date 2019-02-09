@@ -7,7 +7,7 @@ public class NightBehavior : MonoBehaviour
 {
 
     public Material material;
-
+    public Color orange = new Color(1.0f, 1.0f, 1.0f, 1f);
     //Globar reference used to store all game data
     public GameObject player;
 
@@ -15,7 +15,7 @@ public class NightBehavior : MonoBehaviour
     {
         Vector2 pos = player.transform.position;
         Vector4 v1 = Camera.main.WorldToViewportPoint(pos);
-        Vector4 orange = new Vector4(1.0f, 1.0f, 1.0f, 1f);
+        //Vector4 orange = new Vector4(1.0f, 1.0f, 1.0f, 1f);
         material.SetVector("_Orange", orange);
 
         v1.z = 0.5f;
