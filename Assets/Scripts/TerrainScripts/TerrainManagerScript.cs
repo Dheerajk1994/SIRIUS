@@ -22,6 +22,7 @@ enum TileEnum {
 
 public class TerrainManagerScript : MonoBehaviour
 {
+    #region VARIABLES
     public ushort xDimension;
     public ushort heightAddition;
 
@@ -52,9 +53,9 @@ public class TerrainManagerScript : MonoBehaviour
     public GameObject[,] backTiles;
     public GameObject[,] vegetationTiles;   //USED TO STORE PLANTS, GRASS, AND OTHER VEGETATION
 
-    ushort[,] frontTilesValue;
-    ushort[,] backTilesValue;
-    ushort[,] vegetationTilesValue;
+    public ushort[,] frontTilesValue;
+    public ushort[,] backTilesValue;
+    public ushort[,] vegetationTilesValue;
 
 
     public int backTileLayerID;
@@ -64,11 +65,12 @@ public class TerrainManagerScript : MonoBehaviour
     public GameObject player;
     private InventoryScript playerInventoryScript;
 
+    #endregion 
+
     public void StartTerrainGen()
     {
         this.GetComponentInParent<GenerateTerrainScript>().StartTerrainGeneration(this, xDimension, heightAddition, chunkSize);
     }
-
 
     public void SetTiles(ushort[,] fTilesV, ushort[,] bTilesV, ushort[,] vTilesV)
     {
@@ -99,19 +101,17 @@ public class TerrainManagerScript : MonoBehaviour
         Debug.Log("values received");
     }
 
-
     public void DisplayChunks(Vector2 playerPos)
     {
-        //(a % b + b) % b;
         ushort chunkPosY = (ushort)Mathf.Floor(playerPos.y / chunkSize);
 
         int xRelativel = Mathf.FloorToInt(((playerPos.x - chunkSize )% worldXDimension + worldXDimension) % worldXDimension);
         int xRelativem = Mathf.FloorToInt(( playerPos.x              % worldXDimension + worldXDimension) % worldXDimension);
         int xRelativer = Mathf.FloorToInt(((playerPos.x + chunkSize )% worldXDimension + worldXDimension) % worldXDimension);
 
-        ushort chunkToDisplayl = (ushort)Mathf.FloorToInt(xRelativel / chunkSize);
-        ushort chunkToDisplaym = (ushort)Mathf.FloorToInt(xRelativem / chunkSize);
-        ushort chunkToDisplayr = (ushort)Mathf.FloorToInt(xRelativer / chunkSize);
+        ushort chunkToDisplayl = (ushort)Mathf.Floor(xRelativel / chunkSize);
+        ushort chunkToDisplaym = (ushort)Mathf.Floor(xRelativem / chunkSize);
+        ushort chunkToDisplayr = (ushort)Mathf.Floor(xRelativer / chunkSize);
 
         int cppxl = Mathf.FloorToInt((playerPos.x - chunkSize) / chunkSize) * chunkSize;
         int cppxm = Mathf.FloorToInt((playerPos.x            ) / chunkSize) * chunkSize;
@@ -121,15 +121,9 @@ public class TerrainManagerScript : MonoBehaviour
         chunks[chunkToDisplaym, chunkPosY].transform.localPosition = new Vector2(cppxm, chunkPosY * chunkSize);
         chunks[chunkToDisplayr, chunkPosY].transform.localPosition = new Vector2(cppxr, chunkPosY * chunkSize);
 
-
-        //Debug.Log(chunkToDisplayl + " " + chunkToDisplaym + " " + chunkToDisplayr);
-        Debug.Log(chunkPosY);
         if(!chunksLoadedIntoMemory[chunkToDisplayl,chunkPosY]) LoadChunk(chunkToDisplayl, chunkPosY);
         if(!chunksLoadedIntoMemory[chunkToDisplaym,chunkPosY]) LoadChunk(chunkToDisplaym, chunkPosY);
         if(!chunksLoadedIntoMemory[chunkToDisplayr,chunkPosY]) LoadChunk(chunkToDisplayr, chunkPosY);
-        //if (!chunksLoadedIntoMemory[0, 1]) LoadChunk(0, 1);
-        //if (!chunksLoadedIntoMemory[1, 1]) LoadChunk(1, 1);
-        //if (!chunksLoadedIntoMemory[2, 1]) LoadChunk(2, 1);
 
     }
 
@@ -155,6 +149,7 @@ public class TerrainManagerScript : MonoBehaviour
                     tile = Instantiate(tile);
                     tile.transform.SetParent(chunks[cx, cy].transform);
                     tile.transform.localPosition = new Vector2(x, y);
+                    frontTiles[fetchPosX, fetchPosY] = tile;
                     PlaceTileInFrontLayer(tile);
                 }
                 //BACK TILES
@@ -164,6 +159,7 @@ public class TerrainManagerScript : MonoBehaviour
                     tile = Instantiate(tile);
                     tile.transform.SetParent(chunks[cx, cy].transform);
                     tile.transform.localPosition = new Vector2(x, y);
+                    backTiles[fetchPosX, fetchPosY] = tile;
                     PlaceTileInBackLayer(tile);
                 }
                 //VEGETATION TILES
@@ -173,6 +169,7 @@ public class TerrainManagerScript : MonoBehaviour
                     tile = Instantiate(tile);
                     tile.transform.SetParent(chunks[cx, cy].transform);
                     tile.transform.localPosition = new Vector2(x, y);
+                    vegetationTiles[fetchPosX, fetchPosY] = tile;
                     PlaceTileInVegetationtLayer(tile);
                 }
             }
@@ -257,42 +254,47 @@ public class TerrainManagerScript : MonoBehaviour
 
     public GameObject MineTile(int x, int y)
     {
-        if (x >= 0 && x < worldXDimension&& y >= 0 && y < worldYDimension && frontTiles[x,y] != null)
-        {
-            if(frontTiles[x,y].GetComponent<TileScript>().tileId == 2)
-            {
-                CutTree(x, y);
-            }
-            else
-            {
-                player.GetComponent<InventoryScript>().AddItemToInventory(frontTiles[x, y], 1);
-                Destroy(frontTiles[x, y]);
-            }
+        ushort relativeX = (ushort)Mathf.Floor((x % worldXDimension + worldXDimension) % worldXDimension);
+        ushort relativeY = (ushort)Mathf.Floor(y / chunkSize);
 
-            
-        }
+        player.GetComponent<InventoryScript>().AddItemToInventory(GetTileToPlace((ushort)relativeX, (ushort)y, frontTilesValue), 1);
+
+        //ushort posXinChunk = (ushort)(Mathf.Floor((x % chunkSize + chunkSize)) % chunkSize);
+        //ushort posYinChunk = (ushort)(y % chunkSize);
+
+        //chunks[relativeX, relativeY]
+        frontTilesValue             [relativeX, y] = 0;
+        vegetationTilesValue        [relativeX, y] = 0;
+
+        Destroy(frontTiles          [relativeX, y]);
+        Destroy(vegetationTiles     [relativeX, y]);
 
         return null;
     }
 
-    public bool PlaceTile(int x, int y, GameObject tile)
+    public bool PlaceTile(int x, int y, GameObject t, ushort id)
     {
-        if (x >= 0 && x < worldXDimension&& y >= 0 && y < worldYDimension && frontTiles[x, y] == null)
+        ushort relativeX = (ushort)Mathf.Floor((x % worldXDimension + worldXDimension) % worldXDimension);
+        //ushort relativeY = (ushort)Mathf.Floor(y / chunkSize);
+        if(frontTilesValue[relativeX, y] == (ushort)TileEnum.EMPTY)
         {
-            playerInventoryScript = player.GetComponent<InventoryScript>();
+            ushort posXinChunk = (ushort)(Mathf.Floor((x % chunkSize + chunkSize)) % chunkSize);
+            ushort posYinChunk = (ushort)(y % chunkSize);
 
-            if(playerInventoryScript.CheckItemInInventory(tile, 1))
-            {
-                playerInventoryScript.RemoveItemFromInventory(tile, 1);
-                GameObject t = Instantiate(tile, new Vector2(x, y), Quaternion.identity);
-                t.GetComponent<SpriteRenderer>().sortingOrder = frontTileLayerID;
-                frontTiles[x, y] = t;
-                return true;
-            }
+            ushort chunkX = (ushort)Mathf.Floor(relativeX / chunkSize);
+            ushort chunkY = (ushort)Mathf.Floor(y / chunkSize);
 
-            
+            //playerInventoryScript.RemoveItemFromInventory(t, 1);
+            GameObject tile = Instantiate(t);
+
+            frontTilesValue[relativeX, y] = (ushort)TileEnum.STONE;
+            frontTiles[relativeX, y] = tile;
+            tile.transform.SetParent(chunks[chunkX, chunkY].transform);
+            tile.transform.localPosition = new Vector2(posXinChunk, posYinChunk);
+            PlaceTileInFrontLayer(tile);
         }
-        return false;
+       
+        return true;
     }
 
     private void CutTree(int x, int y)
@@ -304,133 +306,5 @@ public class TerrainManagerScript : MonoBehaviour
             y++;
         }
     }
-
-    //BEGIN CREATETILE GAME OBJECTS
-    private void CreateTileGameobjects(ushort [,] frontTilesValue, ushort[,] backTilesValue, ushort[,] vegetationTilesValue)
-    {
-        ushort worldXDimension= (ushort)frontTilesValue.GetLength(0);
-        ushort yDim = (ushort)frontTilesValue.GetLength(1);
-
-        for (int x = 0; x < worldXDimension; x++)
-        {
-            for (int y = 0; y < worldYDimension; y++)
-            {
-                GameObject fTile = null;
-                GameObject bTile = null;
-
-                //FRONT TILES
-                switch (frontTilesValue[x, y])
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        fTile = Instantiate(dirtObjects[UnityEngine.Random.Range(0, dirtObjects.Length)], new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 2:
-                        fTile = Instantiate(stoneObjects[UnityEngine.Random.Range(0, stoneObjects.Length)], new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 3:
-                        break;
-                    case 21:
-                        fTile = Instantiate(coal, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 22:
-                        fTile = Instantiate(copper, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 23:
-                        fTile = Instantiate(silver, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 24:
-                        fTile = Instantiate(gold, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 25:
-                        fTile = Instantiate(diamond, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    default:
-                        Debug.LogError("INVALID ID IN FRONT TILE VALUE ARRAY " + frontTilesValue[x,y]);
-                        break;
-
-                }
-                //BACK TILES
-                switch (backTilesValue[x, y])
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        bTile = Instantiate(dirtObjects[UnityEngine.Random.Range(0, dirtObjects.Length)], new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 2:
-                        bTile = Instantiate(stoneObjects[UnityEngine.Random.Range(0, stoneObjects.Length)], new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 3:
-                        break;
-                    case 21:
-                        bTile = Instantiate(coal, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 22:
-                        bTile = Instantiate(copper, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 23:
-                        bTile = Instantiate(silver, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 24:
-                        bTile = Instantiate(gold, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    case 25:
-                        bTile = Instantiate(diamond, new Vector2(x, y), Quaternion.identity);
-                        break;
-                    default:
-                        Debug.LogError("INVALID ID IN BACK TILE VALUE ARRAY " + backTilesValue[x,y]);
-                        break;
-
-                }
-                //VEGETATION TILES
-                switch (vegetationTilesValue[x, y])
-                {
-                    case 0:
-                        break;
-                    case 17:
-                        GameObject trunk = Instantiate(tree1Core[UnityEngine.Random.Range(0, tree1Core.Length)], new Vector2(x, y), Quaternion.identity);
-                        vegetationTiles[x, y] = trunk;
-                        trunk.GetComponent<SpriteRenderer>().sortingOrder = backTileLayerID;
-                        break;
-                    case 18:
-                        GameObject treeLeaf = Instantiate(tree1Top, new Vector2(x, y), Quaternion.identity);
-                        vegetationTiles[x, y] = treeLeaf;
-                        treeLeaf.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
-                        treeLeaf.transform.SetParent(vegetationTiles[x, y - 1].transform);
-                        break;
-                    case 19:
-                        GameObject flowerObj = Instantiate(flowers[UnityEngine.Random.Range(0, 4)], new Vector2(x, y), Quaternion.identity);
-                        flowerObj.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
-                        break;
-                    case 20:
-                        GameObject grassObj = Instantiate(grass[UnityEngine.Random.Range(0, 4)], new Vector2(x, y), Quaternion.identity);
-                        grassObj.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
-                        break;
-                    default:
-                        Debug.LogError("INVALID ID IN BACK TILE VALUE ARRAY " + vegetationTilesValue[x,y]);
-                        break;
-                }
-
-
-                if (fTile != null)
-                {
-                    frontTiles[x, y] = fTile;
-                    //frontTiles[x, y].transform.position = new Vector2(x, y);
-                    fTile.GetComponent<SpriteRenderer>().sortingOrder = frontTileLayerID;
-                }
-                if (bTile != null)
-                {
-                    backTiles[x, y] = bTile;
-                    //backTiles[x, y].transform.position = new Vector2(x, y);
-                    bTile.GetComponent<SpriteRenderer>().sortingOrder = backTileLayerID;
-                    bTile.GetComponent<Collider2D>().enabled = false;
-                    bTile.GetComponent<SpriteRenderer>().color = Color.gray;
-                }
-            }
-        }
-    }
-    //END CREATETILE GAME OBJECTS
 
 }
