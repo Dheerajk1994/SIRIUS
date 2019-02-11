@@ -103,34 +103,123 @@ public class TerrainManagerScript : MonoBehaviour
 
     public void DisplayChunks(Vector2 playerPos)
     {
-        ushort chunkPosY = (ushort)Mathf.Floor(playerPos.y / chunkSize);
+        ushort chunkPosY = (ushort)Mathf.Clamp((ushort)Mathf.Floor(playerPos.y / chunkSize), 0, chunks.GetLength(1) - 1);
 
-        int xRelativel = Mathf.FloorToInt(((playerPos.x - chunkSize )% worldXDimension + worldXDimension) % worldXDimension);
-        int xRelativem = Mathf.FloorToInt(( playerPos.x              % worldXDimension + worldXDimension) % worldXDimension);
-        int xRelativer = Mathf.FloorToInt(((playerPos.x + chunkSize )% worldXDimension + worldXDimension) % worldXDimension);
+        int xRelativell = Mathf.FloorToInt(((playerPos.x - chunkSize * 2 )% worldXDimension + worldXDimension) % worldXDimension);
+        int xRelativel  = Mathf.FloorToInt(((playerPos.x - chunkSize)     % worldXDimension + worldXDimension) % worldXDimension);
+        int xRelativem  = Mathf.FloorToInt(( playerPos.x                  % worldXDimension + worldXDimension) % worldXDimension);
+        int xRelativer  = Mathf.FloorToInt(((playerPos.x + chunkSize)     % worldXDimension + worldXDimension) % worldXDimension);
+        int xRelativerr = Mathf.FloorToInt(((playerPos.x + chunkSize * 2 )% worldXDimension + worldXDimension) % worldXDimension);
 
-        ushort chunkToDisplayl = (ushort)Mathf.Floor(xRelativel / chunkSize);
-        ushort chunkToDisplaym = (ushort)Mathf.Floor(xRelativem / chunkSize);
-        ushort chunkToDisplayr = (ushort)Mathf.Floor(xRelativer / chunkSize);
+        ushort chunkToDisplayll = (ushort)Mathf.Floor(xRelativell / chunkSize);
+        ushort chunkToDisplayl  = (ushort)Mathf.Floor(xRelativel  / chunkSize);
+        ushort chunkToDisplaym  = (ushort)Mathf.Floor(xRelativem  / chunkSize);
+        ushort chunkToDisplayr  = (ushort)Mathf.Floor(xRelativer  / chunkSize);
+        ushort chunkToDisplayrr = (ushort)Mathf.Floor(xRelativerr / chunkSize);
 
-        int cppxl = Mathf.FloorToInt((playerPos.x - chunkSize) / chunkSize) * chunkSize;
-        int cppxm = Mathf.FloorToInt((playerPos.x            ) / chunkSize) * chunkSize;
-        int cppxr = Mathf.FloorToInt((playerPos.x + chunkSize) / chunkSize) * chunkSize;
 
-        chunks[chunkToDisplayl, chunkPosY].transform.localPosition = new Vector2(cppxl, chunkPosY * chunkSize);
-        chunks[chunkToDisplaym, chunkPosY].transform.localPosition = new Vector2(cppxm, chunkPosY * chunkSize);
-        chunks[chunkToDisplayr, chunkPosY].transform.localPosition = new Vector2(cppxr, chunkPosY * chunkSize);
+        int cppxll = Mathf.FloorToInt((playerPos.x - chunkSize * 2) / chunkSize) * chunkSize;
+        int cppxl  = Mathf.FloorToInt((playerPos.x - chunkSize)     / chunkSize) * chunkSize;
+        int cppxm  = Mathf.FloorToInt((playerPos.x            )     / chunkSize) * chunkSize;
+        int cppxr  = Mathf.FloorToInt((playerPos.x + chunkSize)     / chunkSize) * chunkSize;
+        int cppxrr = Mathf.FloorToInt((playerPos.x + chunkSize * 2) / chunkSize) * chunkSize;
 
-        if(!chunksLoadedIntoMemory[chunkToDisplayl,chunkPosY]) LoadChunk(chunkToDisplayl, chunkPosY);
-        if(!chunksLoadedIntoMemory[chunkToDisplaym,chunkPosY]) LoadChunk(chunkToDisplaym, chunkPosY);
-        if(!chunksLoadedIntoMemory[chunkToDisplayr,chunkPosY]) LoadChunk(chunkToDisplayr, chunkPosY);
+        //TOP TOP Y - TO TURN OFF
+        if (chunkPosY + 2 < chunks.GetLength(1))
+        {
+            chunks[chunkToDisplayl, chunkPosY + 2].transform.localPosition = new Vector2(cppxl, (chunkPosY + 2) * chunkSize);
+            chunks[chunkToDisplaym, chunkPosY + 2].transform.localPosition = new Vector2(cppxm, (chunkPosY + 2) * chunkSize);
+            chunks[chunkToDisplayr, chunkPosY + 2].transform.localPosition = new Vector2(cppxr, (chunkPosY + 2) * chunkSize);
+
+            chunks[chunkToDisplayl, chunkPosY + 2].SetActive(false); chunksCurrentlyDisplaying[chunkToDisplayl, chunkPosY + 2] = false;
+            chunks[chunkToDisplaym, chunkPosY + 2].SetActive(false); chunksCurrentlyDisplaying[chunkToDisplaym, chunkPosY + 2] = false;
+            chunks[chunkToDisplayr, chunkPosY + 2].SetActive(false); chunksCurrentlyDisplaying[chunkToDisplayr, chunkPosY + 2] = false;
+
+
+        }
+        //TOP Y
+        if (chunkPosY + 1 < chunks.GetLength(1))
+        {
+            chunks[chunkToDisplayll, chunkPosY + 1].transform.localPosition = new Vector2(cppxll, (chunkPosY + 1) * chunkSize);//R
+            chunks[chunkToDisplayl,  chunkPosY + 1].transform.localPosition = new Vector2(cppxl,  (chunkPosY + 1) * chunkSize);//S
+            chunks[chunkToDisplaym,  chunkPosY + 1].transform.localPosition = new Vector2(cppxm,  (chunkPosY + 1) * chunkSize);//S
+            chunks[chunkToDisplayr,  chunkPosY + 1].transform.localPosition = new Vector2(cppxr,  (chunkPosY + 1) * chunkSize);//S
+            chunks[chunkToDisplayrr, chunkPosY + 1].transform.localPosition = new Vector2(cppxrr, (chunkPosY + 1) * chunkSize);//R
+
+            DisplayChunk(chunkToDisplayl,  (ushort)(chunkPosY + 1));
+            DisplayChunk(chunkToDisplaym,  (ushort)(chunkPosY + 1));
+            DisplayChunk(chunkToDisplayr,  (ushort)(chunkPosY + 1));
+
+
+            chunks[chunkToDisplayll, chunkPosY + 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayll, chunkPosY + 1] = false;
+            chunks[chunkToDisplayrr, chunkPosY + 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayrr, chunkPosY + 1] = false;
+        }                                            
+
+
+        //MIDDLE Y
+        //Debug.LogError(chunks.GetLength(0) + " " + chunks.GetLength(1) + " - " + chunkToDisplayll + " " + chunkPosY);
+            chunks[chunkToDisplayll, chunkPosY].transform.localPosition = new Vector2(cppxll, chunkPosY * chunkSize);//R
+            chunks[chunkToDisplayl, chunkPosY].transform.localPosition = new Vector2(cppxl, chunkPosY * chunkSize);//S
+            chunks[chunkToDisplaym, chunkPosY].transform.localPosition = new Vector2(cppxm, chunkPosY * chunkSize);//S
+            chunks[chunkToDisplayr, chunkPosY].transform.localPosition = new Vector2(cppxr, chunkPosY * chunkSize);//S
+            chunks[chunkToDisplayrr, chunkPosY].transform.localPosition = new Vector2(cppxrr, chunkPosY * chunkSize);//R
+
+
+            DisplayChunk(chunkToDisplayl, chunkPosY);
+            DisplayChunk(chunkToDisplaym, chunkPosY);
+            DisplayChunk(chunkToDisplayr, chunkPosY);
+
+            chunks[chunkToDisplayll, chunkPosY].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayll, chunkPosY] = false;
+            chunks[chunkToDisplayrr, chunkPosY].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayrr, chunkPosY] = false;
+
+
+
+        //BOT Y
+        if (chunkPosY - 1 >= 0)
+        {
+            chunks[chunkToDisplayll, chunkPosY - 1].transform.localPosition = new Vector2(cppxll, (chunkPosY - 1) * chunkSize);//R
+            chunks[chunkToDisplayl,  chunkPosY - 1].transform.localPosition = new Vector2(cppxl,  (chunkPosY - 1) * chunkSize);//S
+            chunks[chunkToDisplaym,  chunkPosY - 1].transform.localPosition = new Vector2(cppxm,  (chunkPosY - 1) * chunkSize);//S
+            chunks[chunkToDisplayr,  chunkPosY - 1].transform.localPosition = new Vector2(cppxr,  (chunkPosY - 1) * chunkSize);//S
+            chunks[chunkToDisplayrr, chunkPosY - 1].transform.localPosition = new Vector2(cppxrr, (chunkPosY - 1) * chunkSize);//R
+
+            DisplayChunk(chunkToDisplayl, (ushort)(chunkPosY - 1));
+            DisplayChunk(chunkToDisplaym, (ushort)(chunkPosY - 1));
+            DisplayChunk(chunkToDisplayr, (ushort)(chunkPosY - 1));
+
+            Debug.Log(chunkToDisplayl + " " + (ushort)(chunkPosY - 1));
+
+            chunks[chunkToDisplayll, chunkPosY - 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayll, chunkPosY - 1] = false;
+            chunks[chunkToDisplayrr, chunkPosY - 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayrr, chunkPosY - 1] = false;
+        }                                                      
+
+        //BOT BOT Y - TO REMOVE
+        if (chunkPosY - 2 >= 0)
+        {
+            chunks[chunkToDisplayl, chunkPosY - 2].transform.localPosition = new Vector2(cppxl, (chunkPosY - 2) * chunkSize);
+            chunks[chunkToDisplaym, chunkPosY - 2].transform.localPosition = new Vector2(cppxm, (chunkPosY - 2) * chunkSize);
+            chunks[chunkToDisplayr, chunkPosY - 2].transform.localPosition = new Vector2(cppxr, (chunkPosY - 2) * chunkSize);
+
+            chunks[chunkToDisplayl, chunkPosY - 2].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayl, chunkPosY - 2] = false;
+            chunks[chunkToDisplaym, chunkPosY - 2].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplaym, chunkPosY - 2] = false;
+            chunks[chunkToDisplayr, chunkPosY - 2].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayr, chunkPosY - 2] = false;
+        }
 
     }
 
-    void LoadChunk(ushort cx, ushort cy)        //LOADS A CHUNK - USE WHEN CHUNK IS NOT POPULATED YET
+    void DisplayChunk(ushort cx, ushort cy)        //LOADS A CHUNK - USE WHEN CHUNK IS NOT POPULATED YET
     {
-        //int cppx = Mathf.FloorToInt(ppos.x / chunkSize) * chunkSize;
-        //int cppy = Mathf.FloorToInt(ppos.y / chunkSize);
+        
+        if(chunksLoadedIntoMemory[cx, cy])
+        {
+            if(!chunksCurrentlyDisplaying[cx, cy])
+            {
+                chunks[cx, cy].SetActive(true);
+                chunksCurrentlyDisplaying[cx, cy] = true;
+            }
+            return;
+        }
+
         ushort fetchPosX = 0;
         ushort fetchPosY = 0;
         for (ushort x = 0; x < chunkSize; ++x)
@@ -153,14 +242,17 @@ public class TerrainManagerScript : MonoBehaviour
                     PlaceTileInFrontLayer(tile);
                 }
                 //BACK TILES
-                tile = GetTileToPlace(fetchPosX, fetchPosY, backTilesValue);
-                if (tile)
+                if(frontTilesValue[fetchPosX, fetchPosY] == (ushort)TileEnum.EMPTY)//no need to display back tile if there is front tile
                 {
-                    tile = Instantiate(tile);
-                    tile.transform.SetParent(chunks[cx, cy].transform);
-                    tile.transform.localPosition = new Vector2(x, y);
-                    backTiles[fetchPosX, fetchPosY] = tile;
-                    PlaceTileInBackLayer(tile);
+                    tile = GetTileToPlace(fetchPosX, fetchPosY, backTilesValue);
+                    if (tile)
+                    {
+                        tile = Instantiate(tile);
+                        tile.transform.SetParent(chunks[cx, cy].transform);
+                        tile.transform.localPosition = new Vector2(x, y);
+                        backTiles[fetchPosX, fetchPosY] = tile;
+                        PlaceTileInBackLayer(tile);
+                    }
                 }
                 //VEGETATION TILES
                 tile = GetTileToPlace(fetchPosX, fetchPosY, vegetationTilesValue);
@@ -174,6 +266,7 @@ public class TerrainManagerScript : MonoBehaviour
                 }
             }
         }
+        chunks[cx, cy].SetActive(true);
         chunksLoadedIntoMemory[cx, cy] = true;
         chunksCurrentlyDisplaying[cx, cy] = true;
 
@@ -257,12 +350,22 @@ public class TerrainManagerScript : MonoBehaviour
         ushort relativeX = (ushort)Mathf.Floor((x % worldXDimension + worldXDimension) % worldXDimension);
         ushort relativeY = (ushort)Mathf.Floor(y / chunkSize);
 
+        if (frontTilesValue[x, y] == (ushort)TileEnum.EMPTY) return null;
+
         player.GetComponent<InventoryScript>().AddItemToInventory(GetTileToPlace((ushort)relativeX, (ushort)y, frontTilesValue), 1);
 
-        //ushort posXinChunk = (ushort)(Mathf.Floor((x % chunkSize + chunkSize)) % chunkSize);
-        //ushort posYinChunk = (ushort)(y % chunkSize);
+        GameObject tile = GetTileToPlace(relativeX, relativeY, backTilesValue);
+        if (tile)
+        {
+            tile = Instantiate(tile);
+            tile.transform.SetParent(chunks[(ushort)Mathf.Floor(relativeX / chunkSize), (ushort)Mathf.Floor(y / chunkSize)].transform);
+            ushort posXinChunk = (ushort)(Mathf.Floor((x % chunkSize + chunkSize)) % chunkSize);
+            ushort posYinChunk = (ushort)(y % chunkSize);
+            tile.transform.localPosition = new Vector2(posXinChunk, posYinChunk);
+            backTiles[relativeX, relativeY] = tile;
+            PlaceTileInBackLayer(tile);
+        }
 
-        //chunks[relativeX, relativeY]
         frontTilesValue             [relativeX, y] = 0;
         vegetationTilesValue        [relativeX, y] = 0;
 

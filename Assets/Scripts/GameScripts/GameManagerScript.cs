@@ -27,9 +27,12 @@ public class GameManagerScript : MonoBehaviour
     public bool isInDemoMode;
     private bool readyToGo = false;
 
+    Vector2 playerPos;
+
     private void Start()
     {
         player.gameObject.SetActive(false);
+        playerPos = player.transform.position;
         terrainManagerScript = TerrainManager.GetComponent<TerrainManagerScript>();
         if (isInDemoMode)
         {
@@ -45,7 +48,12 @@ public class GameManagerScript : MonoBehaviour
             else if (Input.GetMouseButton(1)) RightMouseClicked();
             else if (Input.GetKeyDown(KeyCode.I)) ToggleInventory();
             else if (Input.GetKeyDown(KeyCode.C)) ToggleCrafting();
-            terrainManagerScript.DisplayChunks(player.transform.position);
+            //if(Vector2.Distance(player.transform.position, playerPos) > 20)
+            //{
+            //    terrainManagerScript.DisplayChunks(player.transform.position);
+            //    playerPos = player.transform.position;
+            //}
+                terrainManagerScript.DisplayChunks(player.transform.position);
         }
     }
 
