@@ -23,7 +23,8 @@ public class InventoryScript : MonoBehaviour
 
     public void AddItemToInventory(GameObject item, int amount)
     {
-        for(int i = 0; i < inventorySize; i++)
+        if (item == null) return;
+        for (int i = 0; i < inventorySize; i++)
         {
             if(inventoryItems[i] != null && inventoryItems[i].itemID == item.GetComponent<TileScript>().tileId)
             {
@@ -46,6 +47,7 @@ public class InventoryScript : MonoBehaviour
 
     public void RemoveItemFromInventory(GameObject item, int amount)
     {
+        if (item == null) return;
         for (int i = 0; i < inventorySize; i++)
         {
             if (inventoryItems[i] != null && inventoryItems[i].itemID == item.GetComponent<TileScript>().tileId)
