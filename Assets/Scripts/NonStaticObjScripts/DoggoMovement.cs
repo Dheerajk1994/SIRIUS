@@ -11,17 +11,31 @@ public class DoggoMovement : MonoBehaviour {
 
     float horizontalMove = 0f;
     bool jump = false;
-    	
-	// Update is called once per frame
-	void Update () {
+
+    public GameObject player;
+    private PlayerScript playerScript;
+
+    private void Start()
+    {
+        player = GameObject.Find("GameManager").GetComponent<GameManagerScript>().player;
+        playerScript = player.GetComponent<PlayerScript>();
+    }
+
+    // Update is called once per frame
+    void Update () {
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         if(Input.GetButtonDown("Jump"))
         {
-            jump = true;
-            animator.SetBool("isJump", true);
+            if(playerScript.currentStamina >= 10)
+            {
+                jump = true;
+                animator.SetBool("isJump", true);
+                playerScript.ChangeStamina(-10);
+            }
+            
         }
 	}
 
