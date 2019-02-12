@@ -579,6 +579,10 @@ MonoBehaviour:
   UI: {fileID: 1754475266}
   playerInvoPanel: {fileID: 779931697}
   craftingPanel: {fileID: 1598471940}
+  attributePanel: {fileID: 0}
+  healthBar: {fileID: 0}
+  staminaBar: {fileID: 0}
+  hungerBar: {fileID: 0}
   isInDemoMode: 1
 --- !u!4 &134921671
 Transform:
@@ -1702,6 +1706,7 @@ MonoBehaviour:
   controller: {fileID: 485184609}
   animator: {fileID: 485184610}
   runSpeed: 100
+  player: {fileID: 0}
 --- !u!114 &485184609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2629,38 +2634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159f0d9f7f94efe4f830aa99754ca1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stoneObjects:
-  - {fileID: 1601765989645798, guid: 467e9a3d2970a944e8193e1fa213e9cc, type: 2}
-  - {fileID: 1477336892249200, guid: 04567c25720eac9448298994879ee8d1, type: 2}
-  - {fileID: 1830568133484256, guid: 78eaec09892be0248b80a85e527b6201, type: 2}
-  - {fileID: 1857664707528882, guid: 166ee35a87d2b0348b0cfb1f8b47cd8c, type: 2}
-  dirtObjects:
-  - {fileID: 1778954574826284, guid: d74d01affa2cf2c4393720e158f6d4fc, type: 2}
-  - {fileID: 1961061265238306, guid: 2653318181896214aad51859f55bff11, type: 2}
-  - {fileID: 1388234397514544, guid: 3a9975e031f7803469ef91b0f91809bc, type: 2}
-  - {fileID: 1935891212128696, guid: 1b9b2cf9906d089418e2bdf7b5d91e71, type: 2}
-  grass:
-  - {fileID: 1147847452662578, guid: 81cbd5df97638ba48bfbbaee79c72d02, type: 2}
-  - {fileID: 1289579156322202, guid: 99e943bd32e79b1419600cffdb727a05, type: 2}
-  - {fileID: 1336601157171444, guid: 5300c59c3b8797a43a53721b88cd8291, type: 2}
-  - {fileID: 1086542754000140, guid: 496e17bb383c45b41a60d921fd22c996, type: 2}
-  flowers:
-  - {fileID: 1288983557608434, guid: 8ed66addb64b8e848b08626cf19ae1d6, type: 2}
-  - {fileID: 1460683419082884, guid: 633cb3294d61ab9458226947fbab72fa, type: 2}
-  - {fileID: 1336119762759380, guid: 9380ad20009851046915824a7ce32167, type: 2}
-  - {fileID: 1888704002428804, guid: cee269f056e123049929a7a66df2d5bf, type: 2}
-  tree1Base: {fileID: 1576205482675570, guid: 90f89ced8b0f05f4b821a3ba78956b60, type: 2}
-  tree1Top: {fileID: 1624293563353494, guid: 73d2d3f843e63c542aa0858fee3635cf, type: 2}
-  tree1Core:
-  - {fileID: 1877179025606374, guid: 9162fed3ecd8a404f9154e6eb7794fdb, type: 2}
-  - {fileID: 1929804583520076, guid: d106d517efa3e0a40bd0c602b92ef7ae, type: 2}
-  - {fileID: 1160366329413018, guid: 495031f0fd0050944a58f8a6d21ea7c2, type: 2}
-  - {fileID: 1830711470946446, guid: 64d5a5aa8e5ed6a4c90668713b0e33e6, type: 2}
-  coal: {fileID: 1002037512885184, guid: ed3e464f8ec7af94ab1c0a09c8001c6a, type: 2}
-  copper: {fileID: 1816122398459096, guid: ee1a2de691c5c054d9ae8cdcae81db8b, type: 2}
-  silver: {fileID: 1342432692097644, guid: f6f0328eb5ea6fb4f8af5b0425a8eddc, type: 2}
-  gold: {fileID: 1444934275431416, guid: ddabd6119e182a543a683fbc5e62b7d0, type: 2}
-  diamond: {fileID: 1895697507877374, guid: cef27dcd248af8c4191a4ffc5db32161, type: 2}
   xDimension: 100
   smoothness: 40
   heightMultiple: 20
@@ -2719,9 +2692,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 680721632}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93bf2d72d5140ff438844a69f3c21626, type: 3}
+  m_Script: {fileID: 11500000, guid: ad4cd56488e2614459e50ba265c8276c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoneObjects:
+  - {fileID: 1601765989645798, guid: 467e9a3d2970a944e8193e1fa213e9cc, type: 2}
+  - {fileID: 1477336892249200, guid: 04567c25720eac9448298994879ee8d1, type: 2}
+  - {fileID: 1830568133484256, guid: 78eaec09892be0248b80a85e527b6201, type: 2}
+  - {fileID: 1857664707528882, guid: 166ee35a87d2b0348b0cfb1f8b47cd8c, type: 2}
+  dirtObjects:
+  - {fileID: 1778954574826284, guid: d74d01affa2cf2c4393720e158f6d4fc, type: 2}
+  - {fileID: 1961061265238306, guid: 2653318181896214aad51859f55bff11, type: 2}
+  - {fileID: 1388234397514544, guid: 3a9975e031f7803469ef91b0f91809bc, type: 2}
+  - {fileID: 1935891212128696, guid: 1b9b2cf9906d089418e2bdf7b5d91e71, type: 2}
+  grass:
+  - {fileID: 1147847452662578, guid: 81cbd5df97638ba48bfbbaee79c72d02, type: 2}
+  - {fileID: 1289579156322202, guid: 99e943bd32e79b1419600cffdb727a05, type: 2}
+  - {fileID: 1336601157171444, guid: 5300c59c3b8797a43a53721b88cd8291, type: 2}
+  - {fileID: 1086542754000140, guid: 496e17bb383c45b41a60d921fd22c996, type: 2}
+  flowers:
+  - {fileID: 1288983557608434, guid: 8ed66addb64b8e848b08626cf19ae1d6, type: 2}
+  - {fileID: 1460683419082884, guid: 633cb3294d61ab9458226947fbab72fa, type: 2}
+  - {fileID: 1336119762759380, guid: 9380ad20009851046915824a7ce32167, type: 2}
+  - {fileID: 1888704002428804, guid: cee269f056e123049929a7a66df2d5bf, type: 2}
+  tree1Base: {fileID: 1576205482675570, guid: 90f89ced8b0f05f4b821a3ba78956b60, type: 2}
+  tree1Top: {fileID: 1624293563353494, guid: 73d2d3f843e63c542aa0858fee3635cf, type: 2}
+  tree1Core:
+  - {fileID: 1877179025606374, guid: 9162fed3ecd8a404f9154e6eb7794fdb, type: 2}
+  - {fileID: 1929804583520076, guid: d106d517efa3e0a40bd0c602b92ef7ae, type: 2}
+  - {fileID: 1160366329413018, guid: 495031f0fd0050944a58f8a6d21ea7c2, type: 2}
+  - {fileID: 1830711470946446, guid: 64d5a5aa8e5ed6a4c90668713b0e33e6, type: 2}
+  coal: {fileID: 1002037512885184, guid: ed3e464f8ec7af94ab1c0a09c8001c6a, type: 2}
+  copper: {fileID: 1816122398459096, guid: ee1a2de691c5c054d9ae8cdcae81db8b, type: 2}
+  silver: {fileID: 1342432692097644, guid: f6f0328eb5ea6fb4f8af5b0425a8eddc, type: 2}
+  gold: {fileID: 1444934275431416, guid: ddabd6119e182a543a683fbc5e62b7d0, type: 2}
+  diamond: {fileID: 1895697507877374, guid: cef27dcd248af8c4191a4ffc5db32161, type: 2}
   backTileLayerID: 12
   frontTileLayerID: 13
   grassLayerID: 15
@@ -3426,7 +3431,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193ad254f1f23c4b8f85c023eff3650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resolut: 0
   GameManager: {fileID: 134921669}
+  myDropdown: {fileID: 0}
 --- !u!1001 &848844051
 Prefab:
   m_ObjectHideFlags: 0
@@ -6687,6 +6694,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 134921669}
+  attributeIcon: {fileID: 0}
+  attributePanelStatusSprite: []
 --- !u!1 &1763470507
 GameObject:
   m_ObjectHideFlags: 0
