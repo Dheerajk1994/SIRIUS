@@ -56,4 +56,10 @@ public void screenSz()
     {
         SceneManager.LoadScene(scene);
     }
+
+
+    void OnMouseOver()
+    {
+
+    }
 }
