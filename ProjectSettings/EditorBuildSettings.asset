@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu(PN).unity
     guid: 7daf74898ef10435485df66ad9ad4139
   - enabled: 1
-    path: Assets/Scenes/EditedCrafting(PN).unity
-    guid: aa4cf29340c074083b0321576d95b81e
+    path: Assets/Scenes/craftingandinvoscene.unity
+    guid: 970b217d9a926484b96aa978fefa4bd7
   m_configObjects: {}

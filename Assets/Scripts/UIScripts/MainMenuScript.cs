@@ -62,4 +62,12 @@ public void screenSz()
     {
 
     }
+
+   public void escDown(GameObject panel)
+    {
+        if
+        (Input.GetKeyDown(KeyCode.Escape)) {
+            panel.gameObject.SetActive(!panel.gameObject.activeSelf);
+        };
+    }
 }
