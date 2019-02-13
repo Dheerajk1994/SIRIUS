@@ -31,6 +31,8 @@ public class GameManagerScript : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.Find("Sam");
+        mainCamera = Camera.main;
         player.gameObject.SetActive(false);
         playerPos = player.transform.position;
         terrainManagerScript = TerrainManager.GetComponent<TerrainManagerScript>();
@@ -59,6 +61,14 @@ public class GameManagerScript : MonoBehaviour
 
     public void StartNewGame()
     {
+        player.gameObject.SetActive(false);
+        playerPos = player.transform.position;
+        terrainManagerScript = TerrainManager.GetComponent<TerrainManagerScript>();
+        if (isInDemoMode)
+        {
+            //StartNewGame();
+        }
+
         mainCamera.gameObject.SetActive(false);
 
         terrainManagerScript.StartTerrainGen();

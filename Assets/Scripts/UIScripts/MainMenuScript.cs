@@ -65,8 +65,9 @@ public void screenSz()
 
    public void escDown(GameObject panel)
     {
-        if
-        (Input.GetKeyDown(KeyCode.Escape)) {
+        if(Input.GetKeyDown("escape")) {
+            //(Input.GetKeyDown(Input.KeyCode.Escape)) {
+            Debug.Log("pls hep");
             panel.gameObject.SetActive(!panel.gameObject.activeSelf);
         };
     }
