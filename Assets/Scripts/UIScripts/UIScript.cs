@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class UIScript : MonoBehaviour
 {
     public GameObject gameManager;
-    private GameObject playerInvoPanel;
-    private GameObject craftingPanel;
-    private Slider healthBar;
-    private Slider staminaBar;
-    private Slider hungerBar;
+    public GameObject playerInvoPanel;
+    public GameObject craftingPanel;
+    public Slider healthBar;
+    public Slider staminaBar;
+    public Slider hungerBar;
 
     public Image attributeIcon;
     public Sprite [] attributePanelStatusSprite;
@@ -19,15 +19,15 @@ public class UIScript : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager");
 
-        playerInvoPanel = gameManager.GetComponent<GameManagerScript>().playerInvoPanel;
+        //playerInvoPanel = gameManager.GetComponent<GameManagerScript>().playerInvoPanel;
         playerInvoPanel.gameObject.SetActive(false);
 
-        craftingPanel = gameManager.GetComponent<GameManagerScript>().craftingPanel;
+        //craftingPanel = gameManager.GetComponent<GameManagerScript>().craftingPanel;
         craftingPanel.gameObject.SetActive(false);
 
-        healthBar = gameManager.GetComponent<GameManagerScript>().healthBar;
-        staminaBar = gameManager.GetComponent<GameManagerScript>().staminaBar;
-        hungerBar = gameManager.GetComponent<GameManagerScript>().hungerBar;
+        //healthBar = gameManager.GetComponent<GameManagerScript>().healthBar;
+        //staminaBar = gameManager.GetComponent<GameManagerScript>().staminaBar;
+        //hungerBar = gameManager.GetComponent<GameManagerScript>().hungerBar;
 
     }
 

@@ -7,22 +7,32 @@ using UnityEngine.UI;
 public class GameManagerScript : MonoBehaviour
 {
 
-    public GameObject player;
-    public GameObject TerrainManager;
+   
     public GameObject stone;
 
-    private TerrainManagerScript terrainManagerScript;
 
+    //PREFABS
+    public GameObject UIPrefab;             
+    public GameObject PlayerPrefab;
+    public GameObject TerrainManagerPrefab;
+    public Camera MainCameraPrefab;
+
+    //INSTANTIATEED PREFABS
+    public GameObject player;
+    public GameObject TerrainManager;
+    public Camera     mainCamera;
     public GameObject UI;
+
+    private TerrainManagerScript terrainManagerScript;
+    public UIScript   uiScript;
+
     public GameObject playerInvoPanel;
     public GameObject craftingPanel;
-    public GameObject attributePanel;
+    //public GameObject attributePanel;
 
     public Slider healthBar;
     public Slider staminaBar;
     public Slider hungerBar;
-
-    public Camera mainCamera;
 
     public bool isInDemoMode;
     private bool readyToGo = false;
@@ -31,13 +41,33 @@ public class GameManagerScript : MonoBehaviour
 
     private void Start()
     {
+        UI               = Instantiate(UIPrefab);
+
+        uiScript        = UI.GetComponent<UIScript>();
+        playerInvoPanel = uiScript.playerInvoPanel;
+        craftingPanel   = uiScript.craftingPanel;
+        healthBar       = uiScript.healthBar;
+        staminaBar      = uiScript.staminaBar;
+        hungerBar       = uiScript.hungerBar;
+
+
+
+        TerrainManager   = Instantiate(TerrainManagerPrefab);
+        //mainCamera       = Instantiate(Resources.Load("Main Camera", typeof(Camera))) as Camera;
+        mainCamera = Instantiate(MainCameraPrefab);
+
+        player           = Instantiate(PlayerPrefab);
         player.gameObject.SetActive(false);
-        playerPos = player.transform.position;
+        
+
+        playerInvoPanel.GetComponent<PlayerInventoryPanelScript>().player = player;
+
         terrainManagerScript = TerrainManager.GetComponent<TerrainManagerScript>();
-        if (isInDemoMode)
-        {
-            //StartNewGame();
-        }
+
+        GameObject PlayArea = new GameObject("PlayArea");
+        PlayArea.transform.position = new Vector3(0f, 0f, 0f);
+
+        StartNewGame();
     }
 
     private void Update()
@@ -59,14 +89,19 @@ public class GameManagerScript : MonoBehaviour
 
     public void StartNewGame()
     {
+        Debug.Log("start new game pressed");
         mainCamera.gameObject.SetActive(false);
 
         terrainManagerScript.StartTerrainGen();
         player.gameObject.SetActive(true);
         player.GetComponent<SpriteRenderer>().sortingLayerName = "frontTileLayer";
         player.transform.SetParent(GameObject.Find("PlayArea").transform);
+        playerPos = terrainManagerScript.GetSafePlaceToSpawnPlayer();
+        player.transform.position = playerPos;
 
         mainCamera.gameObject.SetActive(true);
+        mainCamera.gameObject.GetComponent<CameraScript>().playerToFollow = player.transform;
+
         readyToGo = true;
     }
 

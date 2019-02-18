@@ -133,14 +133,14 @@ public class InventoryScript : MonoBehaviour
 
 public class InventoryItem
 {
-    public InventoryItem(byte id, Sprite img, int amnt, bool stack)
+    public InventoryItem(ushort id, Sprite img, int amnt, bool stack)
     {
         itemID = id;
         itemImage = img;
         itemAmount = amnt;
         stackable = stack;
     }
-    public byte itemID;
+    public ushort itemID;
     public Sprite itemImage;
     public int itemAmount;
     public bool stackable;

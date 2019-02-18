@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1692291654787358}
+  m_IsPrefabAsset: 1
+--- !u!1 &1692291654787358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4289973376253224}
+  - component: {fileID: 114754101674837374}
+  - component: {fileID: 114922002961065996}
+  m_Layer: 0
+  m_Name: TerrainManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4289973376253224
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1692291654787358}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114754101674837374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1692291654787358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad4cd56488e2614459e50ba265c8276c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xDimension: 160
+  heightAddition: 50
+  TileObjectPrefab: {fileID: 1212904404968698, guid: 5ac034eac9cfea74fbf2d9dc890db054,
+    type: 2}
+  regularStoneSprites:
+  - {fileID: 21300000, guid: 3aaae0fabe76a12449c31cc70c66c5b7, type: 3}
+  - {fileID: 21300000, guid: 9e1330000bab6884e8a763aa740be1be, type: 3}
+  - {fileID: 21300000, guid: 4990aebc16245804db7529d68853f765, type: 3}
+  - {fileID: 21300000, guid: b909e811c7f3d3f41870f1f90f23a77b, type: 3}
+  moonStoneSprites:
+  - {fileID: 21300000, guid: 84c8e4775caf3104699aa04fca877553, type: 3}
+  - {fileID: 21300000, guid: c28a8bcb5becbd540845d721e7adef23, type: 3}
+  - {fileID: 21300000, guid: fe6aa07c3711dcc4b880a39e3bf53748, type: 3}
+  - {fileID: 21300000, guid: acc0a8dd5b55b1b47a9632503258a113, type: 3}
+  regularDirtSprites:
+  - {fileID: 21300000, guid: 09edeee814bbdde4ea57fc57c5ac8eae, type: 3}
+  - {fileID: 21300000, guid: ecd6ad2e94c34444b80edd76da231fa3, type: 3}
+  - {fileID: 21300000, guid: 6e24c80b6a2a9504c9fae3e0e72ba866, type: 3}
+  - {fileID: 21300000, guid: ea820fee63b0ef0468dd33da43971512, type: 3}
+  moonDirtSprites:
+  - {fileID: 21300000, guid: 5a632bdb80bfb3649aee4c3ab652459b, type: 3}
+  - {fileID: 21300000, guid: f68b8f63fec60044ea7856579f70e1d4, type: 3}
+  - {fileID: 21300000, guid: d3849b1d88313464f86ac0ed993d2b8a, type: 3}
+  - {fileID: 21300000, guid: aa0df37426961a14b96fef7eca40003a, type: 3}
+  regularSandSprites:
+  - {fileID: 21300000, guid: cd049aad2478acf44bfdbfe492001344, type: 3}
+  - {fileID: 21300000, guid: 27d0ce0807773bf42a3c18e8342067b2, type: 3}
+  - {fileID: 21300000, guid: de2bf5e31077d0d40a1d9654fe8d1b68, type: 3}
+  - {fileID: 21300000, guid: 4fe46207f501e5c41b3faf78752c2570, type: 3}
+  moonSandSprite: []
+  regularGrassSprites:
+  - {fileID: 21300000, guid: ebf2ca31d7fa1f046a75494c04d55418, type: 3}
+  - {fileID: 21300000, guid: d6bcbdb2daa54834594166fd7cc9469f, type: 3}
+  - {fileID: 21300000, guid: cc0eb3095df087146a140147fcd6e859, type: 3}
+  - {fileID: 21300000, guid: ecea2e9fcbee50946a4b030f7008962b, type: 3}
+  regularFlowerSprites:
+  - {fileID: 21300000, guid: 159390351d4f11040be918e31a7dd287, type: 3}
+  - {fileID: 21300000, guid: 0a9479abdc118114ab224df414cb905c, type: 3}
+  - {fileID: 21300000, guid: 63ee27dc53428f1418d7bf8ef6e78469, type: 3}
+  - {fileID: 21300000, guid: 791ddaf855b1f0140948724f9eae57a6, type: 3}
+  regularTreeBaseSprite:
+  - {fileID: 21300000, guid: ddd03f8d35607e44c82c3f4b9e0b69cf, type: 3}
+  regularTreeTopSprite:
+  - {fileID: 21300000, guid: 9419b3ca96bcd974880cd0305a6b055c, type: 3}
+  regularTreeCoreSprite:
+  - {fileID: 21300000, guid: 1839d0ecb04ac0346987e83b725109d3, type: 3}
+  - {fileID: 21300000, guid: f55c3f1f7a8497640a24641111bc9113, type: 3}
+  - {fileID: 21300000, guid: 81bb6d39138940b4995444a28b024603, type: 3}
+  - {fileID: 21300000, guid: 5f755b3a44191f448a5c9c19ac893ae1, type: 3}
+  coalSprites:
+  - {fileID: 21300000, guid: cb7aee118edb047499a51a15845649a1, type: 3}
+  - {fileID: 21300000, guid: 485a94980b4b5c84fb7d250e997a384b, type: 3}
+  - {fileID: 21300000, guid: 933b99b8bae44de4f87764a01b270a76, type: 3}
+  - {fileID: 21300000, guid: 794287c99bbb9474289b444ad94863e7, type: 3}
+  copperSprites:
+  - {fileID: 21300000, guid: 8a98c7be89f8b3f45a78031e9f06cc9c, type: 3}
+  - {fileID: 21300000, guid: 713248ba74324f2488cd05912c91fbf5, type: 3}
+  - {fileID: 21300000, guid: 9d5405677d0b88f459b12fefe1082f17, type: 3}
+  - {fileID: 21300000, guid: 059686307052b714493943430368b415, type: 3}
+  ironSprites:
+  - {fileID: 21300000, guid: 1b70a64495ac1344aa4a01e896652b6c, type: 3}
+  - {fileID: 21300000, guid: 461ea7213edd2e546aaab1b4333accc9, type: 3}
+  - {fileID: 21300000, guid: 83683777227363147b562e4ab5f07128, type: 3}
+  - {fileID: 21300000, guid: ad8500ef8845eda428ff617c80ac6559, type: 3}
+  silverSprites:
+  - {fileID: 21300000, guid: b27546d690dc3e74eb6c4d5f54b98b49, type: 3}
+  - {fileID: 21300000, guid: 14121578b60494743a40152bc8ffe960, type: 3}
+  - {fileID: 21300000, guid: 1b0fab1119cfcea4caa352342aa2695a, type: 3}
+  - {fileID: 21300000, guid: 019f502444b987246b041d68d9873ed1, type: 3}
+  goldSprites:
+  - {fileID: 21300000, guid: a2212771dba29da45aa20ef892f60c18, type: 3}
+  - {fileID: 21300000, guid: fdb32ec4d4364cc459e4b3086c03f284, type: 3}
+  - {fileID: 21300000, guid: 6df57c5b218f7814fb8fe58f8606e987, type: 3}
+  - {fileID: 21300000, guid: 4749fb90640eb7b498188d297b070ae2, type: 3}
+  diamondSprites:
+  - {fileID: 21300000, guid: 6a8d41a0e242db34094ce77889b25727, type: 3}
+  - {fileID: 21300000, guid: a2c997556083b244ea0650a5757640eb, type: 3}
+  - {fileID: 21300000, guid: 3de7d154720ef5943a4ae8d2883acd08, type: 3}
+  - {fileID: 21300000, guid: 7fba5b61b35d9af4fab849b6318d6a8b, type: 3}
+  chunkSize: 40
+  player: {fileID: 0}
+--- !u!114 &114922002961065996
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1692291654787358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159f0d9f7f94efe4f830aa99754ca1cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xDimension: 42
+  smoothness: 100
+  heightMultiple: 10
+  heightAddition: 50
+  backTileLayerID: 12
+  frontTileLayerID: 13
+  grassLayerID: 15
+  caveChanceVal: 48
+  caveSimRep: 2
+  caveMinNeighReq: 2
+  caveMaxNeighReq: 6
+  caveChangeInHeight: 0
+  stoneChanceVal: 48
+  stoneSimRep: 3
+  stoneMinNeighReq: 4
+  stoneMaxNeighReq: 5
+  stoneChangeInHeight: 0
+  coalChance: 5
+  coalNeighChance: 60
+  coalChangeInHeight: 0
+  copperChance: 5
+  copperNeighChance: 50
+  copperChangeInHeight: 0
+  silverChance: 5
+  silverNeighChance: 40
+  silverChangeInHeight: 0.5
+  goldChance: 10
+  goldNeighChance: 10
+  goldChangeInHeight: 0.7
+  diamondChance: 5
+  diamondNeighChance: 5
+  diamondChangeInHeight: 1
+  flowerChance: 100
+  treeChance: 10
+  minTreeHeight: 15
+  maxTreeHeight: 20

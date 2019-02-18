@@ -34,7 +34,7 @@ public static class SaveManager {
         data   = (SerializedSaveData)formatter.Deserialize(stream);
         stream.Close();
 
-        tScript.SetTiles(data.ftileData, data.btileData, data.vtileData);
+        //tScript.SetTiles(data.ftileData, data.btileData, data.vtileData);
 
     }
 }

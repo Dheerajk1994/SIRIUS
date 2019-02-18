@@ -24,7 +24,7 @@ public class PlayerScript : MonoBehaviour {
     private void Start()
     {
         gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
-        uiScript = GameObject.Find("UI").GetComponent<UIScript>();
+        uiScript = gameManagerScript.UI.GetComponent<UIScript>();
     }
 
     private void FixedUpdate()

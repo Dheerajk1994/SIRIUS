@@ -2,22 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum TileEnum {
-    EMPTY = 0,
-    DIRT,
-    STONE,
-    WOOD,
-    TREETRUNK = 17,
-    TREELEAF,
-    FLOWER,
-    GRASS, 
-    COAL,
-    COPPER, 
-    SILVER,
-    GOLD, 
-    DIAMOND,
-    CAMPFIRE = 50
-};
+//enum EnumClass.TileEnum {
+//    EMPTY = 0,
+//    REGULAR_DIRT             = 1,
+//    REGULAR_STONE            = 2,
+//    REGULAR_WOOD             = 3,
+//    REGULAR_TREETRUNK        = 17,
+//    REGULAR_TREELEAF         ,
+//    REGULAR_FLOWER           ,
+//    REGULAR_GRASS            , 
+//    //RESOURCES
+//    COAL                     = 21,
+//    COPPER                   , 
+//    SILVER                   ,
+//    GOLD                     , 
+//    DIAMOND                  ,
+//    //MOON
+//    MOON_DIRT                = 40, 
+//    MOON_STONE, 
+//    MOON_SAND,
+
+//    CAMPFIRE = 100
+//};
 
 
 public class TerrainManagerScript : MonoBehaviour
@@ -29,20 +35,38 @@ public class TerrainManagerScript : MonoBehaviour
     private ushort worldXDimension;
     private ushort worldYDimension;
 
-    public GameObject[] stoneObjects;
-    public GameObject[] dirtObjects;
-    public GameObject[] grass;
-    public GameObject[] flowers;
-    public GameObject   tree1Base;
-    public GameObject   tree1Top;
-    public GameObject[] tree1Core;
+    public GameObject TileObjectPrefab;
 
+    //STONES
+    public Sprite[] regularStoneSprites;
+    public Sprite[] moonStoneSprites;
 
-    public GameObject coal;
-    public GameObject copper;
-    public GameObject silver;
-    public GameObject gold;
-    public GameObject diamond;
+    //DIRT
+    public Sprite[] regularDirtSprites;
+    public Sprite[] moonDirtSprites;
+
+    //SAND
+    public Sprite[] regularSandSprites;
+    public Sprite[] moonSandSprite;
+
+    //GRASS
+    public Sprite[] regularGrassSprites;
+
+    //FLOWERS
+    public Sprite[] regularFlowerSprites;
+
+    //TREE
+    public Sprite[] regularTreeBaseSprite;
+    public Sprite[] regularTreeTopSprite;
+    public Sprite[] regularTreeCoreSprite;
+
+    //MINEABLE RESOURCES
+    public Sprite[] coalSprites;
+    public Sprite[] copperSprites;
+    public Sprite[] ironSprites;
+    public Sprite[] silverSprites;
+    public Sprite[] goldSprites;
+    public Sprite[] diamondSprites;
 
     public ushort        chunkSize = 40;
     public GameObject[,] chunks;
@@ -53,14 +77,15 @@ public class TerrainManagerScript : MonoBehaviour
     public GameObject[,] backTiles;
     public GameObject[,] vegetationTiles;   //USED TO STORE PLANTS, GRASS, AND OTHER VEGETATION
 
+    public GameObject[,] frontTilesResources;
+    public GameObject[,] backTilesResources;
+
     public ushort[,] frontTilesValue;
+    public ushort[,] frontTilesResourceValue;
     public ushort[,] backTilesValue;
+    public ushort[,] backTilesResourceValue;
     public ushort[,] vegetationTilesValue;
 
-
-    public int backTileLayerID;
-    public int frontTileLayerID;
-    public int grassLayerID;
 
     public GameObject player;
     private InventoryScript playerInventoryScript;
@@ -69,21 +94,28 @@ public class TerrainManagerScript : MonoBehaviour
 
     public void StartTerrainGen()
     {
-        this.GetComponentInParent<GenerateTerrainScript>().StartTerrainGeneration(this, xDimension, heightAddition, chunkSize);
+        this.GetComponentInParent<GenerateTerrainScript>().StartTerrainGeneration(this, xDimension, heightAddition, chunkSize, (ushort)EnumClass.TerrainType.MOON);
     }
 
-    public void SetTiles(ushort[,] fTilesV, ushort[,] bTilesV, ushort[,] vTilesV)
+    public void SetTiles(ushort[,] fTilesV,ushort[,] fTilesRV, ushort[,] bTilesV, ushort[,] bTilesRV, ushort[,] vTilesV)
     {
+        player = GameObject.Find("GameManager").GetComponent<GameManagerScript>().player;
+
         worldXDimension = (ushort)fTilesV.GetLength(0);
         worldYDimension = (ushort)fTilesV.GetLength(1);
 
-        frontTilesValue      = fTilesV;
-        backTilesValue       = bTilesV;
-        vegetationTilesValue = vTilesV;
+        frontTilesValue         = fTilesV;
+        frontTilesResourceValue = fTilesRV;
+        backTilesValue          = bTilesV;
+        backTilesResourceValue  = bTilesRV;
+        vegetationTilesValue    = vTilesV;
 
         frontTiles      = new GameObject[worldXDimension, worldYDimension];
         backTiles       = new GameObject[worldXDimension, worldYDimension];
         vegetationTiles = new GameObject[worldXDimension, worldYDimension];
+
+        frontTilesResources = new GameObject[worldXDimension, worldYDimension];
+        backTilesResources  = new GameObject[worldXDimension, worldYDimension];
 
         chunks                    = new GameObject[worldXDimension/ chunkSize, worldYDimension / chunkSize];
         chunksLoadedIntoMemory    = new bool      [worldXDimension/ chunkSize, worldYDimension / chunkSize];
@@ -187,7 +219,7 @@ public class TerrainManagerScript : MonoBehaviour
             DisplayChunk(chunkToDisplaym, (ushort)(chunkPosY - 1));
             DisplayChunk(chunkToDisplayr, (ushort)(chunkPosY - 1));
 
-            Debug.Log(chunkToDisplayl + " " + (ushort)(chunkPosY - 1));
+            //Debug.Log(chunkToDisplayl + " " + (ushort)(chunkPosY - 1));
 
             chunks[chunkToDisplayll, chunkPosY - 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayll, chunkPosY - 1] = false;
             chunks[chunkToDisplayrr, chunkPosY - 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayrr, chunkPosY - 1] = false;
@@ -222,6 +254,7 @@ public class TerrainManagerScript : MonoBehaviour
 
         ushort fetchPosX = 0;
         ushort fetchPosY = 0;
+        GameObject tile;
         for (ushort x = 0; x < chunkSize; ++x)
         {
             for (ushort y = 0; y < chunkSize; y++)
@@ -229,41 +262,58 @@ public class TerrainManagerScript : MonoBehaviour
                 fetchPosX = (ushort)(x + (cx * chunkSize));
                 fetchPosY = (ushort)(y + (cy * chunkSize));
                 //PLACE TILES
-                GameObject tile;
+                
 
                 //FRONT TILE
                 tile = GetTileToPlace(fetchPosX, fetchPosY, frontTilesValue);
                 if (tile)
                 {
-                    tile = Instantiate(tile);
+                    //tile = Instantiate(tile);
                     tile.transform.SetParent(chunks[cx, cy].transform);
                     tile.transform.localPosition = new Vector2(x, y);
                     frontTiles[fetchPosX, fetchPosY] = tile;
                     PlaceTileInFrontLayer(tile);
                 }
                 //BACK TILES
-                if(frontTilesValue[fetchPosX, fetchPosY] == (ushort)TileEnum.EMPTY)//no need to display back tile if there is front tile
+                tile = GetTileToPlace(fetchPosX, fetchPosY, backTilesValue);
+                if (tile)
                 {
-                    tile = GetTileToPlace(fetchPosX, fetchPosY, backTilesValue);
-                    if (tile)
-                    {
-                        tile = Instantiate(tile);
-                        tile.transform.SetParent(chunks[cx, cy].transform);
-                        tile.transform.localPosition = new Vector2(x, y);
-                        backTiles[fetchPosX, fetchPosY] = tile;
-                        PlaceTileInBackLayer(tile);
-                    }
+                    //tile = Instantiate(tile);
+                    tile.transform.SetParent(chunks[cx, cy].transform);
+                    tile.transform.localPosition = new Vector2(x, y);
+                    backTiles[fetchPosX, fetchPosY] = tile;
+                    PlaceTileInBackLayer(tile);
                 }
                 //VEGETATION TILES
                 tile = GetTileToPlace(fetchPosX, fetchPosY, vegetationTilesValue);
                 if (tile)
                 {
-                    tile = Instantiate(tile);
+                    //tile = Instantiate(tile);
                     tile.transform.SetParent(chunks[cx, cy].transform);
                     tile.transform.localPosition = new Vector2(x, y);
                     vegetationTiles[fetchPosX, fetchPosY] = tile;
                     PlaceTileInVegetationtLayer(tile);
                 }
+                //FRONT RESOURCES
+                tile = GetTileToPlace(fetchPosX, fetchPosY, frontTilesResourceValue);
+                if (tile)
+                {
+                    tile.transform.SetParent(chunks[cx, cy].transform);
+                    tile.transform.localPosition = new Vector2(x, y);
+                    frontTilesResources[fetchPosX, fetchPosY] = tile;
+                    PlaceTileInFResourceLayer(tile);
+                }
+                //BACK RESOURCES
+                tile = GetTileToPlace(fetchPosX, fetchPosY, backTilesResourceValue);
+                if (tile)
+                {
+                    tile.transform.SetParent(chunks[cx, cy].transform);
+                    tile.transform.localPosition = new Vector2(x, y);
+                    backTilesResources[fetchPosX, fetchPosY] = tile;
+                    PlaceTileInBResourceLayer(tile);
+                }
+
+
             }
         }
         chunks[cx, cy].SetActive(true);
@@ -278,45 +328,82 @@ public class TerrainManagerScript : MonoBehaviour
 
         switch (tileLayer[x,y])
         {
-            case (ushort)TileEnum.EMPTY:
+            case (ushort)EnumClass.TileEnum.EMPTY:
                 break;
-            case (ushort)TileEnum.DIRT:
-                tile = dirtObjects[UnityEngine.Random.Range(0, dirtObjects.Length)];
+            case (ushort)EnumClass.TileEnum.REGULAR_DIRT:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = regularDirtSprites[UnityEngine.Random.Range(0, regularDirtSprites.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.REGULAR_DIRT;
                 break;
-            case (ushort)TileEnum.STONE:
-                tile = stoneObjects[UnityEngine.Random.Range(0, dirtObjects.Length)];
+            case (ushort)EnumClass.TileEnum.REGULAR_STONE:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = regularStoneSprites[UnityEngine.Random.Range(0, regularStoneSprites.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.REGULAR_STONE;
                 break;
-            case (ushort)TileEnum.WOOD:
+            case (ushort)EnumClass.TileEnum.REGULAR_WOOD:
                 Debug.LogError("WOOD GAMEOBJECT MISSING");
                 break;
-            case (ushort)TileEnum.TREETRUNK:
-                tile = tree1Core[UnityEngine.Random.Range(0, tree1Core.Length)];
+            case (ushort)EnumClass.TileEnum.REGULAR_TREETRUNK:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = regularTreeCoreSprite[UnityEngine.Random.Range(0, regularTreeCoreSprite.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.REGULAR_TREETRUNK;
                 break;
-            case (ushort)TileEnum.TREELEAF:
-                tile = tree1Top;
+            case (ushort)EnumClass.TileEnum.REGULAR_TREELEAF:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = regularTreeTopSprite[UnityEngine.Random.Range(0, regularTreeTopSprite.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.REGULAR_TREELEAF;
                 break;
-            case (ushort)TileEnum.FLOWER:
-                tile = flowers[UnityEngine.Random.Range(0, 4)];
+            case (ushort)EnumClass.TileEnum.REGULAR_FLOWER:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = regularFlowerSprites[UnityEngine.Random.Range(0, regularFlowerSprites.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.REGULAR_FLOWER;
                 break;
-            case (ushort)TileEnum.GRASS:
-                tile = grass[UnityEngine.Random.Range(0, 4)];
+            case (ushort)EnumClass.TileEnum.REGULAR_GRASS:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = regularGrassSprites[UnityEngine.Random.Range(0, regularGrassSprites.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.REGULAR_GRASS;
                 break;
-            case (ushort)TileEnum.COAL:
-                tile = coal;
+            case (ushort)EnumClass.TileEnum.COAL:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = coalSprites[UnityEngine.Random.Range(0, coalSprites.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.COAL;
                 break;
-            case (ushort)TileEnum.COPPER:
-                tile = coal;
+            case (ushort)EnumClass.TileEnum.COPPER:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = copperSprites[UnityEngine.Random.Range(0, copperSprites.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.COPPER;
                 break;
-            case (ushort)TileEnum.SILVER:
-                tile = silver;
+            case (ushort)EnumClass.TileEnum.SILVER:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = silverSprites[UnityEngine.Random.Range(0, silverSprites.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.SILVER;
                 break;
-            case (ushort)TileEnum.GOLD:
-                tile = gold;
+            case (ushort)EnumClass.TileEnum.GOLD:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = goldSprites[UnityEngine.Random.Range(0, goldSprites.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.GOLD;
                 break;
-            case (ushort)TileEnum.DIAMOND:
-                tile = diamond;
+            case (ushort)EnumClass.TileEnum.DIAMOND:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = diamondSprites[UnityEngine.Random.Range(0, diamondSprites.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.DIAMOND;
                 break;
-            case (ushort)TileEnum.CAMPFIRE:
+            case (ushort)EnumClass.TileEnum.MOON_DIRT:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = moonDirtSprites[UnityEngine.Random.Range(0, moonDirtSprites.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.MOON_DIRT;
+                break;
+            case (ushort)EnumClass.TileEnum.MOON_STONE:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = moonStoneSprites[UnityEngine.Random.Range(0, moonStoneSprites.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.MOON_STONE;
+                break;
+            case (ushort)EnumClass.TileEnum.MOON_SAND:
+                tile = Instantiate(TileObjectPrefab);
+                tile.GetComponent<SpriteRenderer>().sprite = moonSandSprite[UnityEngine.Random.Range(0, moonSandSprite.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.MOON_SAND;
+                break;
+            case (ushort)EnumClass.TileEnum.CAMPFIRE:
                 Debug.LogError("CAMPFIRE GAMEOBJECT MISSING");
                 break;
             default:
@@ -330,41 +417,46 @@ public class TerrainManagerScript : MonoBehaviour
 
     void PlaceTileInFrontLayer(GameObject tile)
     {
-        tile.GetComponent<SpriteRenderer>().sortingOrder = frontTileLayerID;
+        tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.FRONTLAYER;
     }
 
     void PlaceTileInBackLayer(GameObject tile)
     {
-        tile.GetComponent<SpriteRenderer>().sortingOrder = backTileLayerID;
+        tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.BACKLAYER;
         tile.GetComponent<Collider2D>().enabled = false;
         tile.GetComponent<SpriteRenderer>().color = Color.gray;
     }
 
     void PlaceTileInVegetationtLayer(GameObject tile)
     {
-        tile.GetComponent<SpriteRenderer>().sortingOrder = grassLayerID;
+        tile.GetComponent<Collider2D>().enabled = false;
+        tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.GRASS;
+    }
+
+    void PlaceTileInFResourceLayer(GameObject tile)
+    {
+        tile.GetComponent<Collider2D>().enabled = false;
+        tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.FRONTLAYER_RESOURCES;
+    }
+
+    void PlaceTileInBResourceLayer(GameObject tile)
+    {
+        tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.BACKLAYER_RESOURCES;
+        tile.GetComponent<Collider2D>().enabled = false;
+        tile.GetComponent<SpriteRenderer>().color = Color.gray;
     }
 
     public GameObject MineTile(int x, int y)
     {
+        Debug.Log("mine tile called");
         ushort relativeX = (ushort)Mathf.Floor((x % worldXDimension + worldXDimension) % worldXDimension);
         ushort relativeY = (ushort)Mathf.Floor(y / chunkSize);
 
-        if (frontTilesValue[x, y] == (ushort)TileEnum.EMPTY) return null;
+        Debug.Log(relativeX+ " " + relativeY);
+
+        if (frontTilesValue[relativeX, relativeY] == (ushort)EnumClass.TileEnum.EMPTY) { Debug.Log(frontTilesValue[relativeX, relativeY]); return null; }
 
         player.GetComponent<InventoryScript>().AddItemToInventory(GetTileToPlace((ushort)relativeX, (ushort)y, frontTilesValue), 1);
-
-        GameObject tile = GetTileToPlace(relativeX, relativeY, backTilesValue);
-        if (tile)
-        {
-            tile = Instantiate(tile);
-            tile.transform.SetParent(chunks[(ushort)Mathf.Floor(relativeX / chunkSize), (ushort)Mathf.Floor(y / chunkSize)].transform);
-            ushort posXinChunk = (ushort)(Mathf.Floor((x % chunkSize + chunkSize)) % chunkSize);
-            ushort posYinChunk = (ushort)(y % chunkSize);
-            tile.transform.localPosition = new Vector2(posXinChunk, posYinChunk);
-            backTiles[relativeX, relativeY] = tile;
-            PlaceTileInBackLayer(tile);
-        }
 
         frontTilesValue             [relativeX, y] = 0;
         vegetationTilesValue        [relativeX, y] = 0;
@@ -379,7 +471,7 @@ public class TerrainManagerScript : MonoBehaviour
     {
         ushort relativeX = (ushort)Mathf.Floor((x % worldXDimension + worldXDimension) % worldXDimension);
         //ushort relativeY = (ushort)Mathf.Floor(y / chunkSize);
-        if(frontTilesValue[relativeX, y] == (ushort)TileEnum.EMPTY)
+        if(frontTilesValue[relativeX, y] == (ushort)EnumClass.TileEnum.EMPTY)
         {
             ushort posXinChunk = (ushort)(Mathf.Floor((x % chunkSize + chunkSize)) % chunkSize);
             ushort posYinChunk = (ushort)(y % chunkSize);
@@ -390,7 +482,7 @@ public class TerrainManagerScript : MonoBehaviour
             //playerInventoryScript.RemoveItemFromInventory(t, 1);
             GameObject tile = Instantiate(t);
 
-            frontTilesValue[relativeX, y] = (ushort)TileEnum.STONE;
+            frontTilesValue[relativeX, y] = (ushort)EnumClass.TileEnum.REGULAR_STONE;
             frontTiles[relativeX, y] = tile;
             tile.transform.SetParent(chunks[chunkX, chunkY].transform);
             tile.transform.localPosition = new Vector2(posXinChunk, posYinChunk);
@@ -408,6 +500,21 @@ public class TerrainManagerScript : MonoBehaviour
             Destroy(frontTiles[x, y]);
             y++;
         }
+    }
+
+    public Vector2 GetSafePlaceToSpawnPlayer()
+    {
+        Vector2 pos = new Vector2(0f,0f);
+        ushort x = (ushort)UnityEngine.Random.Range(0, worldXDimension - 1);
+        for(ushort y = (ushort)(worldYDimension - 1); y > 0; --y)
+        {
+            if(frontTilesValue[x, y] != (ushort)EnumClass.TileEnum.EMPTY)
+            {
+                pos = new Vector2(x, y + 3);
+                break;
+            }
+        }
+        return pos;
     }
 
 }

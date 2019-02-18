@@ -14,18 +14,18 @@ TagManager:
   - 
   - 
   - 
-  - backgroundLayer
+  - starsLayer
+  - skyShaderLayer
+  - planetLayer
+  - cloudLayer
+  - terrainBackGroundLayer
+  - backTile
+  - backTileResource
+  - frontTile
+  - fronTileResource
   - 
-  - 
-  - backTileLayer
-  - frontTileLayer
   - 
   - grass
-  - 
-  - 
-  - 
-  - 
-  - 
   - 
   - 
   - 

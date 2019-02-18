@@ -12,10 +12,10 @@ public class CameraScript : MonoBehaviour {
 
     public Transform cloud1_l;
     public Transform cloud1_m;
-    //public Transform cloud1_r;
-    //public Transform cloud2_l;
-    //public Transform cloud2_m;
-    //public Transform cloud2_r;
+
+    public Transform sky;
+    public Transform planet;
+    public Transform stars;
 
     private Vector3 cloudStartPos;
     private Vector3 cloudEndPos;
@@ -27,7 +27,17 @@ public class CameraScript : MonoBehaviour {
 
     public void Start()
     {
-        this.transform.localPosition = (playerToFollow.localPosition) + cameraOffset;
+        
+
+        cloud1_l.gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.CLOUDLAYER;
+        cloud1_m.gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.CLOUDLAYER;
+
+        sky.   gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.SKYSHADERLAYER;
+        planet.gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.PLANETLAYER;
+        stars. gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.STARSLAYER;
+
+        
+
         cloudStartPos = cloud1_l.localPosition + cloudOffset;
         cloudEndPos = new Vector3(cloud1_m.localPosition.x + 50, cloudStartPos.y, 3f);
     }
@@ -40,8 +50,11 @@ public class CameraScript : MonoBehaviour {
 
     public void FixedUpdate()
     {
-        desiredLocation = playerToFollow.localPosition + cameraOffset;
-        this.transform.localPosition = Vector3.SmoothDamp(transform.localPosition, desiredLocation, ref velocity, cameraSmoothSpeed);
+        if (playerToFollow)
+        {
+            desiredLocation = playerToFollow.localPosition + cameraOffset;
+            this.transform.localPosition = Vector3.SmoothDamp(transform.localPosition, desiredLocation, ref velocity, cameraSmoothSpeed);
+        }
 
         if (cloud1_l.localPosition.x >= cloudEndPos.x) cloud1_l.transform.localPosition = new Vector2(cloud1_m.localPosition.x - 50, cloud1_m.localPosition.y);
         if (cloud1_m.localPosition.x >= cloudEndPos.x) cloud1_m.transform.localPosition = new Vector2(cloud1_l.localPosition.x - 50, cloud1_l.localPosition.y);

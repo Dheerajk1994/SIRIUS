@@ -7,7 +7,9 @@ using UnityEngine;
 public class GenerateTerrainScript : MonoBehaviour
 {
     private ushort[,] frontTilesValue;
+    private ushort[,] frontTilesResourceValues;
     private ushort[,] backTilesValue;
+    private ushort[,] backTilesResourceValue;
     private ushort[,] vegetationTilesValue;
 
     //private GameObject[,] chunkTiles;
@@ -61,42 +63,91 @@ public class GenerateTerrainScript : MonoBehaviour
     public int minTreeHeight;
     public int maxTreeHeight;
 
+    private ushort DIRT_ID, STONE_ID, SAND_ID, GRASS_ID, FLOWER_ID, TREE_CORE_ID, TREE_TOP_ID;
+    private ushort worldXDimension, worldYDimension;
 
-    public void StartTerrainGeneration(TerrainManagerScript terrainManager, ushort xDim, ushort heightA, ushort chunkSize)
+    public void StartTerrainGeneration(TerrainManagerScript terrainManager, ushort xDim, ushort heightA, ushort chunkSize, ushort terrainType)
     {
         this.heightAddition = heightA;
         Debug.Log(xDim + " % " + chunkSize + ": " + xDim % chunkSize);
         //xDimension = (ushort)(xDim - (xDim - (chunkSize * (Mathf.Floor(xDim / chunkSize)))));   //MAKE SURE XDIMENSION IS DIVISIBLE BY CHUNKSIZE
         xDimension = (ushort)(xDim - (xDim % chunkSize));
+        worldXDimension = xDimension;
+        worldYDimension = (ushort)(heightAddition + 50);
 
-        frontTilesValue      = new ushort[xDimension, heightAddition + 50];
-        backTilesValue       = new ushort[xDimension, heightAddition + 50];
-        vegetationTilesValue = new ushort[xDimension, heightAddition + 50];
+        frontTilesValue              = new ushort[worldXDimension, worldYDimension];
+        frontTilesResourceValues     = new ushort[worldXDimension, worldYDimension];
+        backTilesValue               = new ushort[worldXDimension, worldYDimension];
+        backTilesResourceValue       = new ushort[worldXDimension, worldYDimension];
+        vegetationTilesValue         = new ushort[worldXDimension, worldYDimension];
+
+        GenerateIDs(terrainType);
 
         GenerateTerrainNoise();
         GenerateStone();
-              
-        GenerateResources(21, coalChance, coalNeighChance, coalChangeInHeight);
-        GenerateResources(22, copperChance, copperNeighChance, copperChangeInHeight);
-        GenerateResources(23, silverChance, silverNeighChance, silverChangeInHeight);
-        GenerateResources(24, goldChance, goldNeighChance, goldChangeInHeight);
-        GenerateResources(25, diamondChance, diamondNeighChance, diamondChangeInHeight);
 
-        GenerateGrass();
+        GenerateResources((ushort)EnumClass.TileEnum.COAL, coalChance, coalNeighChance, coalChangeInHeight);
+        GenerateResources((ushort)EnumClass.TileEnum.COPPER, copperChance, copperNeighChance, copperChangeInHeight);
+        GenerateResources((ushort)EnumClass.TileEnum.SILVER, silverChance, silverNeighChance, silverChangeInHeight);
+        GenerateResources((ushort)EnumClass.TileEnum.GOLD, goldChance, goldNeighChance, goldChangeInHeight);
+        GenerateResources((ushort)EnumClass.TileEnum.DIAMOND, diamondChance, diamondNeighChance, diamondChangeInHeight);
+        if(terrainType != (ushort)EnumClass.TerrainType.MOON && terrainType != (ushort)EnumClass.TerrainType.ASTEROID)
+        {
+            GenerateGrass();
+        }
         GenerateCaves();
+
+       
+
+        
 
         //GenerateChunk();
 
         //CreateTileGameobjects();
 
-        terrainManager.SetTiles(frontTilesValue, backTilesValue, vegetationTilesValue);
+        terrainManager.SetTiles(frontTilesValue, frontTilesResourceValues, backTilesValue, backTilesResourceValue, vegetationTilesValue);
 
     }
 
+    private void GenerateIDs(ushort terrainType)
+    {
+        switch (terrainType)
+        {
+            case (ushort)EnumClass.TerrainType.GREEN:
+                DIRT_ID = (ushort)EnumClass.TileEnum.REGULAR_DIRT;
+                STONE_ID = (ushort)EnumClass.TileEnum.REGULAR_STONE;
+                SAND_ID = (ushort)EnumClass.TileEnum.REGULAR_SAND;
+                GRASS_ID = (ushort)EnumClass.TileEnum.REGULAR_GRASS;
+                FLOWER_ID = (ushort)EnumClass.TileEnum.REGULAR_FLOWER;
+                TREE_CORE_ID = (ushort)EnumClass.TileEnum.REGULAR_TREETRUNK;
+                TREE_TOP_ID = (ushort)EnumClass.TileEnum.REGULAR_TREELEAF;
+                break;
+            case (ushort)EnumClass.TerrainType.DESERT:
+                Debug.LogError("Desert biome generation not set.");
+                break;
+            case (ushort)EnumClass.TerrainType.SNOW:
+                Debug.LogError("Snow biome generation not set.");
+                break;
+            case (ushort)EnumClass.TerrainType.MOON:
+                DIRT_ID = (ushort)EnumClass.TileEnum.MOON_DIRT;
+                STONE_ID = (ushort)EnumClass.TileEnum.MOON_STONE;
+                SAND_ID = (ushort)EnumClass.TileEnum.MOON_SAND;
+                GRASS_ID = (ushort)EnumClass.TileEnum.REGULAR_GRASS;
+                FLOWER_ID = (ushort)EnumClass.TileEnum.REGULAR_FLOWER;
+                TREE_CORE_ID = (ushort)EnumClass.TileEnum.REGULAR_TREETRUNK;
+                TREE_TOP_ID = (ushort)EnumClass.TileEnum.REGULAR_TREELEAF;
+                break;
+            case (ushort)EnumClass.TerrainType.ASTEROID:
+                Debug.LogError("Asteroid biome generation not set.");
+                break;
+            default:
+                break;
+        }
+    }
 
     private void GenerateTerrainNoise()
     {
-        for (int x = 0; x < xDimension; x++)
+        for (ushort x = 0; x < worldXDimension; x++)
         {
             float xOff = x * 1.0f;
 
@@ -104,10 +155,10 @@ public class GenerateTerrainScript : MonoBehaviour
             float height = Mathf.RoundToInt(Mathf.PerlinNoise(xOff / smoothness, xOff / smoothness) * heightMultiple) + heightAddition;
 
 
-            for (int y = 0; y < height; y++)
+            for (ushort y = 0; y < height; y++)
             {
-                frontTilesValue[x, y] = 1;
-                backTilesValue[x, y] = 1;
+                frontTilesValue[x, y] = DIRT_ID;
+                backTilesValue[x, y] = DIRT_ID;
 
             }
         }
@@ -115,11 +166,11 @@ public class GenerateTerrainScript : MonoBehaviour
 
     private void GenerateStone()
     {
-        byte[,] stoneArray = new byte[frontTilesValue.GetLength(0), frontTilesValue.GetLength(1)];
+        byte[,] stoneArray = new byte[worldXDimension, worldYDimension];
 
-        for (int x = 0; x < frontTilesValue.GetLength(0); x++)
+        for (int x = 0; x < worldXDimension; x++)
         {
-            for (int y = 0; y < frontTilesValue.GetLength(1); y++)
+            for (int y = 0; y < worldYDimension; y++)
             {
                 if (frontTilesValue[x, y] != 0)
                 {
@@ -135,9 +186,9 @@ public class GenerateTerrainScript : MonoBehaviour
         {
             int neighborCount = 0;
 
-            for (int x = 1; x < frontTilesValue.GetLength(0) - 1; x++)
+            for (int x = 1; x < worldXDimension - 1; x++)
             {
-                for (int y = 1; y < frontTilesValue.GetLength(1) - 1; y++)
+                for (int y = 1; y < worldYDimension - 1; y++)
                 {
                     if (/*StoneChance[x,y] == 0 ||*/ frontTilesValue[x, y] == 0) continue;
 
@@ -157,14 +208,14 @@ public class GenerateTerrainScript : MonoBehaviour
             }
         }
 
-        for (int x = 0; x < frontTilesValue.GetLength(0); x++)
+        for (int x = 0; x < worldXDimension; x++)
         {
-            for (int y = 0; y < frontTilesValue.GetLength(1); y++)
+            for (int y = 0; y < worldYDimension; y++)
             {
                 if (stoneArray[x, y] == 1)
                 {
-                    frontTilesValue [x, y] = 2;     //2 for stone
-                    backTilesValue[x, y] = 2;       //2 for stone
+                    frontTilesValue [x, y] = STONE_ID;     //2 for stone
+                    backTilesValue[x, y] = STONE_ID;       //2 for stone
                 }
             }
         }
@@ -173,14 +224,14 @@ public class GenerateTerrainScript : MonoBehaviour
 
     private void GenerateGrass()
     {
-        for (int x = 0; x < frontTilesValue.GetLength(0); x++)
+        for (int x = 0; x < worldXDimension; ++x)
         {
-            for (int y = 0; y < frontTilesValue.GetLength(1); y++)
+            for (int y = 0; y < worldYDimension; ++y)
             {
-                if ((y + 1) < frontTilesValue.GetLength(1) && frontTilesValue[x, y + 1] == 0 && frontTilesValue[x, y] != 0)
+                if ((y + 1) < worldYDimension && frontTilesValue[x, y + 1] == 0 && frontTilesValue[x, y] != 0)
                 {
-                    vegetationTilesValue[x, y + 1] = 19;
-                    vegetationTilesValue[x, y] = 20;
+                    vegetationTilesValue[x, y] = GRASS_ID;
+                    vegetationTilesValue[x, y + 1] = FLOWER_ID;
 
                     ushort chance = (ushort)UnityEngine.Random.Range(0, 100);
                     if (chance < treeChance)
@@ -199,19 +250,19 @@ public class GenerateTerrainScript : MonoBehaviour
         vegetationTilesValue[x, y] = 17;
         for (int i = 0; i < height; i++)
         {
-            vegetationTilesValue[x, y + 1 + i] = 17;
+            vegetationTilesValue[x, y + 1 + i] = TREE_CORE_ID;
         }
-        vegetationTilesValue[x, y + height] = 18;
+        vegetationTilesValue[x, y + height] = TREE_TOP_ID;
 
     }
 
     private void GenerateCaves()
     {
-        byte[,] caveArray = new byte[frontTilesValue.GetLength(0), frontTilesValue.GetLength(1)];
+        byte[,] caveArray = new byte[worldXDimension, worldYDimension];
 
-        for (int x = 0; x < frontTilesValue.GetLength(0); x++)
+        for (int x = 0; x < worldXDimension; x++)
         {
-            for (int y = 0; y < frontTilesValue.GetLength(1); y++)
+            for (int y = 0; y < worldYDimension; y++)
             {
                 if (frontTilesValue[x, y] != 0)
                 {
@@ -227,16 +278,16 @@ public class GenerateTerrainScript : MonoBehaviour
         {
             int neighborCount = 0;
 
-            for (int x = 1; x < frontTilesValue.GetLength(0) - 1; x++)
+            for (int x = 1; x < worldXDimension  - 1; x++)
             {
-                for (int y = 1; y < frontTilesValue.GetLength(1) - 1; y++)
+                for (int y = 1; y < worldYDimension - 1; y++)
                 {
-                    if (/*StoneChance[x,y] == 0 ||*/ frontTilesValue[x, y] == 0) continue;
+                    if (frontTilesValue[x, y] == 0) continue;
 
                     neighborCount = GetNeighBorhood(caveArray, x, y, 1);
 
 
-                    if (neighborCount > stoneMinNeighReq)// && neighborCount <= stoneMaxNeighReq)
+                    if (neighborCount > stoneMinNeighReq)
                     {
                         caveArray[x, y] = 1;
                     }
@@ -249,13 +300,14 @@ public class GenerateTerrainScript : MonoBehaviour
             }
         }
 
-        for (int x = 0; x < frontTilesValue.GetLength(0); x++)
+        for (int x = 0; x < worldXDimension; x++)
         {
-            for (int y = 0; y < frontTilesValue.GetLength(1); y++)
+            for (int y = 0; y < worldYDimension; y++)
             {
                 if (caveArray[x, y] == 1)
                 {
                     frontTilesValue[x, y] = 0;
+                    frontTilesResourceValues[x, y] = 0;
                     vegetationTilesValue[x, y] = 0;
                 }
             }
@@ -267,27 +319,24 @@ public class GenerateTerrainScript : MonoBehaviour
     {
         byte[,] frontTileResourceArray = new byte[frontTilesValue.GetLength(0), frontTilesValue.GetLength(1)];
         byte[,] backtTileResourceArray = new byte[frontTilesValue.GetLength(0), frontTilesValue.GetLength(1)];
-        for (int x = 0; x < frontTilesValue.GetLength(0); x++)
+        for (int x = 0; x < worldXDimension; x++)
         {
-            for (int y = 0; y < frontTilesValue.GetLength(1); y++)
+            for (int y = 0; y < worldYDimension; y++)
             {
-                if (frontTilesValue[x, y]  == 2)
+                if (frontTilesValue[x,y] !=0 && UnityEngine.Random.Range(1, 100) <= (resourceChance - y * resourceChangeInHeight))
                 {
-                    if (UnityEngine.Random.Range(1, 100) <= (resourceChance - y * resourceChangeInHeight))
-                    {
-                        frontTileResourceArray[x, y] = 1;
-                    }
-                    if (UnityEngine.Random.Range(1, 100) <= (resourceChance - y * resourceChangeInHeight))
-                    {
-                        backtTileResourceArray[x, y] = 1;
-                    }
+                    frontTileResourceArray[x, y] = 1;
+                }
+                if (UnityEngine.Random.Range(1, 100) <= (resourceChance - y * resourceChangeInHeight))
+                {
+                    backtTileResourceArray[x, y] = 1;
                 }
             }
         }
 
-        for (int x = 0; x < frontTileResourceArray.GetLength(0); x++)
+        for (int x = 0; x < worldXDimension; x++)
         {
-            for (int y = 0; y < frontTileResourceArray.GetLength(1); y++)
+            for (int y = 0; y < worldYDimension; y++)
             {
                 if (frontTilesValue[x, y] != 0 && GetNeighBorhood(frontTileResourceArray, x, y, 1) > 1)
                 {
@@ -317,42 +366,22 @@ public class GenerateTerrainScript : MonoBehaviour
             }
         }
 
-        for (int x = 0; x < frontTileResourceArray.GetLength(0); x++)
+        for (int x = 0; x < worldXDimension; x++)
         {
-            for (int y = 0; y < frontTileResourceArray.GetLength(1); y++)
+            for (int y = 0; y < worldYDimension; y++)
             {
                 if (frontTileResourceArray[x, y] == 1)
                 {
-                    frontTilesValue[x, y] = resourceID;
+                    frontTilesResourceValues[x, y] = resourceID;
                 }
                 if (backtTileResourceArray[x, y] == 1)
                 {
-                    backTilesValue[x, y] = resourceID;
+                    backTilesResourceValue[x, y] = resourceID;
                 }
 
             }
         }
     }
-
-    //private void GenerateChunk()
-    //{
-    //    int chunkArrayIndex = 0;
-    //    Debug.Log(frontTiles.GetLength(0) + " " + frontTiles.GetLength(1));
-    //    for (int x = 0; x < frontTiles.GetLength(0); x++)
-    //    {
-    //        for (int y = 0; y < frontTiles.GetLength(1); y++)
-    //        {
-    //            if (frontTiles[x, y] != null)
-    //            {
-    //                frontTiles[x, y].gameObject.transform.parent = chunkArray[chunkArrayIndex].transform;// SetParent(chunkArray[chunkArrayIndex].transform);
-    //            }
-    //        }
-    //        if (x != 0 && x % chunkSize == 0)
-    //        {
-    //            chunkArrayIndex++;
-    //        }
-    //    }
-    //}
 
     //HELPER FUNCTIONS
 
