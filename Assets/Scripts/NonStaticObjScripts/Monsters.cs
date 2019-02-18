@@ -16,6 +16,6 @@ public class Monsters : NonStaticClassScript
 	// Update is called once per frame
 	void Update () 
     {
-		Physics2D raycast
+	//	Physics2D raycast
 	}
 }
