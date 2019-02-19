@@ -10,8 +10,10 @@ public class GameManagerScript : MonoBehaviour
     public GameObject player;
     public GameObject TerrainManager;
     public GameObject stone;
+    public GameObject MobSpawner;
 
     private TerrainManagerScript terrainManagerScript;
+    private MobSpawnerScript mobSpawnerScript;
 
     public GameObject UI;
     public GameObject playerInvoPanel;
@@ -34,6 +36,7 @@ public class GameManagerScript : MonoBehaviour
         player.gameObject.SetActive(false);
         playerPos = player.transform.position;
         terrainManagerScript = TerrainManager.GetComponent<TerrainManagerScript>();
+        mobSpawnerScript = MobSpawner.GetComponent<MobSpawnerScript>();
         if (isInDemoMode)
         {
             //StartNewGame();
@@ -62,6 +65,10 @@ public class GameManagerScript : MonoBehaviour
         mainCamera.gameObject.SetActive(false);
 
         terrainManagerScript.StartTerrainGen();
+        mobSpawnerScript.generateSpawnLocations(terrainManagerScript.frontTilesValue,50);
+        mobSpawnerScript.printSpawnLocations();
+        mobSpawnerScript.printNumberOfSpawnLocations();
+
         player.gameObject.SetActive(true);
         player.GetComponent<SpriteRenderer>().sortingLayerName = "frontTileLayer";
         player.transform.SetParent(GameObject.Find("PlayArea").transform);
