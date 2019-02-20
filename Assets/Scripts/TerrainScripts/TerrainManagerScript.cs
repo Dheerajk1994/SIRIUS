@@ -187,7 +187,7 @@ public class TerrainManagerScript : MonoBehaviour
             DisplayChunk(chunkToDisplaym, (ushort)(chunkPosY - 1));
             DisplayChunk(chunkToDisplayr, (ushort)(chunkPosY - 1));
 
-            Debug.Log(chunkToDisplayl + " " + (ushort)(chunkPosY - 1));
+            //Debug.Log(chunkToDisplayl + " " + (ushort)(chunkPosY - 1));
 
             chunks[chunkToDisplayll, chunkPosY - 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayll, chunkPosY - 1] = false;
             chunks[chunkToDisplayrr, chunkPosY - 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayrr, chunkPosY - 1] = false;
