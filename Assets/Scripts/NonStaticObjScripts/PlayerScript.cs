@@ -16,7 +16,7 @@ public class PlayerScript : MonoBehaviour {
     public float healthRecoveryRate;
     public float staminaRecoveryRate;
     public float hungerRecoveryRate;
-    
+
 
     public GameManagerScript gameManagerScript;
     public UIScript uiScript;
@@ -88,6 +88,17 @@ public class PlayerScript : MonoBehaviour {
 
     public void Die()
     {
+
+    }
+
+    // Adding Collider (Sprint 8)
+    [SerializeField]
+    private Collider SamAttackCollider;
+
+    public void MeleeAttack() 
+    {
+        SamAttackCollider.enabled = !SamAttackCollider;
+        // enabling attack
 
     }
 

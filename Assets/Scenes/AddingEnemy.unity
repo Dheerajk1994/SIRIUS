@@ -129,9 +129,10 @@ GameObject:
   - component: {fileID: 70475282}
   - component: {fileID: 70475281}
   - component: {fileID: 70475280}
+  - component: {fileID: 70475289}
   m_Layer: 0
   m_Name: Sam
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -329,9 +330,85 @@ Transform:
   m_Children:
   - {fileID: 1317436787}
   - {fileID: 1544826702}
+  - {fileID: 422423926}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &70475289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 70475279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2db883ab57b9c4e4fbce596e45ac8a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  maxHealth: 100
+  currentStamina: 100
+  maxStamina: 100
+  currentHunger: 100
+  maxHunger: 100
+  temperature: 0
+  armor: 0
+  insulation: 0
+  healthRecoveryRate: 0.1
+  staminaRecoveryRate: 0.1
+  hungerRecoveryRate: -0.005
+  gameManagerScript: {fileID: 0}
+  uiScript: {fileID: 0}
+--- !u!1 &422423925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 422423926}
+  - component: {fileID: 422423927}
+  m_Layer: 0
+  m_Name: AttackCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &422423926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 422423925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 70475288}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &422423927
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 422423925}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0.69537306, y: -1.555663}
+  - {x: 1.0241773, y: -1.1465788}
+  - {x: 1.1801233, y: -0.74148536}
+  - {x: 1.126185, y: -0.24624133}
+  - {x: 0.90996164, y: 0.36236787}
+  - {x: 0.6838885, y: -1.5352373}
 --- !u!1 &530777908
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +435,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &690551453
 Prefab:
@@ -369,11 +446,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4369440446538852, guid: 97646aa7a0fff4a9ca64fa405bbff13e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: 3.84
       objectReference: {fileID: 0}
     - target: {fileID: 4369440446538852, guid: 97646aa7a0fff4a9ca64fa405bbff13e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0.59
       objectReference: {fileID: 0}
     - target: {fileID: 4369440446538852, guid: 97646aa7a0fff4a9ca64fa405bbff13e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -397,7 +474,42 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4369440446538852, guid: 97646aa7a0fff4a9ca64fa405bbff13e, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 61555589663118646, guid: 97646aa7a0fff4a9ca64fa405bbff13e,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: -0.0048971176
+      objectReference: {fileID: 0}
+    - target: {fileID: 61555589663118646, guid: 97646aa7a0fff4a9ca64fa405bbff13e,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.9007306
+      objectReference: {fileID: 0}
+    - target: {fileID: 61555589663118646, guid: 97646aa7a0fff4a9ca64fa405bbff13e,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: -0.32723653
+      objectReference: {fileID: 0}
+    - target: {fileID: 61555589663118646, guid: 97646aa7a0fff4a9ca64fa405bbff13e,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.7511728
+      objectReference: {fileID: 0}
+    - target: {fileID: 58719806772883234, guid: 97646aa7a0fff4a9ca64fa405bbff13e,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 0.0073826313
+      objectReference: {fileID: 0}
+    - target: {fileID: 58719806772883234, guid: 97646aa7a0fff4a9ca64fa405bbff13e,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.10851097
+      objectReference: {fileID: 0}
+    - target: {fileID: 58719806772883234, guid: 97646aa7a0fff4a9ca64fa405bbff13e,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: -0.5655174
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97646aa7a0fff4a9ca64fa405bbff13e, type: 2}
@@ -430,7 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1413626688407090, guid: 97646aa7a0fff4a9ca64fa405bbff13e, type: 2}
-  spawnRate: 2
+  defaultSpawnRate: 1
 --- !u!4 &831476772
 Transform:
   m_ObjectHideFlags: 0
@@ -442,8 +554,62 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1039510618 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1413626688407090, guid: 97646aa7a0fff4a9ca64fa405bbff13e,
+    type: 2}
+  m_PrefabInternal: {fileID: 690551453}
+--- !u!68 &1039510619
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1039510618}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.004529953, y: -0.7404802}
+  - {x: -0.36270118, y: -0.7406828}
+  - {x: -0.3680091, y: -0.69221205}
+  - {x: -0.42869186, y: -0.6948151}
+  - {x: -0.42770696, y: -0.6263841}
+  - {x: -0.48482275, y: -0.6253872}
+  - {x: -0.4802475, y: -0.25019357}
+  - {x: -0.42184186, y: -0.2476748}
+  - {x: -0.42173076, y: -0.13699585}
+  - {x: -0.37402272, y: -0.13853344}
+  - {x: -0.37193918, y: -0.06580031}
+  - {x: -0.31359053, y: -0.0659799}
+  - {x: -0.3116238, y: -0.004306257}
+  - {x: -0.24066496, y: -0.0033296347}
+  - {x: -0.23716617, y: 0.058250308}
+  - {x: -0.121200085, y: 0.057131767}
+  - {x: -0.123500586, y: 0.119555295}
+  - {x: 0.122306585, y: 0.12273669}
+  - {x: 0.11501527, y: 0.057415187}
+  - {x: 0.25606084, y: 0.05837506}
+  - {x: 0.25739837, y: 0.0031728745}
+  - {x: 0.29933238, y: 0.005728662}
+  - {x: 0.29702306, y: -0.06769985}
+  - {x: 0.36570096, y: -0.06598288}
+  - {x: 0.36633182, y: -0.122457206}
+  - {x: 0.4344008, y: -0.11938137}
+  - {x: 0.4336536, y: -0.24864087}
+  - {x: 0.49490333, y: -0.25049978}
+  - {x: 0.49183297, y: -0.6060145}
+  - {x: 0.4401586, y: -0.60448295}
+  - {x: 0.44080853, y: -0.68065816}
+  - {x: 0.36512876, y: -0.67856264}
+  - {x: 0.36155534, y: -0.7398627}
+  - {x: -0.031380177, y: -0.73763657}
 --- !u!1 &1153325372
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,17 +637,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9fca0c5c89921409e6ee0f42fb82a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 70475279}
   TerrainManager: {fileID: 1514719230}
   stone: {fileID: 1857664707528882, guid: 166ee35a87d2b0348b0cfb1f8b47cd8c, type: 2}
+  MobSpawner: {fileID: 0}
   UI: {fileID: 0}
-  playerInvoPanel: {fileID: 0}
-  craftingPanel: {fileID: 0}
+  playerInvoPanel: {fileID: 1532270483130082, guid: d7f14c729c7474d4ba2e2fa7ebd9cdfb,
+    type: 2}
+  craftingPanel: {fileID: 1806725974249758, guid: ea9732d6fc0431947a6eaf517ce6502e,
+    type: 2}
   attributePanel: {fileID: 0}
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
   hungerBar: {fileID: 0}
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 1989205423}
   isInDemoMode: 1
 --- !u!4 &1153325374
 Transform:
@@ -494,7 +663,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1317436786
 GameObject:
@@ -599,25 +768,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4cd56488e2614459e50ba265c8276c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDimension: 0
-  heightAddition: 0
-  stoneObjects: []
-  dirtObjects: []
-  grass: []
-  flowers: []
-  tree1Base: {fileID: 0}
-  tree1Top: {fileID: 0}
-  tree1Core: []
-  coal: {fileID: 0}
-  copper: {fileID: 0}
-  silver: {fileID: 0}
-  gold: {fileID: 0}
-  diamond: {fileID: 0}
+  xDimension: 400
+  heightAddition: 400
+  stoneObjects:
+  - {fileID: 1601765989645798, guid: 467e9a3d2970a944e8193e1fa213e9cc, type: 2}
+  - {fileID: 1477336892249200, guid: 04567c25720eac9448298994879ee8d1, type: 2}
+  - {fileID: 1830568133484256, guid: 78eaec09892be0248b80a85e527b6201, type: 2}
+  - {fileID: 1857664707528882, guid: 166ee35a87d2b0348b0cfb1f8b47cd8c, type: 2}
+  dirtObjects:
+  - {fileID: 1778954574826284, guid: d74d01affa2cf2c4393720e158f6d4fc, type: 2}
+  - {fileID: 1961061265238306, guid: 2653318181896214aad51859f55bff11, type: 2}
+  - {fileID: 1388234397514544, guid: 3a9975e031f7803469ef91b0f91809bc, type: 2}
+  - {fileID: 1935891212128696, guid: 1b9b2cf9906d089418e2bdf7b5d91e71, type: 2}
+  grass:
+  - {fileID: 1147847452662578, guid: 81cbd5df97638ba48bfbbaee79c72d02, type: 2}
+  - {fileID: 1289579156322202, guid: 99e943bd32e79b1419600cffdb727a05, type: 2}
+  - {fileID: 1336601157171444, guid: 5300c59c3b8797a43a53721b88cd8291, type: 2}
+  - {fileID: 1086542754000140, guid: 496e17bb383c45b41a60d921fd22c996, type: 2}
+  flowers:
+  - {fileID: 1288983557608434, guid: 8ed66addb64b8e848b08626cf19ae1d6, type: 2}
+  - {fileID: 1460683419082884, guid: 633cb3294d61ab9458226947fbab72fa, type: 2}
+  - {fileID: 1336119762759380, guid: 9380ad20009851046915824a7ce32167, type: 2}
+  - {fileID: 1888704002428804, guid: cee269f056e123049929a7a66df2d5bf, type: 2}
+  tree1Base: {fileID: 1576205482675570, guid: 90f89ced8b0f05f4b821a3ba78956b60, type: 2}
+  tree1Top: {fileID: 1624293563353494, guid: 73d2d3f843e63c542aa0858fee3635cf, type: 2}
+  tree1Core:
+  - {fileID: 1877179025606374, guid: 9162fed3ecd8a404f9154e6eb7794fdb, type: 2}
+  - {fileID: 1929804583520076, guid: d106d517efa3e0a40bd0c602b92ef7ae, type: 2}
+  - {fileID: 1160366329413018, guid: 495031f0fd0050944a58f8a6d21ea7c2, type: 2}
+  - {fileID: 1830711470946446, guid: 64d5a5aa8e5ed6a4c90668713b0e33e6, type: 2}
+  coal: {fileID: 1002037512885184, guid: ed3e464f8ec7af94ab1c0a09c8001c6a, type: 2}
+  copper: {fileID: 1816122398459096, guid: ee1a2de691c5c054d9ae8cdcae81db8b, type: 2}
+  silver: {fileID: 1342432692097644, guid: f6f0328eb5ea6fb4f8af5b0425a8eddc, type: 2}
+  gold: {fileID: 1444934275431416, guid: ddabd6119e182a543a683fbc5e62b7d0, type: 2}
+  diamond: {fileID: 1895697507877374, guid: cef27dcd248af8c4191a4ffc5db32161, type: 2}
   chunkSize: 40
-  backTileLayerID: 0
-  frontTileLayerID: 0
-  grassLayerID: 0
-  player: {fileID: 0}
+  backTileLayerID: 12
+  frontTileLayerID: 13
+  grassLayerID: 15
+  player: {fileID: 70475279}
 --- !u!4 &1514719233
 Transform:
   m_ObjectHideFlags: 0
@@ -629,7 +818,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1544826701
 GameObject:
