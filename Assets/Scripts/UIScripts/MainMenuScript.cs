@@ -8,6 +8,9 @@ public class MainMenuScript : MonoBehaviour {
     public int resolut;
     public GameObject GameManager;
     public Dropdown myDropdown;
+    public GameObject pauseMenu;
+
+
     public void SetDropdownIndex(Dropdown index)
     {
         int res = index.value;
@@ -63,12 +66,20 @@ public void screenSz()
 
     }
 
-   public void escDown(GameObject panel)
+
+   
+
+    // Update is called once per frame
+    void Update()
     {
-        if(Input.GetKeyDown("escape")) {
-            //(Input.GetKeyDown(Input.KeyCode.Escape)) {
-            Debug.Log("pls hep");
-            panel.gameObject.SetActive(!panel.gameObject.activeSelf);
-        };
+        // Reverse the active state every time escape is pressed
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // Check whether it's active / inactive
+            bool isActive = pauseMenu.activeSelf;
+
+            pauseMenu.SetActive(!isActive);
+        }
     }
+
 }
