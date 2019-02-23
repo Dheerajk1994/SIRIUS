@@ -2,30 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//enum EnumClass.TileEnum {
-//    EMPTY = 0,
-//    REGULAR_DIRT             = 1,
-//    REGULAR_STONE            = 2,
-//    REGULAR_WOOD             = 3,
-//    REGULAR_TREETRUNK        = 17,
-//    REGULAR_TREELEAF         ,
-//    REGULAR_FLOWER           ,
-//    REGULAR_GRASS            , 
-//    //RESOURCES
-//    COAL                     = 21,
-//    COPPER                   , 
-//    SILVER                   ,
-//    GOLD                     , 
-//    DIAMOND                  ,
-//    //MOON
-//    MOON_DIRT                = 40, 
-//    MOON_STONE, 
-//    MOON_SAND,
-
-//    CAMPFIRE = 100
-//};
-
-
 public class TerrainManagerScript : MonoBehaviour
 {
     #region VARIABLES
@@ -261,9 +237,7 @@ public class TerrainManagerScript : MonoBehaviour
             {
                 fetchPosX = (ushort)(x + (cx * chunkSize));
                 fetchPosY = (ushort)(y + (cy * chunkSize));
-                //PLACE TILES
                 
-
                 //FRONT TILE
                 tile = GetTileToPlace(fetchPosX, fetchPosY, frontTilesValue);
                 if (tile)
@@ -448,21 +422,24 @@ public class TerrainManagerScript : MonoBehaviour
 
     public GameObject MineTile(int x, int y)
     {
-        Debug.Log("mine tile called");
+        //Debug.Log("mine tile called");
         ushort relativeX = (ushort)Mathf.Floor((x % worldXDimension + worldXDimension) % worldXDimension);
-        ushort relativeY = (ushort)Mathf.Floor(y / chunkSize);
+        //ushort relativeY = (ushort)Mathf.Floor(y / chunkSize);
 
-        Debug.Log(relativeX+ " " + relativeY);
-
-        if (frontTilesValue[relativeX, relativeY] == (ushort)EnumClass.TileEnum.EMPTY) { Debug.Log(frontTilesValue[relativeX, relativeY]); return null; }
-
+        if (frontTilesValue[relativeX, y] == (ushort)EnumClass.TileEnum.EMPTY) { return null; }
+        //Debug.Log(frontTilesValue[relativeX, y]);
         player.GetComponent<InventoryScript>().AddItemToInventory(GetTileToPlace((ushort)relativeX, (ushort)y, frontTilesValue), 1);
+        player.GetComponent<InventoryScript>().AddItemToInventory(GetTileToPlace((ushort)relativeX, (ushort)y, frontTilesResourceValue), 1);
 
         frontTilesValue             [relativeX, y] = 0;
+        frontTilesResourceValue     [relativeX, y] = 0; 
         vegetationTilesValue        [relativeX, y] = 0;
+        vegetationTilesValue        [relativeX, y + 1] = 0;
 
         Destroy(frontTiles          [relativeX, y]);
+        Destroy(frontTilesResources [relativeX, y]);
         Destroy(vegetationTiles     [relativeX, y]);
+        Destroy(vegetationTiles     [relativeX, y + 1]);
 
         return null;
     }

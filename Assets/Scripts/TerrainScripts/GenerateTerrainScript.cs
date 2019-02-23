@@ -97,16 +97,7 @@ public class GenerateTerrainScript : MonoBehaviour
         }
         GenerateCaves();
 
-       
-
-        
-
-        //GenerateChunk();
-
-        //CreateTileGameobjects();
-
         terrainManager.SetTiles(frontTilesValue, frontTilesResourceValues, backTilesValue, backTilesResourceValue, vegetationTilesValue);
-
     }
 
     private void GenerateIDs(ushort terrainType)
