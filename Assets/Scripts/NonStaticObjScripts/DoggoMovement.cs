@@ -5,50 +5,104 @@ using UnityEngine;
 public class DoggoMovement : MonoBehaviour {
 
     public CharacterController2D controller;
-    public Animator animator;
-
-    public float runSpeed = 40f;
-
-    float horizontalMove = 0f;
-    bool jump = false;
-
+    public Animator Animator;
     public GameObject player;
-    private PlayerScript playerScript;
+    public  PlayerScript playerScript;
+   
+    public float runSpeed = 40f;
+    public float horizontalMove = 0f;
+    public bool jump = false;
+
+    // Sprint 8 
+    private bool attack;
+    public Rigidbody2D rigidbody;
 
     private void Start()
     {
         player = GameObject.Find("GameManager").GetComponent<GameManagerScript>().player;
         playerScript = player.GetComponent<PlayerScript>();
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update () {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+    void Update ()
+    {
+        // Sprint 8
+        HandleInput();
 
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+    }
 
-        if(Input.GetButtonDown("Jump"))
-        {
-            if(playerScript.currentStamina >= 10)
-            {
-                jump = true;
-                animator.SetBool("isJump", true);
-                playerScript.ChangeStamina(-10);
-            }
-            
-        }
-	}
+    void FixedUpdate()
+    {
+        /*
+        //Move the character
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        jump = false
+        */
+        HandleMovements();
+        HandleAttacks();
+        ResetValues();
+
+    }
+
 
     // Stops repeated jumping 
     public void OnLanding()
     {
-        animator.SetBool("isJump", false);
+        Animator.SetBool("jump", false);
     }
    
-    void FixedUpdate () {
-        //Move the character
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-        jump = false;  
+    private void HandleMovements() 
+    {
+        /* Prevent Run and Attack at the same time
+         * Adding layer 0, if it's not "Attack" then we move player
+         */       
+        if (!this.Animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            // Move the character
+            controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        }
+    }
+
+    // Adding Attacking stuff (Sprint 8)
+    private void HandleAttacks()
+    {
+        if (attack && !this.Animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            Animator.SetTrigger("attack");
+            rigidbody.velocity = Vector2.zero; 
+        }
     }
     
+
+    private void HandleInput()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            attack = true;
+        }
+
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+
+        Animator.SetFloat("speed", Mathf.Abs(horizontalMove));
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (playerScript.currentStamina >= 10)
+            {
+                jump = true;
+                Animator.SetBool("jump", true);
+                playerScript.ChangeStamina(-10);
+            }
+
+        }
+
+    }
+
+    // function that resets all values for jump/attack
+    private void ResetValues() 
+    {
+        jump = false;
+        attack = false;
+    }
 }
