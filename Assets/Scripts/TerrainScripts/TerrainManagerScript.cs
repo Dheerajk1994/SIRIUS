@@ -66,7 +66,16 @@ public class TerrainManagerScript : MonoBehaviour
     public GameObject player;
     private InventoryScript playerInventoryScript;
 
+    public GameObject gameManager;
+    private TilePoolScript tilePool;
+
     #endregion 
+
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager");
+        tilePool = gameManager.GetComponent<TilePoolScript>();
+    }
 
     public void StartTerrainGen()
     {
@@ -139,9 +148,14 @@ public class TerrainManagerScript : MonoBehaviour
             chunks[chunkToDisplaym, chunkPosY + 2].transform.localPosition = new Vector2(cppxm, (chunkPosY + 2) * chunkSize);
             chunks[chunkToDisplayr, chunkPosY + 2].transform.localPosition = new Vector2(cppxr, (chunkPosY + 2) * chunkSize);
 
-            chunks[chunkToDisplayl, chunkPosY + 2].SetActive(false); chunksCurrentlyDisplaying[chunkToDisplayl, chunkPosY + 2] = false;
-            chunks[chunkToDisplaym, chunkPosY + 2].SetActive(false); chunksCurrentlyDisplaying[chunkToDisplaym, chunkPosY + 2] = false;
-            chunks[chunkToDisplayr, chunkPosY + 2].SetActive(false); chunksCurrentlyDisplaying[chunkToDisplayr, chunkPosY + 2] = false;
+            //chunks[chunkToDisplayl, chunkPosY + 2].SetActive(false); chunksCurrentlyDisplaying[chunkToDisplayl, chunkPosY + 2] = false;
+            //chunks[chunkToDisplaym, chunkPosY + 2].SetActive(false); chunksCurrentlyDisplaying[chunkToDisplaym, chunkPosY + 2] = false;
+            //chunks[chunkToDisplayr, chunkPosY + 2].SetActive(false); chunksCurrentlyDisplaying[chunkToDisplayr, chunkPosY + 2] = false;
+
+            DestroyChunk(chunkToDisplayl, (ushort)(chunkPosY + 2));
+            DestroyChunk(chunkToDisplaym, (ushort)(chunkPosY + 2));
+            DestroyChunk(chunkToDisplayr, (ushort)(chunkPosY + 2));
+
 
 
         }
@@ -159,8 +173,10 @@ public class TerrainManagerScript : MonoBehaviour
             DisplayChunk(chunkToDisplayr,  (ushort)(chunkPosY + 1));
 
 
-            chunks[chunkToDisplayll, chunkPosY + 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayll, chunkPosY + 1] = false;
-            chunks[chunkToDisplayrr, chunkPosY + 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayrr, chunkPosY + 1] = false;
+            //chunks[chunkToDisplayll, chunkPosY + 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayll, chunkPosY + 1] = false;
+            //chunks[chunkToDisplayrr, chunkPosY + 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayrr, chunkPosY + 1] = false;
+            DestroyChunk(chunkToDisplayll, (ushort)(chunkPosY + 1));
+            DestroyChunk(chunkToDisplayrr, (ushort)(chunkPosY + 1));
         }                                            
 
 
@@ -177,9 +193,12 @@ public class TerrainManagerScript : MonoBehaviour
             DisplayChunk(chunkToDisplaym, chunkPosY);
             DisplayChunk(chunkToDisplayr, chunkPosY);
 
-            chunks[chunkToDisplayll, chunkPosY].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayll, chunkPosY] = false;
-            chunks[chunkToDisplayrr, chunkPosY].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayrr, chunkPosY] = false;
+            //chunks[chunkToDisplayll, chunkPosY].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayll, chunkPosY] = false;
+            //chunks[chunkToDisplayrr, chunkPosY].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayrr, chunkPosY] = false;
 
+            DestroyChunk(chunkToDisplayll, (ushort)(chunkPosY));
+            DestroyChunk(chunkToDisplayrr, (ushort)(chunkPosY));
+        
 
 
         //BOT Y
@@ -195,10 +214,11 @@ public class TerrainManagerScript : MonoBehaviour
             DisplayChunk(chunkToDisplaym, (ushort)(chunkPosY - 1));
             DisplayChunk(chunkToDisplayr, (ushort)(chunkPosY - 1));
 
-            //Debug.Log(chunkToDisplayl + " " + (ushort)(chunkPosY - 1));
+            //chunks[chunkToDisplayll, chunkPosY - 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayll, chunkPosY - 1] = false;
+            //chunks[chunkToDisplayrr, chunkPosY - 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayrr, chunkPosY - 1] = false;
 
-            chunks[chunkToDisplayll, chunkPosY - 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayll, chunkPosY - 1] = false;
-            chunks[chunkToDisplayrr, chunkPosY - 1].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayrr, chunkPosY - 1] = false;
+            DestroyChunk(chunkToDisplayll, (ushort)(chunkPosY - 1));
+            DestroyChunk(chunkToDisplayrr, (ushort)(chunkPosY - 1));
         }                                                      
 
         //BOT BOT Y - TO REMOVE
@@ -208,29 +228,28 @@ public class TerrainManagerScript : MonoBehaviour
             chunks[chunkToDisplaym, chunkPosY - 2].transform.localPosition = new Vector2(cppxm, (chunkPosY - 2) * chunkSize);
             chunks[chunkToDisplayr, chunkPosY - 2].transform.localPosition = new Vector2(cppxr, (chunkPosY - 2) * chunkSize);
 
-            chunks[chunkToDisplayl, chunkPosY - 2].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayl, chunkPosY - 2] = false;
-            chunks[chunkToDisplaym, chunkPosY - 2].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplaym, chunkPosY - 2] = false;
-            chunks[chunkToDisplayr, chunkPosY - 2].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayr, chunkPosY - 2] = false;
+            //chunks[chunkToDisplayl, chunkPosY - 2].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayl, chunkPosY - 2] = false;
+            //chunks[chunkToDisplaym, chunkPosY - 2].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplaym, chunkPosY - 2] = false;
+            //chunks[chunkToDisplayr, chunkPosY - 2].SetActive(false);chunksCurrentlyDisplaying[chunkToDisplayr, chunkPosY - 2] = false;
+
+            DestroyChunk(chunkToDisplayl, (ushort)(chunkPosY - 2));
+            DestroyChunk(chunkToDisplaym, (ushort)(chunkPosY - 2));
+            DestroyChunk(chunkToDisplayr, (ushort)(chunkPosY - 2));
         }
 
     }
 
     void DisplayChunk(ushort cx, ushort cy)        //LOADS A CHUNK - USE WHEN CHUNK IS NOT POPULATED YET
     {
-        
-        if(chunksLoadedIntoMemory[cx, cy])
+        if (chunksCurrentlyDisplaying[cx, cy])
         {
-            if(!chunksCurrentlyDisplaying[cx, cy])
-            {
-                chunks[cx, cy].SetActive(true);
-                chunksCurrentlyDisplaying[cx, cy] = true;
-            }
             return;
         }
 
         ushort fetchPosX = 0;
         ushort fetchPosY = 0;
         GameObject tile;
+        Debug.Log("Pool size before creating items: " + tilePool.GetPoolSize());
         for (ushort x = 0; x < chunkSize; ++x)
         {
             for (ushort y = 0; y < chunkSize; y++)
@@ -242,7 +261,7 @@ public class TerrainManagerScript : MonoBehaviour
                 tile = GetTileToPlace(fetchPosX, fetchPosY, frontTilesValue);
                 if (tile)
                 {
-                    //tile = Instantiate(tile);
+                    tile.gameObject.SetActive(true);
                     tile.transform.SetParent(chunks[cx, cy].transform);
                     tile.transform.localPosition = new Vector2(x, y);
                     frontTiles[fetchPosX, fetchPosY] = tile;
@@ -252,7 +271,7 @@ public class TerrainManagerScript : MonoBehaviour
                 tile = GetTileToPlace(fetchPosX, fetchPosY, backTilesValue);
                 if (tile)
                 {
-                    //tile = Instantiate(tile);
+                    tile.gameObject.SetActive(true);
                     tile.transform.SetParent(chunks[cx, cy].transform);
                     tile.transform.localPosition = new Vector2(x, y);
                     backTiles[fetchPosX, fetchPosY] = tile;
@@ -262,7 +281,7 @@ public class TerrainManagerScript : MonoBehaviour
                 tile = GetTileToPlace(fetchPosX, fetchPosY, vegetationTilesValue);
                 if (tile)
                 {
-                    //tile = Instantiate(tile);
+                    tile.gameObject.SetActive(true);
                     tile.transform.SetParent(chunks[cx, cy].transform);
                     tile.transform.localPosition = new Vector2(x, y);
                     vegetationTiles[fetchPosX, fetchPosY] = tile;
@@ -272,6 +291,7 @@ public class TerrainManagerScript : MonoBehaviour
                 tile = GetTileToPlace(fetchPosX, fetchPosY, frontTilesResourceValue);
                 if (tile)
                 {
+                    tile.gameObject.SetActive(true);
                     tile.transform.SetParent(chunks[cx, cy].transform);
                     tile.transform.localPosition = new Vector2(x, y);
                     frontTilesResources[fetchPosX, fetchPosY] = tile;
@@ -281,20 +301,36 @@ public class TerrainManagerScript : MonoBehaviour
                 tile = GetTileToPlace(fetchPosX, fetchPosY, backTilesResourceValue);
                 if (tile)
                 {
+                    tile.gameObject.SetActive(true);
                     tile.transform.SetParent(chunks[cx, cy].transform);
                     tile.transform.localPosition = new Vector2(x, y);
                     backTilesResources[fetchPosX, fetchPosY] = tile;
                     PlaceTileInBResourceLayer(tile);
                 }
-
-
             }
         }
+        Debug.Log("Pool size after creating items: " + tilePool.GetPoolSize());
         chunks[cx, cy].SetActive(true);
         chunksLoadedIntoMemory[cx, cy] = true;
         chunksCurrentlyDisplaying[cx, cy] = true;
 
     }
+
+    void DestroyChunk(ushort cx, ushort cy)
+    {
+        if (!chunksCurrentlyDisplaying[cx, cy])//DONT ITERATE THROUGH AN INACTIVE OBJECT
+        {
+            return;
+        }
+        Debug.Log("Pool size before adding back items: " + tilePool.GetPoolSize());
+        foreach(Transform child in chunks[cx, cy].transform)
+        {
+            tilePool.AddTileIntoPool(child.gameObject);
+        }
+        chunks[cx, cy].gameObject.SetActive(false);
+        chunksCurrentlyDisplaying[cx, cy] = false;
+        Debug.Log("Pool size after adding back items: " + tilePool.GetPoolSize());
+    }   
 
     GameObject GetTileToPlace (ushort x, ushort y, ushort [,] tileLayer)
     {
@@ -305,12 +341,14 @@ public class TerrainManagerScript : MonoBehaviour
             case (ushort)EnumClass.TileEnum.EMPTY:
                 break;
             case (ushort)EnumClass.TileEnum.REGULAR_DIRT:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = regularDirtSprites[UnityEngine.Random.Range(0, regularDirtSprites.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.REGULAR_DIRT;
                 break;
             case (ushort)EnumClass.TileEnum.REGULAR_STONE:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = regularStoneSprites[UnityEngine.Random.Range(0, regularStoneSprites.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.REGULAR_STONE;
                 break;
@@ -318,62 +356,74 @@ public class TerrainManagerScript : MonoBehaviour
                 Debug.LogError("WOOD GAMEOBJECT MISSING");
                 break;
             case (ushort)EnumClass.TileEnum.REGULAR_TREETRUNK:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = regularTreeCoreSprite[UnityEngine.Random.Range(0, regularTreeCoreSprite.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.REGULAR_TREETRUNK;
                 break;
             case (ushort)EnumClass.TileEnum.REGULAR_TREELEAF:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = regularTreeTopSprite[UnityEngine.Random.Range(0, regularTreeTopSprite.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.REGULAR_TREELEAF;
                 break;
             case (ushort)EnumClass.TileEnum.REGULAR_FLOWER:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = regularFlowerSprites[UnityEngine.Random.Range(0, regularFlowerSprites.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.REGULAR_FLOWER;
                 break;
             case (ushort)EnumClass.TileEnum.REGULAR_GRASS:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = regularGrassSprites[UnityEngine.Random.Range(0, regularGrassSprites.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.REGULAR_GRASS;
                 break;
             case (ushort)EnumClass.TileEnum.COAL:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = coalSprites[UnityEngine.Random.Range(0, coalSprites.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.COAL;
                 break;
             case (ushort)EnumClass.TileEnum.COPPER:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = copperSprites[UnityEngine.Random.Range(0, copperSprites.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.COPPER;
                 break;
             case (ushort)EnumClass.TileEnum.SILVER:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = silverSprites[UnityEngine.Random.Range(0, silverSprites.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.SILVER;
                 break;
             case (ushort)EnumClass.TileEnum.GOLD:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = goldSprites[UnityEngine.Random.Range(0, goldSprites.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.GOLD;
                 break;
             case (ushort)EnumClass.TileEnum.DIAMOND:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = diamondSprites[UnityEngine.Random.Range(0, diamondSprites.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.DIAMOND;
                 break;
             case (ushort)EnumClass.TileEnum.MOON_DIRT:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = moonDirtSprites[UnityEngine.Random.Range(0, moonDirtSprites.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.MOON_DIRT;
                 break;
             case (ushort)EnumClass.TileEnum.MOON_STONE:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = moonStoneSprites[UnityEngine.Random.Range(0, moonStoneSprites.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.MOON_STONE;
                 break;
             case (ushort)EnumClass.TileEnum.MOON_SAND:
-                tile = Instantiate(TileObjectPrefab);
+                //tile = Instantiate(TileObjectPrefab);
+                tile = tilePool.FetchTileFromPool();
                 tile.GetComponent<SpriteRenderer>().sprite = moonSandSprite[UnityEngine.Random.Range(0, moonSandSprite.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.MOON_SAND;
                 break;
@@ -392,6 +442,15 @@ public class TerrainManagerScript : MonoBehaviour
     void PlaceTileInFrontLayer(GameObject tile)
     {
         tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.FRONTLAYER;
+        tile.GetComponent<Collider2D>().enabled = true;
+        tile.GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    void PlaceTileInFResourceLayer(GameObject tile)
+    {
+        tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.FRONTLAYER_RESOURCES;
+        tile.GetComponent<Collider2D>().enabled = false;
+        tile.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     void PlaceTileInBackLayer(GameObject tile)
@@ -401,21 +460,16 @@ public class TerrainManagerScript : MonoBehaviour
         tile.GetComponent<SpriteRenderer>().color = Color.gray;
     }
 
-    void PlaceTileInVegetationtLayer(GameObject tile)
-    {
-        tile.GetComponent<Collider2D>().enabled = false;
-        tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.GRASS;
-    }
-
-    void PlaceTileInFResourceLayer(GameObject tile)
-    {
-        tile.GetComponent<Collider2D>().enabled = false;
-        tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.FRONTLAYER_RESOURCES;
-    }
-
     void PlaceTileInBResourceLayer(GameObject tile)
     {
         tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.BACKLAYER_RESOURCES;
+        tile.GetComponent<Collider2D>().enabled = false;
+        tile.GetComponent<SpriteRenderer>().color = Color.gray;
+    }
+
+    void PlaceTileInVegetationtLayer(GameObject tile)
+    {
+        tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.GRASS;
         tile.GetComponent<Collider2D>().enabled = false;
         tile.GetComponent<SpriteRenderer>().color = Color.gray;
     }

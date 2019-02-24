@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4cd56488e2614459e50ba265c8276c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDimension: 160
-  heightAddition: 50
+  xDimension: 500
+  heightAddition: 500
   TileObjectPrefab: {fileID: 1212904404968698, guid: 5ac034eac9cfea74fbf2d9dc890db054,
     type: 2}
   regularStoneSprites:
@@ -133,6 +133,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7fba5b61b35d9af4fab849b6318d6a8b, type: 3}
   chunkSize: 40
   player: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!114 &114922002961065996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,13 +170,13 @@ MonoBehaviour:
   copperChangeInHeight: 0
   silverChance: 5
   silverNeighChance: 40
-  silverChangeInHeight: 0.5
+  silverChangeInHeight: 0
   goldChance: 10
   goldNeighChance: 10
-  goldChangeInHeight: 0.7
+  goldChangeInHeight: 0
   diamondChance: 5
-  diamondNeighChance: 5
-  diamondChangeInHeight: 1
+  diamondNeighChance: 20
+  diamondChangeInHeight: 0
   flowerChance: 100
   treeChance: 10
   minTreeHeight: 15

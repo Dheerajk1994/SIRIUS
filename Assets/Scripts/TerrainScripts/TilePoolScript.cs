@@ -5,19 +5,19 @@ using UnityEngine;
 public class TilePoolScript : MonoBehaviour {
 
     private static TilePoolScript instance;
-    public GameObject tile;
+    public GameObject tilePrefab;
 
-    public ushort tilePoolSize;
+    public uint tilePoolSize;
 
     private Queue<GameObject> tilePoolQueue;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
-        else if(instance != this)
+        else if (instance != this)
         {
             Destroy(this);
         }
@@ -29,26 +29,33 @@ public class TilePoolScript : MonoBehaviour {
         GameObject tempTile;
         for (ushort i = 0; i < tilePoolSize; ++i)
         {
-            tempTile = Instantiate(tile);
+            tempTile = Instantiate(tilePrefab);
+            //tempTile.name = i.ToString();
             tempTile.gameObject.SetActive(false);
+            tempTile.transform.parent = this.transform;
             tilePoolQueue.Enqueue(tempTile);
         }
     }
 
     public GameObject FetchTileFromPool()
     {
-        if(tilePoolQueue.Peek() != null)
+        if (tilePoolQueue.Peek() != null)
         {
             return tilePoolQueue.Dequeue();
         }
         return null;
     }
 
-    public void AddTileIntoPool(GameObject tile)
+    public void AddTileIntoPool(GameObject tileToAdd)
     {
-        tile.gameObject.SetActive(false);
-        tilePoolQueue.Enqueue(tile);
+        tileToAdd.gameObject.SetActive(false);
+        //tileToAdd.transform.parent = this.transform;
+        tilePoolQueue.Enqueue(tileToAdd);
     }
 
+    public int GetPoolSize()
+    {
+        return tilePoolQueue.Count;
+    }
 
 }
