@@ -91,6 +91,7 @@ public class GenerateTerrainScript : MonoBehaviour
         GenerateResources((ushort)EnumClass.TileEnum.SILVER, silverChance, silverNeighChance, silverChangeInHeight);
         GenerateResources((ushort)EnumClass.TileEnum.GOLD, goldChance, goldNeighChance, goldChangeInHeight);
         GenerateResources((ushort)EnumClass.TileEnum.DIAMOND, diamondChance, diamondNeighChance, diamondChangeInHeight);
+
         if(terrainType != (ushort)EnumClass.TerrainType.MOON && terrainType != (ushort)EnumClass.TerrainType.ASTEROID)
         {
             GenerateGrass();

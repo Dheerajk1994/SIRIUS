@@ -11,6 +11,8 @@ public class UIScript : MonoBehaviour
     public Slider healthBar;
     public Slider staminaBar;
     public Slider hungerBar;
+    public RectTransform fadePanel;
+    private Animator fadePanelAnimator;
 
     public Image attributeIcon;
     public Sprite [] attributePanelStatusSprite;
@@ -19,16 +21,9 @@ public class UIScript : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager");
 
-        //playerInvoPanel = gameManager.GetComponent<GameManagerScript>().playerInvoPanel;
         playerInvoPanel.gameObject.SetActive(false);
-
-        //craftingPanel = gameManager.GetComponent<GameManagerScript>().craftingPanel;
         craftingPanel.gameObject.SetActive(false);
-
-        //healthBar = gameManager.GetComponent<GameManagerScript>().healthBar;
-        //staminaBar = gameManager.GetComponent<GameManagerScript>().staminaBar;
-        //hungerBar = gameManager.GetComponent<GameManagerScript>().hungerBar;
-
+        fadePanelAnimator = fadePanel.GetComponent<Animator>();
     }
 
     public void TogglePlayerInventory()
@@ -77,6 +72,16 @@ public class UIScript : MonoBehaviour
     public void UpdateHunger(float hunger)
     {
         hungerBar.value = hunger;
+    }
+
+    public void FadeInScene()
+    {
+        fadePanelAnimator.SetBool("sceneDark", false);
+    }
+
+    public void FadeOutScene()
+    {
+        fadePanelAnimator.SetBool("sceneDark", true);
     }
 
 }

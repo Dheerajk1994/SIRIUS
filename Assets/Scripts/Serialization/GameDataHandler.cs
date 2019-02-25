@@ -28,10 +28,10 @@ public static class GameDataHandler {
             gameManager.mainCamera.gameObject.SetActive(true);
             gameManager.mainCamera.gameObject.GetComponent<CameraScript>().playerToFollow = gameManager.player.transform;
 
+            gameManager.uiScript.FadeInScene();
+
             gameManager.worldPresent = true;
             gameManager.readyToGo = true;
-
-
         }
     }
 
@@ -80,6 +80,8 @@ public static class GameDataHandler {
 
             gameManager.mainCamera.gameObject.SetActive(true);
             gameManager.mainCamera.GetComponent<CameraScript>().playerToFollow = gameManager.player.transform;
+
+            gameManager.uiScript.FadeInScene();
 
             gameManager.worldPresent = true;
             gameManager.readyToGo = true;

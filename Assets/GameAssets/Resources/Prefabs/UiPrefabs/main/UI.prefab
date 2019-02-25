@@ -6708,6 +6708,7 @@ MonoBehaviour:
   healthBar: {fileID: 114290434491809594}
   staminaBar: {fileID: 114197497135258702}
   hungerBar: {fileID: 114188359830642054}
+  fadePanel: {fileID: 224531135552689404}
   attributeIcon: {fileID: 114793266100394836}
   attributePanelStatusSprite:
   - {fileID: 21300000, guid: 8973ec37efd075d468cfe8e1e6c398a7, type: 3}
