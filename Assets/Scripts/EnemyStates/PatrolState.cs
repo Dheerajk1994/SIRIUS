@@ -6,7 +6,7 @@ public class PatrolState : IEnemyState {
 
     private Enemy enemy;
     private float patrolTimer;
-    private float patrolDuration = 5;
+    private float patrolDuration = 6;
 
     public void Enter(Enemy enemy)
     {
@@ -17,8 +17,15 @@ public class PatrolState : IEnemyState {
     {
         Debug.Log("Enemy Patroling");
         Patrol();
-
         enemy.Move();
+
+        // maybe future implementation with ranged attack for diff enemies?  
+        // if (enemy.Target !=null && enemy.InRangedAttackRange)
+        if (enemy.Target !=null)
+        {
+            Debug.Log("Target Acquired... Following");
+            enemy.ChangeState(new RangedState()); 
+        }
     }
 
     public void Exit()
@@ -34,8 +41,6 @@ public class PatrolState : IEnemyState {
 
     private void Patrol()
     {
-
-        // increase idleTimer by the time that has passed since a frame was rendered.
         patrolTimer += Time.deltaTime;
 
         if (patrolTimer >= patrolDuration)

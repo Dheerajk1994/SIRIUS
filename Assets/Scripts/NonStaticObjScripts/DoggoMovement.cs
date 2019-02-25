@@ -27,6 +27,7 @@ public class DoggoMovement : MonoBehaviour {
     void Update ()
     {
         HandleInput();
+
     }
 
     void FixedUpdate()

@@ -6,7 +6,7 @@ public class IdleState : IEnemyState
 {
     private Enemy enemy;
     private float idleTimer;
-    private float idleDuration = 4f;
+    private float idleDuration = 3;
 
     public void Enter(Enemy enemy)
     {
@@ -17,6 +17,14 @@ public class IdleState : IEnemyState
     {
         Debug.Log("Enemy Idling");
         Idle();
+
+        // switch to new state when we see something, switch to patrol state
+        // since patrol state already making the subject move we will use this 
+        if (enemy.Target != null)
+        {
+            Debug.Log("Target Acquired");
+            enemy.ChangeState(new PatrolState()); 
+        }
     }
 
     public void Exit()

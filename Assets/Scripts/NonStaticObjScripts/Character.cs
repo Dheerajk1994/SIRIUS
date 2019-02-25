@@ -5,10 +5,21 @@ using UnityEngine;
  public abstract class Character : MonoBehaviour
 {
     public Animator Animator { get; set;}
+   //[SerializeField]
+    protected float runSpeed;
+    public float standardDamage;
 
     [SerializeField]
-    public float runSpeed;
+    protected float currentHealth, maxHealth;
+    public float currentStamina, maxStamina;
+    [SerializeField]
+    protected float currentHunger, maxHunger;
+    [SerializeField]
+    protected float temperature;
 
+
+    public abstract bool IsDead { get; }
+    public bool IsTakingDamage { get; set;  }
     public bool facingRight;
     public bool attack;
     public float horizontalMove = 0f;
@@ -18,6 +29,7 @@ using UnityEngine;
     {
         Debug.Log("Character start");
         Animator = GetComponent<Animator>();
+        //Animator.GetComponent<Character>().attack = true;
         facingRight = true;
 	}
 
@@ -28,10 +40,21 @@ using UnityEngine;
 
 	}
 
-    public void changeDirection(float horizontal) 
+    public void ChangeDirection() 
     {
         facingRight = !facingRight;
         transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
     }
 
+    public virtual void OnTriggerEnter2D(Collider2D other) 
+    {
+        if (other.tag =="Attack")
+        {
+            StartCoroutine(TakeDamage(standardDamage)); 
+        }
+    }
+
+
+
+    public abstract IEnumerator TakeDamage(float damage);
 }
