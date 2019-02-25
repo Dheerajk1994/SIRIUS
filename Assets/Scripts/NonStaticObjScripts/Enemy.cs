@@ -65,10 +65,11 @@ public class Enemy : Character
         //    {
         //        currentState.Execute();
         //    }
-
+        // LookAtTarget();
         //}
-        currentState.Execute();
-        LookAtTarget();
+            currentState.Execute();
+            LookAtTarget();
+        
     }
 
     private void LookAtTarget()

@@ -9,7 +9,10 @@ public class PlayerScript : Character {
     public CharacterController2D controller;
     //public Animator Animator;
     public GameObject player;
+    [SerializeField]
+    private EdgeCollider2D BarkCollider;
     private PlayerScript playerScript;
+    
     // private Rigidbody2D rigidbody;
 
     /*----------- PLAYER STATS -----------*/
@@ -102,6 +105,12 @@ public class PlayerScript : Character {
     {
 
     }
+
+    public void MeleeAttack()
+    {
+        BarkCollider.enabled = !BarkCollider.enabled;
+    }
+
 
     public void TakeDamage1(float damage)
     {
