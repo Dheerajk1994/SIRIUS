@@ -46,6 +46,8 @@ using UnityEngine;
         transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
     }
 
+
+
     public virtual void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.tag =="Attack")
@@ -53,7 +55,6 @@ using UnityEngine;
             StartCoroutine(TakeDamage(standardDamage)); 
         }
     }
-
 
 
 
