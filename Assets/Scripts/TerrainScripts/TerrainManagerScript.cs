@@ -77,9 +77,9 @@ public class TerrainManagerScript : MonoBehaviour
         tilePool = gameManager.GetComponent<TilePoolScript>();
     }
 
-    public void StartTerrainGen()
+    public void StartTerrainGen(ushort terrainType)
     {
-        this.GetComponentInParent<GenerateTerrainScript>().StartTerrainGeneration(this, xDimension, heightAddition, chunkSize, (ushort)EnumClass.TerrainType.MOON);
+        this.GetComponentInParent<GenerateTerrainScript>().StartTerrainGeneration(this, xDimension, heightAddition, chunkSize, terrainType);
     }
 
     public void SetTiles(ushort[,] fTilesV,ushort[,] fTilesRV, ushort[,] bTilesV, ushort[,] bTilesRV, ushort[,] vTilesV)
@@ -120,6 +120,7 @@ public class TerrainManagerScript : MonoBehaviour
 
     public void DisplayChunks(Vector2 playerPos)
     {
+        //Debug.Log("Display chunk called");
         ushort chunkPosY = (ushort)Mathf.Clamp((ushort)Mathf.Floor(playerPos.y / chunkSize), 0, chunks.GetLength(1) - 1);
 
         int xRelativell = Mathf.FloorToInt(((playerPos.x - chunkSize * 2 )% worldXDimension + worldXDimension) % worldXDimension);
@@ -239,7 +240,7 @@ public class TerrainManagerScript : MonoBehaviour
 
     }
 
-    void DisplayChunk(ushort cx, ushort cy)        //LOADS A CHUNK - USE WHEN CHUNK IS NOT POPULATED YET
+    private void DisplayChunk(ushort cx, ushort cy)        //LOADS A CHUNK - USE WHEN CHUNK IS NOT POPULATED YET
     {
         if (chunksCurrentlyDisplaying[cx, cy])
         {
@@ -316,7 +317,7 @@ public class TerrainManagerScript : MonoBehaviour
 
     }
 
-    void DestroyChunk(ushort cx, ushort cy)
+    private void DestroyChunk(ushort cx, ushort cy)
     {
         if (!chunksCurrentlyDisplaying[cx, cy])//DONT ITERATE THROUGH AN INACTIVE OBJECT
         {
@@ -331,6 +332,17 @@ public class TerrainManagerScript : MonoBehaviour
         chunksCurrentlyDisplaying[cx, cy] = false;
         Debug.Log("Pool size after adding back items: " + tilePool.GetPoolSize());
     }   
+
+    public void ClearTerrain()
+    {
+        for (ushort x = 0; x < chunksCurrentlyDisplaying.GetLength(0); ++x)
+        {
+            for (ushort y = 0; y < chunksCurrentlyDisplaying.GetLength(1); ++y)
+            {
+                DestroyChunk(x, y);
+            }
+        }
+    }
 
     GameObject GetTileToPlace (ushort x, ushort y, ushort [,] tileLayer)
     {
@@ -471,7 +483,7 @@ public class TerrainManagerScript : MonoBehaviour
     {
         tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.GRASS;
         tile.GetComponent<Collider2D>().enabled = false;
-        tile.GetComponent<SpriteRenderer>().color = Color.gray;
+        tile.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     public GameObject MineTile(int x, int y)

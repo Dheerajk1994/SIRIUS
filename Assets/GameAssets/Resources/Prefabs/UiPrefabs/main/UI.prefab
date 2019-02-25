@@ -3009,7 +3009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1891908665679696
 GameObject:
   m_ObjectHideFlags: 1
@@ -6649,7 +6649,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resolut: 0
   GameManager: {fileID: 0}
-  myDropdown: {fileID: 0}
+  resDropdown: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  fullScreenToggle: {fileID: 0}
 --- !u!114 &114351201578765342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6842,9 +6844,12 @@ MonoBehaviour:
   botDialoguePanel: {fileID: 224763164795726932}
   botDialogueTitleText: {fileID: 114814479318585106}
   botDialogueMainText: {fileID: 114668628189271844}
+  dialogueNextButn: {fileID: 114912942516239542}
+  dialogueCloseButn: {fileID: 114834695056027384}
   questPanel: {fileID: 224977813296983760}
   questPanelTitleText: {fileID: 114794817549008090}
   questPanelMainText: {fileID: 114173199620749544}
+  questPanelToggleButn: {fileID: 114305617464593690}
   attributeIcon: {fileID: 114793266100394836}
   attributePanelStatusSprite:
   - {fileID: 21300000, guid: 8973ec37efd075d468cfe8e1e6c398a7, type: 3}

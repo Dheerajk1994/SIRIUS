@@ -109,7 +109,7 @@ public class PlayerScript : Character {
 
     public void MeleeAttack()
     {
-        BarkCollider.enabled = !BarkCollider.enabled;
+        //BarkCollider.enabled = !BarkCollider.enabled;
     }
 
 

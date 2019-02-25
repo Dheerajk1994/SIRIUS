@@ -9,15 +9,18 @@ REDUCES CLUTTER IN GAMEMANAGER
 */
 public static class GameDataHandler {
 
-    public static void NewGame(GameManagerScript gameManager, TerrainManagerScript terrainManager)
+    public static void NewGame(GameManagerScript gameManager, TerrainManagerScript terrainManager, ushort terrainType)
     {
         if (!gameManager.worldPresent)
         {
             gameManager.readyToGo = false;
 
+            gameManager.UI.SetActive(true);
+            gameManager.MainMenu.SetActive(false);
+
             gameManager.mainCamera.gameObject.SetActive(false);
 
-            terrainManager.StartTerrainGen();
+            terrainManager.StartTerrainGen(terrainType);
 
             gameManager.player.gameObject.SetActive(true);
             gameManager.player.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.FRONTLAYER;
@@ -26,16 +29,16 @@ public static class GameDataHandler {
             gameManager.player.transform.position = gameManager.playerPos;
 
             gameManager.mainCamera.gameObject.SetActive(true);
-            gameManager.mainCamera.gameObject.GetComponent<CameraScript>().playerToFollow = gameManager.player.transform;
+            gameManager.mainCamera.gameObject.GetComponent<CameraScript>().SetCamera(gameManager.player.transform, terrainType);
 
-            gameManager.uiScript.FadeInScene();
+            //gameManager.uiScript.FadeInScene();
 
             gameManager.worldPresent = true;
             gameManager.readyToGo = true;
         }
     }
 
-    public static void SaveGame(GameManagerScript gameManager, TerrainManagerScript terrainManager)
+    public static void SaveGame(string path,GameManagerScript gameManager, TerrainManagerScript terrainManager)
     {
         //CHECK IF THERE IS A WORLD RUNNING & CALL SAVAMANAGER
         if (gameManager.worldPresent)
@@ -43,6 +46,7 @@ public static class GameDataHandler {
             gameManager.readyToGo = false;
             Debug.Log("Saving game...");
             SaveManager.SaveGame(
+                path,
                 terrainManager.frontTilesValue,
                 terrainManager.frontTilesResourceValue,
                 terrainManager.backTilesValue,
@@ -54,7 +58,7 @@ public static class GameDataHandler {
         }
     }
 
-    public static void LoadGame(GameManagerScript gameManager, TerrainManagerScript terrainManager)
+    public static bool LoadGame(string path, GameManagerScript gameManager, TerrainManagerScript terrainManager)
     {
         //LOAD ONLY IF THERE IS NO WORLD PRESENT
         if (!gameManager.worldPresent)
@@ -65,8 +69,9 @@ public static class GameDataHandler {
             gameManager.player.SetActive(false);
 
 
-            SerializedSaveData loadedData = SaveManager.LoadGame();
-            terrainManager.SetTiles(
+            SerializedSaveData loadedData = SaveManager.LoadGame(path);
+            if (loadedData != null){
+                terrainManager.SetTiles(
                 loadedData.ftileData,
                 loadedData.fResourceData,
                 loadedData.btileData,
@@ -74,17 +79,33 @@ public static class GameDataHandler {
                 loadedData.vtileData
                 );
 
-            gameManager.player.SetActive(true);
-            gameManager.player.transform.localPosition = new Vector3(loadedData.playerPosX, loadedData.playerPosY, loadedData.playerPosZ);
-            gameManager.player.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.FRONTLAYER;
+                gameManager.player.SetActive(true);
+                gameManager.player.transform.localPosition = new Vector3(loadedData.playerPosX, loadedData.playerPosY, loadedData.playerPosZ);
+                gameManager.player.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.FRONTLAYER;
 
-            gameManager.mainCamera.gameObject.SetActive(true);
-            gameManager.mainCamera.GetComponent<CameraScript>().playerToFollow = gameManager.player.transform;
+                gameManager.mainCamera.gameObject.SetActive(true);
+                gameManager.mainCamera.gameObject.GetComponent<CameraScript>().SetCamera(gameManager.player.transform, gameManager.currentWorld);
 
-            gameManager.uiScript.FadeInScene();
+                gameManager.uiScript.FadeInScene();
 
-            gameManager.worldPresent = true;
-            gameManager.readyToGo = true;
+                gameManager.worldPresent = true;
+                gameManager.readyToGo = true;
+
+                return true;
+            }
+            else
+            {
+                Debug.LogError("LOAD PATH CANNOT BE FOUND");
+                return false;
+            }
         }
+        return false;
     }
+
+    public static void ClearWorld(GameManagerScript gameManager, TerrainManagerScript terrainManager)
+    {
+        terrainManager.ClearTerrain();
+        gameManager.worldPresent = false;
+    }
+
 }

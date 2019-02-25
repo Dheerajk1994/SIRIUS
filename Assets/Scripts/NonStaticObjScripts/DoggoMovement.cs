@@ -5,7 +5,7 @@ using UnityEngine;
 public class DoggoMovement : MonoBehaviour {
 
     public CharacterController2D controller;
-    public Animator Animator;
+    public Animator animator;
     public GameObject player;
     public  PlayerScript playerScript;
    
@@ -21,6 +21,7 @@ public class DoggoMovement : MonoBehaviour {
         player = GameObject.Find("GameManager").GetComponent<GameManagerScript>().player;
         playerScript = player.GetComponent<PlayerScript>();
         rigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -40,7 +41,7 @@ public class DoggoMovement : MonoBehaviour {
     // Stops repeated jumping 
     public void OnLanding()
     {
-        Animator.SetBool("jump", false);
+        animator.SetBool("jump", false);
     }
    
     private void HandleMovements() 
@@ -48,7 +49,7 @@ public class DoggoMovement : MonoBehaviour {
         /* Prevent Run and Attack at the same time
          * Adding layer 0, if it's not "Attack" then we move player
          */       
-        if (!this.Animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        if (!this.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             // Move the character
             controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
@@ -57,9 +58,9 @@ public class DoggoMovement : MonoBehaviour {
 
     private void HandleAttacks()
     {
-        if (attack && !this.Animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        if (attack && !this.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
-            Animator.SetTrigger("attack");
+            animator.SetTrigger("attack");
             rigidbody.velocity = Vector2.zero; 
         }
     }
@@ -74,14 +75,14 @@ public class DoggoMovement : MonoBehaviour {
 
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-        Animator.SetFloat("speed", Mathf.Abs(horizontalMove));
+        animator.SetFloat("speed", Mathf.Abs(horizontalMove));
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (playerScript.currentStamina >= 10)
             {
                 jump = true;
-                Animator.SetBool("jump", true);
+                animator.SetBool("jump", true);
                 playerScript.ChangeStamina(-10);
             }
 

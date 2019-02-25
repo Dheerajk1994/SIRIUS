@@ -7,10 +7,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveManager {
 
-    private static readonly string save1Path = Application.persistentDataPath + "/save1.data";
+    private static string path;
     
 
     public static void SaveGame (
+        string savePath,
         ushort[,] fTilesValue, 
         ushort[,] fRValue, 
         ushort[,] bTilesValue, 
@@ -19,29 +20,41 @@ public static class SaveManager {
         Vector3 playerPos
         )
     {
+        path = Application.persistentDataPath + "/" + savePath;
+
         SerializedSaveData data = new SerializedSaveData(fTilesValue, fRValue, bTilesValue, bRValue, vTilesValue, playerPos);
 
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream;
 
-        stream = new FileStream(save1Path, FileMode.Create);
+        stream = new FileStream(path, FileMode.Create);
         formatter.Serialize(stream, data);
         stream.Close();
 
     }
 
-    public static SerializedSaveData LoadGame()
+    public static SerializedSaveData LoadGame(string loadPath)
     {
-        SerializedSaveData data;
+        path = Application.persistentDataPath + "/" + loadPath;
 
-        BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream;
+        if (File.Exists(path))
+        {
+            SerializedSaveData data;
 
-        stream = new FileStream(save1Path, FileMode.Open);
-        data   = (SerializedSaveData)formatter.Deserialize(stream);
-        stream.Close();
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream;
 
-        return data;
+            stream = new FileStream(path, FileMode.Open);
+            data = (SerializedSaveData)formatter.Deserialize(stream);
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            return null;
+        }
+        
     }
 }
 

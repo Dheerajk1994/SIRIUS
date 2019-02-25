@@ -19,11 +19,16 @@ public class UIScript : MonoBehaviour
     private Animator botDialoguePanelAnimator;
     public Text botDialogueTitleText;
     public Text botDialogueMainText;
+    public Button dialogueNextButn;
+    public Button dialogueCloseButn;
+
 
     public RectTransform questPanel;
     private Animator questPanelAnimator;
     public Text questPanelTitleText;
     public Text questPanelMainText;
+    public Button questPanelToggleButn;
+    private bool questPanelShown = false;
 
 
     public Image attributeIcon;
@@ -39,6 +44,11 @@ public class UIScript : MonoBehaviour
         fadePanelAnimator        = fadePanel.GetComponent<Animator>();
         botDialoguePanelAnimator = botDialoguePanel.GetComponent<Animator>();
         questPanelAnimator       = questPanel.GetComponent<Animator>();
+
+        dialogueNextButn.onClick.AddListener(DialogueNextClicked);
+        dialogueCloseButn.onClick.AddListener(DialogueCloseClicked);
+
+        questPanelToggleButn.onClick.AddListener(ToggleQuestPanel);
     }
 
     public void TogglePlayerInventory()
@@ -58,6 +68,16 @@ public class UIScript : MonoBehaviour
         botDialoguePanelAnimator.SetBool("isShowing", toggle);
     }
 
+    private void DialogueNextClicked()
+    {
+        DialogueController.NextDialogue();
+    }
+
+    private void DialogueCloseClicked()
+    {
+        botDialoguePanelAnimator.SetBool("isShowing", false);
+    }
+
     public void SetBotDialoguePanelText(string title, string dialogue)
     {
         botDialogueTitleText.text = title;
@@ -73,7 +93,16 @@ public class UIScript : MonoBehaviour
     public void ToggleQuestPanel(bool toggle)
     {
         questPanelAnimator.SetBool("isShowing", toggle);
+        questPanelShown = toggle;
     }
+
+    public void ToggleQuestPanel()
+    {
+        questPanelShown = !questPanelShown;
+        questPanelAnimator.SetBool("isShowing", questPanelShown);
+
+    }
+
 
     public void UpdateHealth(float health)
     {

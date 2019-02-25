@@ -14,10 +14,11 @@
   ],
 
   "questDialogues": [
-    "First Steps",
     "Collect 100 stone",
     "Collect 50 wood",
     "collect 50 coal",
-    "Collect 50 copper"
+    "Collect 50 copper",
+    "Press I to open inventory",
+    "Press C to open crafting panel"
   ]
 }
