@@ -19,11 +19,13 @@ public class GameManagerScript : MonoBehaviour
     //INSTANTIATEED PREFABS
     public GameObject player;
     public GameObject TerrainManager;
+
     public Camera     mainCamera;
     public GameObject UI;
 
     private TerrainManagerScript terrainManagerScript;
     public UIScript   uiScript;
+
 
     public GameObject playerInvoPanel;
     public GameObject craftingPanel;
@@ -78,10 +80,12 @@ public class GameManagerScript : MonoBehaviour
 
         terrainManagerScript = TerrainManager.GetComponent<TerrainManagerScript>();
 
+
         GameObject PlayArea = new GameObject("PlayArea");
         PlayArea.transform.position = new Vector3(0f, 0f, 0f);
 
         worldPresent = false;
+
     }
 
     private void Update()

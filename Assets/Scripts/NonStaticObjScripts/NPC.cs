@@ -9,6 +9,7 @@ public class NPC : Humanoid
     protected override void Talk()
     {
         Debug.Log("Loading Text for NPC");
+
     }
 
     protected override void Start()

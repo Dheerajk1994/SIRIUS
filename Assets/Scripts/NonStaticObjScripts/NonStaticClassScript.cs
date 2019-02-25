@@ -23,29 +23,29 @@ public class NonStaticClassScript : MonoBehaviour
         return CurrentStamina;
     }
 
-    // Heals the mob up (might only be used by sam or bosses)
+    // Heals the subject up (might only be used by sam or bosses)
     void heal(int healAmount)
     {
         CurrentHealth += healAmount;
         if (CurrentHealth > MaxHealth)
             CurrentHealth = MaxHealth;
-        Debug.Log("Mob has healed");
+        Debug.Log("Subject has healed");
     }
 
-    // Damages the mob
+    // Damages the subject
     void takeDamage(int attackPower)
     {
         CurrentHealth -= attackPower;
         if (CurrentHealth <= 0)
             Die();
-        Debug.Log("Mob has taken damage");
+        Debug.Log("Subject has taken damage");
     }
 
     // RIP
     void Die()
     {
         CurrentHealth = 0;
-        Debug.Log("Mob has died");
+        Debug.Log("Subject has died");
     }
 
     // Use this for initialization

@@ -2,29 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerScript : MonoBehaviour {
+public class PlayerScript : Character {
 
-    public float currentHealth, maxHealth;
-    public float currentStamina, maxStamina;
-    public float currentHunger, maxHunger;
-    public float temperature;
+    public GameManagerScript gameManagerScript;
+    public UIScript uiScript;
+    public CharacterController2D controller;
+    //public Animator Animator;
+    public GameObject player;
+    [SerializeField]
+    private EdgeCollider2D BarkCollider;
+    private PlayerScript playerScript;
+    
+    // private Rigidbody2D rigidbody;
+
+    /*----------- PLAYER STATS -----------*/
+    //protected float currentHealth, maxHealth;
+    //protected float currentStamina, maxStamina;
+    //protected float currentHunger, maxHunger;
+    //protected float temperature;
    
-
     public float armor;
     public float insulation;
 
     public float healthRecoveryRate;
     public float staminaRecoveryRate;
     public float hungerRecoveryRate;
-    
 
-    public GameManagerScript gameManagerScript;
-    public UIScript uiScript;
 
-    private void Start()
+
+    /*------------------------------------*/
+
+
+    public override void Start()
     {
+        Debug.Log("PlayerScript start");
+        // base.Start();
         gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
+
         uiScript = gameManagerScript.UI.GetComponent<UIScript>();
+        player = GameObject.Find("GameManager").GetComponent<GameManagerScript>().player;
+        playerScript = player.GetComponent<PlayerScript>();
+        // rigidbody = GetComponent<Rigidbody2D>();
+
+    }
+    // checking on every frame
+    private void Update()
+    {
+
+
     }
 
     private void FixedUpdate()
@@ -41,18 +66,9 @@ public class PlayerScript : MonoBehaviour {
         {
             ChangeHunger(hungerRecoveryRate);
         }
+
     }
 
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-
-        if (currentHealth >= maxHealth) currentHealth = maxHealth;
-        else if (currentHealth <= 0) currentHealth = 0.0f;
-
-        uiScript.UpdateHealth((currentHealth / maxHealth) * 100.0f);
-        if (currentHealth <= 0.0) { Die(); }
-    }
 
     public void ChangeHealth(float health)
     {
@@ -91,5 +107,41 @@ public class PlayerScript : MonoBehaviour {
 
     }
 
+    public void MeleeAttack()
+    {
+        BarkCollider.enabled = !BarkCollider.enabled;
+    }
 
+
+    public void TakeDamage1(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth >= maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        else if (currentHealth <= 0) 
+        { 
+            currentHealth = 0.0f; 
+        }
+        uiScript.UpdateHealth((currentHealth / maxHealth) * 100.0f);
+        if (currentHealth <= 0.0) 
+        {
+            Die();
+        }
+    }
+
+    public override bool IsDead
+    {
+        get
+        {
+            return currentHealth <= 0.0;
+        }
+    }
+
+    public override IEnumerator TakeDamage(float damage)
+    {
+        yield return null;
+    }
 }
