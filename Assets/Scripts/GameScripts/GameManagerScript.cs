@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
+    GameManagerScript instance;
+
     public GameObject stone;
 
     //PREFABS
@@ -36,6 +38,20 @@ public class GameManagerScript : MonoBehaviour
     public bool worldPresent;
 
     public Vector3 playerPos;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else if(this != instance)
+        {
+            Destroy(this);
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
+
 
     private void Start()
     {
@@ -70,9 +86,13 @@ public class GameManagerScript : MonoBehaviour
 
     private void Update()
     {
-        if      (Input.GetKeyDown(KeyCode.N)) StartNewGame();
+        if (Input.GetKeyDown(KeyCode.N)) StartNewGame();
         else if (Input.GetKeyDown(KeyCode.S)) SaveGame();
         else if (Input.GetKeyDown(KeyCode.L)) LoadGame();
+        else if (Input.GetKeyDown(KeyCode.O)) uiScript.ToggleBotDialoguePanel(true);
+        else if (Input.GetKeyDown(KeyCode.P)) uiScript.ToggleBotDialoguePanel(false);
+        else if (Input.GetKeyDown(KeyCode.Q)) uiScript.ToggleQuestPanel(true);
+        else if (Input.GetKeyDown(KeyCode.E)) uiScript.ToggleQuestPanel(false);
 
         if (readyToGo)
         {

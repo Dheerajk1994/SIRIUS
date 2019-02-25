@@ -11,8 +11,20 @@ public class UIScript : MonoBehaviour
     public Slider healthBar;
     public Slider staminaBar;
     public Slider hungerBar;
+
     public RectTransform fadePanel;
     private Animator fadePanelAnimator;
+
+    public RectTransform botDialoguePanel;
+    private Animator botDialoguePanelAnimator;
+    public Text botDialogueTitleText;
+    public Text botDialogueMainText;
+
+    public RectTransform questPanel;
+    private Animator questPanelAnimator;
+    public Text questPanelTitleText;
+    public Text questPanelMainText;
+
 
     public Image attributeIcon;
     public Sprite [] attributePanelStatusSprite;
@@ -23,7 +35,10 @@ public class UIScript : MonoBehaviour
 
         playerInvoPanel.gameObject.SetActive(false);
         craftingPanel.gameObject.SetActive(false);
-        fadePanelAnimator = fadePanel.GetComponent<Animator>();
+
+        fadePanelAnimator        = fadePanel.GetComponent<Animator>();
+        botDialoguePanelAnimator = botDialoguePanel.GetComponent<Animator>();
+        questPanelAnimator       = questPanel.GetComponent<Animator>();
     }
 
     public void TogglePlayerInventory()
@@ -36,6 +51,28 @@ public class UIScript : MonoBehaviour
     {
         craftingPanel.gameObject.SetActive(!craftingPanel.gameObject.activeInHierarchy);
         craftingPanel.GetComponent<CraftingPanelScript>().UpdateCraftingPanel();
+    }
+
+    public void ToggleBotDialoguePanel(bool toggle)
+    {
+        botDialoguePanelAnimator.SetBool("isShowing", toggle);
+    }
+
+    public void SetBotDialoguePanelText(string title, string dialogue)
+    {
+        botDialogueTitleText.text = title;
+        botDialogueMainText.text = dialogue;
+    }
+
+    public void SetQuestPanelText(string title, string qSummary)
+    {
+        questPanelTitleText.text = title;
+        questPanelMainText.text = qSummary;
+    }
+
+    public void ToggleQuestPanel(bool toggle)
+    {
+        questPanelAnimator.SetBool("isShowing", toggle);
     }
 
     public void UpdateHealth(float health)
