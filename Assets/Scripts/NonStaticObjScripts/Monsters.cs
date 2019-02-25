@@ -17,5 +17,7 @@ public class Monsters : NonStaticClassScript
 	void Update () 
     {
         Physics2D raycast;
+
 	}
+
 }
