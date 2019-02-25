@@ -6,7 +6,7 @@ public class PatrolState : IEnemyState {
 
     private Enemy enemy;
     private float patrolTimer;
-    private float patrolDuration = 10;
+    private float patrolDuration = 5;
 
     public void Enter(Enemy enemy)
     {
@@ -15,7 +15,7 @@ public class PatrolState : IEnemyState {
 
     public void Execute()
     {
-        Debug.Log("Patroling");
+        Debug.Log("Enemy Patroling");
         Patrol();
 
         enemy.Move();
@@ -28,7 +28,8 @@ public class PatrolState : IEnemyState {
 
     public void OnTriggerEnter(Collider2D other)
     {
-
+        // future direciton changing things done here
+        // eg. if (other.tag == "some obstacle") enemy.ChangeDirection();
     }
 
     private void Patrol()

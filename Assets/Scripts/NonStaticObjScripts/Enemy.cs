@@ -11,6 +11,7 @@ public class Enemy : Character {
     {
         base.Start();
         ChangeState(new IdleState());
+        this.GetComponent<SpriteRenderer>().sortingOrder = 13;
     }
 
     // Update is called once per frame
@@ -32,7 +33,7 @@ public class Enemy : Character {
 
     public void Move() 
     {
-        Animator.SetFloat("speed", 1);
+        Animator.SetFloat("speed", Mathf.Abs(horizontalMove));
         transform.Translate(GetDirection() * (runSpeed * Time.deltaTime));
     }
 
@@ -40,5 +41,15 @@ public class Enemy : Character {
     {
         return facingRight ? Vector2.right : Vector2.left;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
+    }
+
+    //void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    currentState.OnTriggerEnter(other);
+    //}
 }
 

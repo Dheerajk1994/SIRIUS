@@ -4,18 +4,14 @@ using UnityEngine;
 
  public abstract class Character : MonoBehaviour
 {
-    public Animator Animator { get; private set;}
-
-    protected bool facingRight;
-    protected bool attack;
-    public float horizontalMove = 0f;
+    public Animator Animator { get; set;}
 
     [SerializeField]
-    protected float runSpeed;
+    public float runSpeed;
 
-   
-
-    
+    public bool facingRight;
+    public bool attack;
+    public float horizontalMove = 0f;
 
     // Use this for initialization
     public virtual void Start ()

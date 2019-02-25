@@ -43,7 +43,7 @@ public class GameManagerScript : MonoBehaviour
         //enemySpawnerScript = EnemySpawner.GetComponent<EnemySpawnerScript>();
         if (isInDemoMode)
         {
-            //StartNewGame();
+            StartNewGame();
         }
     }
 

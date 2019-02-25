@@ -1245,8 +1245,8 @@ GameObject:
   - component: {fileID: 485184604}
   - component: {fileID: 485184610}
   - component: {fileID: 485184612}
-  - component: {fileID: 485184613}
   - component: {fileID: 485184608}
+  - component: {fileID: 485184613}
   m_Layer: 0
   m_Name: Sam
   m_TagString: Player
@@ -1280,10 +1280,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1362,7 +1362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 485184609}
-  Animator: {fileID: 0}
+  Animator: {fileID: 485184610}
   player: {fileID: 0}
   playerScript: {fileID: 0}
   runSpeed: 100
@@ -1456,8 +1456,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManagerScript: {fileID: 0}
   uiScript: {fileID: 0}
-  controller: {fileID: 485184609}
-  animator: {fileID: 485184610}
+  controller: {fileID: 0}
+  animator: {fileID: 0}
   player: {fileID: 0}
   currentHealth: 100
   maxHealth: 100
@@ -1483,6 +1483,7 @@ GameObject:
   - component: {fileID: 489084384}
   - component: {fileID: 489084383}
   - component: {fileID: 489084386}
+  - component: {fileID: 489084389}
   - component: {fileID: 489084388}
   m_Layer: 0
   m_Name: EnemyBlob
@@ -1562,7 +1563,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 489084382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.5, y: 195.6, z: 0}
+  m_LocalPosition: {x: 49.8, y: 108.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1613,6 +1614,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   other: {fileID: 485184604}
+--- !u!68 &489084389
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 489084382}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0.37322998, y: -0.7440338}
+  - {x: -0.37394714, y: -0.7456665}
+  - {x: -0.37402344, y: -0.68507385}
+  - {x: -0.4381752, y: -0.6852722}
+  - {x: -0.4390564, y: -0.6208191}
+  - {x: -0.49253082, y: -0.6227875}
+  - {x: -0.49873734, y: -0.24734497}
+  - {x: -0.43266678, y: -0.24516296}
+  - {x: -0.43291855, y: -0.12742615}
+  - {x: -0.36628342, y: -0.12773132}
+  - {x: -0.3703575, y: -0.06750488}
+  - {x: -0.31411743, y: -0.065216064}
+  - {x: -0.31642914, y: -0.006713867}
+  - {x: -0.24253464, y: -0.005996704}
+  - {x: -0.24345398, y: 0.058792114}
+  - {x: -0.11369324, y: 0.060424805}
+  - {x: -0.11141968, y: 0.1131897}
+  - {x: 0.12427902, y: 0.116256714}
+  - {x: 0.12625122, y: 0.05807495}
+  - {x: 0.23931885, y: 0.05781555}
+  - {x: 0.23971558, y: -0.002243042}
+  - {x: 0.30752563, y: -0.000015258789}
+  - {x: 0.30562592, y: -0.063064575}
+  - {x: 0.3740654, y: -0.060775757}
+  - {x: 0.3730545, y: -0.13406372}
+  - {x: 0.4377861, y: -0.13156128}
+  - {x: 0.4392128, y: -0.25106812}
+  - {x: 0.50029373, y: -0.2490387}
+  - {x: 0.49575424, y: -0.62353516}
+  - {x: 0.442379, y: -0.62371826}
+  - {x: 0.44494247, y: -0.6823883}
+  - {x: 0.37548828, y: -0.6865387}
+  - {x: 0.37620163, y: -0.7428589}
 --- !u!1 &580509999
 GameObject:
   m_ObjectHideFlags: 0

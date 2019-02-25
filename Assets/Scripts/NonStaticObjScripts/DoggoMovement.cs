@@ -13,7 +13,6 @@ public class DoggoMovement : MonoBehaviour {
     public float horizontalMove = 0f;
     public bool jump = false;
 
-    // Sprint 8 
     private bool attack;
     public Rigidbody2D rigidbody;
 
@@ -27,24 +26,15 @@ public class DoggoMovement : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        // Sprint 8
         HandleInput();
-
     }
 
     void FixedUpdate()
     {
-        /*
-        //Move the character
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-        jump = false
-        */
         HandleMovements();
         HandleAttacks();
         ResetValues();
-
     }
-
 
     // Stops repeated jumping 
     public void OnLanding()
@@ -64,7 +54,6 @@ public class DoggoMovement : MonoBehaviour {
         }
     }
 
-    // Adding Attacking stuff (Sprint 8)
     private void HandleAttacks()
     {
         if (attack && !this.Animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
@@ -99,7 +88,6 @@ public class DoggoMovement : MonoBehaviour {
 
     }
 
-    // function that resets all values for jump/attack
     private void ResetValues() 
     {
         jump = false;
