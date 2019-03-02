@@ -64,7 +64,7 @@ public class TerrainManagerScript : MonoBehaviour
 
 
     public GameObject player;
-    private InventoryScript playerInventoryScript;
+    //private InventoryScript playerInventoryScript;
 
     public GameObject gameManager;
     private TilePoolScript tilePool;
@@ -494,8 +494,8 @@ public class TerrainManagerScript : MonoBehaviour
 
         if (frontTilesValue[relativeX, y] == (ushort)EnumClass.TileEnum.EMPTY) { return null; }
         //Debug.Log(frontTilesValue[relativeX, y]);
-        player.GetComponent<InventoryScript>().AddItemToInventory(GetTileToPlace((ushort)relativeX, (ushort)y, frontTilesValue), 1);
-        player.GetComponent<InventoryScript>().AddItemToInventory(GetTileToPlace((ushort)relativeX, (ushort)y, frontTilesResourceValue), 1);
+       // player.GetComponent<InventoryScript>().AddItemToInventory(GetTileToPlace((ushort)relativeX, (ushort)y, frontTilesValue), 1);
+       // player.GetComponent<InventoryScript>().AddItemToInventory(GetTileToPlace((ushort)relativeX, (ushort)y, frontTilesResourceValue), 1);
 
         frontTilesValue             [relativeX, y] = 0;
         frontTilesResourceValue     [relativeX, y] = 0; 
@@ -539,7 +539,7 @@ public class TerrainManagerScript : MonoBehaviour
     {
         while(frontTiles[x,y] != null && frontTiles[x,y].GetComponent<TileScript>().tileId == 2 && y < frontTiles.GetLength(1))
         {
-            player.GetComponent<InventoryScript>().AddItemToInventory(frontTiles[x, y], 1);
+            //player.GetComponent<InventoryScript>().AddItemToInventory(frontTiles[x, y], 1);
             Destroy(frontTiles[x, y]);
             y++;
         }

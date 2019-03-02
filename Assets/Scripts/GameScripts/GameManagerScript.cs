@@ -103,6 +103,7 @@ public class GameManagerScript : MonoBehaviour
         PlayArea.transform.position = new Vector3(0f, 0f, 0f);
 
         worldPresent = false;
+        StartNewGame();
 
     }
 
