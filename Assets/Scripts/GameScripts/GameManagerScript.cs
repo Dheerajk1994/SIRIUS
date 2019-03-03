@@ -94,7 +94,7 @@ public class GameManagerScript : MonoBehaviour
         player.gameObject.SetActive(false);
         
 
-        playerInvoPanel.GetComponent<PlayerInventoryPanelScript>().player = player;
+        //playerInvoPanel.GetComponent<PlayerInventoryPanelScript>().player = player;
 
         terrainManagerScript = TerrainManager.GetComponent<TerrainManagerScript>();
 

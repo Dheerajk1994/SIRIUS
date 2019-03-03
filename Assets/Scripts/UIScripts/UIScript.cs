@@ -53,8 +53,8 @@ public class UIScript : MonoBehaviour
 
     public void TogglePlayerInventory()
     {
-        playerInvoPanel.gameObject.SetActive(!playerInvoPanel.gameObject.activeInHierarchy);
-        playerInvoPanel.GetComponent<PlayerInventoryPanelScript>().UpdatePlayerInventoryPanel();
+        //playerInvoPanel.gameObject.SetActive(!playerInvoPanel.gameObject.activeInHierarchy);
+        //playerInvoPanel.GetComponent<PlayerInventoryPanelScript>().UpdatePlayerInventoryPanel();
     }
 
     public void ToggleCraftingPanel()
