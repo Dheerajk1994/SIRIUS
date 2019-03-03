@@ -5,17 +5,14 @@ using UnityEngine;
  public abstract class Character : MonoBehaviour
 {
     public Animator Animator { get; set;}
-   //[SerializeField]
-    protected float runSpeed;
+ 
+    public float runSpeed;
     public float standardDamage;
 
-    [SerializeField]
-    protected float currentHealth, maxHealth;
+    public float currentHealth, maxHealth;
     public float currentStamina, maxStamina;
-    [SerializeField]
-    protected float currentHunger, maxHunger;
-    [SerializeField]
-    protected float temperature;
+    public float currentHunger, maxHunger;
+    public float temperature;
 
 
     public abstract bool IsDead { get; }

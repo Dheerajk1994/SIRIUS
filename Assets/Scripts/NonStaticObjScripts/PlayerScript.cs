@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class PlayerScript : Character {
 
-    public GameManagerScript gameManagerScript;
-    public UIScript uiScript;
-    public CharacterController2D controller;
-    //public Animator Animator;
-    public GameObject player;
-    [SerializeField]
-    private EdgeCollider2D BarkCollider;
-    private PlayerScript playerScript;
-    
-    // private Rigidbody2D rigidbody;
+    public GameObject               player;
+    public GameManagerScript        gameManagerScript;
+    public UIScript                 uiScript;
+    public CharacterController2D    myController;
+    public Animator                 myAnimator;
+    private PlayerScript            playerScript;
+    private Rigidbody2D             rigidbody;
+
+    public EdgeCollider2D BarkCollider;
+
+    // added for test
+
+    public bool jump = false;
 
     /*----------- PLAYER STATS -----------*/
     //protected float currentHealth, maxHealth;
     //protected float currentStamina, maxStamina;
     //protected float currentHunger, maxHunger;
     //protected float temperature;
-   
+
     public float armor;
     public float insulation;
-
     public float healthRecoveryRate;
     public float staminaRecoveryRate;
     public float hungerRecoveryRate;
@@ -35,25 +37,26 @@ public class PlayerScript : Character {
 
     public override void Start()
     {
-        Debug.Log("PlayerScript start");
         // base.Start();
         gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
         uiScript = GameObject.Find("UI").GetComponent<UIScript>();
         player = GameObject.Find("GameManager").GetComponent<GameManagerScript>().player;
         playerScript = player.GetComponent<PlayerScript>();
-        // rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody2D>();
 
     }
     // checking on every frame
     private void Update()
     {
-
+        HandleInput();
 
     }
 
     private void FixedUpdate()
     {
-        if(currentHealth < maxHealth)
+
+
+        if (currentHealth < maxHealth)
         {
             ChangeHealth(healthRecoveryRate);
         }
@@ -65,9 +68,68 @@ public class PlayerScript : Character {
         {
             ChangeHunger(hungerRecoveryRate);
         }
+        HandleMovements();
+        HandleAttacks();
+        ResetValues();
 
     }
 
+    public void OnLanding()
+    {
+        myAnimator.SetBool("jump", false);
+    }
+
+    private void HandleMovements()
+    {
+        /* Prevent Run and Attack at the same time
+         * Adding layer 0, if it's not "Attack" then we move player
+         */
+        if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            // Move the character
+            myController.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        }
+    }
+
+    private void HandleAttacks()
+    {
+        if (attack && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            myAnimator.SetTrigger("attack");
+            rigidbody.velocity = Vector2.zero;
+        }
+    }
+
+
+    private void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            attack = true;
+        }
+
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+
+        myAnimator.SetFloat("speed", Mathf.Abs(horizontalMove));
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (playerScript.currentStamina >= 10)
+            {
+                jump = true;
+                myAnimator.SetBool("jump", true);
+                playerScript.ChangeStamina(-10);
+            }
+
+        }
+
+    }
+
+    private void ResetValues()
+    {
+        jump = false;
+        attack = false;
+    }
 
     public void ChangeHealth(float health)
     {
