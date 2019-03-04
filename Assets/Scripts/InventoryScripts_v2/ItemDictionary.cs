@@ -1,30 +1,76 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class ItemDictionary : MonoBehaviour
 {
 
     //Create the Dictionary
-    Dictionary<int, Item> items = new Dictionary<int, Item>();
+    private Dictionary<ushort, Item> itemDictionary = new Dictionary<ushort, Item>();
+    private ItemList listOfItems;
 
-    // Use this for initialization
+    private string path;
+
     void Start()
     {
-        //Adding item variables to be added to the dictionary
-        //Use an item constructor
-        //Item constructor consists of (String itemName, string itemDetail, Sprite icon, int cost, ItemTypes itemtype, int currentStack, int maxStack) 
-        Item dirt = new Item("Dirt");
+        path = Application.streamingAssetsPath + "/itemDescription.json";
+        listOfItems = new ItemList();
+        if (File.Exists(path))
+        {
+            string jsonString = File.ReadAllText(path);
+            Debug.Log(jsonString);
+            listOfItems = JsonUtility.FromJson<ItemList>(jsonString);
 
-        //Add Variables to the dictionary
-        //items.Add("ID", <item variable from above>)
-        items.Add(1, dirt);
+            //Populate dictionary via JSON
+            foreach (Item item in listOfItems.itemList)
+            {
+                Debug.Log(item.itemName);
+                //itemDictionary.Add(item.id, item);
+            }
+        }
+        else
+        {
+            Debug.LogError("ITEMDESCRIPTION FILE CANNOT BE FOUNDD");
+        }
+
     }
 
-    public Item getItem(int ID)
+    public Item GetItem(ushort id)
     {
-        Debug.Log("ID sent: " + ID);
-        Debug.Log(items.Values);
-        return items[ID];
+        Item itemToReturn;
+        if (itemDictionary.TryGetValue(id, out itemToReturn))
+        {
+            return itemToReturn;
+        }
+        return null;
     }
 }
+
+
+[System.Serializable]
+public class ItemList
+{
+    public List<Item> itemList = new List<Item>();
+}
+
+[System.Serializable]
+public class Item
+{
+    public ushort id;
+    public string itemName;
+    public string description;
+    public ushort stack;
+    public uint cost;
+
+    public Item(ushort newId, string newItemName, string newDescription, ushort newStack, uint newCost)
+    {
+        id = newId;
+        itemName = newItemName;
+        description = newDescription;
+        stack = newStack;
+        cost = newCost;
+    }
+}
+
+

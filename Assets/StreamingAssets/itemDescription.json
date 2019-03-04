@@ -1,0 +1,26 @@
+{
+  "Items": 
+  [
+    {
+      "id": 1,
+      "itemName": "Regular Dirt",
+      "description": "Dirty dirt",
+      "stack": 500,
+      "cost": 0
+    },
+    {
+      "id": 2,
+      "itemName": "Regular Stone",
+      "description": "It's hard",
+      "stack": 500,
+      "cost": 0
+    },
+    {
+      "id": 4,
+      "itemName": "Regular Sand",
+      "description": "Dirty dirt",
+      "stack": 500,
+      "cost": 0
+    }
+  ]
+}
