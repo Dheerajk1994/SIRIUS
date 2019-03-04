@@ -5,9 +5,7 @@ using System.IO;
 
 public class ItemDictionary : MonoBehaviour
 {
-
-    //Create the Dictionary
-    private Dictionary<ushort, Item> itemDictionary = new Dictionary<ushort, Item>();
+    private Dictionary<ushort, ItemDescription> itemDictionary = new Dictionary<ushort, ItemDescription>();
     private ItemList listOfItems;
 
     private string path;
@@ -15,18 +13,14 @@ public class ItemDictionary : MonoBehaviour
     void Start()
     {
         path = Application.streamingAssetsPath + "/itemDescription.json";
-        listOfItems = new ItemList();
         if (File.Exists(path))
         {
             string jsonString = File.ReadAllText(path);
-            Debug.Log(jsonString);
             listOfItems = JsonUtility.FromJson<ItemList>(jsonString);
 
-            //Populate dictionary via JSON
-            foreach (Item item in listOfItems.itemList)
+            foreach (ItemDescription item in listOfItems.Items)
             {
                 Debug.Log(item.itemName);
-                //itemDictionary.Add(item.id, item);
             }
         }
         else
@@ -35,42 +29,23 @@ public class ItemDictionary : MonoBehaviour
         }
 
     }
-
-    public Item GetItem(ushort id)
-    {
-        Item itemToReturn;
-        if (itemDictionary.TryGetValue(id, out itemToReturn))
-        {
-            return itemToReturn;
-        }
-        return null;
-    }
 }
 
 
 [System.Serializable]
 public class ItemList
 {
-    public List<Item> itemList = new List<Item>();
+    public List<ItemDescription> Items;
 }
 
 [System.Serializable]
-public class Item
+public class ItemDescription
 {
-    public ushort id;
     public string itemName;
+    public ushort id;
     public string description;
-    public ushort stack;
+    public ushort stackAmnt;
     public uint cost;
-
-    public Item(ushort newId, string newItemName, string newDescription, ushort newStack, uint newCost)
-    {
-        id = newId;
-        itemName = newItemName;
-        description = newDescription;
-        stack = newStack;
-        cost = newCost;
-    }
 }
 
 
