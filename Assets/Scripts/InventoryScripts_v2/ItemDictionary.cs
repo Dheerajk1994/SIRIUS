@@ -21,6 +21,7 @@ public class ItemDictionary : MonoBehaviour
             foreach (ItemDescription item in listOfItems.Items)
             {
                 Debug.Log(item.itemName);
+                itemDictionary.Add(item.id, item);
             }
         }
         else
@@ -28,6 +29,19 @@ public class ItemDictionary : MonoBehaviour
             Debug.LogError("ITEMDESCRIPTION FILE CANNOT BE FOUNDD");
         }
 
+    }
+
+    public ItemDescription getItem(ushort fetchID)
+    {
+        ItemDescription output;
+        if (itemDictionary.TryGetValue(fetchID, out output ))
+        {
+            return output;
+        }
+        else
+        {
+            Debug.LogError("Item ID: " + fetchID + " does not exist in the dictionary");
+            return null; }
     }
 }
 

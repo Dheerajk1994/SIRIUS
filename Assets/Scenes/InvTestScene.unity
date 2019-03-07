@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 137780557}
   - component: {fileID: 137780556}
   m_Layer: 5
-  m_Name: InvoPanel
+  m_Name: InvPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 203924530}
   - component: {fileID: 203924529}
   m_Layer: 5
-  m_Name: Txt_Inventory (1)
+  m_Name: txt_Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -745,7 +745,7 @@ GameObject:
   - component: {fileID: 875804421}
   - component: {fileID: 875804420}
   m_Layer: 5
-  m_Name: Button
+  m_Name: btn_sort
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -896,7 +896,7 @@ GameObject:
   - component: {fileID: 1141527416}
   - component: {fileID: 1141527415}
   m_Layer: 5
-  m_Name: Butn_CloseISPanel
+  m_Name: btn_CloseInvPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1720,7 +1720,7 @@ GameObject:
   - component: {fileID: 2028494346}
   - component: {fileID: 2028494345}
   m_Layer: 5
-  m_Name: Image
+  m_Name: img_trash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
