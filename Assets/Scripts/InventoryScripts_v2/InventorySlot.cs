@@ -8,6 +8,10 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 {
     private GameObject itemInSlot;
 
+    public ushort id;
+    public ushort currentstack;
+
+
     private void Start()
     {
         itemInSlot = null;
@@ -17,7 +21,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     //WHAT HAPPENS WHEN AN ITEMS IS DROPPED ONTO THE SLOT
     public void OnDrop(PointerEventData eventData)
     {
-        if (!itemInSlot) //THERE IS NO ITEM IN THE SLOT
+        if (itemInSlot == null) //THERE IS NO ITEM IN THE SLOT
         {
             itemInSlot = InventoryItem.itemBeingDragged;
             InventoryItem.itemBeingDragged.transform.parent.GetComponent<InventorySlot>().itemInSlot = null;

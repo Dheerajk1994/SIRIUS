@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class ItemDictionary : MonoBehaviour
+public static class ItemDictionary
 {
-    private Dictionary<ushort, ItemDescription> itemDictionary = new Dictionary<ushort, ItemDescription>();
-    private ItemList listOfItems;
+    private static Dictionary<ushort, ItemDescription> itemDictionary = new Dictionary<ushort, ItemDescription>();
+    private static ItemList listOfItems;
 
-    private string path;
+    private static string path;
 
-    void Start()
+    public static void GenerateDictionary()
     {
         path = Application.streamingAssetsPath + "/itemDescription.json";
         if (File.Exists(path))
@@ -26,17 +26,27 @@ public class ItemDictionary : MonoBehaviour
         }
         else
         {
-            Debug.LogError("ITEMDESCRIPTION FILE CANNOT BE FOUNDD");
+            Debug.LogError("ITEMDESCRIPTION FILE CANNOT BE FOUNDO");
         }
-
     }
 
-    public ItemDescription getItem(ushort fetchID)
+    /*
+    NEED OPTIMIZATION
+        */
+    //InventorySpritesScript inventorySpritesScript = GameObject.Find("ItemTest");
+
+
+
+    public static CompleteItem GetItem(ushort fetchID)
     {
         ItemDescription output;
         if (itemDictionary.TryGetValue(fetchID, out output ))
         {
-            return output;
+            //CompleteItem newItem = new CompleteItem(output, InventorySpritesScript.instance.GetSprite(output.id));
+            CompleteItem newItem = new CompleteItem();
+            newItem.itemDescription = output;
+            //newItem.icon = InventorySpritesScript.instance.GetSprite(output.id);
+            return newItem;
         }
         else
         {
@@ -61,5 +71,24 @@ public class ItemDescription
     public ushort stackAmnt;
     public uint cost;
 }
+
+public class CompleteItem
+{
+    public ItemDescription itemDescription;
+    public Sprite icon;
+
+    public CompleteItem()
+    {
+
+    }
+    public CompleteItem(ItemDescription newItem, Sprite newIcon)
+    {
+        itemDescription = newItem;
+        icon = newIcon;
+    }
+
+}
+
+
 
 

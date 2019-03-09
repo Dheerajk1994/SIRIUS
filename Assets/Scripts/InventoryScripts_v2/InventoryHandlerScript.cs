@@ -29,7 +29,7 @@ public class InventoryHandlerScript : MonoBehaviour {
 
     private void Start()
     {
-        
+        ItemDictionary.GenerateDictionary();
     }
 
     //CALLED BY GAMEMANAGER TO SET ALL REFERENCES
@@ -48,7 +48,8 @@ public class InventoryHandlerScript : MonoBehaviour {
 
     public void AddItemToPlayerInventory()
     {
-
+        CompleteItem item = ItemDictionary.GetItem(1);
+        playerInventory.AddItem(item.itemDescription, 1, this, 0);
     }
 
     public void AddItemToPlayerHotBar()
