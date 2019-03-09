@@ -8,6 +8,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public static GameObject itemBeingDragged;
     public GameObject parentSlot;
 
+    public CompleteItem completeItem;
+
     //BEGINDRAG IMPLEMENTATION
     public void OnBeginDrag(PointerEventData eventData)
     {
