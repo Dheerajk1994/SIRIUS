@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 //PARENT CLASS FOR SCRIPTS ATTACHED TO PLAYERS/CHESTS INVENTORY
-public class ItemHolder : ScriptableObject
+public class ItemHolder : MonoBehaviour
 {
     [SerializeField]
     private ushort inventorySize;   //size of the inventory
@@ -19,31 +19,32 @@ public class ItemHolder : ScriptableObject
     }
      
     //Items picked up adding to first slot
-    public ushort AddItem(ItemDescription item, ushort amount, InventoryHandlerScript inventoryHandler, ushort slotIndex){
+    public ushort AddItem(ItemDescription itemDescription, ushort amount, InventoryHandlerScript inventoryHandler, ushort slotIndex){
         if (amount == 0 || slotIndex >= inventorySize)
         {
             return amount;
         }
-        for (int column = slotIndex; column < inventorySize; ++column)
+        for (int column = slotIndex; column < inventorySize; column++)
         {
-            if (itemsInInventory[0, column] == item.id)
+            if(itemsInInventory[0, column] == (ushort)EnumClass.TileEnum.EMPTY)
             {
-                int rAmount = amount - (item.stackAmnt - itemsInInventory[1, column]);
+                itemsInInventory[0, column] = itemDescription.id;
+                itemsInInventory[1, column] = (ushort)Mathf.Clamp(amount, 0, itemDescription.stackAmnt);
+                amount -= itemsInInventory[1, column];
+                return (AddItem(itemDescription, amount, inventoryHandler, (ushort)(slotIndex++)));
+            }
+            if (itemsInInventory[0, column] == itemDescription.id)
+            {
+                int rAmount = amount - (itemDescription.stackAmnt - itemsInInventory[1, column]);
                 amount = (ushort)(Mathf.Clamp(rAmount, 0, amount));
-                return (AddItem(item, amount, inventoryHandler, (ushort)(slotIndex ++)));
+                return (AddItem(itemDescription, amount, inventoryHandler, (ushort)(slotIndex ++)));
             }
             else{
-                return (AddItem(item, amount, inventoryHandler, (ushort)(slotIndex++)));
+                return (AddItem(itemDescription, amount, inventoryHandler, (ushort)(slotIndex++)));
             }
         }
         return amount;
     }
-
-
-    //max stack is 1000
-    //990 current    5 given
-    // abs(20 - (1000 - 990))
-    //
 
 
     public void AddItemToSlot(ItemDescription item, ushort amount, InventorySlot newslot, InventorySlot parentSlot)
@@ -74,5 +75,26 @@ public class ItemHolder : ScriptableObject
 
     }
 
-    
+    public ushort FetchItemIdInInventorySlot(ushort slot)
+    {
+        if(slot < inventorySize)
+        {
+            return itemsInInventory[0, slot];
+        }
+        return 0;
+    }
+
+    public ushort FetchItemAmountInInventorySlot(ushort slot)
+    {
+        if (slot < inventorySize)
+        {
+            return itemsInInventory[1, slot];
+        }
+        return 0;
+    }
+
+    public ushort GetInventorySize()
+    {
+        return inventorySize;
+    }
 }

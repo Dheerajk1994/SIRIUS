@@ -5,7 +5,7 @@ using UnityEngine;
 //[CreateAssetMenu(fileName = "New Sprite", menuName = "Inventory/New Sprite")]
 public class InventorySpritesScript : MonoBehaviour {
 
-    public static Sprite[] itemSprites;
+    public Sprite[] itemSprites;
 
     public Sprite GetSprite(ushort index){
         Debug.Log("Getsprite called");

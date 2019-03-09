@@ -6,16 +6,19 @@ public class PlayerInventoryPanelScript : MonoBehaviour {
 
     [SerializeField]
     private GameObject slotPrefab;
+    public GameObject[] slots;
     [SerializeField]
     private GameObject invoPanel;
     
 
 	// Use this for initialization
 	void Start () {
+        slots = new GameObject[40]; //NEED OPTIMIZATION
         for (int i = 0; i < 40; i++)
         {
             GameObject slot = Instantiate(slotPrefab);
             slot.transform.SetParent(invoPanel.transform, false);
+            slots[i] = slot;
         }
 	}
 

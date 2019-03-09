@@ -33,19 +33,20 @@ public static class ItemDictionary
     /*
     NEED OPTIMIZATION
         */
-    //InventorySpritesScript inventorySpritesScript = GameObject.Find("ItemTest");
-
-
+    static InventorySpritesScript inventorySpritesScript = GameObject.Find("ItemTest").GetComponent<InventorySpritesScript>();
 
     public static CompleteItem GetItem(ushort fetchID)
     {
+        if (fetchID == (ushort)EnumClass.TileEnum.EMPTY) return null;
+
         ItemDescription output;
         if (itemDictionary.TryGetValue(fetchID, out output ))
         {
             //CompleteItem newItem = new CompleteItem(output, InventorySpritesScript.instance.GetSprite(output.id));
             CompleteItem newItem = new CompleteItem();
             newItem.itemDescription = output;
-            //newItem.icon = InventorySpritesScript.instance.GetSprite(output.id);
+            Debug.Log(output.id);
+            newItem.icon = inventorySpritesScript.GetSprite(output.id);
             return newItem;
         }
         else
