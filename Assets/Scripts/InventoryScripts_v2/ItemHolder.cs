@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 //PARENT CLASS FOR SCRIPTS ATTACHED TO PLAYERS/CHESTS INVENTORY
 public class ItemHolder : MonoBehaviour
 {
+    const ushort ROW_ID = 0;
+    const ushort ROW_AMOUNT = 1;
     [SerializeField]
-    private ushort inventorySize;   //size of the inventory
+    private ushort inventorySize;   //size of the inventory 
 
     [SerializeField]
     private ushort [,] itemsInInventory;    //items that are in the inventory row 0 = item id, row 1 = amount of that item
@@ -26,18 +29,21 @@ public class ItemHolder : MonoBehaviour
         }
         for (int column = slotIndex; column < inventorySize; column++)
         {
-            if(itemsInInventory[0, column] == (ushort)EnumClass.TileEnum.EMPTY)
+            if(itemsInInventory[ROW_ID, column] == (ushort)EnumClass.TileEnum.EMPTY)
             {
-                itemsInInventory[0, column] = itemDescription.id;
-                itemsInInventory[1, column] = (ushort)Mathf.Clamp(amount, 0, itemDescription.stackAmnt);
-                amount -= itemsInInventory[1, column];
+                itemsInInventory[ROW_ID, column] = itemDescription.id;
+                itemsInInventory[ROW_AMOUNT, column] = (ushort)Mathf.Clamp(amount, 0, itemDescription.stackAmnt);
+                amount -= itemsInInventory[ROW_AMOUNT, column];
                 return (AddItem(itemDescription, amount, inventoryHandler, (ushort)(slotIndex++)));
             }
-            if (itemsInInventory[0, column] == itemDescription.id)
+            if (itemsInInventory[ROW_ID, column] == itemDescription.id)
             {
-                int rAmount = amount - (itemDescription.stackAmnt - itemsInInventory[1, column]);
-                amount = (ushort)(Mathf.Clamp(rAmount, 0, amount));
-                return (AddItem(itemDescription, amount, inventoryHandler, (ushort)(slotIndex ++)));
+                //itemsInInventory[ROW_AMOUNT,column] =
+                //int rAmount = amount - (itemDescription.stackAmnt - itemsInInventory[1, column]);
+                //amount = (ushort)(Mathf.Clamp(rAmount, 0, amount));
+                //return (AddItem(itemDescription, amount, inventoryHandler, (ushort)(slotIndex ++)));
+                itemsInInventory[ROW_AMOUNT, column] += amount;
+                return 0;
             }
             else{
                 return (AddItem(itemDescription, amount, inventoryHandler, (ushort)(slotIndex++)));
@@ -45,7 +51,14 @@ public class ItemHolder : MonoBehaviour
         }
         return amount;
     }
+    //max 100
+    //current 90
+    //given 5
 
+    //current += |(max - current) - given|;
+                   //(100 - 90) - 15
+
+ 
 
     public void AddItemToSlot(ItemDescription item, ushort amount, InventorySlot newslot, InventorySlot parentSlot)
     {

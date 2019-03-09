@@ -62,7 +62,7 @@ public class InventoryHandlerScript : MonoBehaviour {
     public void AddItemToPlayerInventory()
     {
         CompleteItem item = ItemDictionary.GetItem(1);
-        playerInventory.AddItem(item.itemDescription, 1, this, 0);
+        playerInventory.AddItem(item.itemDescription, 1000, this, 0);
         UpdateAllPlayerInventoryPanelSlots();
     }
 
@@ -73,19 +73,29 @@ public class InventoryHandlerScript : MonoBehaviour {
 
     public void UpdateAllPlayerInventoryPanelSlots()
     {
-        for(ushort i = 0; i < playerInventory.GetInventorySize(); ++i)
+        for (ushort i = 0; i < playerInventory.GetInventorySize(); ++i)
         {
-            CompleteItem item = ItemDictionary.GetItem(playerInventory.FetchItemIdInInventorySlot(i));
-            if(item != null)
-            {
-                GameObject slotItem = Instantiate(inventorySlotItemPrefab);
-                slotItem.GetComponent<Image>().sprite = item.icon;
-                slotItem.transform.SetParent(pInventorySlots[i].transform, false);
-                slotItem.GetComponentInChildren<Text>().text = playerInventory.FetchItemAmountInInventorySlot(i).ToString();
+            if(playerInventory.FetchItemIdInInventorySlot(i) != 0){
+                //check if existing slotitem has same id
+                if (pInventorySlots[i].transform.childCount > 0 && pInventorySlots[i].transform.GetChild(0).GetComponent<InventoryItem>().completeItem.itemDescription.id == playerInventory.FetchItemIdInInventorySlot(i)){
+                    //just update the text
+                    pInventorySlots[i].transform.GetChild(0).GetComponent<InventoryItem>().GetComponentInChildren<Text>().text = playerInventory.FetchItemAmountInInventorySlot(i).ToString();
+                }
+                else{
+                    if(pInventorySlots[i].transform.childCount > 0)Destroy(pInventorySlots[i].transform.GetChild(0));
+                    CompleteItem item = ItemDictionary.GetItem(playerInventory.FetchItemIdInInventorySlot(i));
+                    if(item != null){
+                        GameObject invSlotItem = Instantiate(inventorySlotItemPrefab);
+                        invSlotItem.GetComponent<InventoryItem>().completeItem = item;
+                        invSlotItem.GetComponentInChildren<Text>().text = playerInventory.FetchItemAmountInInventorySlot(i).ToString();
+                        invSlotItem.GetComponent<Image>().sprite = item.icon;
+                        invSlotItem.transform.SetParent(pInventorySlots[i].transform, false);
+                    }
+                }
             }
         }
     }
-
+     
     public void UpdatePlayerInventorySlot(ushort slotIndex)
     {
 
