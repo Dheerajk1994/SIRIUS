@@ -20,7 +20,7 @@ public static class ItemDictionary
 
             foreach (ItemDescription item in listOfItems.Items)
             {
-                Debug.Log(item.itemName);
+                //Debug.Log(item.itemName);
                 itemDictionary.Add(item.id, item);
             }
         }
@@ -42,10 +42,8 @@ public static class ItemDictionary
         ItemDescription output;
         if (itemDictionary.TryGetValue(fetchID, out output ))
         {
-            //CompleteItem newItem = new CompleteItem(output, InventorySpritesScript.instance.GetSprite(output.id));
             CompleteItem newItem = new CompleteItem();
             newItem.itemDescription = output;
-            Debug.Log(output.id);
             newItem.icon = inventorySpritesScript.GetSprite(output.id);
             return newItem;
         }

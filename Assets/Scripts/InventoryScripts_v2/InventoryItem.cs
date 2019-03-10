@@ -16,6 +16,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         itemBeingDragged = this.gameObject;
         parentSlot = this.gameObject.transform.parent.gameObject;
         this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        itemBeingDragged.transform.SetParent(parentSlot.transform.parent);
     }
 
     //DRAG IMPLEMENTATION
@@ -29,14 +30,18 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         itemBeingDragged = null;
         this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        if (transform.parent != parentSlot)
+        if (transform.parent != parentSlot.transform.parent && transform.parent != parentSlot)
         {
             parentSlot = transform.parent.gameObject;
+            transform.SetParent(parentSlot.transform, false);
             transform.position = parentSlot.transform.position;
+            Debug.Log("slot found");
         }
         else
         {
+            transform.SetParent(parentSlot.transform, false);
             transform.position = parentSlot.transform.position;
+            Debug.Log("slot not-found");
         }
     }
 

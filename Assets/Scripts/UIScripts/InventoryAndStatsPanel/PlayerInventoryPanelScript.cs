@@ -14,10 +14,11 @@ public class PlayerInventoryPanelScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         slots = new GameObject[40]; //NEED OPTIMIZATION
-        for (int i = 0; i < 40; i++)
+        for (ushort i = 0; i < 40; i++)
         {
             GameObject slot = Instantiate(slotPrefab);
             slot.transform.SetParent(invoPanel.transform, false);
+            slot.GetComponent<InventorySlot>().slotID = i;
             slots[i] = slot;
         }
 	}

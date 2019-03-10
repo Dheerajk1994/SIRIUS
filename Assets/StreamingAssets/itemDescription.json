@@ -4,49 +4,49 @@
       "itemName": "Regular Dirt",
       "id": 1,
       "description": "Dirty dirt",
-      "stackAmnt": 999,
+      "stackAmnt": 10,
       "cost": 0
     },
     {
       "itemName": "Regular Stone",
       "id": 2,
       "description": "It's hard",
-      "stackAmnt": 999,
+      "stackAmnt": 10,
       "cost": 0
     },
 	    {
       "itemName": "Regular Wood",
       "id": 3,
       "description": "Knock knock",
-      "stackAmnt": 999,
+      "stackAmnt": 10,
       "cost": 0
     },
     {
       "itemName": "Regular Sand",
       "id": 4,
       "description": "It gets everywhere.",
-      "stackAmnt": 999,
+      "stackAmnt": 10,
       "cost": 0 
     },
 	    {
       "itemName": "Tree Trunk Regular",
       "id": 17,
       "description": "It's nothing like an Elephant",
-      "stackAmnt": 999,
+      "stackAmnt": 10,
       "cost": 0
     },
 	    {
       "itemName": "Tree Leaf Regular",
       "id": 18,
       "description": "Dhee spelled it Regalar",
-      "stackAmnt": 999,
+      "stackAmnt": 10,
       "cost": 0
     },
 	    {
       "itemName": "Flower Regular",
       "id": 19,
       "description": "It's a flower",
-      "stackAmnt": 999,
+      "stackAmnt": 10,
       "cost": 0
     },
 	    {
