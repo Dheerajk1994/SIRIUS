@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerScript : Character {
+public class PlayerScript : Character
+{
 
     public GameManagerScript gameManagerScript;
     public UIScript uiScript;
@@ -12,7 +13,7 @@ public class PlayerScript : Character {
     [SerializeField]
     private EdgeCollider2D BarkCollider;
     private PlayerScript playerScript;
-    
+
     // private Rigidbody2D rigidbody;
 
     /*----------- PLAYER STATS -----------*/
@@ -20,7 +21,8 @@ public class PlayerScript : Character {
     //protected float currentStamina, maxStamina;
     //protected float currentHunger, maxHunger;
     //protected float temperature;
-   
+
+    public bool healState;
     public float armor;
     public float insulation;
 
@@ -54,19 +56,28 @@ public class PlayerScript : Character {
 
     private void FixedUpdate()
     {
-        if(currentHealth < maxHealth)
+        // Natural Recovery
+        if (currentHealth < maxHealth)
         {
             ChangeHealth(healthRecoveryRate);
         }
-        if(currentStamina < maxStamina)
+        if (currentStamina < maxStamina)
         {
             ChangeStamina(staminaRecoveryRate);
         }
-        if(currentHunger > 0)
+        if (currentHunger > 0)
         {
             ChangeHunger(hungerRecoveryRate);
         }
 
+        // Check states
+        if (healState)
+        {
+            if (currentHealth < maxHealth)
+            {
+                ChangeHealth(healthRecoveryRate * 2);
+            }
+        }
     }
 
 
@@ -121,12 +132,12 @@ public class PlayerScript : Character {
         {
             currentHealth = maxHealth;
         }
-        else if (currentHealth <= 0) 
-        { 
-            currentHealth = 0.0f; 
+        else if (currentHealth <= 0)
+        {
+            currentHealth = 0.0f;
         }
         uiScript.UpdateHealth((currentHealth / maxHealth) * 100.0f);
-        if (currentHealth <= 0.0) 
+        if (currentHealth <= 0.0)
         {
             Die();
         }
