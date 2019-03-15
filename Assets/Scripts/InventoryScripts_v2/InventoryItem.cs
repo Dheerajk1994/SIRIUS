@@ -9,6 +9,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public GameObject parentSlot;
 
     public CompleteItem completeItem;
+    public ushort stackCount;
 
     //BEGINDRAG IMPLEMENTATION
     public void OnBeginDrag(PointerEventData eventData)

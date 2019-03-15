@@ -59,6 +59,7 @@ public  class InventoryHandlerScript : MonoBehaviour {
         UpdateAllPlayerInventoryPanelSlots();
     }
 
+    //when mining and stuff
     public void AddItemToPlayerInventory()
     {
         CompleteItem item = ItemDictionary.GetItem(1);
@@ -71,10 +72,11 @@ public  class InventoryHandlerScript : MonoBehaviour {
 
     }
 
-    public bool ChangeItemSlot(ushort originalSlotIndex, ushort newSlotIndex)
-    {
-        return true;
+    //called when a item is dropped and stuff
+    public void HandleItemDrop(InventorySlot parentSlot, InventorySlot newSlot, GameObject itemBeingDragged){
+
     }
+   
 
     public void UpdateAllPlayerInventoryPanelSlots()
     {

@@ -10,7 +10,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     private InventoryHandlerScript inventoryHandler;
 
     public ushort slotID;
-
+     
     private void Start()
     {
         itemInSlot = null;
@@ -21,8 +21,8 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     //WHAT HAPPENS WHEN AN ITEMS IS DROPPED ONTO THE SLOT
     public void OnDrop(PointerEventData eventData)
     {
-        //hand over information to iventory handler let it do all the work
-        //pass the parent slot, dropped slot, and the item that is being dragged to inventory handler
+        //steps:
+        //call a function in inventory handler pass it the parent slot(item.parentslot), item , new slot (this)   
 
         if (itemInSlot == null) //THERE IS NO ITEM IN THE SLOT
         {
