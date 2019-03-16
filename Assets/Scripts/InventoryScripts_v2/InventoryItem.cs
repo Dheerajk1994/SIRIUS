@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -9,7 +10,14 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public GameObject parentSlot;
 
     public CompleteItem completeItem;
+    [SerializeField]
     public ushort stackCount;
+
+    public void UpdateStackCount(ushort amount){
+        stackCount = amount;
+        //this.transform.gameObject.GetComponent<Text>().text = stackCount.ToString();
+        this.transform.gameObject.GetComponentInChildren<Text>().text = stackCount.ToString();
+    }
 
     //BEGINDRAG IMPLEMENTATION
     public void OnBeginDrag(PointerEventData eventData)

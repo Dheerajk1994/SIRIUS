@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class ItemHolder : MonoBehaviour
 {
     const ushort ROW_ID = 0;
-    const ushort ROW_AMOUNT = 1;
+    const ushort ROW_AMOUNT = 1; 
     [SerializeField]
     private ushort inventorySize;   //size of the inventory 
 
@@ -48,6 +48,7 @@ public class ItemHolder : MonoBehaviour
         {
             while (inventoryArray[ROW_AMOUNT, slotIndex] < itemDescription.stackAmnt && amount > 0)
             {
+                Debug.Log("Stack amount " + inventoryArray[ROW_AMOUNT, slotIndex]);
                 inventoryArray[ROW_AMOUNT, slotIndex] += 1;
                 amount--;
             }
@@ -58,33 +59,61 @@ public class ItemHolder : MonoBehaviour
     }
 
     //Add item to a specific itemarray index
-    public ushort AddItemToIndex(ItemDescription item, ushort amount, ushort slotIndex)
+    public ushort AddItemToIndex(ItemDescription droppedItem, InventoryItem inventoryItem, ushort amount, ushort parentIndex, ushort droppedIndex)
     {
+        ushort itemIDinSlot = inventoryArray[ROW_ID, droppedIndex];
         Debug.Log("add item to index called");
-        //check if the item in the index is the same
-        if(inventoryArray[ROW_ID, slotIndex] == 0)
+        ushort stackDifference = (ushort)(droppedItem.stackAmnt - inventoryArray[ROW_AMOUNT, droppedIndex]);
+        //Inventory Slot is not an empty item
+        if (itemIDinSlot != 0)
         {
-            inventoryArray[ROW_ID, slotIndex] = item.id;
-            while (inventoryArray[ROW_AMOUNT, slotIndex] < item.stackAmnt && amount > 0)
+            //Dropped item is the same item in the inventory slot
+            if (droppedItem.id == itemIDinSlot)
             {
-                inventoryArray[ROW_AMOUNT, slotIndex] += 1;
-                amount--;
-            }
-            return amount;
-        }
-        if(item.id == inventoryArray[ROW_ID, slotIndex])
-        {
-            // increased stored amount
-            while(inventoryArray[ROW_AMOUNT, slotIndex] < item.stackAmnt && amount > 0)
-            {
-                inventoryArray[ROW_AMOUNT, slotIndex] += 1;
-                amount--;
-            }
-            return amount;
-        }
-        return amount;
+                //If item slot stack < item slot's item's max stack
+                if (inventoryArray[ROW_AMOUNT, droppedIndex] < droppedItem.stackAmnt)
+                {
+                    //If dropped item amount <= max stack of item - current stack in slot(stack difference)
+                    if (amount <= stackDifference)
+                    {
+                        //Add dropped amount to current stack
+                        inventoryArray[ROW_AMOUNT, droppedIndex] += amount;
 
+                        //Empty original slot
+                        inventoryArray[ROW_ID, parentIndex] = 0;
+                        inventoryArray[ROW_AMOUNT, parentIndex] = 0;
+                        return 0;
+                    }
+                    else
+                    {
+                        //Add dropped item stack difference to inventory slot stack
+                        inventoryArray[ROW_AMOUNT, droppedIndex] += stackDifference;
+                        //Add remaining item to origin slot
+                        return (ushort)(stackDifference - amount);
+
+                    }
+                }
+                return 0;
+            }
+            return 0;
+        }
+        else
+        {
+            // Add item to empty slot
+            inventoryArray[ROW_ID, parentIndex] = 0;
+            inventoryArray[ROW_AMOUNT, parentIndex] = 0;
+
+            inventoryArray[ROW_ID, droppedIndex] = droppedItem.id;
+            inventoryArray[ROW_AMOUNT, droppedIndex] = amount;
+            inventoryItem.UpdateStackCount(amount);
+            return 0;
+        }
     }
+
+    /*
+     * protected void HandleItemDrop(PointerEventData eventData)
+public void AddItemToSlot(ItemDescription item, ushort amount, InventorySlot newslot, InventorySlot parentSlot)
+     */
 
     public ushort RemoveItem(ushort itemID, ushort amount)
     {
@@ -166,3 +195,28 @@ public class ItemHolder : MonoBehaviour
         }
         return amount;
      */
+
+
+////check if the item in the index is empty
+//if(inventoryArray[ROW_ID, slotIndex] == 0)      
+//{
+//    inventoryArray[ROW_ID, slotIndex] = item.id;
+//    while (inventoryArray[ROW_AMOUNT, slotIndex] < item.stackAmnt && amount > 0)
+//    {
+//        inventoryArray[ROW_AMOUNT, slotIndex] += 1;
+//        amount--;
+//    }
+//    return amount;
+//}
+////Check if the item in the index is the same as item being passed
+//if(item.id == inventoryArray[ROW_ID, slotIndex])
+//{
+//    // increased stored amount
+//    while(inventoryArray[ROW_AMOUNT, slotIndex] < item.stackAmnt && amount > 0)
+//    {
+//        inventoryArray[ROW_AMOUNT, slotIndex] += 1;
+//        amount--;
+//    }
+//    return amount;
+//}
+//return amount;

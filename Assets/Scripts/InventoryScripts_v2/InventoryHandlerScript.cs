@@ -11,7 +11,7 @@ public  class InventoryHandlerScript : MonoBehaviour {
     [SerializeField]
     private  Inventory playerInventory;
     [SerializeField]
-    private  Hotbar playerHotbar;
+    private  Hotbar playerHotbar; 
 
     //PANEL REFERENCES
     private  GameObject inventoryPanel;
@@ -37,7 +37,7 @@ public  class InventoryHandlerScript : MonoBehaviour {
     {
         ItemDictionary.GenerateDictionary();
         pInventorySlots = GetComponent<PlayerInventoryPanelScript>().slots;
-        playerInventory.AddItemToIndex(ItemDictionary.GetItem(1).itemDescription, 1, 15);   //TEST
+        //playerInventory.AddItemToIndex(ItemDictionary.GetItem(1).itemDescription, 1, 0, 15);   //TEST
         UpdateAllPlayerInventoryPanelSlots();
     }
 
@@ -65,6 +65,9 @@ public  class InventoryHandlerScript : MonoBehaviour {
         CompleteItem item = ItemDictionary.GetItem(1);
         playerInventory.AddItem(item.itemDescription, 1, this, 0);
         UpdateAllPlayerInventoryPanelSlots();
+        //for(int i = 0; i < 40; ++i){
+        //    Debug.Log(playerInventory.FetchItemAmountInInventorySlot((ushort)i));
+        //}
     }
 
     public void AddItemToPlayerHotBar()
@@ -73,13 +76,35 @@ public  class InventoryHandlerScript : MonoBehaviour {
     }
 
     //called when a item is dropped and stuff
-    public void HandleItemDrop(InventorySlot parentSlot, InventorySlot newSlot, GameObject itemBeingDragged){
+    public void HandleItemDrop(InventorySlot parentSlot, InventorySlot newSlot, InventoryItem itemBeingDragged){
 
+        //if new slot is empty just place item there and update inventory index
+        if(!newSlot.isHoldingAnItem) { 
+            newSlot.inventoryReference.AddItemToIndex(itemBeingDragged.completeItem.itemDescription, itemBeingDragged, itemBeingDragged.stackCount, parentSlot.slotID, newSlot.slotID);
+            if (parentSlot.transform.childCount > 0) Destroy(parentSlot.transform.GetChild(0));
+            parentSlot.isHoldingAnItem = false;
+            newSlot.itemInSlot = InventoryItem.itemBeingDragged;
+            InventoryItem.itemBeingDragged.GetComponent<InventoryItem>().parentSlot.GetComponent<InventorySlot>().itemInSlot = null;
+            InventoryItem.itemBeingDragged.transform.SetParent(newSlot.gameObject.transform, false);
+        }
+        else{
+            //if new slot has same item then place item in index
+            if (newSlot.transform.GetChild(0).GetComponent<InventoryItem>().completeItem.itemDescription.id == itemBeingDragged.GetComponent<InventoryItem>().completeItem.itemDescription.id)
+            {
+
+            }
+
+            //if new slot has different item then swap
+            else
+            {
+
+            }
+        }
     }
-   
+    
 
     public void UpdateAllPlayerInventoryPanelSlots()
-    {
+    { 
         //go through each inventory index
         for (ushort i = 0; i < playerInventory.GetInventorySize(); ++i)
         {
@@ -88,17 +113,18 @@ public  class InventoryHandlerScript : MonoBehaviour {
                 //check if existing slotitem has same id
                 if (pInventorySlots[i].transform.childCount > 0 && pInventorySlots[i].transform.GetChild(0).GetComponent<InventoryItem>().completeItem.itemDescription.id == playerInventory.FetchItemIdInInventorySlot(i)){
                     //just update the text
-                    pInventorySlots[i].transform.GetChild(0).GetComponent<InventoryItem>().GetComponentInChildren<Text>().text = playerInventory.FetchItemAmountInInventorySlot(i).ToString();
+                    pInventorySlots[i].transform.GetChild(0).GetComponent<InventoryItem>().UpdateStackCount(playerInventory.FetchItemAmountInInventorySlot(i));
                 }
-                else{
+                else
+                { 
                     //if there is a invoitem in the slot destroy it first
-                    if(pInventorySlots[i].transform.childCount > 0)Destroy(pInventorySlots[i].transform.GetChild(0));
+                    if (pInventorySlots[i].transform.childCount > 0)Destroy(pInventorySlots[i].transform.GetChild(0));
                     CompleteItem item = ItemDictionary.GetItem(playerInventory.FetchItemIdInInventorySlot(i));
                     if(item != null){
                         //making a new invo item
                         GameObject invSlotItem = Instantiate(inventorySlotItemPrefab);
                         invSlotItem.GetComponent<InventoryItem>().completeItem = item;
-                        invSlotItem.GetComponentInChildren<Text>().text = playerInventory.FetchItemAmountInInventorySlot(i).ToString();
+                        invSlotItem.GetComponent<InventoryItem>().UpdateStackCount(playerInventory.FetchItemAmountInInventorySlot(i));
                         invSlotItem.GetComponent<Image>().sprite = item.icon;
                         invSlotItem.transform.SetParent(pInventorySlots[i].transform, false);
                     }
