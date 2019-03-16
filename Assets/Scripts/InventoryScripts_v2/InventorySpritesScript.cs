@@ -8,11 +8,9 @@ public class InventorySpritesScript : MonoBehaviour {
     public Sprite[] itemSprites;
 
     public Sprite GetSprite(ushort index){
-        Debug.Log("Getsprite called");
         if(index < itemSprites.Length){
             return itemSprites[index];
         }
-        Debug.Log("Getsprite return null");
         return null;
     }
 }

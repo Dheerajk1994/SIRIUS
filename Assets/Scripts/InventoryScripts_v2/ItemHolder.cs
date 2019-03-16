@@ -62,7 +62,7 @@ public class ItemHolder : MonoBehaviour
     public ushort AddItemToIndex(ItemDescription droppedItem, InventoryItem inventoryItem, ushort amount, ushort parentIndex, ushort droppedIndex)
     {
         ushort itemIDinSlot = inventoryArray[ROW_ID, droppedIndex];
-        Debug.Log("add item to index called");
+        //Debug.Log("add item to index called");
         ushort stackDifference = (ushort)(droppedItem.stackAmnt - inventoryArray[ROW_AMOUNT, droppedIndex]);
         //Inventory Slot is not an empty item
         if (itemIDinSlot != 0)
@@ -89,7 +89,8 @@ public class ItemHolder : MonoBehaviour
                         //Add dropped item stack difference to inventory slot stack
                         inventoryArray[ROW_AMOUNT, droppedIndex] += stackDifference;
                         //Add remaining item to origin slot
-                        return (ushort)(stackDifference - amount);
+                        inventoryArray[ROW_AMOUNT, parentIndex] = (ushort)(amount - stackDifference);
+                        return (ushort)(amount - stackDifference);
 
                     }
                 }
@@ -105,7 +106,7 @@ public class ItemHolder : MonoBehaviour
 
             inventoryArray[ROW_ID, droppedIndex] = droppedItem.id;
             inventoryArray[ROW_AMOUNT, droppedIndex] = amount;
-            inventoryItem.UpdateStackCount(amount);
+            inventoryItem.UpdateInventoryItem(amount);
             return 0;
         }
     }
@@ -165,6 +166,13 @@ public void AddItemToSlot(ItemDescription item, ushort amount, InventorySlot new
     {
         return inventorySize;
     }
+
+    public void TestFunctionAddToIndex(ItemDescription item, ushort amount, ushort index)
+    {
+        inventoryArray[ROW_ID, index] = item.id;
+        inventoryArray[ROW_AMOUNT, index] = amount;
+    }
+
 }
 /*
  if (amount == 0 || slotIndex >= inventorySize)

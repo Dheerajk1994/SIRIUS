@@ -162,6 +162,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentSlot: {fileID: 0}
+  stackCount: 0
+  spriteRenderer: {fileID: 114708339939288622}
+  stackText: {fileID: 114373532977017428}
 --- !u!222 &222461445442007514
 CanvasRenderer:
   m_ObjectHideFlags: 1

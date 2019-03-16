@@ -10,13 +10,31 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public GameObject parentSlot;
 
     public CompleteItem completeItem;
-    [SerializeField]
+
     public ushort stackCount;
 
-    public void UpdateStackCount(ushort amount){
+    [SerializeField]
+    public Image spriteRenderer;
+    [SerializeField]
+    public Text stackText;
+
+
+    public void UpdateInventoryItem(CompleteItem item, ushort amount)
+    {
+        spriteRenderer.sprite = item.icon;
+        stackText.text = amount.ToString();
         stackCount = amount;
-        //this.transform.gameObject.GetComponent<Text>().text = stackCount.ToString();
-        this.transform.gameObject.GetComponentInChildren<Text>().text = stackCount.ToString();
+        completeItem = item;
+    }
+
+    public void UpdateInventoryItem(ushort amount)
+    {
+        stackText.text = amount.ToString();
+        stackCount = amount;
+    }
+
+    private void UpdateStackCount(ushort amount){
+
     }
 
     //BEGINDRAG IMPLEMENTATION
@@ -39,19 +57,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         itemBeingDragged = null;
         this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        if (transform.parent != parentSlot.transform.parent && transform.parent != parentSlot)
-        {
-            parentSlot = transform.parent.gameObject;
-            transform.SetParent(parentSlot.transform, false);
-            transform.position = parentSlot.transform.position;
-            Debug.Log("slot found");
-        }
-        else
-        {
-            transform.SetParent(parentSlot.transform, false);
-            transform.position = parentSlot.transform.position;
-            Debug.Log("slot not-found");
-        }
+
+        this.parentSlot.GetComponent<InventorySlot>().inventoryHandler.UpdatePlayerInventorySlot(this.parentSlot.GetComponent<InventorySlot>().slotID);
+        Destroy(this.gameObject);
+
     }
 
 }
