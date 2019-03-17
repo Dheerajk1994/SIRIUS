@@ -958,24 +958,29 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114935814538044488, guid: 4cc4de00b0f515c42b810f20d37a0100,
-        type: 2}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 74995805}
     - target: {fileID: 114158416534797512, guid: 4cc4de00b0f515c42b810f20d37a0100,
         type: 2}
       propertyPath: playerInventoryReference
       value: 
       objectReference: {fileID: 74995805}
+    - target: {fileID: 114935814538044488, guid: 4cc4de00b0f515c42b810f20d37a0100,
+        type: 2}
+      propertyPath: genericInventory
+      value: 
+      objectReference: {fileID: 74995805}
     - target: {fileID: 114158416534797512, guid: 4cc4de00b0f515c42b810f20d37a0100,
         type: 2}
-      propertyPath: inventoryHandler
+      propertyPath: genericInvoPanel
       value: 
-      objectReference: {fileID: 1782354628}
+      objectReference: {fileID: 1866882004}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cc4de00b0f515c42b810f20d37a0100, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1866882004 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1552602612469010, guid: 4cc4de00b0f515c42b810f20d37a0100,
+    type: 2}
+  m_PrefabInternal: {fileID: 1814132887}
 --- !u!1 &2023878300
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,6 +993,7 @@ GameObject:
   - component: {fileID: 2023878303}
   - component: {fileID: 2023878302}
   - component: {fileID: 2023878305}
+  - component: {fileID: 2023878306}
   m_Layer: 5
   m_Name: Hotbar
   m_TagString: Untagged
@@ -1081,11 +1087,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e191397f65fc0a48906bc11e751d717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotPrefab: {fileID: 1512088444328584, guid: 5c24d21fbd519d2489815c3b0bab10b9, type: 2}
+  inventorySlotPrefab: {fileID: 1512088444328584, guid: 5c24d21fbd519d2489815c3b0bab10b9,
+    type: 2}
   slots: []
-  hotbarPanel: {fileID: 2023878300}
+  genericInvoPanel: {fileID: 2023878300}
+  genericInvoHandler: {fileID: 2023878306}
   playerHotbarReference: {fileID: 2100305449}
-  inventoryHandler: {fileID: 1782354628}
+--- !u!114 &2023878306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023878300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965060f4814a84949a8dcc101f9f59b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: []
+  genericInventory: {fileID: 2100305449}
+  genericInventoryPanel: {fileID: 2023878300}
+  inventoryItemPrefab: {fileID: 1586053091211532, guid: 1ac93c43f04919c42993edfbfa6e1356,
+    type: 2}
 --- !u!1 &2038884720
 GameObject:
   m_ObjectHideFlags: 0

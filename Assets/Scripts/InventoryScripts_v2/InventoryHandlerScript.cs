@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public  class InventoryHandlerScript : MonoBehaviour {
+public  class InventoryHandlerScript : GenericInvoHandlerScript { 
 
+/*
     private static InventoryHandlerScript instance;
 
     //INTERFACES
@@ -17,8 +18,16 @@ public  class InventoryHandlerScript : MonoBehaviour {
     private  GameObject inventoryPanel;
     private  GameObject hotbarPanel;
 
+    public  GameObject inventoryItemPrefab;
+    
+    //reference to the invo slots - game start
     private  GameObject[] pInventorySlots;
-    public  GameObject inventorySlotItemPrefab;
+
+    //reference to the hotbar slots - game start
+    private GameObject[] pHotbarSlots;
+
+    //reference to chest slots - instantiated whenver a chest is opened
+
 
     //SINGLETON MAKE SURE ONLY ONE OF THE INSTANCES EXIST
     private void Awake()
@@ -36,8 +45,10 @@ public  class InventoryHandlerScript : MonoBehaviour {
     private void Start()
     {
         ItemDictionary.GenerateDictionary();
+
         pInventorySlots = GetComponent<PlayerInventoryPanelScript>().slots;
-        //playerInventory.AddItemToIndex(ItemDictionary.GetItem(1).itemDescription, 1, 0, 15);   //TEST
+        pHotbarSlots = GameObject.Find("HotBar").GetComponent<PlayerHotbarPanelScript>().slots;
+
         UpdateAllPlayerInventoryPanelSlots();
     }
 
@@ -58,36 +69,41 @@ public  class InventoryHandlerScript : MonoBehaviour {
         pInventorySlots = GetComponent<PlayerInventoryPanelScript>().slots;
         UpdateAllPlayerInventoryPanelSlots();
     }
-
+    */
     //when mining and stuff
+
+    //    private void Start()
+    //{
+    //    slots = genericInventoryPanel.GetComponent<GenericInvoPanelScript>().slots;
+    //    UpdatePanelSlots();
+    //}
+
     public void AddItemToPlayerInventory()
     {
         CompleteItem item = ItemDictionary.GetItem(1);
-        playerInventory.AddItem(item.itemDescription, 1, this, 0);
-        UpdateAllPlayerInventoryPanelSlots();
-        //for(int i = 0; i < 40; ++i){
-        //    Debug.Log(playerInventory.FetchItemAmountInInventorySlot((ushort)i));
-        //}
+        genericInventory.AddItem(item.itemDescription, 1, this, 0);
+        UpdatePanelSlots();
     }
 
-    public void AddItemToPlayerHotBar()
-    {
-
-    }
-
+    
     public void TestFunction_AddItemToRandomIndex()
     {
-        playerInventory.TestFunctionAddToIndex(ItemDictionary.GetItem(1).itemDescription, 5, 23);
-        UpdateAllPlayerInventoryPanelSlots();
+        genericInventory.TestFunctionAddToIndex(ItemDictionary.GetItem(1).itemDescription, 5, 23);
+        UpdatePanelSlots();
     }
 
     public void TestFunction_AddStone()
     {
-        playerInventory.TestFunctionAddToIndex(ItemDictionary.GetItem(2).itemDescription, 5, 25);
-        UpdateAllPlayerInventoryPanelSlots();
+        genericInventory.TestFunctionAddToIndex(ItemDictionary.GetItem(2).itemDescription, 5, 25);
+        UpdatePanelSlots();
     }
 
     //called when a item is dropped and stuff
+
+    //what to do if we drag an item from p invo into p hotbar? and vise versa
+
+
+        /*
     public void HandleItemDrop(InventorySlot parentSlot, InventorySlot newSlot, InventoryItem itemBeingDragged){
 
         //if new slot is empty just place item there and update inventory index
@@ -138,7 +154,7 @@ public  class InventoryHandlerScript : MonoBehaviour {
 
                 ushort amnt = playerInventory.FetchItemAmountInInventorySlot(i);
                 CompleteItem item = ItemDictionary.GetItem(id);
-                GameObject invItem = Instantiate(inventorySlotItemPrefab);
+                GameObject invItem = Instantiate(inventoryItemPrefab);
                 invItem.GetComponent<InventoryItem>().UpdateInventoryItem(item, amnt);
                
                 invItem.transform.SetParent(pInventorySlots[i].transform, false);
@@ -157,7 +173,7 @@ public  class InventoryHandlerScript : MonoBehaviour {
         ushort amnt = playerInventory.FetchItemAmountInInventorySlot(slotIndex);
 
         CompleteItem item = ItemDictionary.GetItem(id);
-        GameObject invItem = Instantiate(inventorySlotItemPrefab);
+        GameObject invItem = Instantiate(inventoryItemPrefab);
         invItem.GetComponent<InventoryItem>().UpdateInventoryItem(item, amnt);
         foreach (Transform child in pInventorySlots[slotIndex].transform) { Destroy(child.gameObject); }
         invItem.transform.SetParent(pInventorySlots[slotIndex].transform, false);
@@ -176,4 +192,5 @@ public  class InventoryHandlerScript : MonoBehaviour {
     {
         return true;
     }
+    */
 }

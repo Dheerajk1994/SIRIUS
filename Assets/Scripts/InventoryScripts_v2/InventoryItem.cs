@@ -58,7 +58,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         itemBeingDragged = null;
         this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        this.parentSlot.GetComponent<InventorySlot>().inventoryHandler.UpdatePlayerInventorySlot(this.parentSlot.GetComponent<InventorySlot>().slotID);
+        //needs optimization
+        this.parentSlot.GetComponent<InventorySlot>().genericInvoHandler.UpdatePanelSlots();
         Destroy(this.gameObject);
 
     }

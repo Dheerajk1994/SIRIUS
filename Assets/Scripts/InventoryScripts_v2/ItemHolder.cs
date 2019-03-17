@@ -17,7 +17,8 @@ public class ItemHolder : MonoBehaviour
     private ushort [,] inventoryArray;    //items that are in the inventory row 0 = item id, row 1 = amount of that item
                                             //[0,0] id [1,0] amount
 
-    void Start(){
+    void Awake(){
+        Debug.Log("item holder awake called " + inventorySize);
         inventoryArray = new ushort[2, inventorySize];
     }
      
@@ -59,54 +60,43 @@ public class ItemHolder : MonoBehaviour
     }
 
     //Add item to a specific itemarray index
-    public ushort AddItemToIndex(ItemDescription droppedItem, InventoryItem inventoryItem, ushort amount, ushort parentIndex, ushort droppedIndex)
+    public ushort AddItemToIndex(ItemDescription droppedItem, InventoryItem inventoryItem, ushort amount, ushort droppedIndex)
     {
         ushort itemIDinSlot = inventoryArray[ROW_ID, droppedIndex];
-        //Debug.Log("add item to index called");
         ushort stackDifference = (ushort)(droppedItem.stackAmnt - inventoryArray[ROW_AMOUNT, droppedIndex]);
-        //Inventory Slot is not an empty item
-        if (itemIDinSlot != 0)
+
+        if (amount != 0)
         {
-            //Dropped item is the same item in the inventory slot
-            if (droppedItem.id == itemIDinSlot)
+            //If item slot stack < item slot's item's max stack
+            if (inventoryArray[ROW_AMOUNT, droppedIndex] < droppedItem.stackAmnt)
             {
-                //If item slot stack < item slot's item's max stack
-                if (inventoryArray[ROW_AMOUNT, droppedIndex] < droppedItem.stackAmnt)
+                inventoryArray[ROW_ID, droppedIndex] = droppedItem.id;
+                //If dropped item amount <= max stack of item - current stack in slot(stack difference)
+                if (amount <= stackDifference)
                 {
-                    //If dropped item amount <= max stack of item - current stack in slot(stack difference)
-                    if (amount <= stackDifference)
-                    {
-                        //Add dropped amount to current stack
-                        inventoryArray[ROW_AMOUNT, droppedIndex] += amount;
+                    //Add dropped amount to current stack
+                    inventoryArray[ROW_AMOUNT, droppedIndex] += amount;
+                    //Empty original slot
 
-                        //Empty original slot
-                        inventoryArray[ROW_ID, parentIndex] = 0;
-                        inventoryArray[ROW_AMOUNT, parentIndex] = 0;
-                        return 0;
-                    }
-                    else
-                    {
-                        //Add dropped item stack difference to inventory slot stack
-                        inventoryArray[ROW_AMOUNT, droppedIndex] += stackDifference;
-                        //Add remaining item to origin slot
-                        inventoryArray[ROW_AMOUNT, parentIndex] = (ushort)(amount - stackDifference);
-                        return (ushort)(amount - stackDifference);
-
-                    }
+                    //Empty original slot
+                    return 0;
                 }
-                return 0;
+                else
+                {
+                    //Add dropped item stack difference to inventory slot stack
+                    inventoryArray[ROW_AMOUNT, droppedIndex] += stackDifference;
+
+                    //Add remaining item to origin slot
+                    return (ushort)(amount - stackDifference);
+
+                }
             }
             return 0;
         }
         else
         {
-            // Add item to empty slot
-            inventoryArray[ROW_ID, parentIndex] = 0;
-            inventoryArray[ROW_AMOUNT, parentIndex] = 0;
-
-            inventoryArray[ROW_ID, droppedIndex] = droppedItem.id;
-            inventoryArray[ROW_AMOUNT, droppedIndex] = amount;
-            inventoryItem.UpdateInventoryItem(amount);
+            inventoryArray[ROW_AMOUNT, droppedIndex] = 0;
+            inventoryArray[ROW_ID, droppedIndex] = 0;
             return 0;
         }
     }
@@ -174,57 +164,3 @@ public void AddItemToSlot(ItemDescription item, ushort amount, InventorySlot new
     }
 
 }
-/*
- if (amount == 0 || slotIndex >= inventorySize)
-        {
-            return amount;
-        }
-        for (int column = slotIndex; column < inventorySize; column++)
-        {
-            if(itemsInInventory[ROW_ID, column] == (ushort)EnumClass.TileEnum.EMPTY)
-            {
-                itemsInInventory[ROW_ID, column] = itemDescription.id;
-                itemsInInventory[ROW_AMOUNT, column] = (ushort)Mathf.Clamp(amount, 0, itemDescription.stackAmnt);
-                amount -= itemsInInventory[ROW_AMOUNT, column];
-                return (AddItem(itemDescription, amount, inventoryHandler, (ushort)(slotIndex++)));
-            }
-            if (itemsInInventory[ROW_ID, column] == itemDescription.id)
-            {
-                //itemsInInventory[ROW_AMOUNT,column] =
-                //int rAmount = amount - (itemDescription.stackAmnt - itemsInInventory[1, column]);
-                //amount = (ushort)(Mathf.Clamp(rAmount, 0, amount));
-                //return (AddItem(itemDescription, amount, inventoryHandler, (ushort)(slotIndex ++)));
-                itemsInInventory[ROW_AMOUNT, column] += amount;
-                return 0;
-            }
-            else{
-                return (AddItem(itemDescription, amount, inventoryHandler, (ushort)(slotIndex++)));
-            }
-        }
-        return amount;
-     */
-
-
-////check if the item in the index is empty
-//if(inventoryArray[ROW_ID, slotIndex] == 0)      
-//{
-//    inventoryArray[ROW_ID, slotIndex] = item.id;
-//    while (inventoryArray[ROW_AMOUNT, slotIndex] < item.stackAmnt && amount > 0)
-//    {
-//        inventoryArray[ROW_AMOUNT, slotIndex] += 1;
-//        amount--;
-//    }
-//    return amount;
-//}
-////Check if the item in the index is the same as item being passed
-//if(item.id == inventoryArray[ROW_ID, slotIndex])
-//{
-//    // increased stored amount
-//    while(inventoryArray[ROW_AMOUNT, slotIndex] < item.stackAmnt && amount > 0)
-//    {
-//        inventoryArray[ROW_AMOUNT, slotIndex] += 1;
-//        amount--;
-//    }
-//    return amount;
-//}
-//return amount;

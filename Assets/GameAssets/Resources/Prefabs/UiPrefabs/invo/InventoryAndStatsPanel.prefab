@@ -465,9 +465,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6705a2677e5e5d749abf13370a749cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotPrefab: {fileID: 1512088444328584, guid: 5c24d21fbd519d2489815c3b0bab10b9, type: 2}
+  inventorySlotPrefab: {fileID: 1512088444328584, guid: 5c24d21fbd519d2489815c3b0bab10b9,
+    type: 2}
   slots: []
-  invoPanel: {fileID: 1552602612469010}
+  genericInvoPanel: {fileID: 1291673838923716}
+  genericInvoHandler: {fileID: 114935814538044488}
+  playerInventoryReference: {fileID: 0}
 --- !u!114 &114175415766404452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -950,9 +953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614b65b7f24e2b3428003c87c04c4a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInventory: {fileID: 0}
-  playerHotbar: {fileID: 0}
-  inventorySlotItemPrefab: {fileID: 1586053091211532, guid: 1ac93c43f04919c42993edfbfa6e1356,
+  genericInventoryPanel: {fileID: 1291673838923716}
+  inventoryItemPrefab: {fileID: 1586053091211532, guid: 1ac93c43f04919c42993edfbfa6e1356,
     type: 2}
 --- !u!114 &114979533300429402
 MonoBehaviour:

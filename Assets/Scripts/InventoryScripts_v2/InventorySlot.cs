@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
     public GameObject itemInSlot;
-    public InventoryHandlerScript inventoryHandler;
+    public GenericInvoHandlerScript genericInvoHandler;
 
     public ItemHolder inventoryReference;
 
@@ -24,7 +24,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         //call a function in inventory handler pass it the parent slot(item.parentslot), item , new slot (this)   
-        inventoryHandler.HandleItemDrop(InventoryItem.itemBeingDragged.GetComponent<InventoryItem>().parentSlot.GetComponent<InventorySlot>(), this, InventoryItem.itemBeingDragged.GetComponent<InventoryItem>());
+        genericInvoHandler.HandleItemDrop(InventoryItem.itemBeingDragged.GetComponent<InventoryItem>().parentSlot.GetComponent<InventorySlot>(), this, InventoryItem.itemBeingDragged.GetComponent<InventoryItem>());
 
     }
 }

@@ -9,25 +9,31 @@ public static class ItemDictionary
     private static ItemList listOfItems;
 
     private static string path;
+    private static bool isItemDictionaryPopulated = false;
 
     public static void GenerateDictionary()
     {
-        path = Application.streamingAssetsPath + "/itemDescription.json";
-        if (File.Exists(path))
+        if (!isItemDictionaryPopulated)
         {
-            string jsonString = File.ReadAllText(path);
-            listOfItems = JsonUtility.FromJson<ItemList>(jsonString);
-
-            foreach (ItemDescription item in listOfItems.Items)
+            path = Application.streamingAssetsPath + "/itemDescription.json";
+            if (File.Exists(path))
             {
-                //Debug.Log(item.itemName);
-                itemDictionary.Add(item.id, item);
+                string jsonString = File.ReadAllText(path);
+                listOfItems = JsonUtility.FromJson<ItemList>(jsonString);
+
+                foreach (ItemDescription item in listOfItems.Items)
+                {
+                    //Debug.Log(item.itemName);
+                    itemDictionary.Add(item.id, item);
+                }
+                isItemDictionaryPopulated = true;
+            }
+            else
+            {
+                Debug.LogError("ITEMDESCRIPTION FILE CANNOT BE FOUNDO");
             }
         }
-        else
-        {
-            Debug.LogError("ITEMDESCRIPTION FILE CANNOT BE FOUNDO");
-        }
+        
     }
 
     /*
