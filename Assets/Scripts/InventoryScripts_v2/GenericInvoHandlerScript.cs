@@ -20,6 +20,28 @@ public class GenericInvoHandlerScript : MonoBehaviour {
     }
 
     //FUNCTIONS
+    //adding items
+    public ushort AddItemToGenericInventory(ushort id, ushort amount)
+    {
+        CompleteItem item = ItemDictionary.GetItem(id);
+        amount = genericInventory.AddItem(item.itemDescription, amount, 0);
+        UpdatePanelSlots();
+        return amount;
+    }
+
+    //removing items
+    public ushort CheckItemAmountInGenericInventory(ushort id, ushort amount)
+    {
+        return genericInventory.GetItemAmount(id, amount);
+    }
+
+    public ushort RemoveItemsFromGenericInventory(ushort id, ushort amount)
+    {
+        ushort result =  genericInventory.RemoveItemFromInventory(id, amount);
+        UpdatePanelSlots();
+        return result;
+    }
+
     //handle item drop
     //when called by slot - the slot will call this function in the handler that its associated to
     public void HandleItemDrop(InventorySlot parentSlot, InventorySlot newSlot, InventoryItem itemBeingDragged)
@@ -40,33 +62,37 @@ public class GenericInvoHandlerScript : MonoBehaviour {
                 itemBeingDragged, 
                 itemBeingDragged.stackCount, 
                 newSlot.slotID);
-            Debug.Log("remaining amoung: " + remainingAmount);
+            Debug.Log("remaining amount: " + remainingAmount);
             //call the original slots handler with remaining amount
-            parentSlot.GetComponent<InventorySlot>().genericInvoHandler.genericInventory.AddItemToIndex(
-                itemBeingDragged.completeItem.itemDescription,
-                itemBeingDragged,
-                remainingAmount,
-                parentSlot.slotID);
+            parentSlot.GetComponent<InventorySlot>().genericInvoHandler.genericInventory.SetItemAmountAtIndex(remainingAmount, parentSlot.slotID);
             //call both handlers update functions
+            //Debug.Log("stack at new slot: " + genericInventory.FetchItemAmountInInventorySlot(newSlot.slotID));
+            //Debug.Log("stack at parent slot: " + parentSlot.GetComponent<InventorySlot>().genericInvoHandler.genericInventory.FetchItemAmountInInventorySlot(parentSlot.slotID));
+
             UpdatePanelSlots();
-            parentSlot.GetComponent<GenericInvoHandlerScript>().UpdatePanelSlots();
+            parentSlot.GetComponent<InventorySlot>().genericInvoHandler.UpdatePanelSlots();
 
         }
         else//swap
         {
+            //Debug.Log("swap called");
             //call the parent slot with the item in the new slot
             InventoryItem itemInNewSlot = newSlot.transform.GetChild(0).GetComponent<InventoryItem>();
             parentSlot.GetComponent<InventorySlot>().genericInvoHandler.genericInventory.AddItemToIndex(
                 itemInNewSlot.completeItem.itemDescription,
                 itemInNewSlot.GetComponent<InventoryItem>(),
                 itemInNewSlot.GetComponent<InventoryItem>().stackCount,
-                newSlot.slotID);
+                parentSlot.slotID);
             //call the new slot with itembeing dragged
-            parentSlot.GetComponent<InventorySlot>().genericInvoHandler.genericInventory.AddItemToIndex(
+            newSlot.GetComponent<InventorySlot>().genericInvoHandler.genericInventory.AddItemToIndex(
                itemBeingDragged.completeItem.itemDescription,
                itemBeingDragged,
                itemBeingDragged.stackCount,
-               parentSlot.slotID);
+               newSlot.slotID);
+
+            UpdatePanelSlots();
+            parentSlot.GetComponent<InventorySlot>().genericInvoHandler.UpdatePanelSlots();
+            //Debug.Log("item in new slot stack: " + itemInNewSlot.GetComponent<InventoryItem>().stackCount + "item being dragged stack: " + itemBeingDragged.stackCount);
         } 
     }
 
@@ -91,7 +117,6 @@ public class GenericInvoHandlerScript : MonoBehaviour {
             }
             else
             {
-                Debug.Log(genericInventory + " " + i);
                 foreach (Transform child in slots[i].transform) { Destroy(child.gameObject); }
                 slots[i].GetComponent<InventorySlot>().isHoldingAnItem = false;
             }

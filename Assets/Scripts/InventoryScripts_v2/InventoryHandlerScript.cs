@@ -81,7 +81,7 @@ public  class InventoryHandlerScript : GenericInvoHandlerScript {
     public void AddItemToPlayerInventory()
     {
         CompleteItem item = ItemDictionary.GetItem(1);
-        genericInventory.AddItem(item.itemDescription, 1, this, 0);
+        genericInventory.AddItem(item.itemDescription, 1, 0);
         UpdatePanelSlots();
     }
 

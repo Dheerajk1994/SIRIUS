@@ -23,6 +23,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     //WHAT HAPPENS WHEN AN ITEMS IS DROPPED ONTO THE SLOT
     public void OnDrop(PointerEventData eventData)
     {
+        //Debug.Log("parent slot on drop: " + InventoryItem.itemBeingDragged.GetComponent<InventoryItem>().parentSlot);
         //call a function in inventory handler pass it the parent slot(item.parentslot), item , new slot (this)   
         genericInvoHandler.HandleItemDrop(InventoryItem.itemBeingDragged.GetComponent<InventoryItem>().parentSlot.GetComponent<InventorySlot>(), this, InventoryItem.itemBeingDragged.GetComponent<InventoryItem>());
 

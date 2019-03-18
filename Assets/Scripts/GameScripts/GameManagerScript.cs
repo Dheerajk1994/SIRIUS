@@ -122,8 +122,7 @@ public class GameManagerScript : MonoBehaviour
 
         if (readyToGo)
         {
-            if (Input.GetMouseButton(0)) LeftMouseClicked();
-            else if (Input.GetMouseButton(1)) RightMouseClicked();
+            if (Input.GetMouseButton(1)) RightMouseClicked();
             else if (Input.GetKeyDown(KeyCode.I)) ToggleInventory();
             else if (Input.GetKeyDown(KeyCode.C)) ToggleCrafting();
             
@@ -153,11 +152,6 @@ public class GameManagerScript : MonoBehaviour
         GameDataHandler.LoadGame(currentWorldSavePath, this, terrainManagerScript);
     }
 
-    private void LeftMouseClicked()
-    {
-        Vector2 mPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        terrainManagerScript.MineTile(Mathf.RoundToInt(mPos.x), Mathf.RoundToInt(mPos.y));
-    }
 
     private void RightMouseClicked()
     {

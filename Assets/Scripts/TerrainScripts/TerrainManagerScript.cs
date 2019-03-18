@@ -346,9 +346,13 @@ public class TerrainManagerScript : MonoBehaviour
 
     GameObject GetTileToPlace (ushort x, ushort y, ushort [,] tileLayer)
     {
-        GameObject tile = null;
+        return CreateTileObject(tileLayer[x, y]);
+    }
 
-        switch (tileLayer[x,y])
+    GameObject CreateTileObject(ushort id)
+    {
+        GameObject tile = null;
+        switch (id)
         {
             case (ushort)EnumClass.TileEnum.EMPTY:
                 break;
@@ -443,11 +447,10 @@ public class TerrainManagerScript : MonoBehaviour
                 Debug.LogError("CAMPFIRE GAMEOBJECT MISSING");
                 break;
             default:
-                Debug.LogError("INVALID VALUE RECEIVED IN FUNCTION TILETOPLACE : VALUE " + tileLayer[x, y]);
+                Debug.LogError("INVALID VALUE RECEIVED IN FUNCTION TILETOPLACE : VALUE " + id);
                 break;
 
         }
-
         return tile;
     }
 
@@ -458,44 +461,40 @@ public class TerrainManagerScript : MonoBehaviour
         tile.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    void PlaceTileInFResourceLayer(GameObject tile)
+    public void PlaceTileInFResourceLayer(GameObject tile)
     {
         tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.FRONTLAYER_RESOURCES;
         tile.GetComponent<Collider2D>().enabled = false;
         tile.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    void PlaceTileInBackLayer(GameObject tile)
+    public void PlaceTileInBackLayer(GameObject tile)
     {
         tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.BACKLAYER;
         tile.GetComponent<Collider2D>().enabled = false;
         tile.GetComponent<SpriteRenderer>().color = Color.gray;
     }
-
-    void PlaceTileInBResourceLayer(GameObject tile)
+     
+    public void PlaceTileInBResourceLayer(GameObject tile)
     {
         tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.BACKLAYER_RESOURCES;
         tile.GetComponent<Collider2D>().enabled = false;
         tile.GetComponent<SpriteRenderer>().color = Color.gray;
     }
-
-    void PlaceTileInVegetationtLayer(GameObject tile)
+     
+    public void PlaceTileInVegetationtLayer(GameObject tile)
     {
         tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.GRASS;
         tile.GetComponent<Collider2D>().enabled = false;
         tile.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    public GameObject MineTile(int x, int y)
+    public ushort MineTile(int x, int y, ushort tileLayer, InputManagerScript inputManager)
     {
         //Debug.Log("mine tile called");
         ushort relativeX = (ushort)Mathf.Floor((x % worldXDimension + worldXDimension) % worldXDimension);
-        //ushort relativeY = (ushort)Mathf.Floor(y / chunkSize);
 
-        if (frontTilesValue[relativeX, y] == (ushort)EnumClass.TileEnum.EMPTY) { return null; }
-        //Debug.Log(frontTilesValue[relativeX, y]);
-       // player.GetComponent<InventoryScript>().AddItemToInventory(GetTileToPlace((ushort)relativeX, (ushort)y, frontTilesValue), 1);
-       // player.GetComponent<InventoryScript>().AddItemToInventory(GetTileToPlace((ushort)relativeX, (ushort)y, frontTilesResourceValue), 1);
+        if (frontTilesValue[relativeX, y] == (ushort)EnumClass.TileEnum.EMPTY) { return 0; }
 
         frontTilesValue             [relativeX, y] = 0;
         frontTilesResourceValue     [relativeX, y] = 0; 
@@ -507,7 +506,7 @@ public class TerrainManagerScript : MonoBehaviour
         Destroy(vegetationTiles     [relativeX, y]);
         Destroy(vegetationTiles     [relativeX, y + 1]);
 
-        return null;
+        return 0;
     }
 
     public bool PlaceTile(int x, int y, GameObject t, ushort id)
@@ -532,6 +531,11 @@ public class TerrainManagerScript : MonoBehaviour
             PlaceTileInFrontLayer(tile);
         }
        
+        return true;
+    }
+
+    public bool PlaceTile(int x, int y, ushort id, ushort terrainLayer)
+    {
         return true;
     }
 

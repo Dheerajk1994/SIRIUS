@@ -18,12 +18,52 @@ public class ItemHolder : MonoBehaviour
                                             //[0,0] id [1,0] amount
 
     void Awake(){
-        Debug.Log("item holder awake called " + inventorySize);
+        //Debug.Log("item holder awake called " + inventorySize);
         inventoryArray = new ushort[2, inventorySize];
     }
-     
+
+    public ushort GetItemAmount(ushort id, ushort amount)
+    {
+        ushort sum = 0;
+        // Iterate through the array of inventory items
+        for (ushort i = 0; i < inventorySize; ++i)
+        {// If the item is in the slot
+            if (inventoryArray[ROW_ID, i] == id)
+            {
+                sum += inventoryArray[ROW_AMOUNT, i];
+                if (sum >= amount) return sum;
+            }
+        }
+        return sum;
+    } 
+    //[0][0][6][5]     [0][0][0] we need 8
+
+    public ushort RemoveItemFromInventory(ushort id, ushort amount) //you need 5 stone and there is 10 stone in the slot
+    {
+        for (ushort i = 0; i < inventorySize; ++i)
+        {
+            if (inventoryArray[ROW_ID, i] == id)
+            {
+                if (amount >= inventoryArray[ROW_AMOUNT, i])
+                {
+                    amount -= inventoryArray[ROW_AMOUNT, i];
+                    inventoryArray[ROW_AMOUNT, i] = 0;
+                    inventoryArray[ROW_ID, i] = 0;
+                }
+                else
+                {
+                    ushort StackDifference = (ushort)(inventoryArray[ROW_AMOUNT, i] - amount);
+                    inventoryArray[ROW_AMOUNT, i] = StackDifference;
+                    amount = 0;
+                    return amount;
+                }
+            }
+        }
+        return amount;
+    }
+
     //Items picked up add to any slot that already contains that item or the first empty slot
-    public ushort AddItem(ItemDescription itemDescription, ushort amount, InventoryHandlerScript inventoryHandler, ushort slotIndex){
+    public ushort AddItem(ItemDescription itemDescription, ushort amount, ushort slotIndex){
         //base case if amount is 0
         if (amount == 0) return amount;    
         //go through the inventory and see if there are any empty slots
@@ -49,14 +89,14 @@ public class ItemHolder : MonoBehaviour
         {
             while (inventoryArray[ROW_AMOUNT, slotIndex] < itemDescription.stackAmnt && amount > 0)
             {
-                Debug.Log("Stack amount " + inventoryArray[ROW_AMOUNT, slotIndex]);
+                //Debug.Log("Stack amount " + inventoryArray[ROW_AMOUNT, slotIndex]);
                 inventoryArray[ROW_AMOUNT, slotIndex] += 1;
                 amount--;
             }
-            return AddItem(itemDescription, amount, inventoryHandler, (ushort)(slotIndex + 1));
+            return AddItem(itemDescription, amount, (ushort)(slotIndex + 1));
         }
         //recursively call the next slot
-        return AddItem(itemDescription, amount, inventoryHandler, (ushort)(slotIndex+1));
+        return AddItem(itemDescription, amount, (ushort)(slotIndex+1));
     }
 
     //Add item to a specific itemarray index
@@ -91,7 +131,7 @@ public class ItemHolder : MonoBehaviour
 
                 }
             }
-            return 0;
+            return amount;
         }
         else
         {
@@ -101,10 +141,17 @@ public class ItemHolder : MonoBehaviour
         }
     }
 
-    /*
-     * protected void HandleItemDrop(PointerEventData eventData)
-public void AddItemToSlot(ItemDescription item, ushort amount, InventorySlot newslot, InventorySlot parentSlot)
-     */
+    //add item to a specific index hardcode
+    public void SetItemAmountAtIndex(ushort amount, ushort index)
+    {
+        Debug.Log("setitemamountatindex called with amount " + amount + " at index " + index);
+        inventoryArray[ROW_AMOUNT, index] = amount;
+        if(amount == 0)
+        {
+            inventoryArray[ROW_ID, index] = 0;
+        }
+    }
+
 
     public ushort RemoveItem(ushort itemID, ushort amount)
     {
@@ -155,6 +202,15 @@ public void AddItemToSlot(ItemDescription item, ushort amount, InventorySlot new
     public ushort GetInventorySize()
     {
         return inventorySize;
+    }
+
+    public void EmptyInventory()
+    {
+        for (ushort i = 0; i < inventorySize; ++i)
+        {
+            inventoryArray[ROW_ID, i] = 0;
+            inventoryArray[ROW_AMOUNT, i] = 0;
+        }
     }
 
     public void TestFunctionAddToIndex(ItemDescription item, ushort amount, ushort index)
