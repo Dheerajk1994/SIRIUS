@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Character 
+public class Enemy : CharacterFinal 
 {
     private IEnemyState currentState;
 
     [SerializeField]
     private float meleeRange;
+
     [SerializeField]
     private float rangedAttackRange;
 
+    public GameObject Target { get; set; }
 
-    public bool InMeleeRange 
-    { 
-        get 
-        { 
-            if (Target!=null)
+    public bool InMeleeRange
+    {
+        get
+        {
+            if (Target != null)
             {
                 // gives length between enemy position and player
                 return Vector2.Distance(transform.position, Target.transform.position) <= meleeRange;
@@ -38,7 +40,7 @@ public class Enemy : Character
         }
     }
 
-    public GameObject Target { get; set; }
+
 
     public override bool IsDead
     {
@@ -54,21 +56,23 @@ public class Enemy : Character
         base.Start();
         ChangeState(new IdleState());
         this.GetComponent<SpriteRenderer>().sortingOrder = 13;
+ 
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (!IsDead) 
-        //{ 
-        //    if(!IsTakingDamage)
-        //    {
-        //        currentState.Execute();
-        //    }
-        // LookAtTarget();
-        //}
-            currentState.Execute();
+
+        //if (!IsDead)
+        //{
+            if (!TakingDamage)
+            {
+                currentState.Execute();
+            }
+
             LookAtTarget();
+       // }
+
         
     }
 
@@ -95,14 +99,15 @@ public class Enemy : Character
         currentState.Enter(this);
     }
 
-    public void Move() 
+    public void Move()
     {
-        if (!attack) 
+        if (!Attack)
         {
-            runSpeed = 3;
-            Animator.SetFloat("speed", 3);
-            transform.Translate(GetDirection() * (runSpeed * Time.deltaTime));
+            movementSpeed = 3;
+            MyAnimator.SetFloat("speed", 3);
+            transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
         }
+
     }
 
     public Vector2 GetDirection() 
@@ -112,8 +117,11 @@ public class Enemy : Character
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
+        base.OnTriggerEnter2D(other);
         currentState.OnTriggerEnter(other);
     }
+
+
 
     public override IEnumerator TakeDamage(float damage)
     {
@@ -122,18 +130,14 @@ public class Enemy : Character
         if(!IsDead)
         {
             Debug.Log("Taken Damage");
-            Animator.SetTrigger("damage");  
+            MyAnimator.SetTrigger("damage");  
         }
         else
         {
-            Animator.SetTrigger("die");
+            MyAnimator.SetTrigger("die");
             yield return null;  
         }
     }
-
-
-
-
 
 }
 
