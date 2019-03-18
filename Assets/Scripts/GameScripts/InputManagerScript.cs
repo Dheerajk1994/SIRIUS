@@ -1,71 +1,125 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class InputManagerScript : MonoBehaviour {
 
-    //references needed
-    //one to terrain manager
-    TerrainManagerScript terrainManager;
-    //one to hotbar panel script
+    GameManagerScript gameManagerScript;
+    UIScript uiScript;
+    TerrainManagerScript terrainManagerScript;
+
     public PlayerInventoryPanelScript inventoryPanel;
     public PlayerHotbarPanelScript hotbarPanel;
-    //character, etc.. later on
-    //????
+
+    public void SetInputManager(GameManagerScript gScript, UIScript uScript, TerrainManagerScript tScript)
+    {
+        gameManagerScript = gScript;
+        uiScript = uScript;
+        terrainManagerScript = tScript;
+        inventoryPanel = uiScript.PlayerInventoryAndStatsPanel.GetComponent<PlayerInventoryPanelScript>();
+        hotbarPanel = uiScript.PlayerHotBarPanel.GetComponent<PlayerHotbarPanelScript>();
+        
+
+    }
 
     private void Update()
     {
         // Player Action
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if      (Input.GetKey(KeyCode.Mouse0) && !EventSystem.current.IsPointerOverGameObject())
         {
             switch(hotbarPanel.GetEquippedSlot())
             {
 
                 // Block Tiles
                 case 1:
+                    PlaceTileFrontLayer(1);
+                    break;
                 case 2:
+                    PlaceTileFrontLayer(2);
+                    break;
                 case 3:
+                    PlaceTileFrontLayer(3);
+                    break;
                 case 4:
-                    //terrainManager.PlaceTile((int)Input.mousePosition.x, (int)Input.mousePosition.y, hotbarPanel.GetEquippedSlot(),(ushort)EnumClass.LayerIDEnum.FRONTLAYER);
-                    // Remove Item from Inventory
+                    PlaceTileFrontLayer(4);
                     break;
                 case 1000:  // Pickaxe   
-                    terrainManager.MineTile((int)Input.mousePosition.x, (int)Input.mousePosition.y, (ushort)EnumClass.LayerIDEnum.FRONTLAYER, this);
+                    MineFrontLayer();
                     break;
             }
-            //MineTile(int x, int y, InputManagerScript inputManager)
         }
+        else if (Input.GetKey(KeyCode.Mouse1) && !EventSystem.current.IsPointerOverGameObject())
+        {
+            switch (hotbarPanel.GetEquippedSlot())
+            {
 
+                // Block Tiles
+                case 1:
+                    PlaceTileBackLayer(1);
+                    break;
+                case 2:
+                    PlaceTileBackLayer(2);
+                    break;
+                case 3:
+                    PlaceTileBackLayer(3);
+                    break;
+                case 4:
+                    PlaceTileBackLayer(4);
+                    break;
+                case 1000:  // Pickaxe   
+                    MineBackLayer();
+                    break;
+            }
+        }
         // Hotbar Equipping
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
             hotbarPanel.EquipSlot(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
             hotbarPanel.EquipSlot(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
             hotbarPanel.EquipSlot(2);
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
             hotbarPanel.EquipSlot(3);
-        if (Input.GetKeyDown(KeyCode.Alpha5))
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
             hotbarPanel.EquipSlot(4);
-        if (Input.GetKeyDown(KeyCode.Alpha6))
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
             hotbarPanel.EquipSlot(5);
-        if (Input.GetKeyDown(KeyCode.Alpha7))
+        else if (Input.GetKeyDown(KeyCode.Alpha7))
             hotbarPanel.EquipSlot(6);
-        if (Input.GetKeyDown(KeyCode.Alpha8))
+        else if (Input.GetKeyDown(KeyCode.Alpha8))
             hotbarPanel.EquipSlot(7);
-        if (Input.GetKeyDown(KeyCode.Alpha9))
+        else if (Input.GetKeyDown(KeyCode.Alpha9))
             hotbarPanel.EquipSlot(8);
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+        else if (Input.GetKeyDown(KeyCode.Alpha0))
             hotbarPanel.EquipSlot(9);
         // End Hotbar Equipping
+        //test for adding a pick to hotbar
+        else if (Input.GetKeyDown(KeyCode.P))
+           hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(1000, 1);
+
     }
 
+    private void MineFrontLayer()
+    {
+        terrainManagerScript.MineTile((int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x, (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y, (ushort)EnumClass.LayerIDEnum.FRONTLAYER, this);
+    }
 
-    //a function that is called by terrain manager
-    //so if the mined tile is stone and coal
-    //i can call this fucntion two times
-    //first with stone
-    //second with coal
+    private void MineBackLayer()
+    {
+        terrainManagerScript.MineTile((int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x, (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y, (ushort)EnumClass.LayerIDEnum.BACKLAYER, this);
+    }
+
+    private void PlaceTileFrontLayer(ushort id)
+    {
+        terrainManagerScript.PlaceTile((int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x, (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y, id, (ushort)EnumClass.LayerIDEnum.FRONTLAYER);
+    }
+
+    private void PlaceTileBackLayer(ushort id)
+    {
+        terrainManagerScript.PlaceTile((int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x, (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y, id, (ushort)EnumClass.LayerIDEnum.BACKLAYER);
+    }
 
     public void BadFunctionCalledByTerrainManager(ushort id, ushort amount)
     {

@@ -39,10 +39,7 @@ public class PlayerScript : Character
     {
         Debug.Log("PlayerScript start");
         // base.Start();
-        gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
-
-        uiScript = gameManagerScript.UI.GetComponent<UIScript>();
-        player = GameObject.Find("GameManager").GetComponent<GameManagerScript>().player;
+        player = gameManagerScript.player;
         playerScript = player.GetComponent<PlayerScript>();
         // rigidbody = GetComponent<Rigidbody2D>();
 
@@ -52,6 +49,13 @@ public class PlayerScript : Character
     {
 
 
+    }
+
+    //called by game manager
+    public void SetPlayerScript(GameManagerScript gmScript, UIScript uScript)
+    {
+        gameManagerScript = gmScript;
+        uiScript = uScript;
     }
 
     private void FixedUpdate()
@@ -88,7 +92,7 @@ public class PlayerScript : Character
         if (currentHealth >= maxHealth) currentHealth = maxHealth;
         else if (currentHealth <= 0) currentHealth = 0.0f;
 
-        uiScript.UpdateHealth((currentHealth / maxHealth) * 100.0f);
+        uiScript.PlayerAttributePanel.GetComponent<PlayerAttributesPanelScript>().UpdateHealth((currentHealth / maxHealth) * 100.0f);
         if (currentHealth <= 0.0) { Die(); }
     }
 
@@ -99,7 +103,7 @@ public class PlayerScript : Character
         if (currentStamina >= maxStamina) currentStamina = maxStamina;
         else if (currentStamina <= 0) currentStamina = 0.0f;
 
-        uiScript.UpdateStamina((currentStamina / maxStamina) * 100.0f);
+        uiScript.PlayerAttributePanel.GetComponent<PlayerAttributesPanelScript>().UpdateStamina((currentStamina / maxStamina) * 100.0f);
     }
 
     public void ChangeHunger(float hunger)
@@ -109,7 +113,7 @@ public class PlayerScript : Character
         if (currentHunger >= maxHunger) currentHunger = maxHunger;
         else if (currentHunger <= 0) currentHunger = 0.0f;
 
-        uiScript.UpdateHunger((currentHunger / maxHunger) * 100.0f);
+        uiScript.PlayerAttributePanel.GetComponent<PlayerAttributesPanelScript>().UpdateHunger((currentHunger / maxHunger) * 100.0f);
     }
 
 
@@ -136,7 +140,7 @@ public class PlayerScript : Character
         {
             currentHealth = 0.0f;
         }
-        uiScript.UpdateHealth((currentHealth / maxHealth) * 100.0f);
+        uiScript.PlayerAttributePanel.GetComponent<PlayerAttributesPanelScript>().UpdateHealth((currentHealth / maxHealth) * 100.0f);
         if (currentHealth <= 0.0)
         {
             Die();

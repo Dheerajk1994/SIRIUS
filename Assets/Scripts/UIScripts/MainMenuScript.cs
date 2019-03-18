@@ -13,6 +13,14 @@ public class MainMenuScript : MonoBehaviour {
     public GameSettings gameSettings;
     public Resolution[] resolution;
 
+
+    UIScript uiScript;
+
+    public void SetMainMenuPanel(UIScript uScript)
+    {
+        uiScript = uScript;
+    }
+
     private void OnEnable()
     {
         gameSettings = new GameSettings();

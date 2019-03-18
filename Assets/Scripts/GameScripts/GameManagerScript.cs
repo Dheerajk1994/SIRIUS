@@ -6,126 +6,103 @@ using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
-    /// <summary>
+    public static GameManagerScript instance;
+
+    #region WORLD_INFO
     public string greenWorldSavePath = "greenWorld";
     public string moonWorldSavePath = "moonWorld";
 
     public ushort currentWorld         = (ushort)EnumClass.TerrainType.GREEN;
     public string currentWorldSavePath = "greenWorld";
-    /// </summary>
+    #endregion
 
-    GameManagerScript instance;
-
-    public GameObject stone;
-
-    //PREFABS
-    public GameObject UIPrefab;
-    public GameObject MainMenuPrefab;
-    public GameObject PlayerPrefab;
+    #region PREFABS
     public GameObject TerrainManagerPrefab;
-    public Camera MainCameraPrefab;
+    public GameObject UIPrefab;
+    public GameObject PlayerPrefab;
+    public GameObject MainCameraPrefab;
+    public GameObject InputManagerPrefab;
+    #endregion
 
-    //INSTANTIATEED PREFABS
+    #region INSTANTIATED_PREFABS
+    public GameObject terrainManager;
+    public GameObject ui;
     public GameObject player;
-    public GameObject playerInvoPanel;
-    public GameObject craftingPanel;
+    public GameObject mainCameraObject;
+    public GameObject inputManager;
+    #endregion
 
-    public GameObject TerrainManager;
-    private TerrainManagerScript terrainManagerScript;
+    #region SCRIPT_REFERENCES
+    public TerrainManagerScript terrainManagerScript;
+    public UIScript uIScript;
+    public PlayerScript playerScript;
+    public CameraScript cameraScript;
+    public InputManagerScript inputManagerScript;
+    #endregion
 
-    public Camera     mainCamera;
-
-    public GameObject MainMenu;
-    public MainMenuSceneScript mainMenuScript;
-
-    public GameObject UI;
-    public UIScript   uiScript;
-
-
-
-    //public GameObject attributePanel;
-
-    public Slider healthBar;
-    public Slider staminaBar;
-    public Slider hungerBar;
-
-    public bool isInDemoMode;
+    #region LOCAL_VARIABLES
     public bool readyToGo = false;
-    public bool worldPresent;
-
+    public bool worldPresent = false;
     public Vector3 playerPos;
+    #endregion
 
+    //AWAKE
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
-        else if(this != instance)
+        else if (this != instance)
         {
             Destroy(this);
         }
         DontDestroyOnLoad(this.gameObject);
     }
 
-
+    //START
     private void Start()
     {
-        UI               = Instantiate(UIPrefab);
-        MainMenu         = Instantiate(MainMenuPrefab);
+        //INITIALIZE ALL THE PREFABS AND SCRIPT REFERENCES
+        terrainManager       = Instantiate(TerrainManagerPrefab);
+        terrainManagerScript = terrainManager.GetComponent<TerrainManagerScript>();
 
-        UI.gameObject.SetActive(false);
-        MainMenu.gameObject.SetActive(true);
+        ui                   = Instantiate(UIPrefab);
+        uIScript             = ui.GetComponent<UIScript>();
+                             
+        player               = Instantiate(PlayerPrefab);
+        playerScript         = player.GetComponent<PlayerScript>();
+                             
+        mainCameraObject     = Instantiate(MainCameraPrefab);
+        cameraScript         = mainCameraObject.GetComponent<CameraScript>();
+                             
+        inputManager         = Instantiate(InputManagerPrefab);
+        inputManagerScript   = inputManager.GetComponent<InputManagerScript>();
 
-        uiScript        = UI.GetComponent<UIScript>();
-        playerInvoPanel = uiScript.playerInvoPanel;
-        craftingPanel   = uiScript.craftingPanel;
-        healthBar       = uiScript.healthBar;
-        staminaBar      = uiScript.staminaBar;
-        hungerBar       = uiScript.hungerBar;
+        ui.      gameObject.SetActive(false);
+        player.  gameObject.SetActive(false);
+
+        terrainManagerScript.SetTerrainManager(this);
+        uIScript.SetUIPanel(this, inputManagerScript, player);
+        playerScript.SetPlayerScript(this, uIScript);
+        inputManagerScript.SetInputManager(this, uIScript, terrainManagerScript);
 
 
-
-        TerrainManager   = Instantiate(TerrainManagerPrefab);
-        //mainCamera       = Instantiate(Resources.Load("Main Camera", typeof(Camera))) as Camera;
-        mainCamera = Instantiate(MainCameraPrefab);
-
-        player           = Instantiate(PlayerPrefab);
-        player.gameObject.SetActive(false);
-        
-
-        //playerInvoPanel.GetComponent<PlayerInventoryPanelScript>().player = player;
-
-        terrainManagerScript = TerrainManager.GetComponent<TerrainManagerScript>();
-
+        //SET LOCAL VARIABLES
+        readyToGo    = false;
+        worldPresent = false;
 
         GameObject PlayArea = new GameObject("PlayArea");
         PlayArea.transform.position = new Vector3(0f, 0f, 0f);
 
-        worldPresent = false;
-        StartNewGame();
 
+        StartNewGame();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N)) StartNewGame();
-        else if (Input.GetKeyDown(KeyCode.S)) SaveGame();
-        else if (Input.GetKeyDown(KeyCode.L)) LoadGame();
-        else if (Input.GetKeyDown(KeyCode.O)) uiScript.ToggleBotDialoguePanel(true);
-        else if (Input.GetKeyDown(KeyCode.P)) uiScript.ToggleBotDialoguePanel(false);
-        else if (Input.GetKeyDown(KeyCode.Q)) uiScript.ToggleQuestPanel(true);
-        else if (Input.GetKeyDown(KeyCode.E)) uiScript.ToggleQuestPanel(false);
-        else if (Input.GetKeyDown(KeyCode.M)) SwitchWorld();
-        else if (Input.GetKeyDown(KeyCode.G)) DialogueController.StartDialogueController(this); ;
-        
-
         if (readyToGo)
         {
-            if (Input.GetMouseButton(1)) RightMouseClicked();
-            else if (Input.GetKeyDown(KeyCode.I)) ToggleInventory();
-            else if (Input.GetKeyDown(KeyCode.C)) ToggleCrafting();
-            
             if (Vector2.Distance(player.transform.position, playerPos) > 20.0f)
             {
                 Debug.Log("player transform pos: " + player.transform.position);
@@ -153,41 +130,5 @@ public class GameManagerScript : MonoBehaviour
     }
 
 
-    private void RightMouseClicked()
-    {
-        Vector2 mPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        terrainManagerScript.PlaceTile(Mathf.RoundToInt(mPos.x), Mathf.RoundToInt(mPos.y), stone, 2);
-    }
-
-    private void ToggleInventory()
-    {
-        UI.GetComponent<UIScript>().TogglePlayerInventory();
-    }
-
-    private void ToggleCrafting()
-    {
-        UI.GetComponent<UIScript>().ToggleCraftingPanel();
-    }
-
-    private void SwitchWorld()
-    {
-        GameDataHandler.SaveGame(currentWorldSavePath, this, terrainManagerScript);
-        GameDataHandler.ClearWorld(this, terrainManagerScript);
-        if(currentWorld == (ushort)EnumClass.TerrainType.GREEN)
-        {
-            currentWorld = (ushort)EnumClass.TerrainType.MOON;
-            currentWorldSavePath = "moonWorld";
-        }
-        else
-        {
-            currentWorld = (ushort)EnumClass.TerrainType.GREEN;
-            currentWorldSavePath = "greenWorld";
-        }
-        if(!GameDataHandler.LoadGame(currentWorldSavePath, this, terrainManagerScript))
-        {
-            GameDataHandler.NewGame(this, terrainManagerScript, currentWorld);
-        }
-
-    }
 
 }//END GAME MANAGER

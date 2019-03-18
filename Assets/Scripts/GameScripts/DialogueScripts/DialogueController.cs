@@ -14,7 +14,7 @@ public static class DialogueController {
 
     private static ushort currentDialogueID = 0;
 
-    public static void StartDialogueController(GameManagerScript gameManager)
+    public static void StartDialogueController(GameManagerScript gameManager, UIScript uScript)
     {
         //path = Application.streamingAssetsPath + fileName;
         if (File.Exists(path))
@@ -24,9 +24,9 @@ public static class DialogueController {
 
             dialogues = JsonUtility.FromJson<DialogueClass>(jsonString);
 
-            uiScript = gameManager.uiScript;
-            uiScript.SetBotDialoguePanelText("SYSTEM", dialogues.aiDialogues[currentDialogueID]);
-            uiScript.ToggleBotDialoguePanel(true);
+            uiScript = uScript;
+            uiScript.BottomDialoguePanel.GetComponent<DialoguePanelScript>().SetDialoguePanelText("SYSTEM", dialogues.aiDialogues[currentDialogueID]);
+            uiScript.BottomDialoguePanel.GetComponent<DialoguePanelScript>().ToggleDialoguePanel(true);
 
             string quest = "";
             for (int i = 0; i < dialogues.questDialogues.GetLength(0); i++)
@@ -34,7 +34,7 @@ public static class DialogueController {
                 quest += dialogues.questDialogues[i];
                 quest += "\n";
             }
-            uiScript.SetQuestPanelText("Starting Out", quest);
+            uiScript.QuestPanel.GetComponent<QuestPanelScript>().SetQuestPanelText("Starting Out", quest);
         }
         else
         {
@@ -47,7 +47,7 @@ public static class DialogueController {
         currentDialogueID++;
         if(currentDialogueID < dialogues.aiDialogues.GetLength(0))
         {
-            uiScript.SetBotDialoguePanelText("SYSTEM", dialogues.aiDialogues[currentDialogueID]);
+            uiScript.BottomDialoguePanel.GetComponent<DialoguePanelScript>().SetDialoguePanelText("SYSTEM", dialogues.aiDialogues[currentDialogueID]);
         }
     }
 }

@@ -15,6 +15,7 @@ public static class ItemDictionary
     {
         if (!isItemDictionaryPopulated)
         {
+            Debug.Log("generate itemdictionary called");
             path = Application.streamingAssetsPath + "/itemDescription.json";
             if (File.Exists(path))
             {

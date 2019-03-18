@@ -18,7 +18,7 @@ public class DoggoMovement : MonoBehaviour {
 
     private void Start()
     {
-        player = GameObject.Find("GameManager").GetComponent<GameManagerScript>().player;
+        player = GameObject.Find("GameManagerV2").GetComponent<GameManagerScript>().player;
         playerScript = player.GetComponent<PlayerScript>();
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();

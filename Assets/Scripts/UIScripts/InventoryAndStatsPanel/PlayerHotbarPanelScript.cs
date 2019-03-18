@@ -8,7 +8,7 @@ public class PlayerHotbarPanelScript : GenericInvoPanelScript {
 
     public Hotbar playerHotbarReference;
 
-    public ushort equippedSlot = 1;
+    public ushort equippedSlot = 0;
 
     // Use this for initialization
     void Start()
@@ -25,7 +25,7 @@ public class PlayerHotbarPanelScript : GenericInvoPanelScript {
             slot.GetComponent<InventorySlot>().genericInvoHandler = this.genericInvoHandler;
         }
         genericInvoHandler.slots = slots;
-        equippedSlot = 1;
+        equippedSlot = 0;
     }
 
     private void Update()

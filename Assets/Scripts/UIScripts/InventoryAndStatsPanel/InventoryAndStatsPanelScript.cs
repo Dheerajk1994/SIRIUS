@@ -11,6 +11,14 @@ public class InventoryAndStatsPanelScript : MonoBehaviour {
     private bool isOpen = false;
     private Animator inventoryAndStatsPanelAnimator;
 
+    UIScript uiScript;
+
+    public void SetInventoryAndStatsPanel(UIScript uScript, GameObject player)
+    {
+        uiScript = uScript;
+        this.transform.gameObject.GetComponent<InventoryHandlerScript>().genericInventory = player.GetComponent<Inventory>();
+    }
+
     private void Start()
     {
         inventoryAndStatsPanelAnimator = GetComponent<Animator>();

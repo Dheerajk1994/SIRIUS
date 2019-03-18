@@ -7,7 +7,7 @@ public class GenericInvoHandlerScript : MonoBehaviour {
     //REFERENCES
     public GameObject[] slots; //slots in inventory, slots in hotbar, slots in chest
     [SerializeField]
-    protected ItemHolder genericInventory; //players inventory, hotbar invo, chest invo
+    public ItemHolder genericInventory; //players inventory, hotbar invo, chest invo
     public GameObject genericInventoryPanel; // player inventory panel, hotbar panel, chest panel
 
     public GameObject inventoryItemPrefab;

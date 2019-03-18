@@ -7,6 +7,11 @@ public class InventorySpritesScript : MonoBehaviour {
 
     public Sprite[] itemSprites;
 
+    private void Awake()
+    {
+        ItemDictionary.GenerateDictionary();
+    }
+
     public Sprite GetSprite(ushort index){
         if(index < itemSprites.Length){
             return itemSprites[index];

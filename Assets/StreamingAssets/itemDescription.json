@@ -14,7 +14,7 @@
       "stackAmnt": 10,
       "cost": 0
     },
-	    {
+    {
       "itemName": "Regular Wood",
       "id": 3,
       "description": "Knock knock",
@@ -26,90 +26,97 @@
       "id": 4,
       "description": "It gets everywhere.",
       "stackAmnt": 10,
-      "cost": 0 
+      "cost": 0
     },
-	    {
+    {
       "itemName": "Tree Trunk Regular",
       "id": 17,
       "description": "It's nothing like an Elephant",
       "stackAmnt": 10,
       "cost": 0
     },
-	    {
+    {
       "itemName": "Tree Leaf Regular",
       "id": 18,
       "description": "Dhee spelled it Regalar",
       "stackAmnt": 10,
       "cost": 0
     },
-	    {
+    {
       "itemName": "Flower Regular",
       "id": 19,
       "description": "It's a flower",
       "stackAmnt": 10,
       "cost": 0
     },
-	    {
+    {
       "itemName": "Grass Regular",
       "id": 20,
       "description": "Why did you pick up some grass?",
       "stackAmnt": 999,
       "cost": 0
     },
-	    {
+    {
       "itemName": "Coal",
       "id": 21,
       "description": "Can be used as fuel",
       "stackAmnt": 999,
       "cost": 2
     },
-	    {
+    {
       "itemName": "Copper",
       "id": 22,
       "description": "I wonder how many pennies this is worth",
       "stackAmnt": 999,
       "cost": 5
     },
-	    {
+    {
       "itemName": "Silver",
       "id": 23,
       "description": "Ooh, shiny",
       "stackAmnt": 500,
       "cost": 8
     },
-	    {
+    {
       "itemName": "Gold",
       "id": 24,
       "description": "That's a big nugget",
       "stackAmnt": 50,
       "cost": 10
     },
-	    {
+    {
       "itemName": "Diamond",
       "id": 25,
       "description": "It's really hard",
       "stackAmnt": 10,
       "cost": 12
     },
-	    {
+    {
       "itemName": "Moon Dirt",
       "id": 40,
       "description": "Dirty dirt from the moon",
       "stackAmnt": 999,
       "cost": 0
     },
-	    {
+    {
       "itemName": "Moon Stone",
       "id": 41,
       "description": "This may be able to evolve certain Pocket Monsters",
       "stackAmnt": 999,
       "cost": 0
     },
-		    {
+    {
       "itemName": "Moon Sand",
       "id": 42,
       "description": "why is there sand on the moon?",
       "stackAmnt": 999,
+      "cost": 0
+    },
+    {
+      "itemName": "Pickaxe",
+      "id": 1000,
+      "description": "I will show you mine if you show me yours.",
+      "stackAmnt": 1,
       "cost": 0
     }
   ]

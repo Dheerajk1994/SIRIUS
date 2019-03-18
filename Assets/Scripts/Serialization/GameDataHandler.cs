@@ -15,10 +15,10 @@ public static class GameDataHandler {
         {
             gameManager.readyToGo = false;
 
-            gameManager.UI.SetActive(true);
-            gameManager.MainMenu.SetActive(false);
+            gameManager.ui.SetActive(true);
+            //gameManager.MainMenu.SetActive(false);
 
-            gameManager.mainCamera.gameObject.SetActive(false);
+            gameManager.mainCameraObject.gameObject.SetActive(false);
 
             terrainManager.StartTerrainGen(terrainType);
 
@@ -28,8 +28,8 @@ public static class GameDataHandler {
             gameManager.playerPos = terrainManager.GetSafePlaceToSpawnPlayer();
             gameManager.player.transform.position = gameManager.playerPos;
 
-            gameManager.mainCamera.gameObject.SetActive(true);
-            gameManager.mainCamera.gameObject.GetComponent<CameraScript>().SetCamera(gameManager.player.transform, terrainType);
+            gameManager.mainCameraObject.gameObject.SetActive(true);
+            gameManager.mainCameraObject.gameObject.GetComponent<CameraScript>().SetCamera(gameManager.player.transform, terrainType);
 
             //gameManager.uiScript.FadeInScene();
 
@@ -65,7 +65,7 @@ public static class GameDataHandler {
         {
             gameManager.readyToGo = false;
 
-            gameManager.mainCamera.gameObject.SetActive(false);
+            gameManager.mainCameraObject.gameObject.SetActive(false);
             gameManager.player.SetActive(false);
 
 
@@ -83,10 +83,10 @@ public static class GameDataHandler {
                 gameManager.player.transform.localPosition = new Vector3(loadedData.playerPosX, loadedData.playerPosY, loadedData.playerPosZ);
                 gameManager.player.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.FRONTLAYER;
 
-                gameManager.mainCamera.gameObject.SetActive(true);
-                gameManager.mainCamera.gameObject.GetComponent<CameraScript>().SetCamera(gameManager.player.transform, gameManager.currentWorld);
+                gameManager.mainCameraObject.gameObject.SetActive(true);
+                gameManager.mainCameraObject.gameObject.GetComponent<CameraScript>().SetCamera(gameManager.player.transform, gameManager.currentWorld);
 
-                gameManager.uiScript.FadeInScene();
+                //gameManager.uIScript.FadeInScene();
 
                 gameManager.worldPresent = true;
                 gameManager.readyToGo = true;

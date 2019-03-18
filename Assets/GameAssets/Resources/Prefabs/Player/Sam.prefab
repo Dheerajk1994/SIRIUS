@@ -58,6 +58,8 @@ GameObject:
   - component: {fileID: 114944128281001554}
   - component: {fileID: 114789206657648136}
   - component: {fileID: 114501148316087484}
+  - component: {fileID: 114465566261386562}
+  - component: {fileID: 114078310744139936}
   m_Layer: 0
   m_Name: Sam
   m_TagString: Untagged
@@ -159,6 +161,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114078310744139936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1976911743273556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64553648ac8e32d49af54bbe10c97fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySize: 40
 --- !u!114 &114426077539660584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,6 +215,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: CharacterController2D+BoolEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114465566261386562
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1976911743273556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a8ef4fcdb39a14c93eb93b47a7f070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySize: 10
 --- !u!114 &114501148316087484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -212,6 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db883ab57b9c4e4fbce596e45ac8a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standardDamage: 0
   currentHealth: 100
   maxHealth: 100
   currentStamina: 100
@@ -219,13 +246,20 @@ MonoBehaviour:
   currentHunger: 100
   maxHunger: 100
   temperature: 0
+  facingRight: 0
+  attack: 0
+  horizontalMove: 0
+  gameManagerScript: {fileID: 0}
+  uiScript: {fileID: 0}
+  controller: {fileID: 0}
+  player: {fileID: 0}
+  BarkCollider: {fileID: 0}
+  healState: 0
   armor: 0
   insulation: 0
   healthRecoveryRate: 0.1
   staminaRecoveryRate: 0.1
   hungerRecoveryRate: -0.005
-  gameManagerScript: {fileID: 0}
-  uiScript: {fileID: 0}
 --- !u!114 &114615449279679094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,8 +273,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 114426077539660584}
   animator: {fileID: 95806841719390866}
-  runSpeed: 100
   player: {fileID: 0}
+  playerScript: {fileID: 0}
+  runSpeed: 100
+  horizontalMove: 0
+  jump: 0
+  rigidbody: {fileID: 0}
 --- !u!114 &114789206657648136
 MonoBehaviour:
   m_ObjectHideFlags: 1
