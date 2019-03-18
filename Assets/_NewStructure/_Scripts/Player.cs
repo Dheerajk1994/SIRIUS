@@ -2,22 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour 
+public class Player : CharacterFinal 
 {
+
+    private static Player instance; 
+    public static Player Instance
+    {
+        get 
+        {
+            if (instance == null)
+            {
+                instance = GameObject.FindObjectOfType<Player>();
+            }
+            return instance;
+        }
+    }
 
     public Rigidbody2D MyRigidbody { get; set; }
 
-    public bool Attack      { get; set; }
+
     public bool Jump        { get; set; }
     public bool OnGround    { get; set; }
 
-
-    private Animator        myAnimator;
-
-    [SerializeField]
-    private float movementSpeed;
-
-    private bool facingRight;
     //private bool attack;
 
     [SerializeField]
@@ -44,11 +50,11 @@ public class Player : MonoBehaviour
     
 
 	// Use this for initialization
-	void Start () 
+	public override void Start () 
     {
-        facingRight = true;
+        base.Start();
         MyRigidbody = GetComponent<Rigidbody2D>();
-        myAnimator = GetComponent<Animator>();
+       
 	}
 
     void Update()
@@ -72,11 +78,13 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            myAnimator.SetTrigger("jump");
             //jump = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            myAnimator.SetTrigger("attack");
             //attack = true;
             //jumpAttack = true;
         }
@@ -87,10 +95,7 @@ public class Player : MonoBehaviour
     {
         if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
         {
-            facingRight = !facingRight;
-            Vector3 scale = transform.localScale;
-            scale.x *= -1;
-            transform.localScale = scale;
+            ChangeDirection();
         }
     }
 

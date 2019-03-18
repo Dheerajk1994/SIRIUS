@@ -11,42 +11,7 @@ public class Enemy : Character
     [SerializeField]
     private float rangedAttackRange;
 
-
-    public bool InMeleeRange 
-    { 
-        get 
-        { 
-            if (Target!=null)
-            {
-                // gives length between enemy position and player
-                return Vector2.Distance(transform.position, Target.transform.position) <= meleeRange;
-            }
-            return false;
-        }
-    }
-
-    public bool InRangedAttackRange
-    {
-        get
-        {
-            if (Target != null)
-            {
-                // gives length between enemy position and player
-                return Vector2.Distance(transform.position, Target.transform.position) <= rangedAttackRange;
-            }
-            return false;
-        }
-    }
-
     public GameObject Target { get; set; }
-
-    public override bool IsDead
-    {
-        get
-        {
-            return currentHealth <= 0.0;
-        }
-    }
 
     // Use this for initialization 
     public override void Start()
@@ -59,14 +24,6 @@ public class Enemy : Character
     // Update is called once per frame
     void Update()
     {
-        //if (!IsDead) 
-        //{ 
-        //    if(!IsTakingDamage)
-        //    {
-        //        currentState.Execute();
-        //    }
-        // LookAtTarget();
-        //}
             currentState.Execute();
             LookAtTarget();
         
@@ -113,6 +70,42 @@ public class Enemy : Character
     public override void OnTriggerEnter2D(Collider2D other)
     {
         currentState.OnTriggerEnter(other);
+    }
+
+    public bool InMeleeRange
+    {
+        get
+        {
+            if (Target != null)
+            {
+                // gives length between enemy position and player
+                return Vector2.Distance(transform.position, Target.transform.position) <= meleeRange;
+            }
+            return false;
+        }
+    }
+
+    public bool InRangedAttackRange
+    {
+        get
+        {
+            if (Target != null)
+            {
+                // gives length between enemy position and player
+                return Vector2.Distance(transform.position, Target.transform.position) <= rangedAttackRange;
+            }
+            return false;
+        }
+    }
+
+
+
+    public override bool IsDead
+    {
+        get
+        {
+            return currentHealth <= 0.0;
+        }
     }
 
     public override IEnumerator TakeDamage(float damage)
