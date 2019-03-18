@@ -7,10 +7,15 @@ public class AttackBehaviour : StateMachineBehaviour {
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) 
     {
-        Player.Instance.Attack = true;
-        if (Player.Instance.OnGround) 
+        animator.GetComponent<CharacterFinal>().Attack = true;
+        animator.SetFloat("speed", 0);
+        if (animator.tag == "Player") 
         {
-            Player.Instance.MyRigidbody.velocity = Vector2.zero;
+            if (Player.Instance.OnGround)
+            {
+                Player.Instance.MyRigidbody.velocity = Vector2.zero;
+            }
+
         }
     }
 
@@ -21,9 +26,10 @@ public class AttackBehaviour : StateMachineBehaviour {
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        Player.Instance.Attack = false;
+
+        animator.GetComponent<CharacterFinal>().Attack = false;
+        animator.GetComponent<CharacterFinal>().BarkAttack();
         animator.ResetTrigger("attack");
-      
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

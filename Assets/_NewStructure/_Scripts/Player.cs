@@ -24,6 +24,14 @@ public class Player : CharacterFinal
     public bool Jump        { get; set; }
     public bool OnGround    { get; set; }
 
+    public override bool IsDead
+    {
+        get
+        {
+            return currentHealth <= 0.0;
+        }
+    }
+
     //private bool attack;
 
     [SerializeField]
@@ -78,13 +86,13 @@ public class Player : CharacterFinal
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            myAnimator.SetTrigger("jump");
+            MyAnimator.SetTrigger("jump");
             //jump = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            myAnimator.SetTrigger("attack");
+            MyAnimator.SetTrigger("attack");
             //attack = true;
             //jumpAttack = true;
         }
@@ -125,11 +133,11 @@ public class Player : CharacterFinal
     {
         if (!OnGround)
         {
-            myAnimator.SetLayerWeight(1, 1);
+            MyAnimator.SetLayerWeight(1, 1);
         }
         else
         {
-            myAnimator.SetLayerWeight(1, 0);
+            MyAnimator.SetLayerWeight(1, 0);
         }
 
     }
@@ -138,7 +146,7 @@ public class Player : CharacterFinal
     {
         if (MyRigidbody.velocity.y <0)
         {
-            myAnimator.SetBool("land", true); 
+            MyAnimator.SetBool("land", true); 
         }
         if (!Attack && (OnGround || airControl))
         {
@@ -148,61 +156,11 @@ public class Player : CharacterFinal
         {
             MyRigidbody.AddForce(new Vector2(0, jumpForce)); 
         }
-        myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
-
-        /*
-        if(myRigidBody.velocity.y < 0)
-        {
-            myAnimator.SetBool("land", true);
-        }
-
-        if (isGrounded && jump)
-        {
-            isGrounded = false;
-            myRigidBody.AddForce(new Vector2(0, jumpForce));
-            myAnimator.SetTrigger("jump");
-        }
-
-        if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") ) // check if need to be && (isGrounded || airControl)
-        {
-            myRigidBody.velocity = new Vector2(horizontal * movementSpeed, myRigidBody.velocity.y);
-        }
-        else if (this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) 
-        {
-            myRigidBody.velocity = new Vector2(0, 0);
-        }
-        myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
-        */
+        MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
-    /*
 
-    private void HandleAttacks()
+    public override IEnumerator TakeDamage(float damage)
     {
-        if(attack && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && (isGrounded || airControl))
-        {
-            myAnimator.SetTrigger("attack");
-            myRigidBody.velocity = Vector2.zero;
-        }
-        if(jump && !isGrounded && !this.myAnimator.GetCurrentAnimatorStateInfo(1).IsName("JumpAttack"))
-        {
-            myAnimator.SetBool("jumpAttack", true);
-        }
-        if(!jumpAttack && !this.myAnimator.GetCurrentAnimatorStateInfo(1).IsName("JumpAttack"))
-        {
-            myAnimator.SetBool("jumpAttack", false); 
-        }
-    }
-    */
-
-    
-    /*
-
-    private void ResetValues() 
-    {
-        attack = false;
-        jump = false;
-        jumpAttack = false;
-    }
-    */
-
+        yield return null;
+    } 
 }

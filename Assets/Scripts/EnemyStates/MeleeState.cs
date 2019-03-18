@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,7 +52,7 @@ public class MeleeState : IEnemyState
         if (canPerformMeleeAttack)
         {
             canPerformMeleeAttack = false;
-            enemy.Animator.SetTrigger("attack");
+            enemy.MyAnimator.SetTrigger("attack");
         }
     }
 }

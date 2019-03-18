@@ -39,7 +39,7 @@ public class IdleState : IEnemyState
 
     private void Idle()
     {
-        enemy.Animator.SetFloat("speed", 0);
+        enemy.MyAnimator.SetFloat("speed", 0);
         // increase idleTimer by the time that has passed since a frame was rendered.
         idleTimer += Time.deltaTime;
 

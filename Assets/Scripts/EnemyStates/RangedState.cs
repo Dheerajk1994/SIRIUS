@@ -9,7 +9,7 @@ public class RangedState : IEnemyState {
     /*---- IF OUR MOB WILL HAVE RANGED ATTACKS----*/
     private float rangedAttackTimer;
     private float rangedAttackCooldown = 3;
-    private bool canPerformRangedAttack = true; //Attack without 3 second cooldown
+    private bool canPerformRangedAttack = true; //Attack without n-second cooldown
     
     public void Enter(Enemy enemy)
     {
@@ -60,7 +60,7 @@ public class RangedState : IEnemyState {
         if (canPerformRangedAttack)
         {
             canPerformRangedAttack = false;
-            enemy.Animator.SetTrigger("rangedAttack"); 
+            enemy.MyAnimator.SetTrigger("rangedAttack"); 
         }
     }
 }
