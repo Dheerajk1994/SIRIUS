@@ -37,7 +37,7 @@ public class PlayerScript : Character
 
     public override void Start()
     {
-        Debug.Log("PlayerScript start");
+        //Debug.Log("PlayerScript start");
         // base.Start();
         player = gameManagerScript.player;
         playerScript = player.GetComponent<PlayerScript>();

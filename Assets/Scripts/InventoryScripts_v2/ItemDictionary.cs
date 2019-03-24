@@ -11,11 +11,14 @@ public static class ItemDictionary
     private static string path;
     private static bool isItemDictionaryPopulated = false;
 
-    public static void GenerateDictionary()
+    static InventorySpritesScript inventorySpritesScript;
+
+    public static void GenerateDictionary(InventorySpritesScript iss)
     {
         if (!isItemDictionaryPopulated)
         {
             Debug.Log("generate itemdictionary called");
+            inventorySpritesScript = iss;
             path = Application.streamingAssetsPath + "/itemDescription.json";
             if (File.Exists(path))
             {
@@ -26,6 +29,7 @@ public static class ItemDictionary
                 {
                     //Debug.Log(item.itemName);
                     itemDictionary.Add(item.id, item);
+                    Debug.Log(item.itemName + " " + item.type);
                 }
                 isItemDictionaryPopulated = true;
             }
@@ -40,7 +44,6 @@ public static class ItemDictionary
     /*
     NEED OPTIMIZATION
         */
-    static InventorySpritesScript inventorySpritesScript = GameObject.Find("ItemTest").GetComponent<InventorySpritesScript>();
 
     public static CompleteItem GetItem(ushort fetchID)
     {
@@ -76,6 +79,7 @@ public class ItemDescription
     public string description;
     public ushort stackAmnt;
     public uint cost;
+    public uint type;
 }
 
 public class CompleteItem

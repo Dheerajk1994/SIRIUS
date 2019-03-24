@@ -8,6 +8,7 @@ public class GenericInvoPanelScript : MonoBehaviour {
     [SerializeField]
     protected GameObject inventorySlotPrefab;
     public GameObject[] slots;
+    protected ushort numberOfSlots;
     [SerializeField]
     protected GameObject genericInvoPanel;
     //public Hotbar playerHotbarReference;

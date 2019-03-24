@@ -7,10 +7,13 @@ public class PlayerInventoryPanelScript : GenericInvoPanelScript {
     public Inventory playerInventoryReference;
 
 
-	// Use this for initialization
-	void Start () {
-        slots = new GameObject[40]; //NEED OPTIMIZATION
-        for (ushort i = 0; i < 40; i++)
+    public void SetPlayerInventoryPanel(Inventory pir)
+    {
+        playerInventoryReference = pir;
+
+        numberOfSlots = playerInventoryReference.GetInventorySize();
+        slots = new GameObject[numberOfSlots]; //NEED OPTIMIZATION
+        for (ushort i = 0; i < numberOfSlots; i++)
         {
             GameObject slot = Instantiate(inventorySlotPrefab);
             slot.name = "InventorySlot (" + i + ")";
@@ -22,6 +25,11 @@ public class PlayerInventoryPanelScript : GenericInvoPanelScript {
             slot.GetComponent<InventorySlot>().genericInvoHandler = this.genericInvoHandler;
         }
         genericInvoHandler.slots = slots;
+    }
+
+
+	void Start () {
+        
     }
 
     private void Update()

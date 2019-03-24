@@ -12,6 +12,7 @@ public class TerrainManagerScript : MonoBehaviour
     private ushort worldYDimension;
 
     public GameObject TileObjectPrefab;
+    public GameObject PickupTilePrefab;
 
     //STONES
     public Sprite[] regularStoneSprites;
@@ -68,14 +69,16 @@ public class TerrainManagerScript : MonoBehaviour
 
     public GameObject gameManager;
     private TilePoolScript tilePool;
+    private InventoryControllerScript inventoryControllerScript;
 
     #endregion 
 
-    public void SetTerrainManager(GameManagerScript gScript)
+    public void SetTerrainManager(GameManagerScript gScript, TilePoolScript tp, GameObject plyr, InventoryControllerScript ics)
     {
         gameManager = gScript.transform.gameObject;
-        tilePool = gameManager.GetComponent<TilePoolScript>();
-        player = gameManager.GetComponent<GameManagerScript>().player;
+        tilePool = tp;
+        player = plyr;
+        inventoryControllerScript = ics;
     }
 
     private void Start()
@@ -121,7 +124,7 @@ public class TerrainManagerScript : MonoBehaviour
                 chunks[x, y].transform.position = new Vector2(x * chunkSize, y * chunkSize);
             }
         }
-        Debug.Log("values received");
+        //Debug.Log("values received");
     }
 
     public void DisplayChunks(Vector2 playerPos)
@@ -256,7 +259,7 @@ public class TerrainManagerScript : MonoBehaviour
         ushort fetchPosX = 0;
         ushort fetchPosY = 0;
         GameObject tile;
-        Debug.Log("Pool size before creating items: " + tilePool.GetPoolSize());
+        //Debug.Log("Pool size before creating items: " + tilePool.GetPoolSize());
         for (ushort x = 0; x < chunkSize; ++x)
         {
             for (ushort y = 0; y < chunkSize; y++)
@@ -316,7 +319,7 @@ public class TerrainManagerScript : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Pool size after creating items: " + tilePool.GetPoolSize());
+        //Debug.Log("Pool size after creating items: " + tilePool.GetPoolSize());
         chunks[cx, cy].SetActive(true);
         chunksLoadedIntoMemory[cx, cy] = true;
         chunksCurrentlyDisplaying[cx, cy] = true;
@@ -329,14 +332,14 @@ public class TerrainManagerScript : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Pool size before adding back items: " + tilePool.GetPoolSize());
+        //Debug.Log("Pool size before adding back items: " + tilePool.GetPoolSize());
         foreach(Transform child in chunks[cx, cy].transform)
         {
             tilePool.AddTileIntoPool(child.gameObject);
         }
         chunks[cx, cy].gameObject.SetActive(false);
         chunksCurrentlyDisplaying[cx, cy] = false;
-        Debug.Log("Pool size after adding back items: " + tilePool.GetPoolSize());
+        //Debug.Log("Pool size after adding back items: " + tilePool.GetPoolSize());
     }   
 
     public void ClearTerrain()
@@ -520,8 +523,10 @@ public class TerrainManagerScript : MonoBehaviour
     {
         if (frontTilesValue[x, y] == (ushort)EnumClass.TileEnum.EMPTY) { return; }
 
-        inputManager.BadFunctionCalledByTerrainManager(frontTilesValue[x, y], 1);
-        if(frontTilesResourceValue[x, y] != 0) inputManager.BadFunctionCalledByTerrainManager(frontTilesResourceValue[x, y], 1);
+        //inputManager.BadFunctionCalledByTerrainManager(frontTilesValue[x, y], 1);
+        //if(frontTilesResourceValue[x, y] != 0) inputManager.BadFunctionCalledByTerrainManager(frontTilesResourceValue[x, y], 1);
+        GenerateTileDrop(frontTilesValue[x, y], 1, frontTiles[x, y].GetComponent<SpriteRenderer>().sprite, frontTiles[x, y].transform.position);
+        if (frontTilesResourceValue[x, y] != 0) GenerateTileDrop(frontTilesResourceValue[x, y], 1, frontTilesResources[x, y].GetComponent<SpriteRenderer>().sprite, frontTiles[x, y].transform.position);
 
         frontTilesValue[x, y] = 0;
         frontTilesResourceValue[x, y] = 0;
@@ -538,14 +543,25 @@ public class TerrainManagerScript : MonoBehaviour
     {
         if (backTilesValue[x, y] == (ushort)EnumClass.TileEnum.EMPTY) { return; }
 
-        inputManager.BadFunctionCalledByTerrainManager(backTilesValue[x, y], 1);
-        if (backTilesResourceValue[x, y] != 0) inputManager.BadFunctionCalledByTerrainManager(backTilesResourceValue[x, y], 1);
+        //inputManager.BadFunctionCalledByTerrainManager(backTilesValue[x, y], 1);
+        //if (backTilesResourceValue[x, y] != 0) inputManager.BadFunctionCalledByTerrainManager(backTilesResourceValue[x, y], 1);
+        GenerateTileDrop(backTilesValue[x, y], 1, backTiles[x, y].GetComponent<SpriteRenderer>().sprite, backTiles[x,y].transform.position);
+        if (backTilesResourceValue[x, y] != 0) GenerateTileDrop(backTilesResourceValue[x, y], 1, backTilesResources[x, y].GetComponent<SpriteRenderer>().sprite, backTiles[x, y].transform.position);
 
         backTilesValue[x, y] = 0;
         backTilesResourceValue[x, y] = 0;
 
         Destroy(backTiles[x, y]);
         Destroy(backTilesResources[x, y]);
+    }
+
+    //CREATE TILE DROP
+    private void GenerateTileDrop(ushort id, ushort amnt, Sprite img, Vector2 pos)
+    {
+        GameObject drop = Instantiate(PickupTilePrefab);
+        drop.GetComponent<TilePickUpScript>().SetTilePickup(inventoryControllerScript, id, amnt, img);
+        drop.transform.position = pos;
+        drop.GetComponent<Rigidbody2D>().AddForce((player.transform.localPosition - drop.transform.localPosition) * 50f);
     }
 
    /* public bool PlaceTile(int x, int y, GameObject t, ushort id)
@@ -605,9 +621,12 @@ public class TerrainManagerScript : MonoBehaviour
             tile.transform.SetParent(chunks[chunkX, chunkY].transform);
             tile.transform.localPosition = new Vector2(posXinChunk, posYinChunk);
             PlaceTileInFrontLayer(tile);
+            tile.gameObject.SetActive(true);
+
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     private void CutTree(int x, int y)

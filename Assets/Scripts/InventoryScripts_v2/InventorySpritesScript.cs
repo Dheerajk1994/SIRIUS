@@ -9,7 +9,7 @@ public class InventorySpritesScript : MonoBehaviour {
 
     private void Awake()
     {
-        ItemDictionary.GenerateDictionary();
+        ItemDictionary.GenerateDictionary(this);
     }
 
     public Sprite GetSprite(ushort index){

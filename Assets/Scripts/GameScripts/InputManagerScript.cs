@@ -113,7 +113,7 @@ public class InputManagerScript : MonoBehaviour {
 
     private void PlaceTileFrontLayer(ushort id)
     {
-        terrainManagerScript.PlaceTile((int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x, (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y, id, (ushort)EnumClass.LayerIDEnum.FRONTLAYER);
+        if(terrainManagerScript.PlaceTile((int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x, (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y, id, (ushort)EnumClass.LayerIDEnum.FRONTLAYER)) { }
     }
 
     private void PlaceTileBackLayer(ushort id)

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHotbarPanelScript : GenericInvoPanelScript {
 
@@ -9,12 +10,17 @@ public class PlayerHotbarPanelScript : GenericInvoPanelScript {
     public Hotbar playerHotbarReference;
 
     public ushort equippedSlot = 0;
+    public  Sprite selectedSlotSprite;
+    private Sprite defaultSprite;
 
-    // Use this for initialization
-    void Start()
+
+    public void SetPlayerHotbarPanel(Hotbar phr)
     {
-        slots = new GameObject[10]; //NEED OPTIMIZATION
-        for (ushort i = 0; i < slots.Length; i++)
+        playerHotbarReference = phr;
+
+        numberOfSlots = playerHotbarReference.GetInventorySize();
+        slots = new GameObject[numberOfSlots]; //NEED OPTIMIZATION
+        for (ushort i = 0; i < numberOfSlots; i++)
         {
             GameObject slot = Instantiate(inventorySlotPrefab);
             slot.name = "hotbarSlot_" + i;
@@ -26,24 +32,31 @@ public class PlayerHotbarPanelScript : GenericInvoPanelScript {
         }
         genericInvoHandler.slots = slots;
         equippedSlot = 0;
+        defaultSprite = slots[equippedSlot].GetComponent<Image>().sprite;
+        slots[equippedSlot].GetComponent<Image>().sprite = selectedSlotSprite;
+    }
+
+    void Start()
+    {
+        
     }
 
     private void Update()
     {
-        HandleInput();
+        //HandleInput();
     }
 
     public void EquipSlot(ushort slotIndex)
     {
-        Debug.Log("equip slot called with index " + slotIndex);
-        //variable that tells you which slot is active 
+        slots[equippedSlot].GetComponent<Image>().sprite = defaultSprite;//set the old slot back to default sprite
         equippedSlot = slotIndex;
+        slots[equippedSlot].GetComponent<Image>().sprite = selectedSlotSprite;//view selected sprite on new slot
     }
 
     //return ID of item in slot
     public ushort GetEquippedSlot()
     {
-        Debug.Log("Equipped Slot variable: " + equippedSlot);
+        //Debug.Log("Equipped Slot variable: " + equippedSlot);
         if (slots[equippedSlot].GetComponent<InventorySlot>().isHoldingAnItem)
         {
             return slots[equippedSlot].transform.GetChild(0).GetComponent<InventoryItem>().completeItem.itemDescription.id;
@@ -54,7 +67,11 @@ public class PlayerHotbarPanelScript : GenericInvoPanelScript {
         }
     }
 
-    private void  HandleInput()
+   
+}
+
+/*
+  private void  HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
             EquipSlot(0);
@@ -77,5 +94,4 @@ public class PlayerHotbarPanelScript : GenericInvoPanelScript {
         if (Input.GetKeyDown(KeyCode.Alpha0))
             EquipSlot(9);
     }
-}
-
+     */

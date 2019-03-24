@@ -56,29 +56,28 @@ MonoBehaviour:
   moonWorldSavePath: moonWorld
   currentWorld: 0
   currentWorldSavePath: greenWorld
-  stone: {fileID: 1857664707528882, guid: 166ee35a87d2b0348b0cfb1f8b47cd8c, type: 2}
-  UIPrefab: {fileID: 1518751177635052, guid: 154739a86ed85c14ca66bda78837b093, type: 2}
-  MainMenuPrefab: {fileID: 1196171191109542, guid: fe65a7e5815db40fb87a09296d7c79ac,
-    type: 2}
-  PlayerPrefab: {fileID: 1976911743273556, guid: 75332c875b310674a974b00fbe4d71ed,
-    type: 2}
   TerrainManagerPrefab: {fileID: 1692291654787358, guid: 49d8fbf2f65393446ab4cb1c2c234172,
     type: 2}
-  MainCameraPrefab: {fileID: 20422774771720070, guid: 461be19241647e04786f222d2316d27c,
+  UIPrefab: {fileID: 1854798513534054, guid: f42fea5cd4cb7b6429366240da94bcce, type: 2}
+  PlayerPrefab: {fileID: 1976911743273556, guid: 75332c875b310674a974b00fbe4d71ed,
     type: 2}
+  MainCameraPrefab: {fileID: 1939834119536744, guid: 461be19241647e04786f222d2316d27c,
+    type: 2}
+  InputManagerPrefab: {fileID: 1352975873008704, guid: 92f34953b7f0c3746865cea836661e87,
+    type: 2}
+  InventoryControllerPrefab: {fileID: 0}
+  terrainManager: {fileID: 0}
+  ui: {fileID: 0}
   player: {fileID: 0}
-  playerInvoPanel: {fileID: 0}
-  craftingPanel: {fileID: 0}
-  TerrainManager: {fileID: 0}
-  mainCamera: {fileID: 0}
-  MainMenu: {fileID: 0}
-  mainMenuScript: {fileID: 0}
-  UI: {fileID: 0}
+  mainCameraObject: {fileID: 0}
+  inputManager: {fileID: 0}
+  inventoryController: {fileID: 0}
+  terrainManagerScript: {fileID: 0}
   uiScript: {fileID: 0}
-  healthBar: {fileID: 0}
-  staminaBar: {fileID: 0}
-  hungerBar: {fileID: 0}
-  isInDemoMode: 1
+  playerScript: {fileID: 0}
+  cameraScript: {fileID: 0}
+  inputManagerScript: {fileID: 0}
+  inventoryControllerScript: {fileID: 0}
   readyToGo: 0
   worldPresent: 0
   playerPos: {x: 0, y: 0, z: 0}

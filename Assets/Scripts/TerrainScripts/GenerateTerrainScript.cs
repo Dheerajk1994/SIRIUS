@@ -69,7 +69,7 @@ public class GenerateTerrainScript : MonoBehaviour
     public void StartTerrainGeneration(TerrainManagerScript terrainManager, ushort xDim, ushort heightA, ushort chunkSize, ushort terrainType)
     {
         this.heightAddition = heightA;
-        Debug.Log(xDim + " % " + chunkSize + ": " + xDim % chunkSize);
+        //Debug.Log(xDim + " % " + chunkSize + ": " + xDim % chunkSize);
         //xDimension = (ushort)(xDim - (xDim - (chunkSize * (Mathf.Floor(xDim / chunkSize)))));   //MAKE SURE XDIMENSION IS DIVISIBLE BY CHUNKSIZE
         xDimension = (ushort)(xDim - (xDim % chunkSize));
         worldXDimension = xDimension;

@@ -14,9 +14,7 @@ public class GenericInvoHandlerScript : MonoBehaviour {
 
     private void Start()
     {
-        ItemDictionary.GenerateDictionary();
-        //slots = genericInventoryPanel.GetComponent<GenericInvoPanelScript>().slots;
-        //UpdatePanelSlots();
+
     }
 
     //FUNCTIONS
@@ -43,7 +41,6 @@ public class GenericInvoHandlerScript : MonoBehaviour {
     }
 
     //handle item drop
-    //when called by slot - the slot will call this function in the handler that its associated to
     public void HandleItemDrop(InventorySlot parentSlot, InventorySlot newSlot, InventoryItem itemBeingDragged)
     {
         //get the id of the item in the slot - teritiary operator if there slot is empty then 0 otherwise the id of the child
@@ -65,9 +62,6 @@ public class GenericInvoHandlerScript : MonoBehaviour {
             Debug.Log("remaining amount: " + remainingAmount);
             //call the original slots handler with remaining amount
             parentSlot.GetComponent<InventorySlot>().genericInvoHandler.genericInventory.SetItemAmountAtIndex(remainingAmount, parentSlot.slotID);
-            //call both handlers update functions
-            //Debug.Log("stack at new slot: " + genericInventory.FetchItemAmountInInventorySlot(newSlot.slotID));
-            //Debug.Log("stack at parent slot: " + parentSlot.GetComponent<InventorySlot>().genericInvoHandler.genericInventory.FetchItemAmountInInventorySlot(parentSlot.slotID));
 
             UpdatePanelSlots();
             parentSlot.GetComponent<InventorySlot>().genericInvoHandler.UpdatePanelSlots();
@@ -75,24 +69,14 @@ public class GenericInvoHandlerScript : MonoBehaviour {
         }
         else//swap
         {
-            //Debug.Log("swap called");
-            //call the parent slot with the item in the new slot
-            InventoryItem itemInNewSlot = newSlot.transform.GetChild(0).GetComponent<InventoryItem>();
-            parentSlot.GetComponent<InventorySlot>().genericInvoHandler.genericInventory.AddItemToIndex(
-                itemInNewSlot.completeItem.itemDescription,
-                itemInNewSlot.GetComponent<InventoryItem>(),
-                itemInNewSlot.GetComponent<InventoryItem>().stackCount,
-                parentSlot.slotID);
-            //call the new slot with itembeing dragged
-            newSlot.GetComponent<InventorySlot>().genericInvoHandler.genericInventory.AddItemToIndex(
-               itemBeingDragged.completeItem.itemDescription,
-               itemBeingDragged,
-               itemBeingDragged.stackCount,
-               newSlot.slotID);
+            ushort tempId = genericInventory.FetchItemIdInInventorySlot(newSlot.slotID);
+            ushort tempAmount = genericInventory.FetchItemAmountInInventorySlot(newSlot.slotID);
+
+            genericInventory.SetItemAtIndexNoQuestionAsked(itemBeingDragged.completeItem.itemDescription.id, itemBeingDragged.stackCount, newSlot.slotID);
+            parentSlot.GetComponent<InventorySlot>().genericInvoHandler.genericInventory.SetItemAtIndexNoQuestionAsked(tempId, tempAmount, parentSlot.slotID);
 
             UpdatePanelSlots();
             parentSlot.GetComponent<InventorySlot>().genericInvoHandler.UpdatePanelSlots();
-            //Debug.Log("item in new slot stack: " + itemInNewSlot.GetComponent<InventoryItem>().stackCount + "item being dragged stack: " + itemBeingDragged.stackCount);
         } 
     }
 

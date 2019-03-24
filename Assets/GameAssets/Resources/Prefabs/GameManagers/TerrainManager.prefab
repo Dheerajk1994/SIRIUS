@@ -56,6 +56,8 @@ MonoBehaviour:
   heightAddition: 500
   TileObjectPrefab: {fileID: 1212904404968698, guid: 5ac034eac9cfea74fbf2d9dc890db054,
     type: 2}
+  PickupTilePrefab: {fileID: 1672008991011400, guid: d5b16e1d919e3d64a93d6c8af75755de,
+    type: 2}
   regularStoneSprites:
   - {fileID: 21300000, guid: 3aaae0fabe76a12449c31cc70c66c5b7, type: 3}
   - {fileID: 21300000, guid: 9e1330000bab6884e8a763aa740be1be, type: 3}

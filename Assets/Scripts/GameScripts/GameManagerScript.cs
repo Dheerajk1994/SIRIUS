@@ -22,6 +22,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject PlayerPrefab;
     public GameObject MainCameraPrefab;
     public GameObject InputManagerPrefab;
+    public GameObject InventoryControllerPrefab;
     #endregion
 
     #region INSTANTIATED_PREFABS
@@ -30,14 +31,16 @@ public class GameManagerScript : MonoBehaviour
     public GameObject player;
     public GameObject mainCameraObject;
     public GameObject inputManager;
+    public GameObject inventoryController;
     #endregion
 
     #region SCRIPT_REFERENCES
     public TerrainManagerScript terrainManagerScript;
-    public UIScript uIScript;
+    public UIScript uiScript;
     public PlayerScript playerScript;
     public CameraScript cameraScript;
     public InputManagerScript inputManagerScript;
+    public InventoryControllerScript inventoryControllerScript;
     #endregion
 
     #region LOCAL_VARIABLES
@@ -64,28 +67,32 @@ public class GameManagerScript : MonoBehaviour
     private void Start()
     {
         //INITIALIZE ALL THE PREFABS AND SCRIPT REFERENCES
-        terrainManager       = Instantiate(TerrainManagerPrefab);
-        terrainManagerScript = terrainManager.GetComponent<TerrainManagerScript>();
+        terrainManager            = Instantiate(TerrainManagerPrefab);
+        terrainManagerScript      = terrainManager.GetComponent<TerrainManagerScript>();
+                                  
+        ui                        = Instantiate(UIPrefab);
+        uiScript                  = ui.GetComponent<UIScript>();
+                                  
+        player                    = Instantiate(PlayerPrefab);
+        playerScript              = player.GetComponent<PlayerScript>();
+                                  
+        mainCameraObject          = Instantiate(MainCameraPrefab);
+        cameraScript              = mainCameraObject.GetComponent<CameraScript>();
+                                  
+        inputManager              = Instantiate(InputManagerPrefab);
+        inputManagerScript        = inputManager.GetComponent<InputManagerScript>();
 
-        ui                   = Instantiate(UIPrefab);
-        uIScript             = ui.GetComponent<UIScript>();
-                             
-        player               = Instantiate(PlayerPrefab);
-        playerScript         = player.GetComponent<PlayerScript>();
-                             
-        mainCameraObject     = Instantiate(MainCameraPrefab);
-        cameraScript         = mainCameraObject.GetComponent<CameraScript>();
-                             
-        inputManager         = Instantiate(InputManagerPrefab);
-        inputManagerScript   = inputManager.GetComponent<InputManagerScript>();
+        inventoryController       = Instantiate(InventoryControllerPrefab);
+        inventoryControllerScript = inventoryController.GetComponent<InventoryControllerScript>();
 
         ui.      gameObject.SetActive(false);
         player.  gameObject.SetActive(false);
 
-        terrainManagerScript.SetTerrainManager(this);
-        uIScript.SetUIPanel(this, inputManagerScript, player);
-        playerScript.SetPlayerScript(this, uIScript);
-        inputManagerScript.SetInputManager(this, uIScript, terrainManagerScript);
+        terrainManagerScript          .SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
+        uiScript                      .SetUIPanel(this, inputManagerScript, player);
+        playerScript                  .SetPlayerScript(this, uiScript);
+        inputManagerScript            .SetInputManager(this, uiScript, terrainManagerScript);
+        inventoryControllerScript     .SetInventoryController(this, uiScript);
 
 
         //SET LOCAL VARIABLES
@@ -105,8 +112,8 @@ public class GameManagerScript : MonoBehaviour
         {
             if (Vector2.Distance(player.transform.position, playerPos) > 20.0f)
             {
-                Debug.Log("player transform pos: " + player.transform.position);
-                Debug.Log("playerpos: " + playerPos);
+                //Debug.Log("player transform pos: " + player.transform.position);
+                //Debug.Log("playerpos: " + playerPos);
                 terrainManagerScript.DisplayChunks(player.transform.position);
                 playerPos = player.transform.position;
             }

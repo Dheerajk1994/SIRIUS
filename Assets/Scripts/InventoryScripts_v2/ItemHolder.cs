@@ -15,7 +15,6 @@ public class ItemHolder : MonoBehaviour
 
     [SerializeField]
     private ushort [,] inventoryArray;    //items that are in the inventory row 0 = item id, row 1 = amount of that item
-                                            //[0,0] id [1,0] amount
 
     void Awake(){
         //Debug.Log("item holder awake called " + inventorySize);
@@ -36,7 +35,6 @@ public class ItemHolder : MonoBehaviour
         }
         return sum;
     } 
-    //[0][0][6][5]     [0][0][0] we need 8
 
     public ushort RemoveItemFromInventory(ushort id, ushort amount) //you need 5 stone and there is 10 stone in the slot
     {
@@ -152,33 +150,15 @@ public class ItemHolder : MonoBehaviour
         }
     }
 
+    public void SetItemAtIndexNoQuestionAsked(ushort id, ushort amount, ushort index)
+    {
+        inventoryArray[ROW_ID, index] = id;
+        inventoryArray[ROW_AMOUNT, index] = amount;
+    }
 
     public ushort RemoveItem(ushort itemID, ushort amount)
     {
         return amount;
-    }
-
-
-    //swap two slots
-    public bool SwapInventoryItems(ushort slot1Index, ushort slot2Index)
-    {
-        if(slot1Index < inventorySize && slot2Index < inventorySize)
-        {
-            ushort tempID = inventoryArray[ROW_ID, slot1Index];
-            ushort tempAmount = inventoryArray[ROW_AMOUNT, slot1Index];
-
-            inventoryArray[ROW_ID,     slot1Index] = inventoryArray[ROW_ID,     slot2Index];
-            inventoryArray[ROW_AMOUNT, slot1Index] = inventoryArray[ROW_AMOUNT, slot2Index];
-
-            inventoryArray[ROW_ID,     slot2Index] = tempID;
-            inventoryArray[ROW_AMOUNT, slot2Index] = tempAmount;
-
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     public ushort FetchItemIdInInventorySlot(ushort slot)
