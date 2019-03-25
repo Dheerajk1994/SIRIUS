@@ -20,9 +20,9 @@ public class MenuScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        menuPanel = transform.FindChild("Panel");
+        menuPanel = transform.Find("Panel");
 
-        for(int i = 0; i < menuPanel.GetChildCount(); ++i)
+        for(int i = 0; i < menuPanel.childCount; ++i)
         {
             
             if (menuPanel.GetChild(i).name == "Left")

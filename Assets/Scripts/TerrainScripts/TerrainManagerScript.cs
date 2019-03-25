@@ -93,6 +93,8 @@ public class TerrainManagerScript : MonoBehaviour
 
     public void SetTiles(ushort[,] fTilesV,ushort[,] fTilesRV, ushort[,] bTilesV, ushort[,] bTilesRV, ushort[,] vTilesV)
     {
+        //////change this
+        LiquidManagerScript.instance.frontTileValues = fTilesV;
 
 
         worldXDimension = (ushort)fTilesV.GetLength(0);
@@ -653,5 +655,12 @@ public class TerrainManagerScript : MonoBehaviour
         }
         return pos;
     }
+
+    //GET FUNCTIONS
+    public ushort[,] GetFrontTilesValues()
+    {
+        return frontTilesValue;
+    }
+
 
 }
