@@ -65,7 +65,8 @@ MonoBehaviour:
     type: 2}
   InputManagerPrefab: {fileID: 1352975873008704, guid: 92f34953b7f0c3746865cea836661e87,
     type: 2}
-  InventoryControllerPrefab: {fileID: 0}
+  InventoryControllerPrefab: {fileID: 1254821907270186, guid: c238ef9336c24724c806cbdb5593c70a,
+    type: 2}
   terrainManager: {fileID: 0}
   ui: {fileID: 0}
   player: {fileID: 0}
