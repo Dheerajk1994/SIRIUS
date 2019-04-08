@@ -148,9 +148,9 @@ class Grid
                     {
                         if (
                             terrain[x, y - 1] == 0 &&
-                            terrain[x, y - 2] == 0 //&&
-                            //terrain[x - 1, y] == 0 &&
-                            //terrain[x + 1, y] == 0
+                            terrain[x, y + 1] == 0 &&
+                            terrain[x - 1, y] == 0 &&
+                            terrain[x + 1, y] == 0
                             )
                         {
                             obstacle = true;    
@@ -200,6 +200,40 @@ class Grid
         {
             neighbors.Add(grid[xCheck, yCheck]);
         }
+
+        //top left
+        xCheck = node.xPos - 1;
+        yCheck = node.yPos + 1;
+        if (xCheck >= 0 && xCheck < xDim && yCheck >= 0 && yCheck < yDim)
+        {
+            neighbors.Add(grid[xCheck, yCheck]);
+        }
+
+        //top right
+        xCheck = node.xPos + 1;
+        yCheck = node.yPos + 1;
+        if (xCheck >= 0 && xCheck < xDim && yCheck >= 0 && yCheck < yDim)
+        {
+            neighbors.Add(grid[xCheck, yCheck]);
+        }
+
+        //bot left
+        xCheck = node.xPos - 1;
+        yCheck = node.yPos - 1;
+        if (xCheck >= 0 && xCheck < xDim && yCheck >= 0 && yCheck < yDim)
+        {
+            neighbors.Add(grid[xCheck, yCheck]);
+        }
+
+        //bot right
+        xCheck = node.xPos + 1;
+        yCheck = node.yPos - 1;
+        if (xCheck >= 0 && xCheck < xDim && yCheck >= 0 && yCheck < yDim)
+        {
+            neighbors.Add(grid[xCheck, yCheck]);
+        }
+
+
 
         return neighbors;
     }
