@@ -2,37 +2,67 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Engine : Interactable {
-    private readonly float maxRepair = 100f;
-    private readonly float maxFuel = 100f;
-    private float currentRepair;
-    private float currentFuel;
+public class Engine : Interactable
+{
+    private readonly float maxRepairGenerator = 100f, maxRepairCrystals = 100f, maxFuel = 100f;
+    private float currentRepairGenerator, currentRepairCrystals, currentFuel;
 
     public override void Interact()
     {
         base.Interact();
         isInteracting = !isInteracting;
-        Debug.Log("Engine: " + currentRepair.ToString() + "%");
+        Debug.Log("Generator: " + currentRepairGenerator.ToString() + "%");
+        Debug.Log("Crystals: " + currentRepairCrystals.ToString() + "%");
         Debug.Log("Fuel: " + currentFuel.ToString() + "%");
     }
 
-    public void Repair(float value)
+    private void Start()
     {
-        if (currentRepair + value >= maxRepair)
-            currentRepair = maxRepair;
+
+    }
+
+    private void Update()
+    {
+        if (canInteract && Input.GetKeyDown(KeyCode.E))
+            Interact();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name.Equals("Sam(Clone)"))
+            canInteract = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.name.Equals("Sam(Clone)"))
+        {
+            canInteract = false;
+            isInteracting = false;
+        }
+    }
+
+    public void RepairGenerator(float value)
+    {
+        if (currentRepairGenerator + value >= maxRepairGenerator)
+            currentRepairGenerator = maxRepairGenerator;
         else
-            currentRepair += value;
+            currentRepairGenerator += value;
+    }
+
+    public void RepairCrystals(float value)
+    {
+        if (currentRepairCrystals + value >= maxRepairCrystals)
+            currentRepairCrystals = maxRepairCrystals;
+        else
+            currentRepairCrystals += value;
     }
 
     public void Refuel(float value)
     {
-        //if (currentFuel + value >= maxFeul)
-        //    currentFuel = maxFeul;
-        //else
-        //    currentFuel += value;
         currentFuel += value;
         Mathf.Clamp(currentFuel, 0, maxFuel);
     }
 
-	
+
 }
