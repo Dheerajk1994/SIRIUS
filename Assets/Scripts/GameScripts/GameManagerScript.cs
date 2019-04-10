@@ -114,10 +114,10 @@ public class GameManagerScript : MonoBehaviour
             {
                 //Debug.Log("player transform pos: " + player.transform.position);
                 //Debug.Log("playerpos: " + playerPos);
-                terrainManagerScript.DisplayChunks(player.transform.position);
-                playerPos = player.transform.position;
+                //terrainManagerScript.DisplayChunks(player.transform.position);
+                //playerPos = player.transform.position;
             }
-            terrainManagerScript.DisplayChunks(player.transform.position);
+            //terrainManagerScript.DisplayChunks(player.transform.position);
         }
     }
 

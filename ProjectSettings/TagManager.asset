@@ -41,15 +41,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 2078349743
+    locked: 0
+  - name: hitboxLayer
+    uniqueID: 3825906477
+    locked: 0
+  - name: shipLayer
+    uniqueID: 537305065
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: backTileLayer
-    uniqueID: 2078349743
-    locked: 0
-  - name: frontTileLayer
-    uniqueID: 537305065
-    locked: 0
-  - name: grassLayer
+  - name: frontLayer
     uniqueID: 3394772979
     locked: 0
