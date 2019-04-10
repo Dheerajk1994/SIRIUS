@@ -27,21 +27,6 @@ public class Engine : Interactable
             Interact();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.name.Equals("Sam(Clone)"))
-            canInteract = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.name.Equals("Sam(Clone)"))
-        {
-            canInteract = false;
-            isInteracting = false;
-        }
-    }
-
     public void RepairGenerator(float value)
     {
         if (currentRepairGenerator + value >= maxRepairGenerator)
@@ -63,6 +48,4 @@ public class Engine : Interactable
         currentFuel += value;
         Mathf.Clamp(currentFuel, 0, maxFuel);
     }
-
-
 }
