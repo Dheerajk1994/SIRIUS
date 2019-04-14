@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public abstract class CharacterFinal : MonoBehaviour {
 
+    #region COMPONENTS
     public Animator MyAnimator { get; private set; }
+    #endregion
 
+    #region VARIABLES
     [SerializeField]
     private EdgeCollider2D BarkCollider;
 
@@ -13,13 +17,27 @@ public abstract class CharacterFinal : MonoBehaviour {
     protected float currentHealth;
 
     protected bool facingRight;
+    public Vector2 currentPosition;
+    protected List<Vector2> path;
 
     [SerializeField]
     private List<string> damageSources;
 
-    [SerializeField]
     protected float movementSpeed;
 
+    [SerializeField] 
+    protected float chaseSpeed = 5f;
+    [SerializeField]
+    protected float patrolSpeed = 2f;
+    #endregion
+
+
+
+
+    #region REFERENCES
+    protected TerrainManagerScript terrainManagerScript;
+    
+#endregion
     public float standardDamage;
 
     public abstract bool IsDead { get;  }
@@ -34,16 +52,17 @@ public abstract class CharacterFinal : MonoBehaviour {
 */  
 
     // Use this for initialization
-    public virtual void Start () 
+    protected virtual void Start () 
     {
         facingRight = true;
         MyAnimator = GetComponent<Animator>();
+        terrainManagerScript = GameObject.Find("TerrainManager(Clone)").GetComponent<TerrainManagerScript>();
     }
 	
 	// Update is called once per frame
-	void Update ()
+	protected virtual void Update ()
     {
-		
+		currentPosition = this.transform.position;
 	}
 
     public void ChangeDirection()

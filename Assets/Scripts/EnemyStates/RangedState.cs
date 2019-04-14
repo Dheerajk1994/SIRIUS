@@ -18,7 +18,6 @@ public class RangedState : IEnemyState {
 
     public void Execute()
     {
-
         // RangedAttack();
 
         // check if in melee range
@@ -30,13 +29,14 @@ public class RangedState : IEnemyState {
         if (enemy.Target != null)
         {
             Debug.Log("Target Acquired... Following");
-            enemy.Move(); 
+            enemy.MoveRanged();
         } 
         else
         {
             enemy.ChangeState(new IdleState());
         }
     }
+    
 
     public void Exit()
     {

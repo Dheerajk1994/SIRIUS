@@ -17,7 +17,8 @@ public class PatrolState : IEnemyState {
     {
         Debug.Log("Enemy Patroling");
         Patrol();
-        enemy.Move();
+        //enemy.Move();
+        enemy.MovePatrol();
 
         // maybe future implementation with ranged attack for diff enemies?  
         // if (enemy.Target !=null && enemy.InRangedAttackRange)
@@ -33,8 +34,10 @@ public class PatrolState : IEnemyState {
 
     }
 
+
     public void OnTriggerEnter(Collider2D other)
     {
+        // for big monsters that we restrict where it can move on the map move
         // future direciton changing things done here
         // eg. if (other.tag == "some obstacle") enemy.ChangeDirection();
     }

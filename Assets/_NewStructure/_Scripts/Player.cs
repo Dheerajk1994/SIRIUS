@@ -4,8 +4,26 @@ using UnityEngine;
 
 public class Player : CharacterFinal 
 {
+    public GameManagerScript gameManagerScript;
+    public UIScript uiScript;
 
-    private static Player instance; 
+    private static Player instance;
+    //there should be only one player
+    // void Awake(){
+    //     if(instance == null){
+    //         instance = this;
+    //     }
+    //     else if(instance != this){
+    //         Destroy(this);
+    //     }
+    // }
+
+    public void SetPlayerScript(GameManagerScript gmScript, UIScript uScript)
+    {
+        gameManagerScript = gmScript;
+        uiScript = uScript;
+    }
+
     public static Player Instance
     {
         get 
@@ -32,8 +50,6 @@ public class Player : CharacterFinal
         }
     }
 
-    //private bool attack;
-
     [SerializeField]
     private bool airControl;
 
@@ -55,18 +71,17 @@ public class Player : CharacterFinal
     private bool jumpAttack;
     */
 
-    
-
 	// Use this for initialization
-	public override void Start () 
+	protected override void Start () 
     {
         base.Start();
         MyRigidbody = GetComponent<Rigidbody2D>();
        
 	}
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         HandleInput();
     }
 
@@ -99,13 +114,6 @@ public class Player : CharacterFinal
 
     }
 
-    private void Flip(float horizontal)
-    {
-        if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
-        {
-            ChangeDirection();
-        }
-    }
 
     private bool IsGrounded()
     {
@@ -140,6 +148,14 @@ public class Player : CharacterFinal
             MyAnimator.SetLayerWeight(1, 0);
         }
 
+    }
+
+    private void Flip(float horizontal)
+    {
+        if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
+        {
+            this.ChangeDirection();
+        }
     }
 
     private void HandleMovement(float horizontal) 

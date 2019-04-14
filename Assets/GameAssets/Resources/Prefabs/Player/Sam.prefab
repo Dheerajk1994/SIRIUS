@@ -26,6 +26,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1285106033426114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4053500102051644}
+  m_Layer: 0
+  m_Name: GroundPoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1406553222955608
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,6 +51,21 @@ GameObject:
   - component: {fileID: 4183950586258662}
   m_Layer: 0
   m_Name: GroudCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1756226229681482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4609294073226404}
+  m_Layer: 0
+  m_Name: GroundPoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,21 +82,31 @@ GameObject:
   - component: {fileID: 212372736381707690}
   - component: {fileID: 50287514886412880}
   - component: {fileID: 114426077539660584}
-  - component: {fileID: 114615449279679094}
   - component: {fileID: 70908077706915636}
   - component: {fileID: 95806841719390866}
-  - component: {fileID: 114944128281001554}
-  - component: {fileID: 114789206657648136}
-  - component: {fileID: 114501148316087484}
+  - component: {fileID: 114746810861653252}
   - component: {fileID: 114465566261386562}
   - component: {fileID: 114078310744139936}
   m_Layer: 0
   m_Name: Sam
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4053500102051644
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1285106033426114}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.34, y: -1.4300003, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4482612416879126}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4183950586258662
 Transform:
   m_ObjectHideFlags: 1
@@ -87,11 +127,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1976911743273556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60, y: 110, z: 0}
+  m_LocalPosition: {x: 21.370436, y: 91.28697, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4512673271041088}
   - {fileID: 4183950586258662}
+  - {fileID: 4609294073226404}
+  - {fileID: 4053500102051644}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -107,6 +149,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4482612416879126}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4609294073226404
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1756226229681482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.14, y: -1.43, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4482612416879126}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50287514886412880
 Rigidbody2D:
@@ -152,7 +207,7 @@ Animator:
   m_GameObject: {fileID: 1976911743273556}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 05063fec1b716db4096f4ce4a33cb5ef, type: 2}
+  m_Controller: {fileID: 9100000, guid: abb82f2ba966f4c33836ca3b72050eff, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -197,7 +252,7 @@ MonoBehaviour:
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114615449279679094}
+      - m_Target: {fileID: 0}
         m_MethodName: OnLanding
         m_Mode: 1
         m_Arguments:
@@ -227,7 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventorySize: 10
---- !u!114 &114501148316087484
+--- !u!114 &114746810861653252
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,75 +290,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1976911743273556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2db883ab57b9c4e4fbce596e45ac8a8d, type: 3}
+  m_Script: {fileID: 11500000, guid: bcce322849124413bb15393472eab0fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standardDamage: 0
+  BarkCollider: {fileID: 0}
   currentHealth: 100
-  maxHealth: 100
-  currentStamina: 100
-  maxStamina: 100
-  currentHunger: 100
-  maxHunger: 100
-  temperature: 0
-  facingRight: 0
-  attack: 0
-  horizontalMove: 0
+  currentPosition: {x: 0, y: 0}
+  damageSources: []
+  chaseSpeed: 5
+  patrolSpeed: 2
+  standardDamage: 0
   gameManagerScript: {fileID: 0}
   uiScript: {fileID: 0}
-  controller: {fileID: 0}
-  player: {fileID: 0}
-  BarkCollider: {fileID: 0}
-  healState: 0
-  armor: 0
-  insulation: 0
-  healthRecoveryRate: 0.1
-  staminaRecoveryRate: 0.1
-  hungerRecoveryRate: -0.005
---- !u!114 &114615449279679094
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1976911743273556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56c4ca0334c31bf40a3ff4190c865698, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 114426077539660584}
-  animator: {fileID: 95806841719390866}
-  player: {fileID: 0}
-  playerScript: {fileID: 0}
-  runSpeed: 100
-  horizontalMove: 0
-  jump: 0
-  rigidbody: {fileID: 0}
---- !u!114 &114789206657648136
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1976911743273556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a72da5e74f6a5b04e891cf0febc965d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventorySize: 40
-  itemMaxStackAmount: 100
-  gameManager: {fileID: 0}
---- !u!114 &114944128281001554
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1976911743273556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcdc9bbc6d9b35c4cae97ce4f6277995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  airControl: 0
+  jumpForce: 450
+  groundPoints:
+  - {fileID: 4609294073226404}
+  - {fileID: 4053500102051644}
+  groundRadius: 0.2
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!212 &212372736381707690
 SpriteRenderer:
   m_ObjectHideFlags: 1

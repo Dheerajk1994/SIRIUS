@@ -6,7 +6,7 @@ public class IdleState : IEnemyState
 {
     private Enemy enemy;
     private float idleTimer;
-    private float idleDuration = 3;
+    [SerializeField] private float idleDuration = 3;
 
     public void Enter(Enemy enemy)
     {
@@ -15,7 +15,7 @@ public class IdleState : IEnemyState
 
     public void Execute()
     {
-        Debug.Log("Enemy Idling");
+        // Debug.Log("Enemy Idling");
         Idle();
 
         // switch to new state when we see something, switch to patrol state

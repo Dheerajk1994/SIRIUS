@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 using UnityEngine;
 using System.Diagnostics;
 
 public static class AStar
 {
-    public static void FindPath(Vector2 startPos, Vector2 endPos, ushort[,] terrain, ExplorerScript eScript)
+    public static void FindPath(Vector2 startPos, Vector2 endPos, ushort[,] terrain, Enemy eScript)
     {
         //Stopwatch stopwatch = new Stopwatch();
         //stopwatch.Start();
-
+        UnityEngine.Debug.Log("start pos " + startPos + " end pos " + endPos);
         Grid grid = new Grid();
         grid.CreateGrid(terrain);
 
@@ -147,6 +147,7 @@ class Grid
                     if (y - 1 > 0 && x - 1 > 0 && x + 1 < xDim && y + 1 < yDim)
                     {
                         if (
+                            //defines obstacles in space we will be mostly here
                             terrain[x, y - 1] == 0 &&
                             terrain[x, y + 1] == 0 &&
                             terrain[x - 1, y] == 0 &&

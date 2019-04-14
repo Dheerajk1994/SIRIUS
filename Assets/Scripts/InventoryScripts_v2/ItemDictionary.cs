@@ -29,7 +29,7 @@ public static class ItemDictionary
                 {
                     //Debug.Log(item.itemName);
                     itemDictionary.Add(item.id, item);
-                    Debug.Log(item.itemName + " " + item.type);
+                    //Debug.Log(item.itemName + " " + item.type);
                 }
                 isItemDictionaryPopulated = true;
             }
