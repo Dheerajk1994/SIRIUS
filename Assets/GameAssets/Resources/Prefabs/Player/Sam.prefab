@@ -234,7 +234,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1976911743273556}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32f2fc7eff9a13f49a85496f7d2e3b0a, type: 3}
   m_Name: 
@@ -297,13 +297,14 @@ MonoBehaviour:
   currentHealth: 100
   currentPosition: {x: 0, y: 0}
   damageSources: []
+  movementSpeed: 8
   chaseSpeed: 5
   patrolSpeed: 2
   standardDamage: 0
   gameManagerScript: {fileID: 0}
   uiScript: {fileID: 0}
-  airControl: 0
-  jumpForce: 450
+  airControl: 1
+  jumpForce: 5000
   groundPoints:
   - {fileID: 4609294073226404}
   - {fileID: 4053500102051644}

@@ -170,7 +170,8 @@ public class Player : CharacterFinal
         }
         if (Jump && MyRigidbody.velocity.y == 0)
         {
-            MyRigidbody.AddForce(new Vector2(0, jumpForce)); 
+            //MyRigidbody.AddForce(new Vector2(0, jumpForce)); 
+            MyRigidbody.AddForce(Vector2.up * jumpForce); 
         }
         MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }

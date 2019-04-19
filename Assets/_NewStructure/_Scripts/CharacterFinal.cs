@@ -23,6 +23,7 @@ public abstract class CharacterFinal : MonoBehaviour {
     [SerializeField]
     private List<string> damageSources;
 
+    [SerializeField]
     protected float movementSpeed;
 
     [SerializeField] 
