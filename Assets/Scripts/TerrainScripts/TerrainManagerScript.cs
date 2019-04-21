@@ -662,5 +662,29 @@ public class TerrainManagerScript : MonoBehaviour
         return frontTilesValue;
     }
 
+    public int GetRelativeXPos(int worldXPos)
+    {
+        return Mathf.FloorToInt((worldXPos % worldXDimension + worldXDimension) % worldXDimension);
+    }
 
+    public ushort[,] GetSurroundingTileValues(Vector2 currentPos,ushort radius)
+    {
+        //Debug.Log("current pos : " + currentPos);
+        ushort[,] surroundTiles = new ushort[radius * 2, radius * 2];
+        int xRelPos;        
+
+        for(int x = -radius; x < radius; ++x)
+        {
+            xRelPos = Mathf.FloorToInt((currentPos.x + x % worldXDimension + worldXDimension) % worldXDimension);
+            //Debug.Log("x rel pos " + xRelPos);
+            for(int y = -radius; y < radius; ++y)
+            {
+                // int xRelativell = Mathf.FloorToInt(((playerPos.x - chunkSize * 2 )% worldXDimension + worldXDimension) % worldXDimension);
+                //Debug.Log("x : " + xRelPos + " y : " + (ushort)(currentPos.y + y) + " value = " + frontTilesValue[xRelPos, (ushort)(currentPos.y + y)]);
+                surroundTiles[radius + x, radius + y] = frontTilesValue[xRelPos, (ushort)(currentPos.y + y)];
+            }
+        }
+
+        return surroundTiles;
+    }
 }

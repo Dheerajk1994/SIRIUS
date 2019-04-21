@@ -2,30 +2,44 @@
 using System.Collections;
 using System.Collections.Generic; 
 using UnityEngine;
-using System.Diagnostics;
+//using System.Diagnostics;
 
 public static class AStar
 {
-    public static void FindPath(Vector2 startPos, Vector2 endPos, ushort[,] terrain, Enemy eScript)
+    public static void FindPath(Vector2 startPos, Vector2 endPos, ushort[,] terrain/*, Enemy eScript*/)
     {
-        //Stopwatch stopwatch = new Stopwatch();
-        //stopwatch.Start();
-        UnityEngine.Debug.Log("start pos " + startPos + " end pos " + endPos);
+        //Debug.Log(terrain.GetLength(0) + " " + terrain.GetLength(1));
+
+        //UnityEngine.Debug.Log("start pos " + startPos + " end pos " + endPos);
         Grid grid = new Grid();
         grid.CreateGrid(terrain);
 
-        //List<Node> openSet = new List<Node>();
         Heap<Node> openSet = new Heap<Node>(1000);
         HashSet<Node> closeSet = new HashSet<Node>();
 
         Node startNode;
         Node endNode;
-
+        /*
+         the staring node will be at the middle of the terrain[,]
+         the end node will be a certain distance from the starting node
+            find the difference between the starting node and end node
+            add this difference to start node to get the pos of end node in terrain[,]
+         
+         */
         try
         {
-            startNode = grid.grid[(int)startPos.x, (int)startPos.y];
-            endNode = grid.grid[(int)endPos.x, (int)endPos.y];
+            startNode = grid.grid[terrain.GetLength(0) / 2, terrain.GetLength(1) / 2];
+            //endNode = grid.grid[(int)endPos.x % terrain.GetLength(0), (int)endPos.y % terrain.GetLength(1)];
+            //Debug.Log("start pos " + startPos);
+            //Debug.Log("end pos " + endPos);
+            //Debug.Log("terrain : " + terrain.GetLength(0) + " " + terrain.GetLength(1));
+            //Debug.Log("endPos.x - startPos.x " + (int)(endPos.x - startPos.x));
+            //Debug.Log("endPos.y - startPos.y " + (int)(endPos.y - startPos.y));
+            //Debug.Log((terrain.GetLength(0) + (int)(endPos.x - startPos.x)) + " " + (terrain.GetLength(1) + (int)(endPos.y - startPos.y)));
+            endNode = grid.grid[terrain.GetLength(0)/2 + Mathf.RoundToInt(endPos.x - startPos.x), terrain.GetLength(1)/2 + Mathf.RoundToInt(endPos.y - startPos.y)];
             openSet.Add(startNode);
+            //Debug.Log("start node: " + startNode.xPos + " " + startNode.yPos);
+            //Debug.Log("end   node: " + endNode.xPos + " " + endNode.yPos);
         }
         catch (Exception e)
         {
@@ -36,19 +50,6 @@ public static class AStar
 
         while (openSet.Count > 0 && !nodeFound)
         {
-            //without heap
-            //Node currentNode = openSet[0];
-            //for (int i = 1; i < openSet.Count; i++)
-            //{
-            //    if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)
-            //    {
-            //        currentNode = openSet[i];
-            //    }
-            //}
-            //openSet.Remove(currentNode);
-            //without heap
-
-
             //with heap
             Node currentNode = openSet.RemoveFirstItem();
             //with heap
@@ -83,24 +84,34 @@ public static class AStar
 
         List<Vector2> path = new List<Vector2>();
         if (!nodeFound) {
-            eScript.SetPotentialPath(path);
-            //return path;
+            //eScript.SetPotentialPath(path);
+            AIPathManagerScript.instance.ReturnPathFromThread(path);//new
             return;
         }
         Node currenNode = endNode;
 
+        int xDisplacement;
+        int yDisplacement;
+
         while (currenNode != startNode)
         {
-            Vector2 pos = new Vector2(currenNode.xPos, currenNode.yPos);
+            //new Vector2(x + this.currentPosition.x - terrain.GetLength(0)/2, y + this.currentPosition.y - terrain.GetLength(1) / 2), Vector3.one * 0.3f);
+            xDisplacement = (int)(startNode.xPos - currenNode.xPos + startPos.x);
+            yDisplacement = (int)(startNode.yPos - currenNode.yPos + startPos.y);
+            Vector2 pos = new Vector2(currenNode.xPos + (int)(startPos.x - terrain.GetLength(0)/2), currenNode.yPos + (int)(startPos.y - terrain.GetLength(1)/2));
             path.Add(pos);
             currenNode = currenNode.parent;
         }
-        //stopwatch.Stop();
-        //UnityEngine.Debug.Log("path finding took: " + stopwatch.ElapsedMilliseconds + " ms");
+
         path.Reverse();
 
-        eScript.SetPotentialPath(path);
-        //return path;
+        //foreach(Vector2 v in path)
+        //{
+        //    Debug.Log(v);
+        //}
+
+        //eScript.SetPotentialPath(path);
+        AIPathManagerScript.instance.ReturnPathFromThread(path);//new
     }
 
     static int GetDistance(Node a, Node b)

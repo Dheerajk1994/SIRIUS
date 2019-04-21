@@ -28,7 +28,7 @@ public class RangedState : IEnemyState {
 
         if (enemy.Target != null)
         {
-            Debug.Log("Target Acquired... Following");
+            //Debug.Log("Target Acquired... Following");
             enemy.MoveRanged();
         } 
         else

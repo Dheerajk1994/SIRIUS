@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4cd56488e2614459e50ba265c8276c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDimension: 500
-  heightAddition: 500
+  xDimension: 200
+  heightAddition: 40
   TileObjectPrefab: {fileID: 1212904404968698, guid: 5ac034eac9cfea74fbf2d9dc890db054,
     type: 2}
   PickupTilePrefab: {fileID: 1672008991011400, guid: d5b16e1d919e3d64a93d6c8af75755de,

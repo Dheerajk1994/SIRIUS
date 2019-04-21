@@ -17,6 +17,10 @@ public class Enemy : CharacterFinal
     private bool isRangedAI;
     public GameObject Target { get; set; }
 
+    //test
+    private ushort[,] terrain;
+    private bool waitingForPath;
+
     // Use this for initialization 
     protected override void Start()
     {
@@ -88,6 +92,14 @@ public class Enemy : CharacterFinal
             }
         }
     }
+    //COLLISION IGNORE
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
+        {
+            Physics2D.IgnoreCollision(collision.collider, this.gameObject.GetComponent<Collider2D>());
+        }
+    }
 
     public void ChangeState(IEnemyState newState)
     {
@@ -102,10 +114,13 @@ public class Enemy : CharacterFinal
     public void SetPotentialPath(List<Vector2> pPath)
     {
         //Debug.Log("a* returned with path " + pPath.Count);
+        waitingForPath = false;
         if (pPath.Count > 0)
         {
             path = pPath;
             targetPos = path[0];
+            //targetPos = path[0];
+            Move();
         }
     }
 
@@ -115,27 +130,35 @@ public class Enemy : CharacterFinal
     public void MoveRanged()
     {
         movementSpeed = chaseSpeed;
-        if(isRangedAI)
+        Player target = Target.GetComponent<Player>();
+        Vector2 targetPos = new Vector2(target.currentPosition.x, target.currentPosition.y - 1);
+        ushort pathFindingRadius = (ushort)(Vector2.Distance(targetPos, this.currentPosition) + 5);
+
+        if (isRangedAI)
         {
             
         }
-        else
+        else if(!waitingForPath)
         {
             //if path is not empty
             if(isPatrolling)
             {
+                //Debug.Log("moving from patrol to chase");
                 path.Clear();
                 isPatrolling = false;
-                AStar.FindPath(this.currentPosition, Target.GetComponent<Player>().currentPosition, terrainManagerScript.frontTilesValue, this);
-                targetPos = path[0];
-                Move();
+                terrain = terrainManagerScript.GetSurroundingTileValues(this.currentPosition, pathFindingRadius);
+                //AStar.FindPath(this.currentPosition, targetPos, terrain, this);
+                AIPathManagerScript.instance.SubmitHighPrioPathRequest(currentPosition, targetPos, terrain, SetPotentialPath);//new
+                waitingForPath = true;
             }
-            else{
+            else
+            {
                 if(path.Count == 0)
                 {
-                    AStar.FindPath(this.currentPosition, Target.GetComponent<Player>().currentPosition, terrainManagerScript.frontTilesValue, this);
-                    targetPos = path[0];
-                    Move();
+                    terrain = terrainManagerScript.GetSurroundingTileValues(this.currentPosition, pathFindingRadius);
+                    //AStar.FindPath(this.currentPosition, targetPos, terrain, this);
+                    AIPathManagerScript.instance.SubmitHighPrioPathRequest(currentPosition, targetPos, terrain, SetPotentialPath);//new
+                    waitingForPath = true;
                 }
                 else{
                     Move();
@@ -154,16 +177,22 @@ public class Enemy : CharacterFinal
         {
             Move();
         }
-        else
+        else if(!waitingForPath)
         {
-            AStar.FindPath(currentPosition, FindTileToMoveTo(), terrainManagerScript.frontTilesValue, this);
+            //terrainManagerScript.GetSurroundingTileValues(this.currentPosition, 5);
+            Vector2 patrolToPosition = FindTileToMoveTo();
+            ushort pathFindingRadius = (ushort)(Vector2.Distance(patrolToPosition, this.currentPosition) + 5);
+            terrain = terrainManagerScript.GetSurroundingTileValues(this.currentPosition, pathFindingRadius);
+            //AStar.FindPath(currentPosition, patrolToPosition, terrainManagerScript.GetSurroundingTileValues(this.currentPosition, pathFindingRadius), this);
+            AIPathManagerScript.instance.SubmitLowPrioPathRequest(currentPosition, patrolToPosition, terrain, SetPotentialPath);//new
+            waitingForPath = true;
         }
     }
 
 
-
     public void Move()
     {
+        //Debug.Log("move called");
         if (Vector2.Distance(currentPosition, targetPos) < 0.5f) path.Remove(targetPos);
         if (path.Count == 0) return;
         targetPos = path[0];
@@ -179,34 +208,37 @@ public class Enemy : CharacterFinal
 
     public Vector2 FindTileToMoveTo()//terrible 
     {
+        //Debug.Log("FindTileToMoveTo called");
         ushort tries = 0;
 
-        int x = Mathf.FloorToInt(currentPosition.x);
+        int relXPos = Mathf.FloorToInt(currentPosition.x);
         int y = Mathf.FloorToInt(currentPosition.y);
 
-        int xLook = 20;
-        int yLook = 10;
+        int xLook = 10;
+        int yLook = 6;
 
         int leftOrRight = UnityEngine.Random.Range(0, 2);
         if (leftOrRight == 0)//left
         {
-            x -= UnityEngine.Random.Range(0, xLook);
-            for(int yPos = yLook / 2; yPos > -yLook/2; --yPos)
+            relXPos -= UnityEngine.Random.Range(0, xLook);
+            terrainManagerScript.GetRelativeXPos(relXPos);
+            for (int yPos = yLook / 2; yPos > -yLook/2; --yPos)
             {
-                if(terrainManagerScript.frontTilesValue[x,y + yPos] == 0 && terrainManagerScript.frontTilesValue[x, y + yPos - 1] != 0)
+                if(terrainManagerScript.frontTilesValue[relXPos,y + yPos] == 0 && terrainManagerScript.frontTilesValue[relXPos, y + yPos - 1] != 0)
                 {
-                    return new Vector2(x, y + yPos);
+                    return new Vector2(relXPos, y + yPos);
                 }
             }
         }
         else
         {
-            x += UnityEngine.Random.Range(0, xLook);
+            relXPos += UnityEngine.Random.Range(0, xLook);
+            terrainManagerScript.GetRelativeXPos(relXPos);
             for (int yPos = yLook / 2; yPos > -yLook / 2; --yPos)
             {
-                if (terrainManagerScript.frontTilesValue[x, y + yPos] == 0 && terrainManagerScript.frontTilesValue[x, y + yPos - 1] != 0)
+                if (terrainManagerScript.frontTilesValue[relXPos, y + yPos] == 0 && terrainManagerScript.frontTilesValue[relXPos, y + yPos - 1] != 0)
                 {
-                    return new Vector2(x, y + yPos);
+                    return new Vector2(relXPos, y + yPos);
                 }
             }
         }
@@ -247,15 +279,29 @@ public class Enemy : CharacterFinal
     }
 
 
-    private void OnDrawGizmos()
-    {
-        if (path == null || path.Count == 0) return;
-        Gizmos.color = Color.red;
-        foreach (Vector2 pos in path)
-        {
-            Gizmos.DrawCube(pos, Vector3.one * 0.3f);
-        }
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    if (terrain != null)
+    //    {
+    //        Gizmos.color = Color.blue;
+    //        for (int x = 0; x < terrain.GetLength(0); ++x)
+    //        {
+    //            for (int y = 0; y < terrain.GetLength(1); ++y)
+    //            {
+    //                if (terrain[x, y] == 0)
+    //                {
+    //                    Gizmos.DrawCube(new Vector2(x + this.currentPosition.x - terrain.GetLength(0) / 2, y + this.currentPosition.y - terrain.GetLength(1) / 2), Vector3.one * 0.3f);
+    //                }
+    //            }
+    //        }
+    //    }
+    //    if (path == null || path.Count == 0) return;
+    //    Gizmos.color = Color.red;
+    //    foreach (Vector2 pos in path)
+    //    {
+    //        Gizmos.DrawCube(pos, Vector3.one * 0.3f);
+    //    }
+    //}
 
 
 
