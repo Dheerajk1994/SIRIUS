@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Teleporter : Interactable
 {
+    public GameObject ExitShipPanel;
+
     public override void Interact()
     {
         base.Interact();
         isInteracting = !isInteracting;
+        ExitShipPanel.SetActive(isInteracting);
         Debug.Log("leaving da shep");
     }
 

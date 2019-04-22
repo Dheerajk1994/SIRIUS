@@ -13,6 +13,7 @@ public class UIScript : MonoBehaviour
     public GameObject QuestPanel;
     public GameObject BottomDialoguePanel;
     public GameObject MainMenuPanel;
+    public GameObject ExitShipPanel;
 
     public GameManagerScript gameManagerScript;
     public InputManagerScript inputManagerScript;
@@ -47,6 +48,8 @@ public class UIScript : MonoBehaviour
         BottomDialoguePanel.GetComponent<DialoguePanelScript>().SetDialoguePanel(this);
 
         MainMenuPanel.GetComponent<MainMenuScript>().SetMainMenuPanel(this);
+
+        ExitShipPanel.GetComponent<ExitShipScript>().SetExitShipPanel(this);
     }
 
 
