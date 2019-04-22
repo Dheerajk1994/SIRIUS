@@ -6,9 +6,11 @@ using UnityEngine;
 public class InventorySpritesScript : MonoBehaviour {
 
     public Sprite[] itemSprites;
+    public static InventorySpritesScript instance;
 
     private void Awake()
     {
+        instance = this;
         ItemDictionary.GenerateDictionary(this);
     }
 

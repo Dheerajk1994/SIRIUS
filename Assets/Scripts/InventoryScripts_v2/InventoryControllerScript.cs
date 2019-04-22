@@ -19,9 +19,20 @@ public class InventoryControllerScript : MonoBehaviour {
 
     public ushort PickeupTile(TilePickUpScript tile)
     {
-        Debug.Log("Picked up a tile");
+        //Debug.Log("Picked up a tile");
+
+        ushort tempVar1 = 0;
+        ushort tempVar2 = 0;
+
         ushort remaining = playerHotbarPanelScript.genericInvoHandler.AddItemToGenericInventory(tile.contentId, tile.currentStackAmount);
+        tempVar1 += (ushort)(tile.currentStackAmount - remaining);
+        tempVar2 += remaining;
+
         if (remaining > 0) remaining = playerInventoryPanelScript.genericInvoHandler.AddItemToGenericInventory(tile.contentId, remaining);
+        tempVar2 += (ushort)(tempVar2 - remaining);
+
+        QuestManagerScript.instance.PickedUpItem(tile.contentId, tempVar1 + tempVar2);
+
         return remaining;
     }
 }

@@ -135,6 +135,14 @@
       "stackAmnt": 1,
       "cost": 0,
       "type": 0
+    }, 
+    {
+      "itemName": "Alien Goo",
+      "id": 700,
+      "description": "It's really sticky...",
+      "stackAmnt": 999,
+      "cost": 4,
+      "type": 6
     }
   ]
 }

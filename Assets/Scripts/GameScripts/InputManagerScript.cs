@@ -27,9 +27,9 @@ public class InputManagerScript : MonoBehaviour {
     private void Update()
     {
         // Player Action
-        if      (Input.GetKey(KeyCode.Mouse0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetKey(KeyCode.Mouse0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            switch(hotbarPanel.GetEquippedSlot())
+            switch (hotbarPanel.GetEquippedSlot())
             {
 
                 // Block Tiles
@@ -97,7 +97,9 @@ public class InputManagerScript : MonoBehaviour {
         // End Hotbar Equipping
         //test for adding a pick to hotbar
         else if (Input.GetKeyDown(KeyCode.P))
-           hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(1000, 1);
+            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(1000, 1);
+        else if (Input.GetKeyDown(KeyCode.Q))
+            gameManagerScript.uiScript.QuestPanel.GetComponent<QuestPanelScript>().ToggleQuestPanel();
 
     }
 

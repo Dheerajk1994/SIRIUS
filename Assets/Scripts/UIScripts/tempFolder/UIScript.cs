@@ -42,7 +42,7 @@ public class UIScript : MonoBehaviour
 
         PlayerCraftingPanel.GetComponent<CraftingPanelScript>().SetCraftingPanel(this, PlayerInventoryAndStatsPanel.GetComponent<PlayerInventoryPanelScript>(), PlayerHotBarPanel.GetComponent<PlayerHotbarPanelScript>());
 
-        QuestPanel.GetComponent<QuestPanelScript>().SetQuestPanel(this);
+        QuestPanel.GetComponent<QuestPanelScript>().SetQuestPanel(gameManagerScript);
 
         BottomDialoguePanel.GetComponent<DialoguePanelScript>().SetDialoguePanel(this);
 

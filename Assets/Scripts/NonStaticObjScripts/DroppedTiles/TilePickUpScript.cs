@@ -36,9 +36,10 @@ public class TilePickUpScript : MonoBehaviour {
         }
         else
         {
-            PlayerScript player = collision.gameObject.GetComponent<PlayerScript>();
+            Player player = collision.gameObject.GetComponent<Player>();
             if (player)
             {
+                //Debug.Log("pickup touched by player");
                 if((currentStackAmount = inventoryController.PickeupTile(this)) <= 0)
                 {
                     Destroy(this.gameObject);

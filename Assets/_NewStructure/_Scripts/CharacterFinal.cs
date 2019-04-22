@@ -20,19 +20,14 @@ public abstract class CharacterFinal : MonoBehaviour {
     public Vector2 currentPosition;
     protected List<Vector2> path;
 
-    [SerializeField]
-    private List<string> damageSources;
+    [SerializeField] private List<string> damageSources;
 
-    [SerializeField]
-    protected float movementSpeed;
+    [SerializeField] protected float movementSpeed;
 
-    [SerializeField] 
-    protected float chaseSpeed = 5f;
+    [SerializeField] protected float chaseSpeed = 5f;
     [SerializeField]
     protected float patrolSpeed = 2f;
     #endregion
-
-
 
 
     #region REFERENCES

@@ -160,6 +160,7 @@ public class Player : CharacterFinal
 
     private void HandleMovement(float horizontal) 
     {
+        //Debug.Log(movementSpeed);
         if (MyRigidbody.velocity.y <0)
         {
             MyAnimator.SetBool("land", true); 
