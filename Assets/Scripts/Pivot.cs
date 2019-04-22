@@ -8,7 +8,7 @@ public class Pivot : MonoBehaviour
     public GameObject sam;
     public CharacterController2D CharacterController2DScript;
    
-   bool facingRight;
+    bool facingRight;
 
     private void FixedUpdate()
     {
@@ -33,11 +33,12 @@ public class Pivot : MonoBehaviour
         {
             if (rotationZ >= 90 && rotationZ <=180)
             {
-                transform.rotation = Quaternion.Euler(0f, 0f, rotationZ + 180);
+                //transform.Rotate(0f, 180, 0f);
+                transform.rotation = Quaternion.Euler(0f, 180f, -rotationZ+180) ;
             }
             else if(rotationZ <= -90 && rotationZ >= -180)
             {
-                transform.rotation = Quaternion.Euler(0f, 0f, rotationZ + 180);
+                transform.rotation = Quaternion.Euler(0f, 180f, -rotationZ+180);
             }
             
         }
