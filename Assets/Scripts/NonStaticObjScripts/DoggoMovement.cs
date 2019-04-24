@@ -13,7 +13,12 @@ public class DoggoMovement : MonoBehaviour {
     public float horizontalMove = 0f;
     public bool jump = false;
 
+    public GameObject rotatingArmPrefab;
+    public GameObject rotatingArm;
+
+    private bool spaceGunEquipped;
     private bool attack;
+
     public Rigidbody2D rigidbody;
 
     private void Start()
@@ -29,6 +34,16 @@ public class DoggoMovement : MonoBehaviour {
     {
         HandleInput();
 
+        /*if (Input.GetKeyDown(KeyCode.G))
+        {
+            if(GameObject.Find("/PlayArea/Sam(Clone)/ArmPivot(Clone)") == null)
+            {
+                rotatingArm = Instantiate(rotatingArmPrefab, new Vector3(), Quaternion.identity) as GameObject;
+                rotatingArm.transform.parent = player.transform;
+                rotatingArm.transform.localPosition = new Vector3(-0.197f, -0.43f);
+            }
+            Debug.Log("Button G was pressed.");
+        }*/
     }
 
     void FixedUpdate()
@@ -38,6 +53,16 @@ public class DoggoMovement : MonoBehaviour {
         ResetValues();
     }
 
+    public void equipSpacegun()
+    {
+        if (GameObject.Find("/PlayArea/Sam(Clone)/ArmPivot(Clone)") == null)
+        {
+            rotatingArm = Instantiate(rotatingArmPrefab, new Vector3(), Quaternion.identity) as GameObject;
+            rotatingArm.transform.parent = this.player.transform;
+            rotatingArm.transform.localPosition = new Vector3(-0.197f, -0.43f);
+            animator.SetBool("spaceGunEquipped", true);
+        }
+    }
     // Stops repeated jumping 
     public void OnLanding()
     {
@@ -87,6 +112,7 @@ public class DoggoMovement : MonoBehaviour {
             }
 
         }
+
 
     }
 

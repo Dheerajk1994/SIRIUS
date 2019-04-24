@@ -55,8 +55,6 @@ GameObject:
   - component: {fileID: 114615449279679094}
   - component: {fileID: 70908077706915636}
   - component: {fileID: 95806841719390866}
-  - component: {fileID: 114944128281001554}
-  - component: {fileID: 114789206657648136}
   - component: {fileID: 114501148316087484}
   - component: {fileID: 114465566261386562}
   - component: {fileID: 114078310744139936}
@@ -87,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1976911743273556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60, y: 110, z: 0}
+  m_LocalPosition: {x: 59.034473, y: 74.469536, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4512673271041088}
@@ -194,6 +192,7 @@ MonoBehaviour:
   m_GroundCheck: {fileID: 4183950586258662}
   m_CeilingCheck: {fileID: 4512673271041088}
   m_CrouchDisableCollider: {fileID: 0}
+  m_FacingRight: 1
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:
@@ -278,32 +277,10 @@ MonoBehaviour:
   runSpeed: 100
   horizontalMove: 0
   jump: 0
+  rotatingArmPrefab: {fileID: 1887140808991610, guid: 3cbb8ff38ac4c9d46913155a2df821fa,
+    type: 2}
+  spaceGunEquipped: 0
   rigidbody: {fileID: 0}
---- !u!114 &114789206657648136
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1976911743273556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a72da5e74f6a5b04e891cf0febc965d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventorySize: 40
-  itemMaxStackAmount: 100
-  gameManager: {fileID: 0}
---- !u!114 &114944128281001554
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1976911743273556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcdc9bbc6d9b35c4cae97ce4f6277995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212372736381707690
 SpriteRenderer:
   m_ObjectHideFlags: 1

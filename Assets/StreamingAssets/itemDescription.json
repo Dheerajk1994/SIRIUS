@@ -6,7 +6,7 @@
       "description": "Dirty dirt",
       "stackAmnt": 10,
       "cost": 0,
-      "type":  1
+      "type": 1
     },
     {
       "itemName": "Regular Stone",
@@ -135,6 +135,14 @@
       "stackAmnt": 1,
       "cost": 0,
       "type": 0
+    },
+    {
+      "itemName": "Spacegun",
+      "id": 900,
+      "description": "Something something something dark side",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 11
     }
   ]
 }

@@ -10,8 +10,11 @@ public class InputManagerScript : MonoBehaviour {
     UIScript uiScript;
     TerrainManagerScript terrainManagerScript;
 
+
     public PlayerInventoryPanelScript inventoryPanel;
     public PlayerHotbarPanelScript hotbarPanel;
+
+    public DoggoMovement doggoMovementScript;
 
     public void SetInputManager(GameManagerScript gScript, UIScript uScript, TerrainManagerScript tScript)
     {
@@ -20,10 +23,12 @@ public class InputManagerScript : MonoBehaviour {
         terrainManagerScript = tScript;
         inventoryPanel = uiScript.PlayerInventoryAndStatsPanel.GetComponent<PlayerInventoryPanelScript>();
         hotbarPanel = uiScript.PlayerHotBarPanel.GetComponent<PlayerHotbarPanelScript>();
-        
 
     }
-
+    private void Start()
+    {
+        doggoMovementScript = GameObject.Find("/PlayArea/Sam(Clone)").GetComponent<DoggoMovement>();
+    }
     private void Update()
     {
         // Player Action
@@ -98,7 +103,22 @@ public class InputManagerScript : MonoBehaviour {
         //test for adding a pick to hotbar
         else if (Input.GetKeyDown(KeyCode.P))
            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(1000, 1);
-
+        //test for adding spacegun to hotbar
+        else if (Input.GetKeyDown(KeyCode.G))
+            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(900, 1);
+        //equipping the Spacegun
+        while (hotbarPanel.GetEquippedSlot().Equals(900))
+        {
+            Debug.Log("Spacegun is selected");
+            doggoMovementScript.equipSpacegun();
+            break;
+        }
+        while(!hotbarPanel.GetEquippedSlot().Equals(900)) 
+        {
+            Destroy(GameObject.Find("/PlayArea/Sam(Clone)/ArmPivot(Clone)"));
+            doggoMovementScript.animator.SetBool("spaceGunEquipped", false);
+            break;
+        }
     }
 
     private void MineFrontLayer()

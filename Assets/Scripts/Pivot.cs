@@ -5,22 +5,25 @@ using UnityEngine;
 public class Pivot : MonoBehaviour
 {
 
-    public GameObject sam;
+    public GameObject player;
     public CharacterController2D CharacterController2DScript;
    
     bool facingRight;
+        
+    private void Start()
+    {
+        player = GameObject.Find("/PlayArea/Sam(Clone)");
+        CharacterController2DScript = player.GetComponent<CharacterController2D>();
+    }
 
     private void FixedUpdate()
     {
-        CharacterController2DScript = sam.GetComponent<CharacterController2D>();
         facingRight = CharacterController2DScript.getDirectionFacing();
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         difference.Normalize();
 
         float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-
-        //Debug.Log(rotationZ);
- 
+    
         if (facingRight)
         {
             if (rotationZ <= 90 && rotationZ >= -90)
