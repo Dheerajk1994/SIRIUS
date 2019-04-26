@@ -42,7 +42,6 @@ public class PlayerAttributesPanelScript : MonoBehaviour {
         //{
         //    attributeIcon.sprite = attributePanelStatusSprite[4];
         //}
-
     }
 
     public void UpdateStamina(float stamina)

@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class ExitShipScript : MonoBehaviour
 {
-
-    //private Animator exitShipPanelAnimator;
-    public Button exitShipPanelToggleButn;
+    private Animator exitShipPanelAnimator;
+    public Button exitButn;
     public Button yesButn;
     public Button noButn;
     private bool isOpen = false;
@@ -21,20 +20,20 @@ public class ExitShipScript : MonoBehaviour
 
     private void Start()
     {
-        //exitShipPanelAnimator = this.GetComponent<Animator>();
-        //exitShipPanelToggleButn.onClick.AddListener(ToggleExitShipPanel);
+        exitShipPanelAnimator = this.GetComponent<Animator>();
+        //exitButn.onClick.AddListener(ToggleExitShipPanel);
     }
 
     public void ToggleExitShipPanel(bool toggle)
     {
-        //exitShipPanelAnimator.SetBool("isOpen", toggle);
         isOpen = toggle;
+        exitShipPanelAnimator.SetBool("isOpen", toggle);
     }
 
     public void ToggleExitShipPanel()
     {
         isOpen = !isOpen;
-        //exitShipPanelAnimator.SetBool("isOpen", isOpen);
+        exitShipPanelAnimator.SetBool("isOpen", isOpen);
 
     }
 

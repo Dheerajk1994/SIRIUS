@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4036415916968192}
   - component: {fileID: 212607401844613098}
+  - component: {fileID: 114286450490008922}
   m_Layer: 0
   m_Name: speship
   m_TagString: Untagged
@@ -125,7 +126,7 @@ GameObject:
   - component: {fileID: 61880789770269060}
   - component: {fileID: 114421684113572526}
   m_Layer: 0
-  m_Name: engine
+  m_Name: Engine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,6 +143,7 @@ GameObject:
   - component: {fileID: 212473389661112774}
   - component: {fileID: 61357553510288644}
   - component: {fileID: 114683188126147568}
+  - component: {fileID: 114805137485153680}
   m_Layer: 0
   m_Name: Teleporter
   m_TagString: Untagged
@@ -664,6 +666,19 @@ MonoBehaviour:
   isInteracting: 0
   interactText: Press E to Interact
   destination: {fileID: 1785246841266026}
+--- !u!114 &114286450490008922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1143345085434036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c981b762859e5449a5cc099f9265af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Teleporter: {fileID: 1858376270952076}
+  Engine: {fileID: 1826140245347036}
 --- !u!114 &114421684113572526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -679,6 +694,7 @@ MonoBehaviour:
   canInteract: 0
   isInteracting: 0
   interactText: Press E to Interact
+  EnginePanel: {fileID: 0}
 --- !u!114 &114683188126147568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -694,6 +710,7 @@ MonoBehaviour:
   canInteract: 0
   isInteracting: 0
   interactText: Press E to Interact
+  ExitShipPanel: {fileID: 0}
 --- !u!114 &114772819540615980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -725,6 +742,20 @@ MonoBehaviour:
   isInteracting: 0
   interactText: Press E to Interact
   playerScript: {fileID: 0}
+--- !u!114 &114805137485153680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1858376270952076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3154243d8d230a347ba6f9387fec98de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitButn: {fileID: 0}
+  yesButn: {fileID: 0}
+  noButn: {fileID: 0}
 --- !u!114 &114968812290966206
 MonoBehaviour:
   m_ObjectHideFlags: 1

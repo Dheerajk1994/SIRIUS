@@ -23,6 +23,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject MainCameraPrefab;
     public GameObject InputManagerPrefab;
     public GameObject InventoryControllerPrefab;
+    public GameObject ShipPrefab;
     #endregion
 
     #region INSTANTIATED_PREFABS
@@ -32,6 +33,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject mainCameraObject;
     public GameObject inputManager;
     public GameObject inventoryController;
+    public GameObject ship;
     #endregion
 
     #region SCRIPT_REFERENCES
@@ -41,6 +43,7 @@ public class GameManagerScript : MonoBehaviour
     public CameraScript cameraScript;
     public InputManagerScript inputManagerScript;
     public InventoryControllerScript inventoryControllerScript;
+    public ShipScript shipScript;
     #endregion
 
     #region LOCAL_VARIABLES
@@ -85,6 +88,9 @@ public class GameManagerScript : MonoBehaviour
         inventoryController       = Instantiate(InventoryControllerPrefab);
         inventoryControllerScript = inventoryController.GetComponent<InventoryControllerScript>();
 
+        ship                      = Instantiate(ShipPrefab);
+        shipScript                = ship.GetComponent<ShipScript>();
+
         ui.      gameObject.SetActive(false);
         player.  gameObject.SetActive(false);
 
@@ -93,7 +99,7 @@ public class GameManagerScript : MonoBehaviour
         playerScript                  .SetPlayerScript(this, uiScript);
         inputManagerScript            .SetInputManager(this, uiScript, terrainManagerScript);
         inventoryControllerScript     .SetInventoryController(this, uiScript);
-
+        shipScript                    .SetShip(uiScript);
 
         //SET LOCAL VARIABLES
         readyToGo    = false;

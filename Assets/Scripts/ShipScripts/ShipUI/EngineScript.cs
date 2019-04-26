@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class EngineScript : MonoBehaviour
 {
-
-    //private Animator enginePanelAnimator;
+    private Animator enginePanelAnimator;
     public Button exitButn;
     public Button refuelButn;
+    public Slider currentFuel;
     private bool isOpen = false;
 
     UIScript uiScript;
@@ -20,19 +20,19 @@ public class EngineScript : MonoBehaviour
 
     private void Start()
     {
-        //enginePanelAnimator = this.GetComponent<Animator>();
+        enginePanelAnimator = this.GetComponent<Animator>();
         //enginePanelToggleButn.onClick.AddListener(ToggleEnginePanel);
     }
 
     public void ToggleEnginePanel(bool toggle)
     {
-        //enginePanelAnimator.SetBool("isOpen", toggle);
         isOpen = toggle;
+        enginePanelAnimator.SetBool("isOpen", toggle);
     }
 
     public void ToggleEnginePanel()
     {
         isOpen = !isOpen;
-        //enginePanelAnimator.SetBool("isOpen", isOpen);
+        enginePanelAnimator.SetBool("isOpen", isOpen);
     }
 }

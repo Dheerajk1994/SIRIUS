@@ -24,4 +24,12 @@ public class InventoryControllerScript : MonoBehaviour {
         if (remaining > 0) remaining = playerInventoryPanelScript.genericInvoHandler.AddItemToGenericInventory(tile.contentId, remaining);
         return remaining;
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            playerHotbarPanelScript.genericInvoHandler.AddItemToGenericInventory(2, 10);
+        }
+    }
 }

@@ -10,7 +10,7 @@ public class Teleporter : Interactable
     {
         base.Interact();
         isInteracting = !isInteracting;
-        ExitShipPanel.SetActive(isInteracting);
+        ExitShipPanel.GetComponent<Animator>().SetBool("isOpen", isInteracting);
         Debug.Log("leaving da shep");
     }
 
