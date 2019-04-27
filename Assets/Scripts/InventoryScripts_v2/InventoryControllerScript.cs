@@ -9,6 +9,13 @@ public class InventoryControllerScript : MonoBehaviour {
     PlayerHotbarPanelScript playerHotbarPanelScript;
     //need chest panel here
 
+    public static InventoryControllerScript instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public void SetInventoryController(GameManagerScript gms, UIScript uiScript)
     {
         this.gameManagerScript = gms;
@@ -16,6 +23,51 @@ public class InventoryControllerScript : MonoBehaviour {
         this.playerHotbarPanelScript = uiScript.PlayerHotBarPanel.GetComponent<PlayerHotbarPanelScript>();
     }
 
+    public bool CheckForItemInInventoryWithId(ushort id, ushort neededAmount)
+    {
+        ushort tempAmnt = playerHotbarPanelScript.genericInvoHandler.CheckItemAmountInGenericInventory(id, neededAmount);
+        if(tempAmnt < neededAmount)
+        {
+            tempAmnt += playerInventoryPanelScript.genericInvoHandler.CheckItemAmountInGenericInventory(id, neededAmount);
+            if (tempAmnt >= neededAmount) return true;
+            return false;
+        }
+        return true;
+    }
+
+    public bool CheckForItemInInventoryWithType(ushort type, ushort neededAmount)
+    {
+        ushort tempAmnt = 0;
+        List<ItemDescription> itemsOfType = ItemDictionary.GetItemsOfType(type);
+
+        foreach(ItemDescription items in itemsOfType)
+        {
+            tempAmnt += playerHotbarPanelScript.genericInvoHandler.CheckItemAmountInGenericInventory(items.id, neededAmount);
+            tempAmnt += playerInventoryPanelScript.genericInvoHandler.CheckItemAmountInGenericInventory(items.id, neededAmount);
+            if(tempAmnt >= neededAmount)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ushort AddItemToInventory(ushort id, ushort amnt)
+    {
+        ushort tempVar1 = 0;
+        ushort tempVar2 = 0;
+
+        ushort remaining = playerHotbarPanelScript.genericInvoHandler.AddItemToGenericInventory(id, amnt);
+        tempVar1 += (ushort)(amnt - remaining);
+        tempVar2 += remaining;
+
+        if (remaining > 0) remaining = playerInventoryPanelScript.genericInvoHandler.AddItemToGenericInventory(id, remaining);
+        tempVar2 += (ushort)(tempVar2 - remaining);
+
+        QuestManagerScript.instance.PickedUpItem(id, tempVar1 + tempVar2);
+
+        return remaining;
+    }
 
     public ushort PickeupTile(TilePickUpScript tile)
     {
@@ -34,6 +86,29 @@ public class InventoryControllerScript : MonoBehaviour {
         QuestManagerScript.instance.PickedUpItem(tile.contentId, tempVar1 + tempVar2);
 
         return remaining;
+    }
+
+    public void RemoveItemFromInventoryWithType(ushort type, ushort removeAmount)
+    {
+        ushort tempAmnt = removeAmount;
+        List<ItemDescription> itemsOfType = ItemDictionary.GetItemsOfType(type);
+
+        foreach (ItemDescription items in itemsOfType)
+        {
+            if(tempAmnt > 0)
+            {
+                tempAmnt = playerHotbarPanelScript.genericInvoHandler.RemoveItemsFromGenericInventory(items.id, tempAmnt);
+            }
+            if(tempAmnt > 0)
+            {
+                tempAmnt = playerInventoryPanelScript.genericInvoHandler.RemoveItemsFromGenericInventory(items.id, tempAmnt);
+            }
+        }
+    }
+
+    public void RemoveItemFromInventoryWithID(ushort id, ushort removeAmount)
+    {
+
     }
 
     public void Update()

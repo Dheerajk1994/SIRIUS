@@ -9,6 +9,7 @@ public class InputManagerScript : MonoBehaviour {
     GameManagerScript gameManagerScript;
     UIScript uiScript;
     TerrainManagerScript terrainManagerScript;
+    CraftingPanelScript craftingPanelScript;
 
     public PlayerInventoryPanelScript inventoryPanel;
     public PlayerHotbarPanelScript hotbarPanel;
@@ -20,8 +21,8 @@ public class InputManagerScript : MonoBehaviour {
         terrainManagerScript = tScript;
         inventoryPanel = uiScript.PlayerInventoryAndStatsPanel.GetComponent<PlayerInventoryPanelScript>();
         hotbarPanel = uiScript.PlayerHotBarPanel.GetComponent<PlayerHotbarPanelScript>();
-        
 
+        craftingPanelScript = uiScript.PlayerCraftingPanel.GetComponent<CraftingPanelScript>();
     }
 
     private void Update()
@@ -100,6 +101,8 @@ public class InputManagerScript : MonoBehaviour {
             hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(1000, 1);
         else if (Input.GetKeyDown(KeyCode.Q))
             gameManagerScript.uiScript.QuestPanel.GetComponent<QuestPanelScript>().ToggleQuestPanel();
+        else if (Input.GetKeyDown(KeyCode.C))
+            craftingPanelScript.ToggleCraftingPanel();
 
     }
 

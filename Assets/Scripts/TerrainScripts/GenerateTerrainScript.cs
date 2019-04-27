@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GenerateTerrainScript : MonoBehaviour
 {
+    [SerializeField] private int maxRandomRange = 1000;
+
     private ushort[,] frontTilesValue;
     private ushort[,] frontTilesResourceValues;
     private ushort[,] backTilesValue;
@@ -88,6 +90,7 @@ public class GenerateTerrainScript : MonoBehaviour
 
         GenerateResources((ushort)EnumClass.TileEnum.COAL, coalChance, coalNeighChance, coalChangeInHeight);
         GenerateResources((ushort)EnumClass.TileEnum.COPPER, copperChance, copperNeighChance, copperChangeInHeight);
+        GenerateResources((ushort)EnumClass.TileEnum.IRON, ironChance, ironNeighChance, ironChangeInHeight);
         GenerateResources((ushort)EnumClass.TileEnum.SILVER, silverChance, silverNeighChance, silverChangeInHeight);
         GenerateResources((ushort)EnumClass.TileEnum.GOLD, goldChance, goldNeighChance, goldChangeInHeight);
         GenerateResources((ushort)EnumClass.TileEnum.DIAMOND, diamondChance, diamondNeighChance, diamondChangeInHeight);
@@ -234,7 +237,7 @@ public class GenerateTerrainScript : MonoBehaviour
             {
                 if (frontTilesValue[x, y] != 0)
                 {
-                    if (UnityEngine.Random.Range(1, 100) <= (stoneChanceVal - y * stoneChangeInHeight))
+                    if (UnityEngine.Random.Range(1, maxRandomRange) <= (stoneChanceVal - y * stoneChangeInHeight))
                     {
                         stoneArray[x, y] = 1;
                     }
@@ -326,7 +329,7 @@ public class GenerateTerrainScript : MonoBehaviour
             {
                 if (frontTilesValue[x, y] != 0)
                 {
-                    if (UnityEngine.Random.Range(1, 100) <= (caveChanceVal - y * caveChangeInHeight))
+                    if (UnityEngine.Random.Range(1, maxRandomRange) <= (caveChanceVal - y * caveChangeInHeight))
                     {
                         caveArray[x, y] = 1;
                     }
@@ -387,11 +390,11 @@ public class GenerateTerrainScript : MonoBehaviour
         {
             for (int y = 0; y < worldYDimension; y++)
             {
-                if (frontTilesValue[x,y] !=0 && UnityEngine.Random.Range(1, 100) <= (resourceChance - y * resourceChangeInHeight))
+                if (frontTilesValue[x,y] !=0 && UnityEngine.Random.Range(1, maxRandomRange) <= (resourceChance - y * resourceChangeInHeight))
                 {
                     frontTileResourceArray[x, y] = 1;
                 }
-                if (UnityEngine.Random.Range(1, 100) <= (resourceChance - y * resourceChangeInHeight))
+                if (UnityEngine.Random.Range(1, maxRandomRange) <= (resourceChance - y * resourceChangeInHeight))
                 {
                     backtTileResourceArray[x, y] = 1;
                 }
@@ -404,7 +407,7 @@ public class GenerateTerrainScript : MonoBehaviour
             {
                 if (frontTilesValue[x, y] != 0 && GetNeighBorhood(frontTileResourceArray, x, y, 1) > 1)
                 {
-                    if (UnityEngine.Random.Range(1, 100) <= resourceNeighChance)
+                    if (UnityEngine.Random.Range(1, maxRandomRange) <= resourceNeighChance)
                     {
                         frontTileResourceArray[x, y] = 1;
                     }
@@ -413,7 +416,7 @@ public class GenerateTerrainScript : MonoBehaviour
                         frontTileResourceArray[x, y] = 0;
                     }
 
-                    if (UnityEngine.Random.Range(1, 100) <= resourceNeighChance)
+                    if (UnityEngine.Random.Range(1, maxRandomRange) <= resourceNeighChance)
                     {
                         backtTileResourceArray[x, y] = 1;
                     }

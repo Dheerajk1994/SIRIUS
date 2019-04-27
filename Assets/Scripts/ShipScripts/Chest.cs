@@ -23,7 +23,7 @@ public class Chest : Interactable
     {
         if (Input.GetKeyDown(KeyCode.E) && canInteract)
             Interact();
-        else if (!canInteract)
-            ChestPanel.GetComponent<Animator>().SetBool("isOpen", false);
+        //else if (!canInteract)
+            //ChestPanel.GetComponent<Animator>().SetBool("isOpen", false);
     }
 }

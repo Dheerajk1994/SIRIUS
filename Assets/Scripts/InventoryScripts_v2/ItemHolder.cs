@@ -21,7 +21,7 @@ public class ItemHolder : MonoBehaviour
         inventoryArray = new ushort[2, inventorySize];
     }
 
-    public ushort GetItemAmount(ushort id, ushort amount)
+    public ushort GetItemAmount(ushort id, ushort amount) 
     {
         ushort sum = 0;
         // Iterate through the array of inventory items

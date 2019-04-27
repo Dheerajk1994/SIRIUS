@@ -33,6 +33,7 @@ public class CraftingPanelScript : MonoBehaviour {
     private ushort currentSelectedTier;
     private int craftAmount;
     List<GameObject> listOfRecipes;
+    CompleteItem itemInItemDescription;
     #endregion
 
 
@@ -58,17 +59,23 @@ public class CraftingPanelScript : MonoBehaviour {
 
         increaseAmountButton.onClick.AddListener(IncreaseCraftAmount);
         decreaseAmountButton.onClick.AddListener(DecreaseCraftAmount);
+        craftButton.onClick.AddListener(CraftButtonClicked);
 
     }
 
     public void ToggleCraftingPanel()
     {
+        //this.gameObject.SetActive(!this.gameObject.activeSelf);
         craftingPanelIsDisplaying = !craftingPanelIsDisplaying;
-
+        this.gameObject.SetActive(craftingPanelIsDisplaying);
         if (craftingPanelIsDisplaying)
         {
-            //GenerateItemsPanel(currentSelectedTier);
+            if(itemInItemDescription != null)
+            {
+                SetItemDescription(itemInItemDescription.itemDescription.id);
+            }
         }
+
     }
 
     public void SwitchTier(ushort tier)
@@ -95,17 +102,18 @@ public class CraftingPanelScript : MonoBehaviour {
 
     private void SetItemDescription(ushort id)
     {
-        CompleteItem item = ItemDictionary.GetItem(id);
-        if(item != null)
+        itemInItemDescription = ItemDictionary.GetItem(id);
+        if(itemInItemDescription != null)
         {
             craftAmount = 1;
             craftAmountText.text = craftAmount.ToString();
-            string description = item.itemDescription.itemName + " \n\n" + item.itemDescription.description;
+            string description = itemInItemDescription.itemDescription.itemName + " \n\n" + itemInItemDescription.itemDescription.description;
             itemDescriptionTxt.text = description;
 
             ClearPanel(recipePanel);
+            listOfRecipes = new List<GameObject>();
 
-            ushort[] recipe = item.itemDescription.recipe;
+            ushort[] recipe = itemInItemDescription.itemDescription.recipe;
             ushort type, amount;
             for(int i = 0; i < recipe.Length; ++i)
             {
@@ -116,17 +124,31 @@ public class CraftingPanelScript : MonoBehaviour {
                 if(recipeItem != null)
                 {
                     GameObject recipeIcon = Instantiate(recipeIconPrefab);
-                    recipeIcon.GetComponent<Image>().sprite = InventorySpritesScript.instance.GetSprite(recipeItem.id);
-                    recipeIcon.GetComponentInChildren<Text>().text = amount.ToString();
+                    RecipeScript script = recipeIcon.gameObject.AddComponent<RecipeScript>();
+                    script.SetRecipe(type,recipeItem.id, amount);
                     listOfRecipes.Add(recipeIcon);
                 }
             }
-
+            Debug.Log(listOfRecipes.Count);
             foreach(GameObject obj in listOfRecipes)
             {
                 obj.transform.SetParent(recipePanel, false);
             }
+            SeeIfItemCanBeCrafted();
+        }
+    }
 
+    private void CraftButtonClicked()
+    {
+        if (SeeIfItemCanBeCrafted())
+        {
+            InventoryControllerScript.instance.AddItemToInventory(itemInItemDescription.itemDescription.id, (ushort)craftAmount);
+            foreach (GameObject obj in listOfRecipes)
+            {
+                RecipeScript script = obj.GetComponent<RecipeScript>();
+                InventoryControllerScript.instance.RemoveItemFromInventoryWithType(script.type, script.currentAmnt);
+            }
+            UpdateRecipeAmnt();
         }
     }
 
@@ -135,6 +157,7 @@ public class CraftingPanelScript : MonoBehaviour {
         craftAmount++;
         craftAmount = Mathf.Clamp(craftAmount, 1, 1000);
         craftAmountText.text = craftAmount.ToString();
+        UpdateRecipeAmnt();
     }
 
     private void DecreaseCraftAmount()
@@ -142,6 +165,33 @@ public class CraftingPanelScript : MonoBehaviour {
         craftAmount--;
         craftAmount = Mathf.Clamp(craftAmount, 1, 1000);
         craftAmountText.text = craftAmount.ToString();
+        UpdateRecipeAmnt();
+    }
+
+    private void UpdateRecipeAmnt()
+    {
+        craftButton.interactable = true;
+        foreach (GameObject obj in listOfRecipes)
+        {
+            if (!obj.GetComponent<RecipeScript>().AdjustCurrentAmnt((ushort)craftAmount))
+            {
+                craftButton.interactable = false;
+            }
+        }
+    }
+
+    private bool SeeIfItemCanBeCrafted()
+    {
+        craftButton.interactable = true;
+        foreach (GameObject obj in listOfRecipes)
+        {
+            if (!obj.GetComponent<RecipeScript>().UpdateCraftStatus())
+            {
+                craftButton.interactable = false;
+                return false;
+            }
+        }
+        return true;
     }
 
     private void ClearPanel(Transform panel)
@@ -196,3 +246,42 @@ public class CraftingPanelItemScript : MonoBehaviour
     public ushort id;
 }
 
+public class RecipeScript : MonoBehaviour
+{
+    public ushort type;
+    public ushort baseAmnt;
+    public ushort currentAmnt;
+    public bool craftStatus = false;
+
+    public void SetRecipe(ushort _type, ushort _id, ushort _baseAmnt)
+    {
+        this.type= _type;
+        this.baseAmnt = _baseAmnt;
+        currentAmnt = baseAmnt;
+
+        this.GetComponent<Image>().sprite = InventorySpritesScript.instance.GetSprite(_id);
+        this.GetComponentInChildren<Text>().text = currentAmnt.ToString();
+        UpdateCraftStatus();
+    }
+
+    public bool AdjustCurrentAmnt(ushort amnt)
+    {
+        currentAmnt = (ushort)(baseAmnt * amnt);
+        this.GetComponentInChildren<Text>().text = currentAmnt.ToString();
+        return UpdateCraftStatus();
+    }
+
+    public bool UpdateCraftStatus()
+    {
+        craftStatus = InventoryControllerScript.instance.CheckForItemInInventoryWithType(type, currentAmnt);
+        if (craftStatus == true)
+        {
+            this.GetComponentInChildren<Text>().color = Color.green;
+        }
+        else
+        {
+            this.GetComponentInChildren<Text>().color = Color.red;
+        }
+        return craftStatus;
+    }
+}

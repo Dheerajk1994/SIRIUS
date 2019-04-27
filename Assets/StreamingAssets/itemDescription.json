@@ -258,7 +258,7 @@
       "cost": 0,
       "type": 12,
       "tier": 1,
-      "recipe": [ 3, 20 ]
+      "recipe": [ 2, 20 ]
     },
     {
       "itemName": "Copper Pickaxe",
@@ -268,7 +268,7 @@
       "cost": 0,
       "type": 12,
       "tier": 2,
-      "recipe": [3, 10, 22, 10]
+      "recipe": [2, 10, 22, 1]
     },
     {
       "itemName": "Iron Pickaxe",

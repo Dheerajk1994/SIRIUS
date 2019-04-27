@@ -21,6 +21,7 @@ public static class EnumClass {
         SILVER,
         GOLD,
         DIAMOND,
+        IRON = 26,
         //MOON
         MOON_DIRT = 40,
         MOON_STONE,
@@ -44,7 +45,9 @@ public static class EnumClass {
         SNOW_TREE_BASE,
         SNOW_TREE_LEAF,
 
-        CAMPFIRE = 100
+        CAMPFIRE = 100,
+
+        BED_ROCK = 500
     };
 
     public enum TerrainType

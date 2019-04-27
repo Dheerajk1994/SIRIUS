@@ -449,6 +449,11 @@ public class TerrainManagerScript : MonoBehaviour
                 tile.GetComponent<SpriteRenderer>().sprite = diamondSprites[UnityEngine.Random.Range(0, diamondSprites.Length)];
                 tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.DIAMOND;
                 break;
+            case (ushort)EnumClass.TileEnum.IRON:
+                tile = tilePool.FetchTileFromPool();
+                tile.GetComponent<SpriteRenderer>().sprite = ironSprites[UnityEngine.Random.Range(0, ironSprites.Length)];
+                tile.GetComponent<TileScript>().tileId = (ushort)EnumClass.TileEnum.IRON;
+                break;
 
             //MOON
             case (ushort)EnumClass.TileEnum.MOON_DIRT:

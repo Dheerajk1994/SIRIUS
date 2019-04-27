@@ -7,43 +7,43 @@
       "heightMultiple": 10,
       "smoothness": 10,
 
-      "caveChanceVal": 48,
+      "caveChanceVal": 480,
       "caveSimRep": 2,
       "caveMinNeighReq": 2,
       "caveMaxNeighReq": 6,
       "caveChangeInHeight": 0,
 
-      "stoneChanceVal": 48,
+      "stoneChanceVal": 480,
       "stoneSimRep": 3,
       "stoneMinNeighReq": 4,
       "stoneMaxNeighReq": 5,
       "stoneChangeInHeight": 0,
 
-      "coalChance": 7,
-      "coalNeighChance": 30,
+      "coalChance": 70,
+      "coalNeighChance": 500,
       "coalChangeInHeight": 0,
 
-      "copperChance": 5,
-      "copperNeighChance": 35,
+      "copperChance": 70,
+      "copperNeighChance": 400,
       "copperChangeInHeight": 0,
 
-      "ironChance": 25,
-      "ironNeighChance": 10,
+      "ironChance": 60,
+      "ironNeighChance": 400,
       "ironChangeInHeight": 0,
 
-      "silverChance": 4,
-      "silverNeighChance": 30,
+      "silverChance": 50,
+      "silverNeighChance": 350,
       "silverChangeInHeight": 0,
 
-      "goldChance": 10,
-      "goldNeighChance": 10,
+      "goldChance": 100,
+      "goldNeighChance": 100,
       "goldChangeInHeight": 0,
 
-      "diamondChance": 5,
-      "diamondNeighChance": 10,
+      "diamondChance": 100,
+      "diamondNeighChance": 50,
       "diamondChangeInHeight": 0,
 
-      "flowerChance": 100,
+      "flowerChance": 900,
       "treeChance": 15,
       "minTreeHeight": 7,
       "maxTreeHeight": 12
@@ -193,8 +193,5 @@
       "minTreeHeight": 3,
       "maxTreeHeight": 6
     }
-
-
-
   ]
 }

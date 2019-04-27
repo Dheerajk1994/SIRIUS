@@ -72,6 +72,19 @@ public static class ItemDictionary
         return null;
     }
 
+    public static List<ItemDescription> GetItemsOfType(ushort type)
+    {
+        List<ItemDescription> itemsOfType = new List<ItemDescription>();
+        foreach (KeyValuePair<ushort, ItemDescription> item in itemDictionary)
+        {
+            if (item.Value.type == type)
+            {
+                itemsOfType.Add(item.Value);
+            }
+        }
+        return itemsOfType;
+    }
+
 
     public static List<ItemDescription> GetItemsOfTier(ushort tier)
     {
