@@ -21,7 +21,7 @@ public class Chest : Interactable
 
     private void Update()
     {
-        if (canInteract && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && canInteract)
             Interact();
         else if (!canInteract)
             ChestPanel.GetComponent<Animator>().SetBool("isOpen", false);

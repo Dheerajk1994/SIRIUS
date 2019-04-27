@@ -7,12 +7,21 @@ using System;
 
 public class CraftingPanelScript : MonoBehaviour {
 
+    private int craftAmount;
+
     #region PANEL_OBJECTS
+    [SerializeField] private Button craftingPanelItemsButtonPrefab;
+    [SerializeField] private GameObject recipeIconPrefab;
+
     [SerializeField] private Transform craftableItemsPanel;
+    [SerializeField] private Transform recipePanel;
     [SerializeField] private Button[] itemTierButtons;
     [SerializeField] private Button closeCraftinPanelButton;
-    [SerializeField] private Button craftingPanelItemsButtonPrefab;
+    [SerializeField] private Button craftButton;
+    [SerializeField] private Button decreaseAmountButton;
+    [SerializeField] private Button increaseAmountButton;
     [SerializeField] private Text itemDescriptionTxt;
+    [SerializeField] private Text craftAmountText;
     #endregion
 
     #region REFERENCES
@@ -47,6 +56,9 @@ public class CraftingPanelScript : MonoBehaviour {
         itemTierButtons[3].onClick.AddListener(Tier4Clicked);
         itemTierButtons[4].onClick.AddListener(Tier5Clicked);
 
+        increaseAmountButton.onClick.AddListener(IncreaseCraftAmount);
+        decreaseAmountButton.onClick.AddListener(DecreaseCraftAmount);
+
     }
 
     public void ToggleCraftingPanel()
@@ -61,7 +73,6 @@ public class CraftingPanelScript : MonoBehaviour {
 
     public void SwitchTier(ushort tier)
     {
-        //Debug.Log("switch tier called " + tier);
         Color newColor = new Color(255f, 255f, 255f, 0f);
         itemTierButtons[currentSelectedTier].GetComponent<Image>().color = newColor;
         currentSelectedTier = tier;
@@ -87,9 +98,25 @@ public class CraftingPanelScript : MonoBehaviour {
         CompleteItem item = ItemDictionary.GetItem(id);
         if(item != null)
         {
+            craftAmount = 1;
+            craftAmountText.text = craftAmount.ToString();
             string description = item.itemDescription.itemName + " \n\n" + item.itemDescription.description;
             itemDescriptionTxt.text = description;
         }
+    }
+
+    private void IncreaseCraftAmount()
+    {
+        craftAmount++;
+        craftAmount = Mathf.Clamp(craftAmount, 1, 1000);
+        craftAmountText.text = craftAmount.ToString();
+    }
+
+    private void DecreaseCraftAmount()
+    {
+        craftAmount--;
+        craftAmount = Mathf.Clamp(craftAmount, 1, 1000);
+        craftAmountText.text = craftAmount.ToString();
     }
 
     private void ClearPanel(Transform panel)

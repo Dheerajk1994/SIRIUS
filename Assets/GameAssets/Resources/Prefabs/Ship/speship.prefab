@@ -679,6 +679,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Teleporter: {fileID: 1858376270952076}
   Engine: {fileID: 1826140245347036}
+  Navigation: {fileID: 1385680063904670}
+  Bed: {fileID: 1901692159518330}
+  Chest: {fileID: 1450299133684860}
 --- !u!114 &114421684113572526
 MonoBehaviour:
   m_ObjectHideFlags: 1
