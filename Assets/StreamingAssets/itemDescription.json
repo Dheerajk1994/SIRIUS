@@ -268,7 +268,7 @@
       "cost": 0,
       "type": 12,
       "tier": 2,
-      "recipe": []
+      "recipe": [3, 10, 22, 10]
     },
     {
       "itemName": "Iron Pickaxe",
@@ -278,7 +278,7 @@
       "cost": 0,
       "type": 12,
       "tier": 3,
-      "recipe": []
+      "recipe": [3, 10, 26, 10]
     },
     {
       "itemName": "Diamond Pickaxe",
@@ -288,7 +288,7 @@
       "cost": 0,
       "type": 12,
       "tier": 4,
-      "recipe": []
+      "recipe": [3, 10, 25, 10]
     },
     {
       "itemName": "Wooden Axe",
@@ -298,7 +298,7 @@
       "cost": 0,
       "type": 13,
       "tier": 1,
-      "recipe": []
+      "recipe": [3, 20]
     },
     {
       "itemName": "Copper Axe",
@@ -308,7 +308,7 @@
       "cost": 0,
       "type": 13,
       "tier": 2,
-      "recipe": []
+      "recipe": [3, 10, 22, 15]
     },
     {
       "itemName": "Iron Axe",
@@ -318,7 +318,7 @@
       "cost": 0,
       "type": 13,
       "tier": 3,
-      "recipe": []
+      "recipe": [3, 10, 26, 20]
     },
     {
       "itemName": "Diamond Axe",
@@ -328,7 +328,7 @@
       "cost": 0,
       "type": 13,
       "tier": 4,
-      "recipe": []
+      "recipe": [3, 10, 25, 10]
     },
     {
       "itemName": "Alien Goo",

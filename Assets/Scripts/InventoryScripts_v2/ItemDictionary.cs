@@ -59,6 +59,20 @@ public static class ItemDictionary
             return null; }
     }
 
+    //RETURNS AN ITEM OF A CERTAIN TYPE - WILL RETURN THE FIRST ITEM WITH THE TYPE
+    public static ItemDescription GetItemOfType(ushort type)
+    {
+        foreach (KeyValuePair<ushort, ItemDescription> item in itemDictionary)
+        {
+            if (item.Value.type == type)
+            {
+                return item.Value;
+            }
+        }
+        return null;
+    }
+
+
     public static List<ItemDescription> GetItemsOfTier(ushort tier)
     {
         List<ItemDescription> craftableItemsList = new List<ItemDescription>();

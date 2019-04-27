@@ -7,8 +7,6 @@ using System;
 
 public class CraftingPanelScript : MonoBehaviour {
 
-    private int craftAmount;
-
     #region PANEL_OBJECTS
     [SerializeField] private Button craftingPanelItemsButtonPrefab;
     [SerializeField] private GameObject recipeIconPrefab;
@@ -33,6 +31,8 @@ public class CraftingPanelScript : MonoBehaviour {
     private bool craftingPanelIsDisplaying;
     private enum itemTier { TIER1 = 0, TIER2 = 1, TIER3 = 2, TIER4 = 3, TIER5 = 4};
     private ushort currentSelectedTier;
+    private int craftAmount;
+    List<GameObject> listOfRecipes;
     #endregion
 
 
@@ -102,6 +102,31 @@ public class CraftingPanelScript : MonoBehaviour {
             craftAmountText.text = craftAmount.ToString();
             string description = item.itemDescription.itemName + " \n\n" + item.itemDescription.description;
             itemDescriptionTxt.text = description;
+
+            ClearPanel(recipePanel);
+
+            ushort[] recipe = item.itemDescription.recipe;
+            ushort type, amount;
+            for(int i = 0; i < recipe.Length; ++i)
+            {
+                type = recipe[i];
+                i++;
+                amount = recipe[i];
+                ItemDescription recipeItem = ItemDictionary.GetItemOfType(type);
+                if(recipeItem != null)
+                {
+                    GameObject recipeIcon = Instantiate(recipeIconPrefab);
+                    recipeIcon.GetComponent<Image>().sprite = InventorySpritesScript.instance.GetSprite(recipeItem.id);
+                    recipeIcon.GetComponentInChildren<Text>().text = amount.ToString();
+                    listOfRecipes.Add(recipeIcon);
+                }
+            }
+
+            foreach(GameObject obj in listOfRecipes)
+            {
+                obj.transform.SetParent(recipePanel, false);
+            }
+
         }
     }
 
