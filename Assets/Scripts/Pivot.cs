@@ -23,7 +23,6 @@ public class Pivot : MonoBehaviour
         difference.Normalize();
 
         float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-    
         if (facingRight)
         {
             if (rotationZ <= 90 && rotationZ >= -90)

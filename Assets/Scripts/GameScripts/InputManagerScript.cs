@@ -109,7 +109,6 @@ public class InputManagerScript : MonoBehaviour {
         //equipping the Spacegun
         while (hotbarPanel.GetEquippedSlot().Equals(900))
         {
-            Debug.Log("Spacegun is selected");
             doggoMovementScript.equipSpacegun();
             break;
         }
