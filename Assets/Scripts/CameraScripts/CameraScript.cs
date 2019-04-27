@@ -48,15 +48,15 @@ public class CameraScript : MonoBehaviour {
 
     public void Start()
     {
-        cloud1_l.gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.CLOUDLAYER;
-        cloud1_m.gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.CLOUDLAYER;
+        //cloud1_l.gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.CLOUDLAYER;
+        //cloud1_m.gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.CLOUDLAYER;
 
-        sky.   gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.SKYSHADERLAYER;
-        planet.gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.PLANETLAYER;
-        stars. gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.STARSLAYER;
+        //sky.   gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.SKYSHADERLAYER;
+        //planet.gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.PLANETLAYER;
+        //stars. gameObject.GetComponent<SpriteRenderer>().sortingOrder = (ushort)EnumClass.LayerIDEnum.STARSLAYER;
 
-        cloudStartPos = cloud1_l.localPosition + cloudOffset;
-        cloudEndPos = new Vector3(cloud1_m.localPosition.x + 50, cloudStartPos.y, 3f);
+        //cloudStartPos = cloud1_l.localPosition + cloudOffset;
+        //cloudEndPos = new Vector3(cloud1_m.localPosition.x + 50, cloudStartPos.y, 3f);
     }
 
     private void Update()

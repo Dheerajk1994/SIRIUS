@@ -35,4 +35,12 @@ public class InventoryControllerScript : MonoBehaviour {
 
         return remaining;
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            playerHotbarPanelScript.genericInvoHandler.AddItemToGenericInventory(2, 10);
+        }
+    }
 }

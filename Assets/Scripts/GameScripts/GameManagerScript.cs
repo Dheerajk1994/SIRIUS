@@ -25,6 +25,8 @@ public class GameManagerScript : MonoBehaviour
     public GameObject InventoryControllerPrefab;
     public GameObject AIManagerPrefab;
     public GameObject QuestManagerPrefab;
+    public GameObject ShipPrefab;
+
     #endregion
 
     #region INSTANTIATED_PREFABS
@@ -36,6 +38,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject inventoryController;
     public GameObject aiManager;
     public GameObject questManager;
+    public GameObject ship;
     #endregion
 
     #region SCRIPT_REFERENCES
@@ -46,6 +49,7 @@ public class GameManagerScript : MonoBehaviour
     public InputManagerScript inputManagerScript;
     public InventoryControllerScript inventoryControllerScript;
     public QuestManagerScript questManagerScript;   
+    public ShipScript shipScript;
     #endregion
 
     #region LOCAL_VARIABLES
@@ -94,6 +98,8 @@ public class GameManagerScript : MonoBehaviour
 
         questManager              = Instantiate(QuestManagerPrefab);
         questManagerScript        = questManager.GetComponent<QuestManagerScript>();
+        ship                      = Instantiate(ShipPrefab);
+        shipScript                = ship.GetComponent<ShipScript>();
 
         ui.      gameObject.SetActive(false);
         player.  gameObject.SetActive(false);
@@ -105,7 +111,7 @@ public class GameManagerScript : MonoBehaviour
         inventoryControllerScript     .SetInventoryController(this, uiScript);
         questManagerScript            .SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>());
 
-
+        shipScript                    .SetShip(uiScript);
         //SET LOCAL VARIABLES
         readyToGo    = false;
         worldPresent = false;
