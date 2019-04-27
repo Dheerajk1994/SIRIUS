@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 
 public class CraftingPanelScript : MonoBehaviour {
 
     #region PANEL_OBJECTS
-    [SerializeField]
-    private GameObject craftableItemsPanel;
-    [SerializeField]
-    private Button[] itemTierButtons;
-    [SerializeField]
-    private Button closeCraftinPanelButton;
-    [SerializeField]
-    private Button craftingPanelItemsButtonPrefab;
+    [SerializeField] private Transform craftableItemsPanel;
+    [SerializeField] private Button[] itemTierButtons;
+    [SerializeField] private Button closeCraftinPanelButton;
+    [SerializeField] private Button craftingPanelItemsButtonPrefab;
+    [SerializeField] private Text itemDescriptionTxt;
     #endregion
 
     #region REFERENCES
@@ -56,7 +55,7 @@ public class CraftingPanelScript : MonoBehaviour {
 
         if (craftingPanelIsDisplaying)
         {
-            GenerateItemsPanel(currentSelectedTier);
+            //GenerateItemsPanel(currentSelectedTier);
         }
     }
 
@@ -68,12 +67,37 @@ public class CraftingPanelScript : MonoBehaviour {
         currentSelectedTier = tier;
         newColor = new Color(255f, 255f, 255f, 255f);
         itemTierButtons[currentSelectedTier].GetComponent<Image>().color = newColor;
+
+        ClearPanel(craftableItemsPanel);
+
+        List<ItemDescription> testList = ItemDictionary.GetItemsOfTier((ushort)(currentSelectedTier + 1));
+        foreach(ItemDescription item in testList)
+        {
+            Button but = Instantiate(craftingPanelItemsButtonPrefab);
+            but.transform.GetChild(0).GetComponent<Image>().sprite = InventorySpritesScript.instance.GetSprite(item.id);
+            but.transform.SetParent(craftableItemsPanel, false);
+            CraftingPanelItemScript script = but.gameObject.AddComponent<CraftingPanelItemScript>();
+            script.id = item.id;
+            but.onClick.AddListener(CraftingPanelItemsButtonClicked);
+        }
     }
 
-
-    private void GenerateItemsPanel(ushort tier)
+    private void SetItemDescription(ushort id)
     {
+        CompleteItem item = ItemDictionary.GetItem(id);
+        if(item != null)
+        {
+            string description = item.itemDescription.itemName + " \n\n" + item.itemDescription.description;
+            itemDescriptionTxt.text = description;
+        }
+    }
 
+    private void ClearPanel(Transform panel)
+    {
+        foreach(Transform children in panel)
+        {
+            Destroy(children.gameObject);
+        }
     }
 
     #region TIER_BUTTON_LISTENERS
@@ -100,6 +124,23 @@ public class CraftingPanelScript : MonoBehaviour {
     }
     #endregion
 
+    public void CraftingPanelItemsButtonClicked()
+    {
+        GameObject clickedButton = EventSystem.current.currentSelectedGameObject.gameObject;
+        try
+        {
+            SetItemDescription(clickedButton.GetComponent<CraftingPanelItemScript>().id);
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+    }
+
 }
 
+public class CraftingPanelItemScript : MonoBehaviour
+{
+    public ushort id;
+}
 

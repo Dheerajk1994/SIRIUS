@@ -41,10 +41,6 @@ public static class ItemDictionary
         
     }
 
-    /*
-    NEED OPTIMIZATION
-        */
-
     public static CompleteItem GetItem(ushort fetchID)
     {
         if (fetchID == (ushort)EnumClass.TileEnum.EMPTY) return null;
@@ -62,6 +58,22 @@ public static class ItemDictionary
             Debug.LogError("Item ID: " + fetchID + " does not exist in the dictionary");
             return null; }
     }
+
+    public static List<ItemDescription> GetItemsOfTier(ushort tier)
+    {
+        List<ItemDescription> craftableItemsList = new List<ItemDescription>();
+
+        foreach(KeyValuePair<ushort, ItemDescription> item in itemDictionary)
+        {
+            if(item.Value.tier == tier)
+            {
+                craftableItemsList.Add(item.Value);
+            }
+        }
+
+        return craftableItemsList;
+    }
+
 }
 
 
@@ -80,6 +92,8 @@ public class ItemDescription
     public ushort stackAmnt;
     public uint cost;
     public uint type;
+    public ushort tier;
+    public ushort [] recipe;
 }
 
 public class CompleteItem

@@ -397,16 +397,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58f2ea3f304693458d2e237f48046a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
   craftableItemsPanel: {fileID: 1327630269749178}
-  craftingPanelItemPrefab: {fileID: 1337593746735236, guid: 07247b17fa8f7f0469c1a8331e8f6225,
-    type: 2}
-  craftCamfireButton: {fileID: 1428280992036682}
-  craftAxeButton: {fileID: 1298849900718170}
-  craftPickButton: {fileID: 1159368775159552}
-  campfire: {fileID: 1847213490905088, guid: 0e95bba479d5c5449ae1ba28dfd86a1f, type: 2}
-  axe: {fileID: 0}
-  pickaxe: {fileID: 0}
+  itemTierButtons: []
+  closeCraftinPanelButton: {fileID: 0}
+  craftingPanelItemsButtonPrefab: {fileID: 0}
 --- !u!114 &114459601138252242
 MonoBehaviour:
   m_ObjectHideFlags: 1
