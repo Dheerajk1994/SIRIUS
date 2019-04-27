@@ -9,8 +9,9 @@ REDUCES CLUTTER IN GAMEMANAGER
 */
 public static class GameDataHandler {
 
-    public static void NewGame(GameManagerScript gameManager, TerrainManagerScript terrainManager, ushort terrainType)
+    public static void NewGame(GameManagerScript gameManager, TerrainManagerScript terrainManager, ushort terrainType) 
     {
+        //Debug.Log(terrainType);
         if (!gameManager.worldPresent)
         {
             gameManager.readyToGo = false;

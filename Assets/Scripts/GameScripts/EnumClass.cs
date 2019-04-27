@@ -26,6 +26,24 @@ public static class EnumClass {
         MOON_STONE,
         MOON_SAND,
 
+        //DESERT
+        DESERT_DIRT=50,
+        DESERT_STONE,
+        DESERT_GRASS,
+        DESERT_FLOWER,
+        DESERT_TREE_TRUNK,
+        DESERT_TREE_BASE,
+        DESERT_TREE_LEAF,
+
+        //SNOW
+        SNOW_DIRT = 60,
+        SNOW_STONE,
+        SNOW_GRASS,
+        SNOW_FLOWER,
+        SNOW_TREE_TRUNK,
+        SNOW_TREE_BASE,
+        SNOW_TREE_LEAF,
+
         CAMPFIRE = 100
     };
 

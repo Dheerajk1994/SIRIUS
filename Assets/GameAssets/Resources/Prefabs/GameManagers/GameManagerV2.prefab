@@ -85,6 +85,7 @@ MonoBehaviour:
   cameraScript: {fileID: 0}
   inputManagerScript: {fileID: 0}
   inventoryControllerScript: {fileID: 0}
+  questManagerScript: {fileID: 0}
   readyToGo: 0
   worldPresent: 0
   playerPos: {x: 0, y: 0, z: 0}

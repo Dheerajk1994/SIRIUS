@@ -17,7 +17,7 @@ public static class ItemDictionary
     {
         if (!isItemDictionaryPopulated)
         {
-            Debug.Log("generate itemdictionary called");
+            //Debug.Log("generate itemdictionary called");
             inventorySpritesScript = iss;
             path = Application.streamingAssetsPath + "/itemDescription.json";
             if (File.Exists(path))

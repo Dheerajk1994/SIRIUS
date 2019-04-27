@@ -10,7 +10,7 @@ public static class QuestGenerator {
 
 	public static QuestLists GenerateQuest()
 	{
-		Debug.Log("Generate QuestGenerator called");
+		//Debug.Log("Generate QuestGenerator called");
 		path = Application.streamingAssetsPath + "/quests.json";
 		if(File.Exists(path))
 		{

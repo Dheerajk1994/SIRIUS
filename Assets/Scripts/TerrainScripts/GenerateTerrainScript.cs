@@ -12,68 +12,68 @@ public class GenerateTerrainScript : MonoBehaviour
     private ushort[,] backTilesResourceValue;
     private ushort[,] vegetationTilesValue;
 
-    //private GameObject[,] chunkTiles;
-    //private GameObject[] chunkArray;
+    //public int backTileLayerID;
+    //public int frontTileLayerID;
+    //public int grassLayerID;
 
-    public ushort xDimension;
-    public float smoothness;
-    public int heightMultiple;
-    public ushort heightAddition;
+    private ushort xDimension;
+    private float smoothness;
+    private int heightMultiple;
+    private ushort heightAddition;
 
-    //public int chunkSize;
+    private int caveChanceVal;
+    private int caveSimRep;
+    private int caveMinNeighReq;
+    private int caveMaxNeighReq;
+    private float caveChangeInHeight;
+    
+    private int stoneChanceVal;                      
+    private int stoneSimRep;                         
+    private int stoneMinNeighReq;                    
+    private int stoneMaxNeighReq;                    
+    private float stoneChangeInHeight;               
+    
+    private int coalChance;
+    private int coalNeighChance;
+    private float coalChangeInHeight;
+    
+    private int copperChance;
+    private int copperNeighChance;
+    private float copperChangeInHeight;
 
-    public int backTileLayerID;
-    public int frontTileLayerID;
-    public int grassLayerID;
+    private int ironChance;
+    private int ironNeighChance;
+    private float ironChangeInHeight;
 
-    public int caveChanceVal;
-    public int caveSimRep;
-    public int caveMinNeighReq;
-    public int caveMaxNeighReq;
-    public float caveChangeInHeight;
-
-    public int stoneChanceVal;                      //CHANCE FOR A STONE TO GENERATE 
-    public int stoneSimRep;                         //HOW MANY TIMES IT RUNS
-    public int stoneMinNeighReq;                       //NEIGHBORS REQUIRED TO REMAIN 1
-    public int stoneMaxNeighReq;                       // max NEIGHBORS REQUIRED TO REMAIN 1
-    public float stoneChangeInHeight;               //SHOULD THERE BE MORE STONE AS WE GO DEEPER
-
-    public int coalChance;
-    public int coalNeighChance;
-    public float coalChangeInHeight;
-
-    public int copperChance;
-    public int copperNeighChance;
-    public float copperChangeInHeight;
-
-    public int silverChance;
-    public int silverNeighChance;
-    public float silverChangeInHeight;
-
-    public int goldChance;
-    public int goldNeighChance;
-    public float goldChangeInHeight;
-
-    public int diamondChance;
-    public int diamondNeighChance;
-    public float diamondChangeInHeight;
-
-    public int flowerChance;
-    public int treeChance;
-    public int minTreeHeight;
-    public int maxTreeHeight;
+    private int silverChance;
+    private int silverNeighChance;
+    private float silverChangeInHeight;
+    
+    private int goldChance;
+    private int goldNeighChance;
+    private float goldChangeInHeight;
+    
+    private int diamondChance;
+    private int diamondNeighChance;
+    private float diamondChangeInHeight;
+    
+    private int flowerChance;
+    private int treeChance;
+    private int minTreeHeight;
+    private int maxTreeHeight;
 
     private ushort DIRT_ID, STONE_ID, SAND_ID, GRASS_ID, FLOWER_ID, TREE_CORE_ID, TREE_TOP_ID;
     private ushort worldXDimension, worldYDimension;
 
     public void StartTerrainGeneration(TerrainManagerScript terrainManager, ushort xDim, ushort heightA, ushort chunkSize, ushort terrainType)
     {
+        //Debug.Log(terrainType);
         this.heightAddition = heightA;
-        //Debug.Log(xDim + " % " + chunkSize + ": " + xDim % chunkSize);
-        //xDimension = (ushort)(xDim - (xDim - (chunkSize * (Mathf.Floor(xDim / chunkSize)))));   //MAKE SURE XDIMENSION IS DIVISIBLE BY CHUNKSIZE
         xDimension = (ushort)(xDim - (xDim % chunkSize));
         worldXDimension = xDimension;
         worldYDimension = (ushort)(heightAddition + 50);
+
+        SetVariables(terrainType);
 
         frontTilesValue              = new ushort[worldXDimension, worldYDimension];
         frontTilesResourceValues     = new ushort[worldXDimension, worldYDimension];
@@ -92,6 +92,7 @@ public class GenerateTerrainScript : MonoBehaviour
         GenerateResources((ushort)EnumClass.TileEnum.GOLD, goldChance, goldNeighChance, goldChangeInHeight);
         GenerateResources((ushort)EnumClass.TileEnum.DIAMOND, diamondChance, diamondNeighChance, diamondChangeInHeight);
 
+
         if(terrainType != (ushort)EnumClass.TerrainType.MOON && terrainType != (ushort)EnumClass.TerrainType.ASTEROID)
         {
             GenerateGrass();
@@ -101,8 +102,63 @@ public class GenerateTerrainScript : MonoBehaviour
         terrainManager.SetTiles(frontTilesValue, frontTilesResourceValues, backTilesValue, backTilesResourceValue, vegetationTilesValue);
     }
 
+    private void SetVariables(ushort terrainType)
+    {
+        TerrainInfo terrain = TerrainVariableReader.GetTerrainInfo(terrainType);
+        //Debug.Log(terrainType);
+        if (terrain != null)
+        {
+            this.heightMultiple = terrain.heightMultiple;
+            this.smoothness = terrain.smoothness;
+            
+            this.caveChanceVal = terrain.caveChanceVal;
+            this.caveSimRep = terrain.caveSimRep;
+            this.caveMinNeighReq = terrain.caveMinNeighReq;
+            this.caveMaxNeighReq = terrain.caveMaxNeighReq;
+            this.caveChangeInHeight = terrain.caveChangeInHeight;
+            
+            this.stoneChanceVal = terrain.stoneChanceVal;
+            this.stoneSimRep = terrain.stoneSimRep;
+            this.stoneMinNeighReq = terrain.stoneMinNeighReq;
+            this.stoneMaxNeighReq = terrain.stoneMaxNeighReq;
+            this.stoneChangeInHeight = terrain.stoneChangeInHeight;
+            
+            this.coalChance = terrain.coalChance;
+            this.coalNeighChance = terrain.coalNeighChance;
+            this.coalChangeInHeight = terrain.coalChangeInHeight;
+            //Debug.Log("coal neigh " + coalNeighChance);
+            
+            this.copperChance = terrain.copperChance;
+            this.copperNeighChance = terrain.copperNeighChance;
+            this.copperChangeInHeight = terrain.copperChangeInHeight;
+
+
+            this.ironChance = terrain.ironChance;
+            this.ironNeighChance = terrain.ironNeighChance;
+            this.ironChangeInHeight = terrain.ironChangeInHeight;
+            
+            this.silverChance = terrain.silverChance;
+            this.silverNeighChance = terrain.silverNeighChance;
+            this.silverChangeInHeight = terrain.silverChangeInHeight;
+            
+            this.goldChance = terrain.goldChance;
+            this.goldNeighChance = terrain.goldNeighChance;
+            this.goldChangeInHeight = terrain.goldChangeInHeight;
+            
+            this.diamondChance = terrain.diamondChance;
+            this.diamondNeighChance = terrain.diamondNeighChance;
+            this.diamondChangeInHeight = terrain.diamondChangeInHeight;
+        
+            this.flowerChance = terrain.flowerChance;
+            this.treeChance = terrain.treeChance;
+            this.minTreeHeight = terrain.minTreeHeight;
+            this.maxTreeHeight = terrain.maxTreeHeight;
+}
+    }
+
     private void GenerateIDs(ushort terrainType)
     {
+        //Debug.Log("TERRAIN TYPE: " + terrainType);
         switch (terrainType)
         {
             case (ushort)EnumClass.TerrainType.GREEN:
@@ -115,10 +171,22 @@ public class GenerateTerrainScript : MonoBehaviour
                 TREE_TOP_ID = (ushort)EnumClass.TileEnum.REGULAR_TREELEAF;
                 break;
             case (ushort)EnumClass.TerrainType.DESERT:
-                Debug.LogError("Desert biome generation not set.");
+                DIRT_ID = (ushort)EnumClass.TileEnum.DESERT_DIRT;
+                STONE_ID = (ushort)EnumClass.TileEnum.DESERT_STONE;
+                SAND_ID = (ushort)EnumClass.TileEnum.REGULAR_SAND;
+                GRASS_ID = (ushort)EnumClass.TileEnum.DESERT_GRASS;
+                FLOWER_ID = (ushort)EnumClass.TileEnum.DESERT_FLOWER;
+                TREE_CORE_ID = (ushort)EnumClass.TileEnum.DESERT_TREE_TRUNK;
+                TREE_TOP_ID = (ushort)EnumClass.TileEnum.DESERT_TREE_LEAF;
                 break;
             case (ushort)EnumClass.TerrainType.SNOW:
-                Debug.LogError("Snow biome generation not set.");
+                DIRT_ID = (ushort)EnumClass.TileEnum.SNOW_DIRT;
+                STONE_ID = (ushort)EnumClass.TileEnum.SNOW_STONE;
+                SAND_ID = (ushort)EnumClass.TileEnum.REGULAR_SAND;
+                GRASS_ID = (ushort)EnumClass.TileEnum.SNOW_GRASS;
+                FLOWER_ID = (ushort)EnumClass.TileEnum.SNOW_FLOWER;
+                TREE_CORE_ID = (ushort)EnumClass.TileEnum.SNOW_TREE_TRUNK;
+                TREE_TOP_ID = (ushort)EnumClass.TileEnum.SNOW_TREE_LEAF;
                 break;
             case (ushort)EnumClass.TerrainType.MOON:
                 DIRT_ID = (ushort)EnumClass.TileEnum.MOON_DIRT;
@@ -239,7 +307,7 @@ public class GenerateTerrainScript : MonoBehaviour
     private void CreateTree(int x, int y)
     {
         int height = UnityEngine.Random.Range(minTreeHeight, maxTreeHeight);
-        vegetationTilesValue[x, y] = 17;
+        vegetationTilesValue[x, y] = TREE_CORE_ID;
         for (int i = 0; i < height; i++)
         {
             vegetationTilesValue[x, y + 1 + i] = TREE_CORE_ID;
@@ -309,6 +377,10 @@ public class GenerateTerrainScript : MonoBehaviour
 
     private void GenerateResources(ushort resourceID, int resourceChance, int resourceNeighChance, float resourceChangeInHeight)
     {
+        //Debug.Log("resource id " + resourceID);
+        //Debug.Log("resource chance " + resourceChance);
+        //Debug.Log("resource neigh chance " + resourceNeighChance);
+        //Debug.Log("resource change in height " + resourceChangeInHeight);
         byte[,] frontTileResourceArray = new byte[frontTilesValue.GetLength(0), frontTilesValue.GetLength(1)];
         byte[,] backtTileResourceArray = new byte[frontTilesValue.GetLength(0), frontTilesValue.GetLength(1)];
         for (int x = 0; x < worldXDimension; x++)
@@ -365,6 +437,7 @@ public class GenerateTerrainScript : MonoBehaviour
                 if (frontTileResourceArray[x, y] == 1)
                 {
                     frontTilesResourceValues[x, y] = resourceID;
+                    //Debug.Log("resource id set");
                 }
                 if (backtTileResourceArray[x, y] == 1)
                 {

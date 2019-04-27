@@ -6,7 +6,7 @@
       "description": "Dirty dirt",
       "stackAmnt": 10,
       "cost": 0,
-      "type":  1
+      "type": 1
     },
     {
       "itemName": "Regular Stone",
@@ -129,13 +129,77 @@
       "type": 4
     },
     {
+      "itemName": "Desert Dirt",
+      "id": 50,
+      "description": "Dirt from a desert.",
+      "stackAmnt": 999,
+      "cost": 0,
+      "type": 1
+    },
+    {
+      "itemName": "Desert Stone",
+      "id": 51,
+      "description": "Stone from a desert.",
+      "stackAmnt": 999,
+      "cost": 0,
+      "type": 2
+    },
+    {
+      "itemName": "Desert Grass",
+      "id": 52,
+      "description": "Dry and flammable.",
+      "stackAmnt": 999,
+      "cost": 0,
+      "type": 5
+    },
+    {
+      "itemName": "Desert Flower",
+      "id": 53,
+      "description": "Dried flowers from the desert.",
+      "stackAmnt": 999,
+      "cost": 0,
+      "type": 0
+    },
+    {
+      "itemName": "Snow Dirt",
+      "id": 60,
+      "description": "Dirty snow?",
+      "stackAmnt": 999,
+      "cost": 0,
+      "type": 1
+    },
+    {
+      "itemName": "Snow Stone",
+      "id": 61,
+      "description": "More like hard ice.",
+      "stackAmnt": 999,
+      "cost": 0,
+      "type": 2
+    },
+    {
+      "itemName": "Snow grass",
+      "id": 62,
+      "description": "Wet useless grass.",
+      "stackAmnt": 999,
+      "cost": 0,
+      "type": 0
+    },
+    {
+      "itemName": "Snow flowers",
+      "id": 63,
+      "description": "Cold, dying flowers.",
+      "stackAmnt": 999,
+      "cost": 0,
+      "type": 0
+    },
+    {
       "itemName": "Pickaxe",
       "id": 1000,
       "description": "I will show you mine if you show me yours.",
       "stackAmnt": 1,
       "cost": 0,
       "type": 0
-    }, 
+    },
     {
       "itemName": "Alien Goo",
       "id": 700,

@@ -12,7 +12,7 @@ public class GameManagerScript : MonoBehaviour
     public string greenWorldSavePath = "greenWorld";
     public string moonWorldSavePath = "moonWorld";
 
-    public ushort currentWorld         = (ushort)EnumClass.TerrainType.GREEN;
+    public ushort currentWorld;         
     public string currentWorldSavePath = "greenWorld";
     #endregion
 
@@ -134,6 +134,9 @@ public class GameManagerScript : MonoBehaviour
 
     public void StartNewGame()
     {
+        //Debug.Log("enum val " + (ushort)EnumClass.TerrainType.MOON);
+        //Debug.Log(currentWorld);
+        currentWorld =  (ushort)EnumClass.TerrainType.GREEN;//TEST
         GameDataHandler.NewGame(this, terrainManagerScript, currentWorld);
     }
 
