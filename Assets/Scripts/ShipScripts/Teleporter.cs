@@ -23,5 +23,7 @@ public class Teleporter : Interactable
     {
         if (canInteract && Input.GetKeyDown(KeyCode.E))
             Interact();
+        else if (!canInteract)
+            ExitShipPanel.GetComponent<Animator>().SetBool("isOpen", false);
     }
 }

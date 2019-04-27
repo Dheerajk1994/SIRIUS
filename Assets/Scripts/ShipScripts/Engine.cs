@@ -25,6 +25,8 @@ public class Engine : Interactable
     {
         if (canInteract && Input.GetKeyDown(KeyCode.E))
             Interact();
+        else if (!canInteract)
+            EnginePanel.GetComponent<Animator>().SetBool("isOpen", false);
     }
 
     public void Refuel(float value)
