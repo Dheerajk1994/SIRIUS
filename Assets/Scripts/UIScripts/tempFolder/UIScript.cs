@@ -40,7 +40,7 @@ public class UIScript : MonoBehaviour
         PlayerInventoryAndStatsPanel.GetComponent<PlayerInventoryPanelScript>().SetPlayerInventoryPanel(player.GetComponent<Inventory>());
 
         PlayerHotBarPanel.GetComponent<HotbarHandlerScript>().genericInventory = player.GetComponent<Hotbar>();
-        PlayerHotBarPanel.GetComponent<PlayerHotbarPanelScript>().SetPlayerHotbarPanel(player.GetComponent<Hotbar>());
+        PlayerHotBarPanel.GetComponent<PlayerHotbarPanelScript>().SetPlayerHotbarPanel(player.GetComponent<Hotbar>(), gameManagerScript.playerScript);
 
         PlayerAttributePanel.GetComponent<PlayerAttributesPanelScript>().SetPlayerAttributesPanel(this);
 

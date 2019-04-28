@@ -12,7 +12,9 @@ public class InventorySpritesScript : MonoBehaviour {
     {
         instance = this;
         ItemDictionary.GenerateDictionary(this);
+        instance = this;
     }
+
 
     public Sprite GetSprite(ushort index){
         if(index < itemSprites.Length){

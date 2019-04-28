@@ -6,6 +6,15 @@ public class Player : CharacterFinal
 {
     public GameManagerScript gameManagerScript;
     public UIScript uiScript;
+    public InputManagerScript inputManagerScript;
+
+    //public GameObject rotatingArmPrefab;
+    //public GameObject rotatingArmObject;
+    public GameObject equippedItem;
+
+    [SerializeField]private GameObject rotatingArm;
+    private Pivot rotatingArmScript;
+
 
     private static Player instance;
     //there should be only one player
@@ -18,10 +27,11 @@ public class Player : CharacterFinal
     //     }
     // }
 
-    public void SetPlayerScript(GameManagerScript gmScript, UIScript uScript)
+    public void SetPlayerScript(GameManagerScript gmScript, UIScript uScript, InputManagerScript inputScript)
     {
         gameManagerScript = gmScript;
         uiScript = uScript;
+        inputManagerScript = inputScript;
     }
 
     public static Player Instance
@@ -76,13 +86,17 @@ public class Player : CharacterFinal
     {
         base.Start();
         MyRigidbody = GetComponent<Rigidbody2D>();
-       
-	}
+        rotatingArmScript = rotatingArm.GetComponent<Pivot>();
+
+
+    }
 
     protected override void Update()
     {
         base.Update();
         HandleInput();
+        //generateRotatingArm();
+
     }
 
     // Update is called once per frame
@@ -104,16 +118,7 @@ public class Player : CharacterFinal
             MyAnimator.SetTrigger("jump");
             //jump = true;
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            MyAnimator.SetTrigger("attack");
-            //attack = true;
-            //jumpAttack = true;
-        }
-
     }
-
 
     private bool IsGrounded()
     {
@@ -181,4 +186,84 @@ public class Player : CharacterFinal
     {
         yield return null;
     } 
+    
+    public void HandleEquip()
+    {
+        if (equippedItem != null)
+            Destroy(equippedItem.gameObject);
+
+
+       switch(inputManagerScript.hotbarPanel.GetEquippedSlot())
+        {
+            case 0:
+                MyAnimator.SetBool("rotatingArm", false);
+                //clearArm();
+                rotatingArm.gameObject.SetActive(false);
+                Debug.Log("Nothing equipped");
+                break;
+            case 800:
+                rotatingArm.gameObject.SetActive(true);
+                rotatingArm.GetComponent<Pivot>().EquipSword();
+                equippedItem = Instantiate(rotatingArmScript.swordPrefab);
+                Debug.Log("Sword equipped");
+                break;
+            case 801:
+                rotatingArm.gameObject.SetActive(true);
+                rotatingArm.GetComponent<Pivot>().EquipKatana();
+                equippedItem = Instantiate(rotatingArmScript.katanaPrefab);
+                Debug.Log("Katana equipped");
+                break;
+            case 900:
+                //GenerateRotatingArm();
+                rotatingArm.gameObject.SetActive(true);
+                rotatingArm.GetComponent<Pivot>().equipSpacegun();
+                Debug.Log("Spacegun equipped");
+                break;
+            case 901:
+                //GenerateRotatingArm();
+                rotatingArm.gameObject.SetActive(true);
+                rotatingArm.GetComponent<Pivot>().equipLavagun();
+                Debug.Log("Lavagun equipped");
+                break;
+            default:
+                GameObject obj = new GameObject();
+                obj.AddComponent<SpriteRenderer>().sprite = InventorySpritesScript.instance.GetSprite(2);
+                rotatingArm.gameObject.SetActive(true);
+                rotatingArm.GetComponent<Pivot>().EquipItem(obj);
+                break;
+
+        }   
+    }
+
+    public void MeleeAttack()
+    {
+        rotatingArmScript.MeleeRotate(equippedItem.GetComponent<WeaponClass>().attackSpeed);
+    }
+
+    //public void GenerateRotatingArm()
+    //{
+    //    if (GameObject.Find("/PlayArea/Sam(Clone)/RotatingArm(Clone)") == null)
+    //    {
+    //        rotatingArmObject = Instantiate(rotatingArmPrefab, new Vector3(), Quaternion.identity) as GameObject;
+    //        rotatingArmObject.transform.parent = transform;
+    //        rotatingArmObject.transform.localPosition = new Vector3(-0.197f, -0.43f);
+    //        MyAnimator.SetBool("rotatingArm", true);
+    //    }
+    //}
+
+    //public Pivot RotatingArm()
+    //{
+    //    return rotatingArmObject.GetComponent<Pivot>();
+    //}
+
+    //public void clearArm()
+    //{
+    //    GameObject[] holder = 
+    //    if (rotatingArmObject != null)
+    //    {
+    //        Destroy(rotatingArmObject);
+    //    }
+        
+    //}
+
 }

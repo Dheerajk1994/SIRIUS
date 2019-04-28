@@ -11,6 +11,7 @@ public class Enemy : CharacterFinal
 
     [SerializeField]
     private float rangedAttackRange;
+
     private Vector2 targetPos;
 
     [SerializeField]
@@ -279,6 +280,7 @@ public class Enemy : CharacterFinal
     }
 
 
+
     //private void OnDrawGizmos()
     //{
     //    if (terrain != null)
@@ -302,7 +304,6 @@ public class Enemy : CharacterFinal
     //        Gizmos.DrawCube(pos, Vector3.one * 0.3f);
     //    }
     //}
-
 
 
 }

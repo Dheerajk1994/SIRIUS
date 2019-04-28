@@ -249,6 +249,7 @@ MonoBehaviour:
   m_GroundCheck: {fileID: 4183950586258662}
   m_CeilingCheck: {fileID: 4512673271041088}
   m_CrouchDisableCollider: {fileID: 0}
+  m_FacingRight: 1
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:
@@ -303,6 +304,9 @@ MonoBehaviour:
   standardDamage: 0
   gameManagerScript: {fileID: 0}
   uiScript: {fileID: 0}
+  rotatingArmPrefab: {fileID: 1245799151272890, guid: 916415f0e108ea0439eb811b7a3e28a4,
+    type: 2}
+  rotatingArmObject: {fileID: 0}
   airControl: 1
   jumpForce: 5000
   groundPoints:
