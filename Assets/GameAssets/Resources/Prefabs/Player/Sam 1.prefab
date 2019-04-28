@@ -200,7 +200,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1370303781483332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.370436, y: 91.28697, z: 0}
+  m_LocalPosition: {x: -0.624069, y: -0.6553955, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4401663595381830}
@@ -330,12 +330,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1370303781483332}
   PlayerScript: {fileID: 0}
+  swordPrefab: {fileID: 1390501716720492, guid: 1f6515a3d74da704093a8c54c230a12f,
+    type: 2}
+  katanaPrefab: {fileID: 1939648194908410, guid: a61096071836f34498a4014a44b549aa,
+    type: 2}
   spacegunPrefab: {fileID: 1190977040168042, guid: b93efe566cd177f42aed9f7609b2b48c,
     type: 2}
-  spacegun: {fileID: 0}
   lavagunPrefab: {fileID: 1783279463749430, guid: e5b2801dae9b2a64c8e82d3d2d321519,
     type: 2}
-  lavagun: {fileID: 0}
   equipmentPosition: {fileID: 4346868372779818}
 --- !u!114 &114500942853247576
 MonoBehaviour:
@@ -414,6 +416,7 @@ MonoBehaviour:
   gameManagerScript: {fileID: 0}
   uiScript: {fileID: 0}
   inputManagerScript: {fileID: 0}
+  equippedItem: {fileID: 0}
   rotatingArm: {fileID: 1396904166721710}
   airControl: 1
   jumpForce: 5000

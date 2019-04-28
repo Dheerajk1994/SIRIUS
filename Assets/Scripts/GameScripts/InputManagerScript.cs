@@ -50,6 +50,10 @@ public class InputManagerScript : MonoBehaviour {
                 case 4:
                     PlaceTileFrontLayer(4);
                     break;
+                case 800:
+                case 801:
+                    playerScript.MeleeAttack();
+                    break;
                 case 1000:  // Pickaxe   
                     MineFrontLayer();
                     break;
@@ -103,6 +107,11 @@ public class InputManagerScript : MonoBehaviour {
         //test for adding a pick to hotbar
         else if (Input.GetKeyDown(KeyCode.P))
            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(1000, 1);
+        else if (Input.GetKeyDown(KeyCode.M))
+        { 
+           hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(800, 1);
+        hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(801, 1);
+        }
         //test for adding spacegun to hotbar
         else if (Input.GetKeyDown(KeyCode.G))
            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(900, 1);

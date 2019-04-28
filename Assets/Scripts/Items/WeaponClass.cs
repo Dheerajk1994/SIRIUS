@@ -9,5 +9,5 @@ public class WeaponClass : ItemClass {
     public LayerMask whatToHit;
 
     public int damage = 0;
-    public int attackSpeed = 0;
+    public float attackSpeed = 0;
 }

@@ -137,6 +137,22 @@
       "type": 0
     },
     {
+      "itemName": "Sword",
+      "id": 800,
+      "description": "Something something something dark side",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 10
+    },
+    {
+      "itemName": "Katana",
+      "id": 801,
+      "description": "Something something something dark side",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 10
+    },
+    {
       "itemName": "Spacegun",
       "id": 900,
       "description": "Something something something dark side",

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeWeapon : WeaponClass {
-    void startAttack()
+    public void startAttack()
     {
         GetComponent<CapsuleCollider2D>().enabled = true;
     }
 
-    void endAttack()
+    public void endAttack()
     {
         GetComponent<CapsuleCollider2D>().enabled = false;
     }
