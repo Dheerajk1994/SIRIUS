@@ -73,6 +73,11 @@ public abstract class CharacterFinal : MonoBehaviour {
         BarkCollider.enabled = !BarkCollider.enabled;
     }
 
+    public bool getFacingDirection()
+    {
+        return facingRight;
+    }
+
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (damageSources.Contains(other.tag))

@@ -25,10 +25,10 @@ public class InputManagerScript : MonoBehaviour {
         inventoryPanel = uiScript.PlayerInventoryAndStatsPanel.GetComponent<PlayerInventoryPanelScript>();
         hotbarPanel = uiScript.PlayerHotBarPanel.GetComponent<PlayerHotbarPanelScript>();
         playerScript = gameManagerScript.playerScript;
+        craftingPanelScript = uiScript.PlayerCraftingPanel.GetComponent<CraftingPanelScript>();
     }
     private void Start()
     {
-        craftingPanelScript = uiScript.PlayerCraftingPanel.GetComponent<CraftingPanelScript>();
     }
     private void Update()
     {

@@ -610,7 +610,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1254745020728124
 GameObject:
   m_ObjectHideFlags: 1
@@ -3763,8 +3763,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hello this is a random message to see how well I can read this thing. Nothing
-    important lol. Blah blah blah blah blah. Oh nice it looks good so far I must say!
+  m_Text: HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO
+    HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO
 --- !u!114 &114274218974918946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8246,7 +8246,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 52, y: 0}
+  m_AnchoredPosition: {x: 48, y: 0}
   m_SizeDelta: {x: 145, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224310898505948740
@@ -8719,8 +8719,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.9, y: -0.20000076}
-  m_SizeDelta: {x: 345.2, y: 46.8}
+  m_AnchoredPosition: {x: -1.9, y: 1.12}
+  m_SizeDelta: {x: 345.2, y: 49.44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224491934395825188
 RectTransform:

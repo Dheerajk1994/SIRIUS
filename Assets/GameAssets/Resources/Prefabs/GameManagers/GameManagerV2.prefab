@@ -59,7 +59,8 @@ MonoBehaviour:
   TerrainManagerPrefab: {fileID: 1692291654787358, guid: 49d8fbf2f65393446ab4cb1c2c234172,
     type: 2}
   UIPrefab: {fileID: 1854798513534054, guid: f42fea5cd4cb7b6429366240da94bcce, type: 2}
-  PlayerPrefab: {fileID: 0}
+  PlayerPrefab: {fileID: 1370303781483332, guid: 75ebd985a83e1b6419e1a66a36394b56,
+    type: 2}
   MainCameraPrefab: {fileID: 1939834119536744, guid: 461be19241647e04786f222d2316d27c,
     type: 2}
   InputManagerPrefab: {fileID: 1352975873008704, guid: 92f34953b7f0c3746865cea836661e87,

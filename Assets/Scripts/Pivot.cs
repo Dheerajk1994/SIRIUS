@@ -37,7 +37,7 @@ public class Pivot : MonoBehaviour
     {
         if (!isAttacking)
         {
-            if(PlayerScript.equippedItem.GetComponent<ItemClass>().ID >= 800 &&
+            if(PlayerScript.equippedItem !=null && PlayerScript.equippedItem.GetComponent<ItemClass>().ID >= 800 &&
                 PlayerScript.equippedItem.GetComponent<ItemClass>().ID < 900)
             {
                 transform.rotation = Quaternion.Euler(0f, 0f, 180);

@@ -251,6 +251,46 @@
       "recipe": []
     },
     {
+      "itemName": "Sword",
+      "id": 800,
+      "description": "Something something something dark side",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 10,
+      "tier": 1,
+      "recipe": [ 26, 10, 3, 20 ]
+    },
+    {
+      "itemName": "Katana",
+      "id": 801,
+      "description": "Something something something dark side",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 10,
+      "tier": 1,
+      "recipe": [ 26, 10, 3, 15 ]
+    },
+    {
+      "itemName": "Spacegun",
+      "id": 900,
+      "description": "Something something something dark side",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 11,
+      "tier": 2,
+      "recipe": [ 25, 10, 23, 20 ]
+    },
+    {
+      "itemName": "Lavagun",
+      "id": 901,
+      "description": "supah hot",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 11,
+      "tier": 3,
+      "recipe": [ 25, 20, 23, 50 ]
+    },
+    {
       "itemName": "Wooden Pickaxe",
       "id": 1000,
       "description": "I will show you mine if you show me yours.",
@@ -268,7 +308,7 @@
       "cost": 0,
       "type": 12,
       "tier": 2,
-      "recipe": [2, 10, 22, 1]
+      "recipe": [ 2, 10, 22, 1 ]
     },
     {
       "itemName": "Iron Pickaxe",
@@ -278,7 +318,7 @@
       "cost": 0,
       "type": 12,
       "tier": 3,
-      "recipe": [3, 10, 26, 10]
+      "recipe": [ 3, 10, 26, 10 ]
     },
     {
       "itemName": "Diamond Pickaxe",
@@ -288,7 +328,7 @@
       "cost": 0,
       "type": 12,
       "tier": 4,
-      "recipe": [3, 10, 25, 10]
+      "recipe": [ 3, 10, 25, 10 ]
     },
     {
       "itemName": "Wooden Axe",
@@ -298,7 +338,7 @@
       "cost": 0,
       "type": 13,
       "tier": 1,
-      "recipe": [3, 20]
+      "recipe": [ 3, 20 ]
     },
     {
       "itemName": "Copper Axe",
@@ -308,7 +348,7 @@
       "cost": 0,
       "type": 13,
       "tier": 2,
-      "recipe": [3, 10, 22, 15]
+      "recipe": [ 3, 10, 22, 15 ]
     },
     {
       "itemName": "Iron Axe",
@@ -318,7 +358,7 @@
       "cost": 0,
       "type": 13,
       "tier": 3,
-      "recipe": [3, 10, 26, 20]
+      "recipe": [ 3, 10, 26, 20 ]
     },
     {
       "itemName": "Diamond Axe",
@@ -328,7 +368,7 @@
       "cost": 0,
       "type": 13,
       "tier": 4,
-      "recipe": [3, 10, 25, 10]
+      "recipe": [ 3, 10, 25, 10 ]
     },
     {
       "itemName": "Alien Goo",
