@@ -10,6 +10,7 @@ public class Teleporter : Interactable
     {
         base.Interact();
         isInteracting = !isInteracting;
+        panelOpen = !panelOpen;
         ExitShipPanel.GetComponent<Animator>().SetBool("isOpen", isInteracting);
         Debug.Log("leaving da shep");
     }
@@ -23,7 +24,10 @@ public class Teleporter : Interactable
     {
         if (canInteract && Input.GetKeyDown(KeyCode.E))
             Interact();
-        else if (!canInteract)
+        else if (!canInteract && panelOpen)
+        {
+            panelOpen = false;
             ExitShipPanel.GetComponent<Animator>().SetBool("isOpen", false);
+        }
     }
 }

@@ -12,6 +12,7 @@ public class Engine : Interactable
     {
         base.Interact();
         isInteracting = !isInteracting;
+        panelOpen = !panelOpen;
         EnginePanel.GetComponent<Animator>().SetBool("isOpen", isInteracting);
         Debug.Log("Fuel: " + currentFuel.ToString() + "%");
     }
@@ -25,8 +26,11 @@ public class Engine : Interactable
     {
         if (canInteract && Input.GetKeyDown(KeyCode.E))
             Interact();
-        else if (!canInteract)
+        else if (!canInteract && panelOpen)
+        {
+            panelOpen = false;
             EnginePanel.GetComponent<Animator>().SetBool("isOpen", false);
+        }
     }
 
     public void Refuel(float value)

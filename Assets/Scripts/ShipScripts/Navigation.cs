@@ -10,6 +10,7 @@ public class Navigation : Interactable
     {
         base.Interact();
         isInteracting = !isInteracting;
+        panelOpen = !panelOpen;
         NavigationPanel.GetComponent<Animator>().SetBool("isOpen", isInteracting);
         Debug.Log("where ya travelin?");
     }
@@ -23,7 +24,10 @@ public class Navigation : Interactable
     {
         if (canInteract && Input.GetKeyDown(KeyCode.E))
             Interact();
-        else if (!canInteract)
+        else if (!canInteract && panelOpen)
+        {
+            panelOpen = false;
             NavigationPanel.GetComponent<Animator>().SetBool("isOpen", false);
+        }
     }
 }
