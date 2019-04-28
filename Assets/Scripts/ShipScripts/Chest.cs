@@ -6,6 +6,11 @@ public class Chest : Interactable
 {
     public GameObject ChestPanel;
 
+    public void SetChestPanel(GameObject cp)
+    {
+        ChestPanel = cp;   
+    }
+
     public override void Interact()
     {
         base.Interact();

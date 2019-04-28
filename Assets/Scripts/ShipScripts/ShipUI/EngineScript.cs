@@ -3,8 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EngineScript : MonoBehaviour
+public class EngineScript : GenericInvoPanelScript
 {
+    //for engine inventory
+    public ItemHolder engineItemHolder;
+    public GameObject slot;
+
+    //
+
+
     private Animator enginePanelAnimator;
     public Button exitButn;
     public Button refuelButn;
@@ -16,6 +23,17 @@ public class EngineScript : MonoBehaviour
     public void SetEnginePanel(UIScript uScript)
     {
         uiScript = uScript;
+
+        slots = new GameObject[1]; //NEED OPTIMIZATION
+        slot.transform.SetParent(genericInvoPanel.transform, false);
+        slot.GetComponent<InventorySlot>().slotID = 0;
+        slots[0] = slot;
+        slot.GetComponent<InventorySlot>().inventoryReference = engineItemHolder;
+        slot.GetComponent<InventorySlot>().genericInvoHandler = this.genericInvoHandler;
+
+    
+        genericInvoHandler.slots = slots;
+
     }
 
     private void Start()

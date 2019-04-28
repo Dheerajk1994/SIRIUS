@@ -235,6 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exitButn: {fileID: 114926567622817814}
   refuelButn: {fileID: 114985756524475640}
+  currentFuel: {fileID: 0}
 --- !u!114 &114672264553598974
 MonoBehaviour:
   m_ObjectHideFlags: 1

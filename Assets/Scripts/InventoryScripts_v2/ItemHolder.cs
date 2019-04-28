@@ -142,7 +142,7 @@ public class ItemHolder : MonoBehaviour
     //add item to a specific index hardcode
     public void SetItemAmountAtIndex(ushort amount, ushort index)
     {
-        Debug.Log("setitemamountatindex called with amount " + amount + " at index " + index);
+        //Debug.Log("setitemamountatindex called with amount " + amount + " at index " + index);
         inventoryArray[ROW_AMOUNT, index] = amount;
         if(amount == 0)
         {

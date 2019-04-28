@@ -59,7 +59,7 @@ public class GenericInvoHandlerScript : MonoBehaviour {
                 itemBeingDragged, 
                 itemBeingDragged.stackCount, 
                 newSlot.slotID);
-            Debug.Log("remaining amount: " + remainingAmount);
+            //Debug.Log("remaining amount: " + remainingAmount);
             //call the original slots handler with remaining amount
             parentSlot.GetComponent<InventorySlot>().genericInvoHandler.genericInventory.SetItemAmountAtIndex(remainingAmount, parentSlot.slotID);
 

@@ -32,7 +32,6 @@ public class InputManagerScript : MonoBehaviour {
         {
             switch (hotbarPanel.GetEquippedSlot())
             {
-
                 // Block Tiles
                 case 1:
                     PlaceTileFrontLayer(1);
