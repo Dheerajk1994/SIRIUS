@@ -17,7 +17,7 @@ public static class ItemDictionary
     {
         if (!isItemDictionaryPopulated)
         {
-            Debug.Log("generate itemdictionary called");
+            //Debug.Log("generate itemdictionary called");
             inventorySpritesScript = iss;
             path = Application.streamingAssetsPath + "/itemDescription.json";
             if (File.Exists(path))
@@ -29,7 +29,7 @@ public static class ItemDictionary
                 {
                     //Debug.Log(item.itemName);
                     itemDictionary.Add(item.id, item);
-                    Debug.Log(item.itemName + " " + item.type);
+                    //Debug.Log(item.itemName + " " + item.type);
                 }
                 isItemDictionaryPopulated = true;
             }
@@ -40,10 +40,6 @@ public static class ItemDictionary
         }
         
     }
-
-    /*
-    NEED OPTIMIZATION
-        */
 
     public static CompleteItem GetItem(ushort fetchID)
     {
@@ -62,6 +58,49 @@ public static class ItemDictionary
             Debug.LogError("Item ID: " + fetchID + " does not exist in the dictionary");
             return null; }
     }
+
+    //RETURNS AN ITEM OF A CERTAIN TYPE - WILL RETURN THE FIRST ITEM WITH THE TYPE
+    public static ItemDescription GetItemOfType(ushort type)
+    {
+        foreach (KeyValuePair<ushort, ItemDescription> item in itemDictionary)
+        {
+            if (item.Value.type == type)
+            {
+                return item.Value;
+            }
+        }
+        return null;
+    }
+
+    public static List<ItemDescription> GetItemsOfType(ushort type)
+    {
+        List<ItemDescription> itemsOfType = new List<ItemDescription>();
+        foreach (KeyValuePair<ushort, ItemDescription> item in itemDictionary)
+        {
+            if (item.Value.type == type)
+            {
+                itemsOfType.Add(item.Value);
+            }
+        }
+        return itemsOfType;
+    }
+
+
+    public static List<ItemDescription> GetItemsOfTier(ushort tier)
+    {
+        List<ItemDescription> craftableItemsList = new List<ItemDescription>();
+
+        foreach(KeyValuePair<ushort, ItemDescription> item in itemDictionary)
+        {
+            if(item.Value.tier == tier)
+            {
+                craftableItemsList.Add(item.Value);
+            }
+        }
+
+        return craftableItemsList;
+    }
+
 }
 
 
@@ -80,6 +119,8 @@ public class ItemDescription
     public ushort stackAmnt;
     public uint cost;
     public uint type;
+    public ushort tier;
+    public ushort [] recipe;
 }
 
 public class CompleteItem

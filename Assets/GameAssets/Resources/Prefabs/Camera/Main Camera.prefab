@@ -161,7 +161,7 @@ Transform:
   m_GameObject: {fileID: 1492930860049742}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 8}
-  m_LocalScale: {x: 15, y: 9, z: 1}
+  m_LocalScale: {x: 20, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 4862699076208594}
   m_RootOrder: 2
@@ -306,15 +306,22 @@ MonoBehaviour:
   planet: {fileID: 4055833082927194}
   stars: {fileID: 4831410052556048}
   terrain: {fileID: 4749738061805340}
-  greenWorldSprite: {fileID: 21300000, guid: 8e457495c67d34948999dc90583dead2, type: 3}
-  moonWorldSprite: {fileID: 21300000, guid: 16ec87d41d07a2145b9b3c7c7171012d, type: 3}
+  greenPlanetSprite: {fileID: 21300000, guid: 8e457495c67d34948999dc90583dead2, type: 3}
+  moonPlanetSprite: {fileID: 21300000, guid: 16ec87d41d07a2145b9b3c7c7171012d, type: 3}
+  desertPlanetSprite: {fileID: 21300000, guid: 1f804575321b53741a05b9bee23ae6c9, type: 3}
+  snowPlanetSprite: {fileID: 21300000, guid: db5b8da74c24a454b9e76d97da2fa5a0, type: 3}
   greenWorldSkyMat: {fileID: 2100000, guid: 620ee6e7b7b64b740bae5e65b25df811, type: 2}
   moonWorldSkyMat: {fileID: 2100000, guid: e13786e9d2b7cbd47a47493691330667, type: 2}
+  desertWorldSkyMat: {fileID: 2100000, guid: 72f5440892eca8745abe0d9b77bbbb00, type: 2}
+  snowWorldSkyMat: {fileID: 2100000, guid: 4f70a74f898d10c449eda5307c438416, type: 2}
   clouds: {fileID: 21300000, guid: 1623cf6e4c2d69f4a912ec20f7aaae41, type: 3}
   asteroids: {fileID: 21300000, guid: 629745e5ef8cf70418936a7d2a9ff379, type: 3}
   greenWorldTerrainBG: {fileID: 21300000, guid: 3a399252c22ee4841bedb996d754e401,
     type: 3}
   moonWorldTerrainBG: {fileID: 21300000, guid: 218f7470dade8684680e173ad19b1926, type: 3}
+  desertWorldTerrainBG: {fileID: 21300000, guid: 860186e888e65b64fb4a8ef263900fd0,
+    type: 3}
+  snowWorldTerrainBG: {fileID: 21300000, guid: d429702b06629984ba2c9663c5f4ef8b, type: 3}
   cloud1Speed: 0.001
   cloud2Speed: 0.05
 --- !u!124 &124384095168520506
@@ -360,7 +367,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 935962ddb1e44499dad00e5ca6b38823, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -406,7 +413,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 12
   m_Sprite: {fileID: 21300000, guid: 629745e5ef8cf70418936a7d2a9ff379, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -452,7 +459,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 13
   m_Sprite: {fileID: 21300000, guid: 218f7470dade8684680e173ad19b1926, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -498,7 +505,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 12
   m_Sprite: {fileID: 21300000, guid: 629745e5ef8cf70418936a7d2a9ff379, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -544,7 +551,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 8e457495c67d34948999dc90583dead2, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -590,7 +597,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: e563ee38c0d4618439c6c394e5cc2772, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

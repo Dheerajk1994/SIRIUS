@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4cd56488e2614459e50ba265c8276c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDimension: 500
-  heightAddition: 500
+  xDimension: 200
+  heightAddition: 200
   TileObjectPrefab: {fileID: 1212904404968698, guid: 5ac034eac9cfea74fbf2d9dc890db054,
     type: 2}
   PickupTilePrefab: {fileID: 1672008991011400, guid: d5b16e1d919e3d64a93d6c8af75755de,
@@ -68,6 +68,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c28a8bcb5becbd540845d721e7adef23, type: 3}
   - {fileID: 21300000, guid: fe6aa07c3711dcc4b880a39e3bf53748, type: 3}
   - {fileID: 21300000, guid: acc0a8dd5b55b1b47a9632503258a113, type: 3}
+  desertStoneSprites:
+  - {fileID: 21300000, guid: d834184f9f86815448208eb458955fde, type: 3}
+  - {fileID: 21300000, guid: ec5fd31431e3dc44282ccff2626390a1, type: 3}
+  - {fileID: 21300000, guid: d210c76aa7cde7c49b340d14b2b5f836, type: 3}
+  - {fileID: 21300000, guid: 1740f76f6b93ccc458772a40e66c15ea, type: 3}
+  snowStoneSprites:
+  - {fileID: 21300000, guid: 2980fb5c330a08c4e8db12dafd24a422, type: 3}
+  - {fileID: 21300000, guid: 1c625147de2c0394f83ecf45a3d0554f, type: 3}
+  - {fileID: 21300000, guid: 17ec07b196c701a428dab8d0e23f5e6d, type: 3}
+  - {fileID: 21300000, guid: c335bdc28d3727046946be1ac5fc5751, type: 3}
+  bedRockSprites:
+  - {fileID: 21300000, guid: 64a437d7658335543a399921c68ea031, type: 3}
+  - {fileID: 21300000, guid: 79ba0ed0e0365664780ba35ef0656056, type: 3}
+  - {fileID: 21300000, guid: 0cb5b5793c86fc24e990a169431d8db9, type: 3}
+  - {fileID: 21300000, guid: 6c40727c82141934e8538a30532e8cd1, type: 3}
   regularDirtSprites:
   - {fileID: 21300000, guid: 09edeee814bbdde4ea57fc57c5ac8eae, type: 3}
   - {fileID: 21300000, guid: ecd6ad2e94c34444b80edd76da231fa3, type: 3}
@@ -78,6 +93,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f68b8f63fec60044ea7856579f70e1d4, type: 3}
   - {fileID: 21300000, guid: d3849b1d88313464f86ac0ed993d2b8a, type: 3}
   - {fileID: 21300000, guid: aa0df37426961a14b96fef7eca40003a, type: 3}
+  desertDirtSprites:
+  - {fileID: 21300000, guid: 409f34c4b585ce549a16e5e760b6edf0, type: 3}
+  - {fileID: 21300000, guid: 26c4859c8a9df974b97ea395788547af, type: 3}
+  - {fileID: 21300000, guid: e2a02a17b721dfe4da6d1c5bcbf750bd, type: 3}
+  - {fileID: 21300000, guid: d29b4afd0af9dcf4d96d11766da49ae0, type: 3}
+  snowDirtSprites:
+  - {fileID: 21300000, guid: 1cb545d0df8bcd04d92061ea77016470, type: 3}
+  - {fileID: 21300000, guid: 76b11850ae4ca7d4795cfcedddca5470, type: 3}
+  - {fileID: 21300000, guid: 3d35e9563136aed4098fae2c23800b48, type: 3}
+  - {fileID: 21300000, guid: 1da7afb83f420de408f6b25ad1389922, type: 3}
   regularSandSprites:
   - {fileID: 21300000, guid: cd049aad2478acf44bfdbfe492001344, type: 3}
   - {fileID: 21300000, guid: 27d0ce0807773bf42a3c18e8342067b2, type: 3}
@@ -89,11 +114,31 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d6bcbdb2daa54834594166fd7cc9469f, type: 3}
   - {fileID: 21300000, guid: cc0eb3095df087146a140147fcd6e859, type: 3}
   - {fileID: 21300000, guid: ecea2e9fcbee50946a4b030f7008962b, type: 3}
+  desertGrassSprites:
+  - {fileID: 21300000, guid: 6a20c62320adeee4487d06ed97c36537, type: 3}
+  - {fileID: 21300000, guid: c01984a196257534c92d4b51dbf4dba6, type: 3}
+  - {fileID: 21300000, guid: f6f4d93ad4d8ef9419213003454f136d, type: 3}
+  - {fileID: 21300000, guid: 4177442290d449b448be5681dc60aba6, type: 3}
+  snowGrassSprites:
+  - {fileID: 21300000, guid: e4ddf15ed0f21574da15e90a38f04317, type: 3}
+  - {fileID: 21300000, guid: 5d346ea5de3d8e147a5bb871d654099c, type: 3}
+  - {fileID: 21300000, guid: 878f839b57fd4f345b39b46e921369cc, type: 3}
+  - {fileID: 21300000, guid: 11de7075d70b8b342be6cd35a07a7bdc, type: 3}
   regularFlowerSprites:
   - {fileID: 21300000, guid: 159390351d4f11040be918e31a7dd287, type: 3}
   - {fileID: 21300000, guid: 0a9479abdc118114ab224df414cb905c, type: 3}
   - {fileID: 21300000, guid: 63ee27dc53428f1418d7bf8ef6e78469, type: 3}
   - {fileID: 21300000, guid: 791ddaf855b1f0140948724f9eae57a6, type: 3}
+  desertFlowerSprites:
+  - {fileID: 21300000, guid: e3f526df39a7e9a4c92ddab88f3270d9, type: 3}
+  - {fileID: 21300000, guid: cca0cdbead910df4f9f926cad849b461, type: 3}
+  - {fileID: 21300000, guid: 464276f9f1aa14d40a7d8feb0c3db783, type: 3}
+  - {fileID: 21300000, guid: f19c7e927ac5d72459fb671bdd511652, type: 3}
+  snowFlowerSprites:
+  - {fileID: 21300000, guid: 38d08b7bd9c2b904d801d05632a0f662, type: 3}
+  - {fileID: 21300000, guid: 206e5ffd634eb2d438a8bd3f6e4ff4ac, type: 3}
+  - {fileID: 21300000, guid: 4b4e109d82d13744684812371a329c6e, type: 3}
+  - {fileID: 21300000, guid: 443e0889b10d22b46bfc98ba0c214394, type: 3}
   regularTreeBaseSprite:
   - {fileID: 21300000, guid: ddd03f8d35607e44c82c3f4b9e0b69cf, type: 3}
   regularTreeTopSprite:
@@ -103,6 +148,22 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f55c3f1f7a8497640a24641111bc9113, type: 3}
   - {fileID: 21300000, guid: 81bb6d39138940b4995444a28b024603, type: 3}
   - {fileID: 21300000, guid: 5f755b3a44191f448a5c9c19ac893ae1, type: 3}
+  desertTreeBaseSprite:
+  - {fileID: 21300000, guid: c1ddec1c38699724d9862065ee005273, type: 3}
+  desertTreeTopSprite:
+  - {fileID: 21300000, guid: 903fa1b2a47871943acaad4d6ceb3348, type: 3}
+  desertTreeCoreSprite:
+  - {fileID: 21300000, guid: c1304cab3d0aafd47956f60a9ce811b9, type: 3}
+  - {fileID: 21300000, guid: 4d7c286ae245a5642a066b0dcd69d10d, type: 3}
+  - {fileID: 21300000, guid: c1ddec1c38699724d9862065ee005273, type: 3}
+  snowTreeBaseSprite:
+  - {fileID: 21300000, guid: c1ddec1c38699724d9862065ee005273, type: 3}
+  snowTreeTopSprite:
+  - {fileID: 21300000, guid: 903fa1b2a47871943acaad4d6ceb3348, type: 3}
+  snowTreeCoreSprite:
+  - {fileID: 21300000, guid: c1304cab3d0aafd47956f60a9ce811b9, type: 3}
+  - {fileID: 21300000, guid: 4d7c286ae245a5642a066b0dcd69d10d, type: 3}
+  - {fileID: 21300000, guid: c1ddec1c38699724d9862065ee005273, type: 3}
   coalSprites:
   - {fileID: 21300000, guid: cb7aee118edb047499a51a15845649a1, type: 3}
   - {fileID: 21300000, guid: 485a94980b4b5c84fb7d250e997a384b, type: 3}
@@ -147,39 +208,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159f0d9f7f94efe4f830aa99754ca1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDimension: 42
-  smoothness: 100
-  heightMultiple: 10
-  heightAddition: 50
-  backTileLayerID: 12
-  frontTileLayerID: 13
-  grassLayerID: 15
-  caveChanceVal: 48
-  caveSimRep: 2
-  caveMinNeighReq: 2
-  caveMaxNeighReq: 6
-  caveChangeInHeight: 0
-  stoneChanceVal: 48
-  stoneSimRep: 3
-  stoneMinNeighReq: 4
-  stoneMaxNeighReq: 5
-  stoneChangeInHeight: 0
-  coalChance: 5
-  coalNeighChance: 60
-  coalChangeInHeight: 0
-  copperChance: 5
-  copperNeighChance: 50
-  copperChangeInHeight: 0
-  silverChance: 5
-  silverNeighChance: 40
-  silverChangeInHeight: 0
-  goldChance: 10
-  goldNeighChance: 10
-  goldChangeInHeight: 0
-  diamondChance: 5
-  diamondNeighChance: 20
-  diamondChangeInHeight: 0
-  flowerChance: 100
-  treeChance: 10
-  minTreeHeight: 15
-  maxTreeHeight: 20

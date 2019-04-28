@@ -12,7 +12,7 @@ public class GameManagerScript : MonoBehaviour
     public string greenWorldSavePath = "greenWorld";
     public string moonWorldSavePath = "moonWorld";
 
-    public ushort currentWorld         = (ushort)EnumClass.TerrainType.GREEN;
+    public ushort currentWorld;         
     public string currentWorldSavePath = "greenWorld";
     #endregion
 
@@ -23,6 +23,10 @@ public class GameManagerScript : MonoBehaviour
     public GameObject MainCameraPrefab;
     public GameObject InputManagerPrefab;
     public GameObject InventoryControllerPrefab;
+    public GameObject AIManagerPrefab;
+    public GameObject QuestManagerPrefab;
+    public GameObject ShipPrefab;
+
     #endregion
 
     #region INSTANTIATED_PREFABS
@@ -32,6 +36,9 @@ public class GameManagerScript : MonoBehaviour
     public GameObject mainCameraObject;
     public GameObject inputManager;
     public GameObject inventoryController;
+    public GameObject aiManager;
+    public GameObject questManager;
+    public GameObject ship;
     #endregion
 
     #region SCRIPT_REFERENCES
@@ -41,6 +48,8 @@ public class GameManagerScript : MonoBehaviour
     public CameraScript cameraScript;
     public InputManagerScript inputManagerScript;
     public InventoryControllerScript inventoryControllerScript;
+    public QuestManagerScript questManagerScript;   
+    public ShipScript shipScript;
     #endregion
 
     #region LOCAL_VARIABLES
@@ -85,6 +94,13 @@ public class GameManagerScript : MonoBehaviour
         inventoryController       = Instantiate(InventoryControllerPrefab);
         inventoryControllerScript = inventoryController.GetComponent<InventoryControllerScript>();
 
+        aiManager                 = Instantiate(AIManagerPrefab);
+
+        questManager              = Instantiate(QuestManagerPrefab);
+        questManagerScript        = questManager.GetComponent<QuestManagerScript>();
+        ship                      = Instantiate(ShipPrefab);
+        shipScript                = ship.GetComponent<ShipScript>();
+
         ui.      gameObject.SetActive(false);
         player.  gameObject.SetActive(false);
 
@@ -93,8 +109,9 @@ public class GameManagerScript : MonoBehaviour
         playerScript                  .SetPlayerScript(this, uiScript,inputManagerScript);
         inputManagerScript            .SetInputManager(this, uiScript, terrainManagerScript);
         inventoryControllerScript     .SetInventoryController(this, uiScript);
+        questManagerScript            .SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>());
 
-
+        shipScript                    .SetShip(uiScript);
         //SET LOCAL VARIABLES
         readyToGo    = false;
         worldPresent = false;
@@ -116,13 +133,16 @@ public class GameManagerScript : MonoBehaviour
                 //Debug.Log("playerpos: " + playerPos);
                 terrainManagerScript.DisplayChunks(player.transform.position);
                 playerPos = player.transform.position;
+                terrainManagerScript.DisplayChunks(player.transform.position);
             }
-            terrainManagerScript.DisplayChunks(player.transform.position);
         }
     }
 
     public void StartNewGame()
     {
+        //Debug.Log("enum val " + (ushort)EnumClass.TerrainType.MOON);
+        //Debug.Log(currentWorld);
+        currentWorld =  (ushort)EnumClass.TerrainType.GREEN;//TEST
         GameDataHandler.NewGame(this, terrainManagerScript, currentWorld);
     }
 

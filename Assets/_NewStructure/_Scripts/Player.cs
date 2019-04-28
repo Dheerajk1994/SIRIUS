@@ -15,6 +15,7 @@ public class Player : CharacterFinal
     [SerializeField]private GameObject rotatingArm;
     private Pivot rotatingArmScript;
 
+
     private static Player instance;
     //there should be only one player
     // void Awake(){
@@ -95,6 +96,7 @@ public class Player : CharacterFinal
         base.Update();
         HandleInput();
         //generateRotatingArm();
+
     }
 
     // Update is called once per frame
@@ -116,10 +118,8 @@ public class Player : CharacterFinal
             MyAnimator.SetTrigger("jump");
             //jump = true;
         }
-
     }
 
-    
     private bool IsGrounded()
     {
         if (MyRigidbody.velocity.y <= 0)

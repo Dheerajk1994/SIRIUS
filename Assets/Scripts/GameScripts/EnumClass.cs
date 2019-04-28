@@ -21,12 +21,33 @@ public static class EnumClass {
         SILVER,
         GOLD,
         DIAMOND,
+        IRON = 26,
         //MOON
         MOON_DIRT = 40,
         MOON_STONE,
         MOON_SAND,
 
-        CAMPFIRE = 100
+        //DESERT
+        DESERT_DIRT=50,
+        DESERT_STONE,
+        DESERT_GRASS,
+        DESERT_FLOWER,
+        DESERT_TREE_TRUNK,
+        DESERT_TREE_BASE,
+        DESERT_TREE_LEAF,
+
+        //SNOW
+        SNOW_DIRT = 60,
+        SNOW_STONE,
+        SNOW_GRASS,
+        SNOW_FLOWER,
+        SNOW_TREE_TRUNK,
+        SNOW_TREE_BASE,
+        SNOW_TREE_LEAF,
+
+        CAMPFIRE = 100,
+
+        BED_ROCK = 500
     };
 
     public enum TerrainType

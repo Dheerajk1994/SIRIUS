@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Engine : Interactable
 {
-    private readonly float maxRepairGenerator = 100f, maxRepairCrystals = 100f, maxFuel = 100f;
-    private float currentRepairGenerator, currentRepairCrystals, currentFuel;
+    private readonly float maxFuel = 100f;
+    public float currentFuel { get; set; }
+    public GameObject EnginePanel;
 
     public override void Interact()
     {
         base.Interact();
         isInteracting = !isInteracting;
-        Debug.Log("Generator: " + currentRepairGenerator.ToString() + "%");
-        Debug.Log("Crystals: " + currentRepairCrystals.ToString() + "%");
+        panelOpen = !panelOpen;
+        EnginePanel.GetComponent<Animator>().SetBool("isOpen", isInteracting);
         Debug.Log("Fuel: " + currentFuel.ToString() + "%");
     }
 
@@ -25,37 +26,11 @@ public class Engine : Interactable
     {
         if (canInteract && Input.GetKeyDown(KeyCode.E))
             Interact();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.name.Equals("Sam(Clone)"))
-            canInteract = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.name.Equals("Sam(Clone)"))
+        else if (!canInteract && panelOpen)
         {
-            canInteract = false;
-            isInteracting = false;
+            panelOpen = false;
+            EnginePanel.GetComponent<Animator>().SetBool("isOpen", false);
         }
-    }
-
-    public void RepairGenerator(float value)
-    {
-        if (currentRepairGenerator + value >= maxRepairGenerator)
-            currentRepairGenerator = maxRepairGenerator;
-        else
-            currentRepairGenerator += value;
-    }
-
-    public void RepairCrystals(float value)
-    {
-        if (currentRepairCrystals + value >= maxRepairCrystals)
-            currentRepairCrystals = maxRepairCrystals;
-        else
-            currentRepairCrystals += value;
     }
 
     public void Refuel(float value)
@@ -63,6 +38,4 @@ public class Engine : Interactable
         currentFuel += value;
         Mathf.Clamp(currentFuel, 0, maxFuel);
     }
-
-
 }
