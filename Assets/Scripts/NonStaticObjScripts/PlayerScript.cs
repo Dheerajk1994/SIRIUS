@@ -13,7 +13,6 @@ public class PlayerScript : Character
     [SerializeField]
     private EdgeCollider2D BarkCollider;
     private PlayerScript playerScript;
-
     // private Rigidbody2D rigidbody;
 
     /*----------- PLAYER STATS -----------*/

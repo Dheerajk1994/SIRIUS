@@ -14,7 +14,7 @@ public class InputManagerScript : MonoBehaviour {
     public PlayerInventoryPanelScript inventoryPanel;
     public PlayerHotbarPanelScript hotbarPanel;
 
-    public DoggoMovement doggoMovementScript;
+    public Player playerScript;
 
     public void SetInputManager(GameManagerScript gScript, UIScript uScript, TerrainManagerScript tScript)
     {
@@ -27,11 +27,11 @@ public class InputManagerScript : MonoBehaviour {
     }
     private void Start()
     {
-        doggoMovementScript = GameObject.Find("/PlayArea/Sam(Clone)").GetComponent<DoggoMovement>();
+        playerScript = GameObject.Find("/PlayArea/Sam(Clone)").GetComponent<Player>();
     }
     private void Update()
     {
-        // Player Action
+        // Player Action    
         if      (Input.GetKey(KeyCode.Mouse0) && !EventSystem.current.IsPointerOverGameObject())
         {
             switch(hotbarPanel.GetEquippedSlot())
@@ -105,11 +105,20 @@ public class InputManagerScript : MonoBehaviour {
            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(1000, 1);
         //test for adding spacegun to hotbar
         else if (Input.GetKeyDown(KeyCode.G))
-            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(900, 1);
+           hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(900, 1);
         //equipping the Spacegun
-        while (hotbarPanel.GetEquippedSlot().Equals(900))
+       while(!hotbarPanel.GetEquippedSlot().Equals(0))
         {
-            Debug.Log("Spacegun is selected");
+            playerScript.GenerateRotatingArm();
+            if(hotbarPanel.GetEquippedSlot().Equals(900))
+            {
+                playerScript.RotatingArm().equipSpacegun();
+                break;
+            }
+            break;
+        }
+        /*while (hotbarPanel.GetEquippedSlot().Equals(900))
+        {
             doggoMovementScript.equipSpacegun();
             break;
         }
@@ -119,6 +128,7 @@ public class InputManagerScript : MonoBehaviour {
             doggoMovementScript.animator.SetBool("spaceGunEquipped", false);
             break;
         }
+        */
     }
 
     private void MineFrontLayer()

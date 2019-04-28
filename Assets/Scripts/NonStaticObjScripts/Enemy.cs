@@ -51,7 +51,7 @@ public class Enemy : CharacterFinal
     }
 
     // Use this for initialization 
-    public override void Start()
+    private void Start()
     {
         base.Start();
         ChangeState(new IdleState());

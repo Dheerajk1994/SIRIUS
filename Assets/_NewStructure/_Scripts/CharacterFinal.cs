@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public abstract class CharacterFinal : MonoBehaviour {
 
+    #region COMPONENTS
     public Animator MyAnimator { get; private set; }
+    #endregion
 
+    #region VARIABLES
     [SerializeField]
     private EdgeCollider2D BarkCollider;
 
@@ -13,13 +17,23 @@ public abstract class CharacterFinal : MonoBehaviour {
     protected float currentHealth;
 
     protected bool facingRight;
+    public Vector2 currentPosition;
+    protected List<Vector2> path;
 
+    [SerializeField] private List<string> damageSources;
+
+    [SerializeField] protected float movementSpeed;
+
+    [SerializeField] protected float chaseSpeed = 5f;
     [SerializeField]
-    private List<string> damageSources;
+    protected float patrolSpeed = 2f;
+    #endregion
 
-    [SerializeField]
-    protected float movementSpeed;
 
+    #region REFERENCES
+    protected TerrainManagerScript terrainManagerScript;
+    
+#endregion
     public float standardDamage;
 
     public abstract bool IsDead { get;  }
@@ -34,22 +48,24 @@ public abstract class CharacterFinal : MonoBehaviour {
 */  
 
     // Use this for initialization
-    public virtual void Start () 
+    protected virtual void Start () 
     {
         facingRight = true;
         MyAnimator = GetComponent<Animator>();
+        terrainManagerScript = GameObject.Find("TerrainManager(Clone)").GetComponent<TerrainManagerScript>();
     }
 	
 	// Update is called once per frame
-	void Update ()
+	protected virtual void Update ()
     {
-		
+		currentPosition = this.transform.position;
 	}
 
     public void ChangeDirection()
     {
         facingRight = !facingRight;
-        transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
+        //transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
+        transform.Rotate(0f, 180, 0f);
     }
 
     public void BarkAttack()
@@ -57,7 +73,10 @@ public abstract class CharacterFinal : MonoBehaviour {
         BarkCollider.enabled = !BarkCollider.enabled;
     }
 
-
+    public bool getFacingDirection()
+    {
+        return facingRight;
+    }
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (damageSources.Contains(other.tag))

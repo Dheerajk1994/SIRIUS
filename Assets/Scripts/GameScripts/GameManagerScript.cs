@@ -37,7 +37,7 @@ public class GameManagerScript : MonoBehaviour
     #region SCRIPT_REFERENCES
     public TerrainManagerScript terrainManagerScript;
     public UIScript uiScript;
-    public PlayerScript playerScript;
+    public Player playerScript;
     public CameraScript cameraScript;
     public InputManagerScript inputManagerScript;
     public InventoryControllerScript inventoryControllerScript;
@@ -74,7 +74,7 @@ public class GameManagerScript : MonoBehaviour
         uiScript                  = ui.GetComponent<UIScript>();
                                   
         player                    = Instantiate(PlayerPrefab);
-        playerScript              = player.GetComponent<PlayerScript>();
+        playerScript              = player.GetComponent<Player>();
                                   
         mainCameraObject          = Instantiate(MainCameraPrefab);
         cameraScript              = mainCameraObject.GetComponent<CameraScript>();

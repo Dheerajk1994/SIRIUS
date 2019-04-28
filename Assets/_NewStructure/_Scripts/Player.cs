@@ -4,8 +4,30 @@ using UnityEngine;
 
 public class Player : CharacterFinal 
 {
+    public GameManagerScript gameManagerScript;
+    public UIScript uiScript;
 
-    private static Player instance; 
+    private bool rotatingArm;
+    public GameObject rotatingArmPrefab;
+    public GameObject rotatingArmObject;
+
+    private static Player instance;
+    //there should be only one player
+    // void Awake(){
+    //     if(instance == null){
+    //         instance = this;
+    //     }
+    //     else if(instance != this){
+    //         Destroy(this);
+    //     }
+    // }
+
+    public void SetPlayerScript(GameManagerScript gmScript, UIScript uScript)
+    {
+        gameManagerScript = gmScript;
+        uiScript = uScript;
+    }
+
     public static Player Instance
     {
         get 
@@ -32,8 +54,6 @@ public class Player : CharacterFinal
         }
     }
 
-    //private bool attack;
-
     [SerializeField]
     private bool airControl;
 
@@ -55,19 +75,23 @@ public class Player : CharacterFinal
     private bool jumpAttack;
     */
 
-    
-
 	// Use this for initialization
-	public override void Start () 
+	protected override void Start () 
     {
         base.Start();
         MyRigidbody = GetComponent<Rigidbody2D>();
        
 	}
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         HandleInput();
+        //generateRotatingArm();
+        if (Input.GetKeyDown(KeyCode.G))
+        {          
+            Debug.Log("Button G was pressed.");
+        }
     }
 
     // Update is called once per frame
@@ -87,6 +111,7 @@ public class Player : CharacterFinal
         if (Input.GetKeyDown(KeyCode.Space))
         {
             MyAnimator.SetTrigger("jump");
+            Debug.Log("Space Pressed");
             //jump = true;
         }
 
@@ -99,13 +124,6 @@ public class Player : CharacterFinal
 
     }
 
-    private void Flip(float horizontal)
-    {
-        if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
-        {
-            ChangeDirection();
-        }
-    }
 
     private bool IsGrounded()
     {
@@ -142,8 +160,17 @@ public class Player : CharacterFinal
 
     }
 
+    private void Flip(float horizontal)
+    {
+        if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
+        {
+            this.ChangeDirection();
+        }
+    }
+
     private void HandleMovement(float horizontal) 
     {
+        //Debug.Log(movementSpeed);
         if (MyRigidbody.velocity.y <0)
         {
             MyAnimator.SetBool("land", true); 
@@ -154,7 +181,8 @@ public class Player : CharacterFinal
         }
         if (Jump && MyRigidbody.velocity.y == 0)
         {
-            MyRigidbody.AddForce(new Vector2(0, jumpForce)); 
+            //MyRigidbody.AddForce(new Vector2(0, jumpForce)); 
+            MyRigidbody.AddForce(Vector2.up * jumpForce); 
         }
         MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
@@ -163,4 +191,20 @@ public class Player : CharacterFinal
     {
         yield return null;
     } 
+
+    public void GenerateRotatingArm()
+    {
+        if (GameObject.Find("/PlayArea/Sam(Clone)/RotatingArm(Clone)") == null)
+        {
+            rotatingArmObject = Instantiate(rotatingArmPrefab, new Vector3(), Quaternion.identity) as GameObject;
+            rotatingArmObject.transform.parent = transform;
+            rotatingArmObject.transform.localPosition = new Vector3(-0.197f, -0.43f);
+            MyAnimator.SetBool("rotatingArm", true);
+        }
+    }
+    public Pivot RotatingArm()
+    {
+        return rotatingArmObject.GetComponent<Pivot>();
+    }
+
 }

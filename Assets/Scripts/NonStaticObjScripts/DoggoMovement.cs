@@ -99,7 +99,6 @@ public class DoggoMovement : MonoBehaviour {
         }
 
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
 
         if (Input.GetKeyDown(KeyCode.Space))

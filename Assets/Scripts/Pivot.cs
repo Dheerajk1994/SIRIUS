@@ -6,25 +6,28 @@ public class Pivot : MonoBehaviour
 {
 
     public GameObject player;
-    public CharacterController2D CharacterController2DScript;
-   
-    bool facingRight;
-        
+    public Player PlayerScript;
+
+    public GameObject spacegunPrefab;
+    public GameObject spacegun;
+
+    public GameObject lavagunPrefab;
+    public GameObject lavagun;
+
+      
     private void Start()
     {
         player = GameObject.Find("/PlayArea/Sam(Clone)");
-        CharacterController2DScript = player.GetComponent<CharacterController2D>();
+        PlayerScript = player.GetComponent<Player>();
     }
 
     private void FixedUpdate()
     {
-        facingRight = CharacterController2DScript.getDirectionFacing();
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         difference.Normalize();
 
         float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-    
-        if (facingRight)
+        if (PlayerScript.getFacingDirection())
         {
             if (rotationZ <= 90 && rotationZ >= -90)
             {
@@ -45,5 +48,16 @@ public class Pivot : MonoBehaviour
             }
             
         }
+    }
+    public void equipSpacegun()
+    {
+        if(spacegun == null)
+        {
+            spacegun = Instantiate(spacegunPrefab, new Vector3(), Quaternion.identity) as GameObject;
+            spacegun.transform.parent = GameObject.Find("/PlayArea/Sam(Clone)/RotatingArm(Clone)/arm").transform;
+            spacegun.transform.localPosition = new Vector3(0.359f,-0.421f);
+            spacegun.transform.localRotation = Quaternion.Euler(.48f, -180, -268);
+        }
+        
     }
 }
