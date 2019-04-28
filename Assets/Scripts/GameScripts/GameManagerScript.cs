@@ -90,7 +90,7 @@ public class GameManagerScript : MonoBehaviour
 
         terrainManagerScript          .SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
         uiScript                      .SetUIPanel(this, inputManagerScript, player);
-        playerScript                  .SetPlayerScript(this, uiScript);
+        playerScript                  .SetPlayerScript(this, uiScript,inputManagerScript);
         inputManagerScript            .SetInputManager(this, uiScript, terrainManagerScript);
         inventoryControllerScript     .SetInventoryController(this, uiScript);
 

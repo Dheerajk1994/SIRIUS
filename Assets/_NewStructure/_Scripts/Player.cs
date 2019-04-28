@@ -6,10 +6,13 @@ public class Player : CharacterFinal
 {
     public GameManagerScript gameManagerScript;
     public UIScript uiScript;
+    public InputManagerScript inputManagerScript;
 
-    private bool rotatingArm;
-    public GameObject rotatingArmPrefab;
-    public GameObject rotatingArmObject;
+
+    //public GameObject rotatingArmPrefab;
+    //public GameObject rotatingArmObject;
+
+    [SerializeField]private GameObject rotatingArm;
 
     private static Player instance;
     //there should be only one player
@@ -22,10 +25,11 @@ public class Player : CharacterFinal
     //     }
     // }
 
-    public void SetPlayerScript(GameManagerScript gmScript, UIScript uScript)
+    public void SetPlayerScript(GameManagerScript gmScript, UIScript uScript, InputManagerScript inputScript)
     {
         gameManagerScript = gmScript;
         uiScript = uScript;
+        inputManagerScript = inputScript;
     }
 
     public static Player Instance
@@ -88,10 +92,6 @@ public class Player : CharacterFinal
         base.Update();
         HandleInput();
         //generateRotatingArm();
-        if (Input.GetKeyDown(KeyCode.G))
-        {          
-            Debug.Log("Button G was pressed.");
-        }
     }
 
     // Update is called once per frame
@@ -111,7 +111,6 @@ public class Player : CharacterFinal
         if (Input.GetKeyDown(KeyCode.Space))
         {
             MyAnimator.SetTrigger("jump");
-            Debug.Log("Space Pressed");
             //jump = true;
         }
 
@@ -124,7 +123,7 @@ public class Player : CharacterFinal
 
     }
 
-
+    
     private bool IsGrounded()
     {
         if (MyRigidbody.velocity.y <= 0)
@@ -191,20 +190,67 @@ public class Player : CharacterFinal
     {
         yield return null;
     } 
-
-    public void GenerateRotatingArm()
+    
+    public void HandleEquip()
     {
-        if (GameObject.Find("/PlayArea/Sam(Clone)/RotatingArm(Clone)") == null)
+       switch(inputManagerScript.hotbarPanel.GetEquippedSlot())
         {
-            rotatingArmObject = Instantiate(rotatingArmPrefab, new Vector3(), Quaternion.identity) as GameObject;
-            rotatingArmObject.transform.parent = transform;
-            rotatingArmObject.transform.localPosition = new Vector3(-0.197f, -0.43f);
-            MyAnimator.SetBool("rotatingArm", true);
-        }
+            case 0:
+                MyAnimator.SetBool("rotatingArm", false);
+                //clearArm();
+                rotatingArm.gameObject.SetActive(false);
+                Debug.Log("Nothing equipped");
+                break;
+            case 800:
+                break;
+            case 900:
+                //GenerateRotatingArm();
+                rotatingArm.gameObject.SetActive(true);
+                rotatingArm.GetComponent<Pivot>().equipSpacegun();
+                Debug.Log("Spacegun equipped");
+                break;
+            case 901:
+                //GenerateRotatingArm();
+                rotatingArm.gameObject.SetActive(true);
+                rotatingArm.GetComponent<Pivot>().equipLavagun();
+                Debug.Log("Lavagun equipped");
+                break;
+            default:
+                GameObject obj = new GameObject();
+                obj.AddComponent<SpriteRenderer>().sprite = InventorySpritesScript.instance.GetSprite(2);
+                rotatingArm.gameObject.SetActive(true);
+                rotatingArm.GetComponent<Pivot>().EquipItem(obj);
+                break;
+
+        }   
     }
-    public Pivot RotatingArm()
-    {
-        return rotatingArmObject.GetComponent<Pivot>();
-    }
+
+  
+
+    //public void GenerateRotatingArm()
+    //{
+    //    if (GameObject.Find("/PlayArea/Sam(Clone)/RotatingArm(Clone)") == null)
+    //    {
+    //        rotatingArmObject = Instantiate(rotatingArmPrefab, new Vector3(), Quaternion.identity) as GameObject;
+    //        rotatingArmObject.transform.parent = transform;
+    //        rotatingArmObject.transform.localPosition = new Vector3(-0.197f, -0.43f);
+    //        MyAnimator.SetBool("rotatingArm", true);
+    //    }
+    //}
+
+    //public Pivot RotatingArm()
+    //{
+    //    return rotatingArmObject.GetComponent<Pivot>();
+    //}
+
+    //public void clearArm()
+    //{
+    //    GameObject[] holder = 
+    //    if (rotatingArmObject != null)
+    //    {
+    //        Destroy(rotatingArmObject);
+    //    }
+        
+    //}
 
 }

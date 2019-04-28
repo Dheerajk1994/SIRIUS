@@ -14,10 +14,11 @@ public class Pivot : MonoBehaviour
     public GameObject lavagunPrefab;
     public GameObject lavagun;
 
-      
+    [SerializeField] private Transform equipmentPosition;
+
     private void Start()
     {
-        player = GameObject.Find("/PlayArea/Sam(Clone)");
+        //player = GameObject.Find("/PlayArea/Sam(Clone)");
         PlayerScript = player.GetComponent<Player>();
     }
 
@@ -53,11 +54,43 @@ public class Pivot : MonoBehaviour
     {
         if(spacegun == null)
         {
+            EmptyCurrentHand();
             spacegun = Instantiate(spacegunPrefab, new Vector3(), Quaternion.identity) as GameObject;
-            spacegun.transform.parent = GameObject.Find("/PlayArea/Sam(Clone)/RotatingArm(Clone)/arm").transform;
-            spacegun.transform.localPosition = new Vector3(0.359f,-0.421f);
-            spacegun.transform.localRotation = Quaternion.Euler(.48f, -180, -268);
+            spacegun.transform.parent = equipmentPosition.transform;
+            spacegun.transform.position = equipmentPosition.position;
+            //spacegun.transform.localPosition = new Vector3(0.359f,-0.421f);
+            //spacegun.transform.localRotation = Quaternion.Euler(.48f, -180, -268);
+        }  
+    }
+    public void equipLavagun()
+    {
+        if(lavagun == null)
+        {
+            EmptyCurrentHand();
+            lavagun = Instantiate(lavagunPrefab, new Vector3(), Quaternion.identity) as GameObject;
+            lavagun.transform.parent = equipmentPosition.transform;
+            lavagun.transform.position = equipmentPosition.position;
+            //lavagun.transform.localPosition = new Vector3(0.312f, -0.536f);
+            //lavagun.transform.localRotation = Quaternion.Euler(0, 0, -86);
         }
-        
+    }
+
+    public void EquipItem(GameObject obj)
+    {
+        EmptyCurrentHand();
+        obj.transform.parent = equipmentPosition.transform;
+        obj.transform.position = equipmentPosition.position;
+        obj.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        obj.GetComponent<SpriteRenderer>().sortingLayerName = "frontTileLayer";
+
+        //obj.transform.SetParent()
+    }
+
+    private void EmptyCurrentHand()
+    {
+        if (equipmentPosition.transform.childCount > 0)
+        {
+            Destroy(equipmentPosition.transform.GetChild(0).gameObject);
+        }
     }
 }

@@ -143,6 +143,14 @@
       "stackAmnt": 1,
       "cost": 0,
       "type": 11
+    },
+    {
+      "itemName": "Lavagun",
+      "id": 901,
+      "description": "supah hot",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 11
     }
   ]
 }

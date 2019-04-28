@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Attack
   - Bark
+  - Undefined
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -23,11 +23,11 @@ public class InputManagerScript : MonoBehaviour {
         terrainManagerScript = tScript;
         inventoryPanel = uiScript.PlayerInventoryAndStatsPanel.GetComponent<PlayerInventoryPanelScript>();
         hotbarPanel = uiScript.PlayerHotBarPanel.GetComponent<PlayerHotbarPanelScript>();
-
+        playerScript = gameManagerScript.playerScript;
     }
     private void Start()
     {
-        playerScript = GameObject.Find("/PlayArea/Sam(Clone)").GetComponent<Player>();
+      
     }
     private void Update()
     {
@@ -106,29 +106,9 @@ public class InputManagerScript : MonoBehaviour {
         //test for adding spacegun to hotbar
         else if (Input.GetKeyDown(KeyCode.G))
            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(900, 1);
-        //equipping the Spacegun
-       while(!hotbarPanel.GetEquippedSlot().Equals(0))
-        {
-            playerScript.GenerateRotatingArm();
-            if(hotbarPanel.GetEquippedSlot().Equals(900))
-            {
-                playerScript.RotatingArm().equipSpacegun();
-                break;
-            }
-            break;
-        }
-        /*while (hotbarPanel.GetEquippedSlot().Equals(900))
-        {
-            doggoMovementScript.equipSpacegun();
-            break;
-        }
-        while(!hotbarPanel.GetEquippedSlot().Equals(900)) 
-        {
-            Destroy(GameObject.Find("/PlayArea/Sam(Clone)/ArmPivot(Clone)"));
-            doggoMovementScript.animator.SetBool("spaceGunEquipped", false);
-            break;
-        }
-        */
+        //test for adding lavagun to hotbar
+        else if (Input.GetKeyDown(KeyCode.L))
+            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(901, 1);
     }
 
     private void MineFrontLayer()
