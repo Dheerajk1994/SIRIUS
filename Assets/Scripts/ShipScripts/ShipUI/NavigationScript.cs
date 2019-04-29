@@ -6,15 +6,48 @@ using UnityEngine.UI;
 public class NavigationScript : MonoBehaviour {
 
     private Animator navPanelAnimator;
-    public Button exitButn;
-    public Button selectButn;
     private bool isOpen = false;
+
+    public int requiredFuelForTravel;
+
+    [SerializeField] private Button exitButn;
+    [SerializeField] private Button setSailButton;
+
+    [SerializeField] private Text planetName;
+    [SerializeField] private Text planetInfo;
+    [SerializeField] private Text fuelInfo;
+    [SerializeField] private Image currentPlanetIcon;
+
+    [SerializeField] private Button GreenPlanet;
+    [SerializeField] private Button MoonPlanet;
+    [SerializeField] private Button SnowPlanet;
+    [SerializeField] private Button DesertPlanet;
+
+    [SerializeField] private Transform greenIconPos;
+    [SerializeField] private Transform moonIconPos;
+    [SerializeField] private Transform snowIconPos;
+    [SerializeField] private Transform desertIconPos;
+
+    public EnumClass.TerrainType currentPlanet;
+    public EnumClass.TerrainType planetToMoveTo;
+
+    public Engine engineObjectScript;
 
     UIScript uiScript;
 
     public void SetNavPanel(UIScript uScript)
     {
+        GreenPlanet.onClick.AddListener(GreenPlanetClicked);
+        MoonPlanet.onClick.AddListener(MoonPlanetClicked);
+        SnowPlanet.onClick.AddListener(IcePlanetClicked);
+        DesertPlanet.onClick.AddListener(DesertPlanetClicked);
+
+        setSailButton.onClick.AddListener(SetSailClicked);
+        exitButn.onClick.AddListener(ClosePanelClicked);
+
         uiScript = uScript;
+
+        engineObjectScript = uiScript.gameManagerScript.ship.GetComponent<ShipScript>().GetEngineReference().GetComponent<Engine>();
     }
 
     private void Start()
@@ -23,15 +56,135 @@ public class NavigationScript : MonoBehaviour {
         //enginePanelToggleButn.onClick.AddListener(ToggleEnginePanel);
     }
 
-    public void ToggleEnginePanel(bool toggle)
+    public void ToggleNavPanel(bool toggle)
     {
+        Debug.Log("toggle 1 called");
         isOpen = toggle;
         navPanelAnimator.SetBool("isOpen", toggle);
+        if(isOpen)
+            GreenPlanetClicked();
     }
 
-    public void ToggleEnginePanel()
+    public void ToggleNavPanel()
     {
+        Debug.Log("toggle 2 called");
         isOpen = !isOpen;
         navPanelAnimator.SetBool("isOpen", isOpen);
+        if(isOpen)
+            GreenPlanetClicked();
+    }
+
+    public void ClosePanelClicked(){
+        ToggleNavPanel(false);
+    }
+
+    public void GreenPlanetClicked(){
+        planetName.text = "Green World";
+        planetInfo.text = "A lush green land with plenty of trees and vegetation.\n" +
+            "Common resources: normal\n" +
+            "Rare resources: low\n"+
+            "Vegetation: high\n" +
+            "Temperature: mild\n"+
+            "Threat level: normal";
+        planetToMoveTo = EnumClass.TerrainType.GREEN;
+        UpdateSetSailButton();
+    }
+
+    public void MoonPlanetClicked(){
+        planetName.text = "Moon World";
+        planetInfo.text = "A barren lifeless rock.\n" +
+            "Common resources: low\n" +
+            "Rare resources: high\n" +
+            "Vegetation: none\n" +
+            "Temperature: low\n" +
+            "Threat level: low";
+        planetToMoveTo = EnumClass.TerrainType.MOON;
+        UpdateSetSailButton();
+    }
+
+    public void IcePlanetClicked(){
+        planetName.text = "Ice World";
+        planetInfo.text = "A harsh icey planet. Bring a jacket\n" +
+            "Common resources: normal\n" +
+            "Rare resources: normal\n" +
+            "Vegetation: low\n" +
+            "Temperature: low\n" +
+            "Threat level: normal";
+        planetToMoveTo = EnumClass.TerrainType.SNOW;
+        UpdateSetSailButton();
+    }
+
+    public void DesertPlanetClicked(){
+        planetName.text = "The Deserts of Sivanium";
+        planetInfo.text = "A hot and dry planet.\n" +
+            "Common resources: normal\n" +
+            "Rare resources: high\n" +
+            "Vegetation: low\n" +
+            "Temperature: high\n" +
+            "Threat level: normal";
+        planetToMoveTo = EnumClass.TerrainType.DESERT;
+        UpdateSetSailButton();
+    }
+
+    private void UpdateSetSailButton()
+    {
+        fuelInfo.text = "Fuel: " + engineObjectScript.currentFuel.ToString() + "/" +  requiredFuelForTravel.ToString();
+        if (!SeeIfEnoughFuel())
+        {
+            setSailButton.interactable = false;
+            fuelInfo.color = Color.red;
+        }
+        else
+        {
+            setSailButton.interactable = true;
+            fuelInfo.color = Color.white;
+        }
+    }
+
+    private bool SeeIfEnoughFuel()
+    {
+        return (engineObjectScript.currentFuel >= requiredFuelForTravel);
+    }
+
+    private void UpdateMarkerPosition()
+    {
+        switch (currentPlanet)
+        {
+            case EnumClass.TerrainType.GREEN:
+                currentPlanetIcon.transform.position = greenIconPos.position;
+                break;
+            case EnumClass.TerrainType.MOON:
+                currentPlanetIcon.transform.position = moonIconPos.position;
+                break;
+            case EnumClass.TerrainType.DESERT:
+                currentPlanetIcon.transform.position = desertIconPos.position;
+                break;
+            case EnumClass.TerrainType.SNOW:
+                currentPlanetIcon.transform.position = snowIconPos.position;
+                break;
+            case EnumClass.TerrainType.ASTEROID:
+                //currentPlanetIcon.transform.position = greenIconPos;
+                break;
+            case EnumClass.TerrainType.SHIP:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void SetSailClicked() {
+        //play some sound
+
+        //shake the ship?
+
+        //take out fuel
+        engineObjectScript.Travel(requiredFuelForTravel);
+
+        //hange current planet
+        currentPlanet = planetToMoveTo;
+        UpdateMarkerPosition();
+        UpdateSetSailButton();
+
+        //set the background
     }
 }

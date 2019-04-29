@@ -98,20 +98,18 @@ public class GameManagerScript : MonoBehaviour
 
         questManager              = Instantiate(QuestManagerPrefab);
         questManagerScript        = questManager.GetComponent<QuestManagerScript>();
-        ship                      = Instantiate(ShipPrefab);
-        shipScript                = ship.GetComponent<ShipScript>();
+        //ship                      = Instantiate(ShipPrefab);
+        //shipScript                = ship.GetComponent<ShipScript>();
 
         ui.      gameObject.SetActive(false);
         player.  gameObject.SetActive(false);
 
         terrainManagerScript          .SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
-        uiScript                      .SetUIPanel(this, inputManagerScript, player);
         playerScript                  .SetPlayerScript(this, uiScript,inputManagerScript);
         inputManagerScript            .SetInputManager(this, uiScript, terrainManagerScript);
         inventoryControllerScript     .SetInventoryController(this, uiScript);
         questManagerScript            .SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>());
 
-        shipScript                    .SetShip(uiScript);
         //SET LOCAL VARIABLES
         readyToGo    = false;
         worldPresent = false;
@@ -121,11 +119,12 @@ public class GameManagerScript : MonoBehaviour
 
 
         StartNewGame();
+        uiScript                      .SetUIPanel(this, inputManagerScript, player);
     }
 
     private void Update()
     {
-        if (readyToGo)
+        if (readyToGo && currentWorld != (ushort)EnumClass.TerrainType.SHIP)
         {
             if (Vector2.Distance(player.transform.position, playerPos) > 20.0f)
             {
@@ -140,9 +139,15 @@ public class GameManagerScript : MonoBehaviour
 
     public void StartNewGame()
     {
-        //Debug.Log("enum val " + (ushort)EnumClass.TerrainType.MOON);
-        //Debug.Log(currentWorld);
-        currentWorld =  (ushort)EnumClass.TerrainType.GREEN;//TEST
+        currentWorld =  (ushort)EnumClass.TerrainType.SHIP;//TEST
+
+        if(currentWorld == (ushort)EnumClass.TerrainType.SHIP)
+        {
+            ship = Instantiate(ShipPrefab);
+            shipScript = ship.GetComponent<ShipScript>();
+            shipScript.SetShip(uiScript);
+        }
+
         GameDataHandler.NewGame(this, terrainManagerScript, currentWorld);
     }
 

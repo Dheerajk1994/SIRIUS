@@ -21,7 +21,7 @@ public class Door : Interactable
 
     private void Update()
     {
-        if (canInteract && Input.GetKeyDown(KeyCode.UpArrow))
+        if (canInteract && Input.GetKeyDown(KeyCode.E))
             Interact();
     }
 }

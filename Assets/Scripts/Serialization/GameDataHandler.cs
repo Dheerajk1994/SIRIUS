@@ -21,19 +21,26 @@ public static class GameDataHandler {
 
             gameManager.mainCameraObject.gameObject.SetActive(false);
 
-            terrainManager.StartTerrainGen(terrainType);
-
             gameManager.player.gameObject.SetActive(true);
             gameManager.player.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.FRONTLAYER;
             gameManager.player.transform.SetParent(GameObject.Find("PlayArea").transform);
-            gameManager.playerPos = terrainManager.GetSafePlaceToSpawnPlayer();
-            //gameManager.playerPos = new Vector2(-10f, 0f);
+
+            if(terrainType != (ushort)EnumClass.TerrainType.SHIP)
+            {
+                terrainManager.StartTerrainGen(terrainType);
+                gameManager.playerPos = terrainManager.GetSafePlaceToSpawnPlayer();
+            }
+            else
+            {
+                gameManager.ship.transform.position = new Vector2(0f, 0f);
+                gameManager.playerPos = gameManager.ship.GetComponent<ShipScript>().spawnPosition.position;
+            }
+
             gameManager.player.transform.position = gameManager.playerPos;
 
             gameManager.mainCameraObject.gameObject.SetActive(true);
             gameManager.mainCameraObject.gameObject.GetComponent<CameraScript>().SetCamera(gameManager.player.transform, terrainType);
 
-            //gameManager.uiScript.FadeInScene();
 
             gameManager.worldPresent = true;
             gameManager.readyToGo = true;

@@ -9,8 +9,7 @@ public class EngineScript : GenericInvoPanelScript
     public ItemHolder engineItemHolder;
     public GameObject slot;
 
-    //
-
+    public Engine engineObjectScript;
 
     private Animator enginePanelAnimator;
     public Button exitButn;
@@ -31,9 +30,12 @@ public class EngineScript : GenericInvoPanelScript
         slot.GetComponent<InventorySlot>().inventoryReference = engineItemHolder;
         slot.GetComponent<InventorySlot>().genericInvoHandler = this.genericInvoHandler;
 
+        engineObjectScript = uiScript.gameManagerScript.ship.GetComponent<ShipScript>().GetEngineReference().GetComponent<Engine>();
     
         genericInvoHandler.slots = slots;
 
+        refuelButn.onClick.AddListener(RefuelButtonClicked);
+        exitButn.onClick.AddListener(ClosePanelClicked);
     }
 
     private void Start()
@@ -42,15 +44,44 @@ public class EngineScript : GenericInvoPanelScript
         //enginePanelToggleButn.onClick.AddListener(ToggleEnginePanel);
     }
 
+    public void RefuelButtonClicked()
+    {
+        //transform.GetChild(0).GetComponent<InventoryItem>().completeItem.itemDescription.type
+        if (slot.GetComponent<InventorySlot>().isHoldingAnItem && slot.transform.GetChild(0).GetComponent<InventoryItem>().completeItem.itemDescription.type == 5) {
+            engineObjectScript.Refuel(slot.transform.GetChild(0).GetComponent<InventoryItem>().stackCount);
+            UpdateFuel();
+            slot.GetComponent<InventorySlot>().isHoldingAnItem = false;
+            Destroy(slot.transform.GetChild(0).gameObject);
+        }
+        else
+            Debug.Log("Can't refuel this. Item must be of fuel type");
+    }
+
+    public void ClosePanelClicked(){
+        ToggleEnginePanel(false);
+    }
+
     public void ToggleEnginePanel(bool toggle)
     {
         isOpen = toggle;
         enginePanelAnimator.SetBool("isOpen", toggle);
+        if (isOpen)
+        {
+            UpdateFuel();
+        }
     }
 
     public void ToggleEnginePanel()
     {
         isOpen = !isOpen;
         enginePanelAnimator.SetBool("isOpen", isOpen);
+        if (isOpen)
+        {
+            UpdateFuel();
+        }
+    }
+
+    public void UpdateFuel(){
+        currentFuel.value = engineObjectScript.currentFuel;
     }
 }

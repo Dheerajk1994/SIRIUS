@@ -10,6 +10,8 @@ public class ShipScript : MonoBehaviour {
     [SerializeField] private GameObject Bed;
     [SerializeField] private GameObject Chest;
 
+    public Transform spawnPosition;
+
     public void SetShip(UIScript uiscript)
     {
         Teleporter.GetComponent<Teleporter>().ExitShipPanel = uiscript.ExitShipPanel;
@@ -18,5 +20,9 @@ public class ShipScript : MonoBehaviour {
         Chest.GetComponent<Chest>().ChestPanel = uiscript.ChestPanel;
     }
 
+    public GameObject GetEngineReference()
+    {
+        return Engine;
+    }
 
 }

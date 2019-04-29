@@ -56,7 +56,8 @@ public static class EnumClass {
         MOON,
         DESERT,
         SNOW,
-        ASTEROID
+        ASTEROID,
+        SHIP
     };
 
     public enum LayerIDEnum

@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Engine : Interactable
 {
-    private readonly float maxFuel = 100f;
-    public float currentFuel { get; set; }
+    private readonly int maxFuel = 1000;
+    public int currentFuel { get; set; }
     public GameObject EnginePanel;
+
+    public void SetEngine(GameObject p)
+    {
+        this.player = p;
+    }
 
     public override void Interact()
     {
@@ -14,7 +19,7 @@ public class Engine : Interactable
         isInteracting = !isInteracting;
         panelOpen = !panelOpen;
         EnginePanel.GetComponent<Animator>().SetBool("isOpen", isInteracting);
-        Debug.Log("Fuel: " + currentFuel.ToString() + "%");
+        Debug.Log("Fuel: " + currentFuel.ToString() + "/1000");
     }
 
     private void Start()
@@ -33,9 +38,18 @@ public class Engine : Interactable
         }
     }
 
-    public void Refuel(float value)
+    public void Refuel(int value)
     {
         currentFuel += value;
         Mathf.Clamp(currentFuel, 0, maxFuel);
+    }
+
+    public void Travel(int amount)
+    {
+        currentFuel -= amount;
+        if (EnginePanel.gameObject.activeInHierarchy)
+        {
+            EnginePanel.GetComponent<EngineScript>().UpdateFuel();
+        }
     }
 }

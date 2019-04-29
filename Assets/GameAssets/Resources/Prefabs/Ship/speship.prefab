@@ -80,6 +80,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1648588196236824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4395889196759800}
+  m_Layer: 0
+  m_Name: PlayerSpanPointInShip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1725670636829980
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +220,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1143345085434036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0.125, z: 0}
+  m_LocalPosition: {x: 816.1149, y: 534.12897, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4871666989039248}
@@ -217,6 +232,7 @@ Transform:
   - {fileID: 4029874901419994}
   - {fileID: 4961932521223190}
   - {fileID: 4742483083990438}
+  - {fileID: 4395889196759800}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -232,6 +248,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4036415916968192}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4395889196759800
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1648588196236824}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.24, y: -3.46, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4036415916968192}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4410027966311882
 Transform:
@@ -633,6 +662,7 @@ MonoBehaviour:
   player: {fileID: 0}
   canInteract: 0
   isInteracting: 0
+  panelOpen: 0
   interactText: Press E to Interact
   destination: {fileID: 1938500411338168}
 --- !u!114 &114162836072644668
@@ -649,6 +679,7 @@ MonoBehaviour:
   player: {fileID: 0}
   canInteract: 0
   isInteracting: 0
+  panelOpen: 0
   interactText: Press E to Interact
 --- !u!114 &114206779202774886
 MonoBehaviour:
@@ -664,6 +695,7 @@ MonoBehaviour:
   player: {fileID: 0}
   canInteract: 0
   isInteracting: 0
+  panelOpen: 0
   interactText: Press E to Interact
   destination: {fileID: 1785246841266026}
 --- !u!114 &114286450490008922
@@ -682,6 +714,7 @@ MonoBehaviour:
   Navigation: {fileID: 1385680063904670}
   Bed: {fileID: 1901692159518330}
   Chest: {fileID: 1450299133684860}
+  spawnPosition: {fileID: 4395889196759800}
 --- !u!114 &114421684113572526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -696,6 +729,7 @@ MonoBehaviour:
   player: {fileID: 0}
   canInteract: 0
   isInteracting: 0
+  panelOpen: 0
   interactText: Press E to Interact
   EnginePanel: {fileID: 0}
 --- !u!114 &114683188126147568
@@ -712,6 +746,7 @@ MonoBehaviour:
   player: {fileID: 0}
   canInteract: 0
   isInteracting: 0
+  panelOpen: 0
   interactText: Press E to Interact
   ExitShipPanel: {fileID: 0}
 --- !u!114 &114772819540615980
@@ -728,6 +763,7 @@ MonoBehaviour:
   player: {fileID: 0}
   canInteract: 0
   isInteracting: 0
+  panelOpen: 0
   interactText: Press E to Interact
   ChestPanel: {fileID: 0}
 --- !u!114 &114790049019200346
@@ -744,6 +780,7 @@ MonoBehaviour:
   player: {fileID: 0}
   canInteract: 0
   isInteracting: 0
+  panelOpen: 0
   interactText: Press E to Interact
   playerScript: {fileID: 0}
 --- !u!114 &114805137485153680
@@ -774,6 +811,7 @@ MonoBehaviour:
   player: {fileID: 0}
   canInteract: 0
   isInteracting: 0
+  panelOpen: 0
   interactText: Press E to Interact
   NavigationPanel: {fileID: 0}
 --- !u!212 &212473389661112774

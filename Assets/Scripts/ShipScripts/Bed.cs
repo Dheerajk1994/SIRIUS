@@ -25,7 +25,7 @@ public class Bed : Interactable {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Equals("Sam(Clone)"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             player = collision.gameObject;
             playerScript = player.GetComponent<PlayerScript>();
@@ -35,7 +35,7 @@ public class Bed : Interactable {
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Equals("Sam(Clone)"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             canInteract = false;
             isInteracting = false;

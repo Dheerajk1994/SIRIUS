@@ -11,7 +11,8 @@ public class Navigation : Interactable
         base.Interact();
         isInteracting = !isInteracting;
         panelOpen = !panelOpen;
-        NavigationPanel.GetComponent<Animator>().SetBool("isOpen", isInteracting);
+        //NavigationPanel.GetComponent<Animator>().SetBool("isOpen", isInteracting);
+        NavigationPanel.GetComponent<NavigationScript>().ToggleNavPanel(isInteracting);
         Debug.Log("where ya travelin?");
     }
 
@@ -27,7 +28,8 @@ public class Navigation : Interactable
         else if (!canInteract && panelOpen)
         {
             panelOpen = false;
-            NavigationPanel.GetComponent<Animator>().SetBool("isOpen", false);
+            //NavigationPanel.GetComponent<Animator>().SetBool("isOpen", false);
+            NavigationPanel.GetComponent<NavigationScript>().ToggleNavPanel(false);
         }
     }
 }
