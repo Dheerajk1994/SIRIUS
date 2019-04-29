@@ -63,7 +63,11 @@ public class PlayerHotbarPanelScript : GenericInvoPanelScript {
         //Debug.Log("Equipped Slot variable: " + equippedSlot);
         if (slots[equippedSlot].GetComponent<InventorySlot>().isHoldingAnItem)
         {
-            return slots[equippedSlot].transform.GetChild(0).GetComponent<InventoryItem>().completeItem.itemDescription.id;
+            if (slots[equippedSlot].transform.childCount > 0)
+            {
+                return slots[equippedSlot].transform.GetChild(0).GetComponent<InventoryItem>().completeItem.itemDescription.id;
+            }
+            return 0;
         }
         else
         {
