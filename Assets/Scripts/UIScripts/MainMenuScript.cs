@@ -21,7 +21,7 @@ public class MainMenuScript : MonoBehaviour {
         uiScript = uScript;
     }
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         gameSettings = new GameSettings();
         fullScreenToggle.onValueChanged.AddListener(delegate { ONfullScreenToggle();  });
@@ -33,7 +33,7 @@ public class MainMenuScript : MonoBehaviour {
             resDropdown.options.Add(new Dropdown.OptionData(resolution.ToString()));
           }
          
-    } 
+    } */
 
     public void ONfullScreenToggle() {
        gameSettings.fullscreen =   Screen.fullScreen = fullScreenToggle.isOn; 

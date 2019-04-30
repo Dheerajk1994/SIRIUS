@@ -208,3 +208,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159f0d9f7f94efe4f830aa99754ca1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxRandomRange: 1000

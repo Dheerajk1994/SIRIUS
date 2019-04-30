@@ -16,6 +16,7 @@ public class ExitShipScript : MonoBehaviour
     public void SetExitShipPanel(UIScript uScript)
     {
         uiScript = uScript;
+        yesButn.onClick.AddListener(ExitShipPressed);
     }
 
     private void Start()
@@ -35,6 +36,12 @@ public class ExitShipScript : MonoBehaviour
         isOpen = !isOpen;
         exitShipPanelAnimator.SetBool("isOpen", isOpen);
 
+    }
+
+    public void ExitShipPressed()
+    {
+        TheImmortalScript.instance.WorldTypeToGenerate = uiScript.NavPanel.GetComponent<NavigationScript>().currentPlanet;
+        uiScript.gameManagerScript.TeleportToTerrain();
     }
 
 }

@@ -151,7 +151,7 @@ public class TerrainManagerScript : MonoBehaviour
         //Debug.Log("values received");
     }
 
-    public void DisplayChunks(Vector2 playerPos)
+    public IEnumerator DisplayChunks(Vector2 playerPos)
     {
         //Debug.Log("Display chunk called");
         ushort chunkPosY = (ushort)Mathf.Clamp((ushort)Mathf.Floor(playerPos.y / chunkSize), 0, chunks.GetLength(1) - 1);
@@ -271,6 +271,7 @@ public class TerrainManagerScript : MonoBehaviour
             DestroyChunk(chunkToDisplayr, (ushort)(chunkPosY - 2));
         }
 
+        yield return null;
     }
 
     private void DisplayChunk(ushort cx, ushort cy)        //LOADS A CHUNK - USE WHEN CHUNK IS NOT POPULATED YET
