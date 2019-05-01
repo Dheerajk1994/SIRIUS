@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4403457551447346}
   - component: {fileID: 212168087349409794}
   - component: {fileID: 70468778144580342}
+  - component: {fileID: 114877585306086754}
   m_Layer: 0
   m_Name: sword1
   m_TagString: Untagged
@@ -102,7 +103,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   damage: 5
-  attackSpeed: 1
+  attackSpeed: 6
+--- !u!114 &114877585306086754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1268590925097850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c76e7c7f5324e5438954c2979e7fe34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212168087349409794
 SpriteRenderer:
   m_ObjectHideFlags: 1
