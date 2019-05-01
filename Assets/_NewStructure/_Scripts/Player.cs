@@ -8,11 +8,12 @@ public class Player : CharacterFinal
     public UIScript uiScript;
     public InputManagerScript inputManagerScript;
 
-
     //public GameObject rotatingArmPrefab;
     //public GameObject rotatingArmObject;
+    public GameObject equippedItem;
 
     [SerializeField]private GameObject rotatingArm;
+    private Pivot rotatingArmScript;
 
     private static Player instance;
     //there should be only one player
@@ -84,8 +85,10 @@ public class Player : CharacterFinal
     {
         base.Start();
         MyRigidbody = GetComponent<Rigidbody2D>();
-       
-	}
+        rotatingArmScript = rotatingArm.GetComponent<Pivot>();
+
+
+    }
 
     protected override void Update()
     {
@@ -112,13 +115,6 @@ public class Player : CharacterFinal
         {
             MyAnimator.SetTrigger("jump");
             //jump = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            MyAnimator.SetTrigger("attack");
-            //attack = true;
-            //jumpAttack = true;
         }
 
     }
@@ -193,6 +189,10 @@ public class Player : CharacterFinal
     
     public void HandleEquip()
     {
+        if (equippedItem != null)
+            Destroy(equippedItem.gameObject);
+
+
        switch(inputManagerScript.hotbarPanel.GetEquippedSlot())
         {
             case 0:
@@ -202,6 +202,16 @@ public class Player : CharacterFinal
                 Debug.Log("Nothing equipped");
                 break;
             case 800:
+                rotatingArm.gameObject.SetActive(true);
+                rotatingArm.GetComponent<Pivot>().EquipSword();
+                equippedItem = Instantiate(rotatingArmScript.swordPrefab);
+                Debug.Log("Sword equipped");
+                break;
+            case 801:
+                rotatingArm.gameObject.SetActive(true);
+                rotatingArm.GetComponent<Pivot>().EquipKatana();
+                equippedItem = Instantiate(rotatingArmScript.katanaPrefab);
+                Debug.Log("Katana equipped");
                 break;
             case 900:
                 //GenerateRotatingArm();
@@ -229,7 +239,10 @@ public class Player : CharacterFinal
         }   
     }
 
-  
+    public void MeleeAttack()
+    {
+        rotatingArmScript.MeleeRotate(equippedItem.GetComponent<WeaponClass>().attackSpeed);
+    }
 
     //public void GenerateRotatingArm()
     //{
