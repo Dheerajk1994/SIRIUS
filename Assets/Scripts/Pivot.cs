@@ -14,6 +14,7 @@ public class Pivot : MonoBehaviour
     public GameObject lavagunPrefab;
     public GameObject lavagun;
 
+    public float rotationZ;
     [SerializeField] private Transform equipmentPosition;
 
     private void Start()
@@ -27,7 +28,7 @@ public class Pivot : MonoBehaviour
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         difference.Normalize();
 
-        float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         if (PlayerScript.getFacingDirection())
         {
             if (rotationZ <= 90 && rotationZ >= -90)
@@ -58,8 +59,7 @@ public class Pivot : MonoBehaviour
             spacegun = Instantiate(spacegunPrefab, new Vector3(), Quaternion.identity) as GameObject;
             spacegun.transform.parent = equipmentPosition.transform;
             spacegun.transform.position = equipmentPosition.position;
-            //spacegun.transform.localPosition = new Vector3(0.359f,-0.421f);
-            //spacegun.transform.localRotation = Quaternion.Euler(.48f, -180, -268);
+            spacegun.transform.localRotation = Quaternion.Euler(0f, 0f, -60f);
         }  
     }
     public void equipLavagun()
@@ -70,8 +70,7 @@ public class Pivot : MonoBehaviour
             lavagun = Instantiate(lavagunPrefab, new Vector3(), Quaternion.identity) as GameObject;
             lavagun.transform.parent = equipmentPosition.transform;
             lavagun.transform.position = equipmentPosition.position;
-            //lavagun.transform.localPosition = new Vector3(0.312f, -0.536f);
-            //lavagun.transform.localRotation = Quaternion.Euler(0, 0, -86);
+            lavagun.transform.localRotation = Quaternion.Euler(0f, 0f, -60f);
         }
     }
 

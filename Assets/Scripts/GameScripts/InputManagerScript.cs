@@ -27,7 +27,7 @@ public class InputManagerScript : MonoBehaviour {
     }
     private void Start()
     {
-      
+        hotbarPanel.EquipSlot(0);
     }
     private void Update()
     {

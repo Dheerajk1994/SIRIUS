@@ -207,12 +207,15 @@ public class Player : CharacterFinal
                 //GenerateRotatingArm();
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().equipSpacegun();
+                MyAnimator.SetBool("rotatingArm", true);
+                Debug.Log(rotatingArm.GetComponent<Pivot>().spacegun.transform.rotation.eulerAngles.z);
                 Debug.Log("Spacegun equipped");
                 break;
             case 901:
                 //GenerateRotatingArm();
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().equipLavagun();
+                MyAnimator.SetBool("rotatingArm", true);
                 Debug.Log("Lavagun equipped");
                 break;
             default:
@@ -220,6 +223,7 @@ public class Player : CharacterFinal
                 obj.AddComponent<SpriteRenderer>().sprite = InventorySpritesScript.instance.GetSprite(2);
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().EquipItem(obj);
+                MyAnimator.SetBool("rotatingArm", true);
                 break;
 
         }   
