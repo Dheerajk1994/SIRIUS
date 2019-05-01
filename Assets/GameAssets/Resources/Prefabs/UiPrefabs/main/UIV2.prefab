@@ -3327,6 +3327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   closeButton: {fileID: 114197073822315220}
+  audiomanager: {fileID: 0}
 --- !u!114 &114155255928669318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5361,6 +5362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerInventoryAndStatsPanel: {fileID: 1114440014486972}
+  InventoryAndStatsPanel: {fileID: 1114440014486972}
   PlayerHotBarPanel: {fileID: 1233540287951828}
   PlayerAttributePanel: {fileID: 1055023155636284}
   PlayerCraftingPanel: {fileID: 1473935419754050}

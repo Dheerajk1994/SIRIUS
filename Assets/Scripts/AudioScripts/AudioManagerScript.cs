@@ -13,12 +13,13 @@ public class AudioManagerScript : MonoBehaviour {
     {
         if (instance == null)
             instance = this;
-        else
+        else if (this != instance)
         {
-            Destroy(gameObject);
+            Destroy(this);
             return;
         }
-        foreach(Sound s in sounds)
+        DontDestroyOnLoad(this.gameObject);
+        foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
@@ -37,5 +38,10 @@ public class AudioManagerScript : MonoBehaviour {
             return;
         }
         s.source.Play();
+    }
+
+    public void SetAudioManager()
+    {
+        //
     }
 }

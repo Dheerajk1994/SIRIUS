@@ -9,6 +9,7 @@ public class ShipScript : MonoBehaviour {
     [SerializeField] private GameObject Navigation;
     [SerializeField] private GameObject Bed;
     [SerializeField] private GameObject Chest;
+    public AudioManagerScript audioManager;
 
     public Transform spawnPosition;
 

@@ -117,6 +117,7 @@ public class GameManagerScript : MonoBehaviour
         inputManagerScript            .SetInputManager(this, uiScript, terrainManagerScript);
         inventoryControllerScript     .SetInventoryController(this, uiScript);
         questManagerScript            .SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>());
+        //audioManagerScript
 
         //SET LOCAL VARIABLES
         readyToGo    = false;
@@ -127,7 +128,7 @@ public class GameManagerScript : MonoBehaviour
 
 
         StartNewGame();
-        uiScript                      .SetUIPanel(this, inputManagerScript, audioManager, player);
+        uiScript                      .SetUIPanel(this, inputManagerScript, audioManagerScript, player);
     }
 
     private void Update()

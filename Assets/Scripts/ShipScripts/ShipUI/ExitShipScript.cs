@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ExitShipScript : MonoBehaviour
 {
-    public AudioManagerScript audiomanager;
+    private AudioManagerScript audiomanager;
     private Animator exitShipPanelAnimator;
     public Button exitButn;
     public Button yesButn;
@@ -46,6 +46,13 @@ public class ExitShipScript : MonoBehaviour
     public void ClosePanelClicked()
     {
         ToggleExitShipPanel(false);
+        audiomanager.Play("btn-confirm");
+    }
+
+    public void YesBtnClicked()
+    {
+        // handle scene change
+
         audiomanager.Play("btn-confirm");
     }
 

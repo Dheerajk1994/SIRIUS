@@ -9,7 +9,7 @@ public class EngineScript : GenericInvoPanelScript
     public ItemHolder engineItemHolder;
     public GameObject slot;
 
-    public AudioManagerScript audiomanager;
+    private AudioManagerScript audiomanager;
     public Engine engineObjectScript;
 
     private Animator enginePanelAnimator;
@@ -55,7 +55,7 @@ public class EngineScript : GenericInvoPanelScript
             UpdateFuel();
             slot.GetComponent<InventorySlot>().isHoldingAnItem = false;
             Destroy(slot.transform.GetChild(0).gameObject);
-
+            audiomanager.Play("btn-refuel");
         }
         else
         {
@@ -66,6 +66,7 @@ public class EngineScript : GenericInvoPanelScript
 
     public void ClosePanelClicked(){
         ToggleEnginePanel(false);
+        audiomanager.Play("btn-confirm");
     }
 
     public void ToggleEnginePanel(bool toggle)
