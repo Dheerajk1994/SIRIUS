@@ -21,7 +21,7 @@ public class ExitShipScript : MonoBehaviour
         uiScript = uScript;
         
         audiomanager = uScript.audioManager.GetComponent<AudioManagerScript>();
-        yesButn.onClick.AddListener(ExitShipPressed);
+        yesButn.onClick.AddListener(YesBtnClicked);
     }
 
     private void Start()
