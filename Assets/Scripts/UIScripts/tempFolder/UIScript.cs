@@ -7,6 +7,7 @@ public class UIScript : MonoBehaviour
 {
     #region REFERENCES
     public GameObject PlayerInventoryAndStatsPanel;
+    public GameObject InventoryAndStatsPanel;
     public GameObject PlayerHotBarPanel;
     public GameObject PlayerAttributePanel;
     public GameObject PlayerCraftingPanel;
@@ -22,14 +23,17 @@ public class UIScript : MonoBehaviour
 
     public GameManagerScript gameManagerScript;
     public InputManagerScript inputManagerScript;
+    public AudioManagerScript audioManager;
     public GameObject player;
     #endregion
 
     //should be called by the gamemanager
-    public void SetUIPanel(GameManagerScript gManagerS, InputManagerScript iManagerS, GameObject p)
+    public void SetUIPanel(GameManagerScript gManagerS, InputManagerScript iManagerS, AudioManagerScript aManager, GameObject p)
     {
         gameManagerScript = gManagerS;
         inputManagerScript = iManagerS;
+        audioManager = aManager;
+
         player = p;
 
         //PlayerCraftingPanel.SetActive(false);
@@ -42,6 +46,8 @@ public class UIScript : MonoBehaviour
     {
         PlayerInventoryAndStatsPanel.GetComponent<InventoryHandlerScript>().genericInventory = player.GetComponent<Inventory>();
         PlayerInventoryAndStatsPanel.GetComponent<PlayerInventoryPanelScript>().SetPlayerInventoryPanel(player.GetComponent<Inventory>());
+
+        InventoryAndStatsPanel.GetComponent<InventoryAndStatsPanelScript>().SetInventoryAndStatsPanel(this, player);
 
         PlayerHotBarPanel.GetComponent<HotbarHandlerScript>().genericInventory = player.GetComponent<Hotbar>();
         PlayerHotBarPanel.GetComponent<PlayerHotbarPanelScript>().SetPlayerHotbarPanel(player.GetComponent<Hotbar>(), gameManagerScript.playerScript);

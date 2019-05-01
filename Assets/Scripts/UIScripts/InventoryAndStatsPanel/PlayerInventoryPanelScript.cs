@@ -6,7 +6,6 @@ public class PlayerInventoryPanelScript : GenericInvoPanelScript {
 
     public Inventory playerInventoryReference;
 
-
     public void SetPlayerInventoryPanel(Inventory pir)
     {
         playerInventoryReference = pir;

@@ -16,7 +16,7 @@ public class Chest : Interactable
         base.Interact();
         isInteracting = !isInteracting;
         panelOpen = !panelOpen;
-        ChestPanel.GetComponent<Animator>().SetBool("isOpen", isInteracting);
+        ChestPanel.GetComponent<ChestScript>().ToggleChestPanel(isInteracting);
         Debug.Log("opening chest");
     }
 

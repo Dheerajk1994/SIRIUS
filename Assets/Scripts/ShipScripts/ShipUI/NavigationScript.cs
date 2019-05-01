@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class NavigationScript : MonoBehaviour {
 
+    private AudioManagerScript audiomanager;
     private Animator navPanelAnimator;
     private bool isOpen = false;
 
@@ -46,7 +47,7 @@ public class NavigationScript : MonoBehaviour {
         exitButn.onClick.AddListener(ClosePanelClicked);
 
         uiScript = uScript;
-
+        audiomanager = uScript.audioManager.GetComponent<AudioManagerScript>();
         engineObjectScript = uiScript.gameManagerScript.ship.GetComponent<ShipScript>().GetEngineReference().GetComponent<Engine>();
     }
 
@@ -61,6 +62,9 @@ public class NavigationScript : MonoBehaviour {
         Debug.Log("toggle 1 called");
         isOpen = toggle;
         navPanelAnimator.SetBool("isOpen", toggle);
+
+        audiomanager.Play("ui-animation");
+
         if (isOpen)
         {
             currentPlanet = TheImmortalScript.instance.TerrainGenerated;
@@ -73,6 +77,10 @@ public class NavigationScript : MonoBehaviour {
         Debug.Log("toggle 2 called");
         isOpen = !isOpen;
         navPanelAnimator.SetBool("isOpen", isOpen);
+
+        audiomanager.Play("ui-animation");
+
+
         if(isOpen)
         {
             currentPlanet = TheImmortalScript.instance.TerrainGenerated;
@@ -82,9 +90,11 @@ public class NavigationScript : MonoBehaviour {
 
     public void ClosePanelClicked(){
         ToggleNavPanel(false);
+        audiomanager.Play("btn-confirm");
     }
 
-    public void GreenPlanetClicked(){
+    public void GreenPlanetClicked() { 
+        audiomanager.Play("btn-quick-ui");
         planetName.text = "Green World";
         planetInfo.text = "A lush green land with plenty of trees and vegetation.\n" +
             "Common resources: normal\n" +
@@ -97,6 +107,7 @@ public class NavigationScript : MonoBehaviour {
     }
 
     public void MoonPlanetClicked(){
+        audiomanager.Play("btn-quick-ui");
         planetName.text = "Moon World";
         planetInfo.text = "A barren lifeless rock.\n" +
             "Common resources: low\n" +
@@ -109,6 +120,7 @@ public class NavigationScript : MonoBehaviour {
     }
 
     public void IcePlanetClicked(){
+        audiomanager.Play("btn-quick-ui");
         planetName.text = "Ice World";
         planetInfo.text = "A harsh icey planet. Bring a jacket\n" +
             "Common resources: normal\n" +
@@ -121,6 +133,7 @@ public class NavigationScript : MonoBehaviour {
     }
 
     public void DesertPlanetClicked(){
+        audiomanager.Play("btn-quick-ui");
         planetName.text = "The Deserts of Sivanium";
         planetInfo.text = "A hot and dry planet.\n" +
             "Common resources: normal\n" +
@@ -184,7 +197,7 @@ public class NavigationScript : MonoBehaviour {
 
     public void SetSailClicked() {
         //play some sound
-
+        audiomanager.Play("btn-confirm");
         //shake the ship?
 
         //take out fuel

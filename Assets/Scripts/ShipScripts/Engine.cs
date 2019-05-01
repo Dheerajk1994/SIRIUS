@@ -18,7 +18,7 @@ public class Engine : Interactable
         base.Interact();
         isInteracting = !isInteracting;
         panelOpen = !panelOpen;
-        EnginePanel.GetComponent<Animator>().SetBool("isOpen", isInteracting);
+        EnginePanel.GetComponent<EngineScript>().ToggleEnginePanel(isInteracting);
         Debug.Log("Fuel: " + currentFuel.ToString() + "/1000");
     }
 
