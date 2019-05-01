@@ -204,12 +204,14 @@ public class Player : CharacterFinal
             case 800:
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().EquipSword();
+                MyAnimator.SetBool("rotatingArm", true);
                 equippedItem = Instantiate(rotatingArmScript.swordPrefab);
                 Debug.Log("Sword equipped");
                 break;
             case 801:
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().EquipKatana();
+                MyAnimator.SetBool("rotatingArm", true);
                 equippedItem = Instantiate(rotatingArmScript.katanaPrefab);
                 Debug.Log("Katana equipped");
                 break;
@@ -217,12 +219,14 @@ public class Player : CharacterFinal
                 //GenerateRotatingArm();
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().equipSpacegun();
+                MyAnimator.SetBool("rotatingArm", true);
                 Debug.Log("Spacegun equipped");
                 break;
             case 901:
                 //GenerateRotatingArm();
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().equipLavagun();
+                MyAnimator.SetBool("rotatingArm", true);
                 Debug.Log("Lavagun equipped");
                 break;
             default:
@@ -230,6 +234,7 @@ public class Player : CharacterFinal
                 obj.AddComponent<SpriteRenderer>().sprite = InventorySpritesScript.instance.GetSprite(2);
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().EquipItem(obj);
+                MyAnimator.SetBool("rotatingArm", true);
                 break;
 
         }   
