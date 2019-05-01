@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class Engine : Interactable
 {
-    private readonly float maxRepairGenerator = 100f, maxRepairCrystals = 100f, maxFuel = 100f;
-    private float currentRepairGenerator, currentRepairCrystals, currentFuel;
+    private readonly int maxFuel = 1000;
+    public int currentFuel { get; set; }
+    public GameObject EnginePanel;
+
+    public void SetEngine(GameObject p)
+    {
+        this.player = p;
+    }
 
     public override void Interact()
     {
         base.Interact();
         isInteracting = !isInteracting;
-        Debug.Log("Generator: " + currentRepairGenerator.ToString() + "%");
-        Debug.Log("Crystals: " + currentRepairCrystals.ToString() + "%");
-        Debug.Log("Fuel: " + currentFuel.ToString() + "%");
+        panelOpen = !panelOpen;
+        EnginePanel.GetComponent<EngineScript>().ToggleEnginePanel(isInteracting);
+        Debug.Log("Fuel: " + currentFuel.ToString() + "/1000");
     }
 
     private void Start()
@@ -25,44 +31,25 @@ public class Engine : Interactable
     {
         if (canInteract && Input.GetKeyDown(KeyCode.E))
             Interact();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.name.Equals("Sam(Clone)"))
-            canInteract = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.name.Equals("Sam(Clone)"))
+        else if (!canInteract && panelOpen)
         {
-            canInteract = false;
-            isInteracting = false;
+            panelOpen = false;
+            EnginePanel.GetComponent<Animator>().SetBool("isOpen", false);
         }
     }
 
-    public void RepairGenerator(float value)
-    {
-        if (currentRepairGenerator + value >= maxRepairGenerator)
-            currentRepairGenerator = maxRepairGenerator;
-        else
-            currentRepairGenerator += value;
-    }
-
-    public void RepairCrystals(float value)
-    {
-        if (currentRepairCrystals + value >= maxRepairCrystals)
-            currentRepairCrystals = maxRepairCrystals;
-        else
-            currentRepairCrystals += value;
-    }
-
-    public void Refuel(float value)
+    public void Refuel(int value)
     {
         currentFuel += value;
         Mathf.Clamp(currentFuel, 0, maxFuel);
     }
 
-
+    public void Travel(int amount)
+    {
+        currentFuel -= amount;
+        if (EnginePanel.gameObject.activeInHierarchy)
+        {
+            EnginePanel.GetComponent<EngineScript>().UpdateFuel();
+        }
+    }
 }

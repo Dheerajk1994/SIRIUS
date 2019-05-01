@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class GameManagerScript : MonoBehaviour
@@ -12,7 +13,7 @@ public class GameManagerScript : MonoBehaviour
     public string greenWorldSavePath = "greenWorld";
     public string moonWorldSavePath = "moonWorld";
 
-    public ushort currentWorld         = (ushort)EnumClass.TerrainType.GREEN;
+    public ushort currentWorld;         
     public string currentWorldSavePath = "greenWorld";
     #endregion
 
@@ -23,6 +24,11 @@ public class GameManagerScript : MonoBehaviour
     public GameObject MainCameraPrefab;
     public GameObject InputManagerPrefab;
     public GameObject InventoryControllerPrefab;
+    public GameObject AIManagerPrefab;
+    public GameObject QuestManagerPrefab;
+    public GameObject ShipPrefab;
+    public GameObject AudioManagerPrefab;
+
     #endregion
 
     #region INSTANTIATED_PREFABS
@@ -32,6 +38,10 @@ public class GameManagerScript : MonoBehaviour
     public GameObject mainCameraObject;
     public GameObject inputManager;
     public GameObject inventoryController;
+    public GameObject aiManager;
+    public GameObject questManager;
+    public GameObject ship;
+    public GameObject audioManager;
     #endregion
 
     #region SCRIPT_REFERENCES
@@ -41,6 +51,10 @@ public class GameManagerScript : MonoBehaviour
     public CameraScript cameraScript;
     public InputManagerScript inputManagerScript;
     public InventoryControllerScript inventoryControllerScript;
+    public QuestManagerScript questManagerScript;   
+    public ShipScript shipScript;
+    public AudioManagerScript audioManagerScript;
+
     #endregion
 
     #region LOCAL_VARIABLES
@@ -60,12 +74,14 @@ public class GameManagerScript : MonoBehaviour
         {
             Destroy(this);
         }
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     //START
     private void Start()
     {
+        currentWorld = (ushort)TheImmortalScript.instance.WorldTypeToGenerate;
+
         //INITIALIZE ALL THE PREFABS AND SCRIPT REFERENCES
         terrainManager            = Instantiate(TerrainManagerPrefab);
         terrainManagerScript      = terrainManager.GetComponent<TerrainManagerScript>();
@@ -85,15 +101,26 @@ public class GameManagerScript : MonoBehaviour
         inventoryController       = Instantiate(InventoryControllerPrefab);
         inventoryControllerScript = inventoryController.GetComponent<InventoryControllerScript>();
 
+        aiManager                 = Instantiate(AIManagerPrefab);
+
+        questManager              = Instantiate(QuestManagerPrefab);
+        questManagerScript        = questManager.GetComponent<QuestManagerScript>();
+
+        audioManager              = Instantiate(AudioManagerPrefab);
+        audioManagerScript        = audioManager.GetComponent<AudioManagerScript>();
+
+        //ship                      = Instantiate(ShipPrefab);
+        //shipScript                = ship.GetComponent<ShipScript>();
+
         ui.      gameObject.SetActive(false);
         player.  gameObject.SetActive(false);
 
         terrainManagerScript          .SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
-        uiScript                      .SetUIPanel(this, inputManagerScript, player);
         playerScript                  .SetPlayerScript(this, uiScript,inputManagerScript);
         inputManagerScript            .SetInputManager(this, uiScript, terrainManagerScript);
         inventoryControllerScript     .SetInventoryController(this, uiScript);
-
+        questManagerScript            .SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>());
+        //audioManagerScript
 
         //SET LOCAL VARIABLES
         readyToGo    = false;
@@ -104,25 +131,34 @@ public class GameManagerScript : MonoBehaviour
 
 
         StartNewGame();
+        uiScript                      .SetUIPanel(this, inputManagerScript, audioManagerScript, player);
     }
 
     private void Update()
     {
-        if (readyToGo)
+        if (readyToGo && currentWorld != (ushort)EnumClass.TerrainType.SHIP)
         {
             if (Vector2.Distance(player.transform.position, playerPos) > 20.0f)
             {
                 //Debug.Log("player transform pos: " + player.transform.position);
                 //Debug.Log("playerpos: " + playerPos);
-                terrainManagerScript.DisplayChunks(player.transform.position);
+                StartCoroutine(terrainManagerScript.DisplayChunks(player.transform.position));
                 playerPos = player.transform.position;
+                //terrainManagerScript.DisplayChunks(player.transform.position);
             }
-            terrainManagerScript.DisplayChunks(player.transform.position);
         }
     }
 
     public void StartNewGame()
     {
+
+        if(currentWorld == (ushort)EnumClass.TerrainType.SHIP)
+        {
+            ship = Instantiate(ShipPrefab);
+            shipScript = ship.GetComponent<ShipScript>();
+            shipScript.SetShip(uiScript);
+        }
+
         GameDataHandler.NewGame(this, terrainManagerScript, currentWorld);
     }
 
@@ -134,6 +170,17 @@ public class GameManagerScript : MonoBehaviour
     public void LoadGame()
     {
         GameDataHandler.LoadGame(currentWorldSavePath, this, terrainManagerScript);
+    }
+
+    public void TeleportToShip()
+    {
+        TheImmortalScript.instance.WorldTypeToGenerate = EnumClass.TerrainType.SHIP;
+        SceneManager.LoadSceneAsync("ShipScene");
+    }
+
+    public void TeleportToTerrain()
+    {
+        SceneManager.LoadSceneAsync("TerrainScene");
     }
 
 

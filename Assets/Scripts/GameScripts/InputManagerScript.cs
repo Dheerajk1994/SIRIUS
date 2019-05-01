@@ -9,6 +9,7 @@ public class InputManagerScript : MonoBehaviour {
     GameManagerScript gameManagerScript;
     UIScript uiScript;
     TerrainManagerScript terrainManagerScript;
+    CraftingPanelScript craftingPanelScript;
 
 
     public PlayerInventoryPanelScript inventoryPanel;
@@ -24,6 +25,7 @@ public class InputManagerScript : MonoBehaviour {
         inventoryPanel = uiScript.PlayerInventoryAndStatsPanel.GetComponent<PlayerInventoryPanelScript>();
         hotbarPanel = uiScript.PlayerHotBarPanel.GetComponent<PlayerHotbarPanelScript>();
         playerScript = gameManagerScript.playerScript;
+        craftingPanelScript = uiScript.PlayerCraftingPanel.GetComponent<CraftingPanelScript>();
     }
     private void Start()
     {
@@ -31,12 +33,11 @@ public class InputManagerScript : MonoBehaviour {
     }
     private void Update()
     {
-        // Player Action    
-        if      (Input.GetKey(KeyCode.Mouse0) && !EventSystem.current.IsPointerOverGameObject())
+        // Player Action
+        if (Input.GetKey(KeyCode.Mouse0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            switch(hotbarPanel.GetEquippedSlot())
+            switch (hotbarPanel.GetEquippedSlot())
             {
-
                 // Block Tiles
                 case 1:
                     PlaceTileFrontLayer(1);
@@ -106,18 +107,25 @@ public class InputManagerScript : MonoBehaviour {
         // End Hotbar Equipping
         //test for adding a pick to hotbar
         else if (Input.GetKeyDown(KeyCode.P))
-           hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(1000, 1);
+            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(1000, 1);
         else if (Input.GetKeyDown(KeyCode.M))
-        { 
-           hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(800, 1);
-        hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(801, 1);
+        {
+            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(800, 1);
+            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(801, 1);
         }
         //test for adding spacegun to hotbar
         else if (Input.GetKeyDown(KeyCode.G))
-           hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(900, 1);
+            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(900, 1);
         //test for adding lavagun to hotbar
         else if (Input.GetKeyDown(KeyCode.L))
             hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(901, 1);
+        else if (Input.GetKeyDown(KeyCode.Q))
+            gameManagerScript.uiScript.QuestPanel.GetComponent<QuestPanelScript>().ToggleQuestPanel();
+        else if (Input.GetKeyDown(KeyCode.C))
+            craftingPanelScript.ToggleCraftingPanel();
+        else if (Input.GetKeyDown(KeyCode.Z))
+            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(21, 10);
+
     }
 
     private void MineFrontLayer()

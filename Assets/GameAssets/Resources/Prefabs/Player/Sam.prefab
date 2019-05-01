@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 114120355095745958}
   - component: {fileID: 114690597959644214}
   m_Layer: 0
-  m_Name: Sam
+  m_Name: Sam 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,7 +200,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1370303781483332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.370436, y: 91.28697, z: 0}
+  m_LocalPosition: {x: -0.624069, y: -0.6553955, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4401663595381830}
@@ -505,7 +505,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3fa3429325e0cfa428af7c4b90b63144, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8c6b452297e7a8f428fb3f481e550990, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

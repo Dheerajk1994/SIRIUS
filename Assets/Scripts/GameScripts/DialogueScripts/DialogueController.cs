@@ -34,7 +34,7 @@ public static class DialogueController {
                 quest += dialogues.questDialogues[i];
                 quest += "\n";
             }
-            uiScript.QuestPanel.GetComponent<QuestPanelScript>().SetQuestPanelText("Starting Out", quest);
+            //uiScript.QuestPanel.GetComponent<QuestPanelScript>().SetQuestPanelText("Starting Out", quest);
         }
         else
         {

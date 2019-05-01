@@ -21,7 +21,7 @@ public class ItemHolder : MonoBehaviour
         inventoryArray = new ushort[2, inventorySize];
     }
 
-    public ushort GetItemAmount(ushort id, ushort amount)
+    public ushort GetItemAmount(ushort id, ushort amount) 
     {
         ushort sum = 0;
         // Iterate through the array of inventory items
@@ -142,7 +142,7 @@ public class ItemHolder : MonoBehaviour
     //add item to a specific index hardcode
     public void SetItemAmountAtIndex(ushort amount, ushort index)
     {
-        Debug.Log("setitemamountatindex called with amount " + amount + " at index " + index);
+        //Debug.Log("setitemamountatindex called with amount " + amount + " at index " + index);
         inventoryArray[ROW_AMOUNT, index] = amount;
         if(amount == 0)
         {

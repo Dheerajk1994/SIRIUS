@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
+    public GameObject player;
     public bool canInteract = false;
     public bool isInteracting = false;
+    public bool panelOpen = false;
     public string interactText = "Press E to Interact";
-    Collider2D interactArea;
 
     public virtual void Interact()
     {
-        Debug.Log("Interacting");
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.E))
-            Interact();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            player = collision.gameObject;
+            canInteract = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            canInteract = false;
+            isInteracting = false;
+        }
     }
 }

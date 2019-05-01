@@ -10,6 +10,7 @@ public class InventorySpritesScript : MonoBehaviour {
 
     private void Awake()
     {
+        instance = this;
         ItemDictionary.GenerateDictionary(this);
         instance = this;
     }

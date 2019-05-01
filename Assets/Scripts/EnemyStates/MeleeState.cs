@@ -42,7 +42,7 @@ public class MeleeState : IEnemyState
 
     private void MeleeAttack()
     {
-        Debug.Log("Performing Melee Attack");
+        //Debug.Log("Performing Melee Attack");
         meleeAttackTimer += Time.deltaTime;
         if (meleeAttackTimer >= meleeAttackCooldown)
         {

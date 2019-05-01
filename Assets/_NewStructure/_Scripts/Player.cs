@@ -15,6 +15,7 @@ public class Player : CharacterFinal
     [SerializeField]private GameObject rotatingArm;
     private Pivot rotatingArmScript;
 
+
     private static Player instance;
     //there should be only one player
     // void Awake(){
@@ -95,6 +96,7 @@ public class Player : CharacterFinal
         base.Update();
         HandleInput();
         //generateRotatingArm();
+
     }
 
     // Update is called once per frame
@@ -116,10 +118,8 @@ public class Player : CharacterFinal
             MyAnimator.SetTrigger("jump");
             //jump = true;
         }
-
     }
 
-    
     private bool IsGrounded()
     {
         if (MyRigidbody.velocity.y <= 0)
@@ -182,9 +182,9 @@ public class Player : CharacterFinal
         MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
 
-    public override IEnumerator TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
-        yield return null;
+        Debug.Log("Player.TakeDamage: not implemented");
     } 
     
     public void HandleEquip()
@@ -204,12 +204,14 @@ public class Player : CharacterFinal
             case 800:
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().EquipSword();
+                MyAnimator.SetBool("rotatingArm", true);
                 equippedItem = Instantiate(rotatingArmScript.swordPrefab);
                 Debug.Log("Sword equipped");
                 break;
             case 801:
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().EquipKatana();
+                MyAnimator.SetBool("rotatingArm", true);
                 equippedItem = Instantiate(rotatingArmScript.katanaPrefab);
                 Debug.Log("Katana equipped");
                 break;
@@ -218,7 +220,6 @@ public class Player : CharacterFinal
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().equipSpacegun();
                 MyAnimator.SetBool("rotatingArm", true);
-                Debug.Log(rotatingArm.GetComponent<Pivot>().spacegun.transform.rotation.eulerAngles.z);
                 Debug.Log("Spacegun equipped");
                 break;
             case 901:

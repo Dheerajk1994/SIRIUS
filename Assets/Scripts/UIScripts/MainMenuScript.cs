@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour {
+
+    //private AudioManagerScript audiomanager;
     public int resolut;
     public GameObject GameManager;
     public Dropdown resDropdown;
@@ -19,9 +21,11 @@ public class MainMenuScript : MonoBehaviour {
     public void SetMainMenuPanel(UIScript uScript)
     {
         uiScript = uScript;
+        //audiomanager = uScript.audioManager.GetComponent<AudioManagerScript>();
+
     }
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         gameSettings = new GameSettings();
         fullScreenToggle.onValueChanged.AddListener(delegate { ONfullScreenToggle();  });
@@ -33,7 +37,7 @@ public class MainMenuScript : MonoBehaviour {
             resDropdown.options.Add(new Dropdown.OptionData(resolution.ToString()));
           }
          
-    } 
+    } */
 
     public void ONfullScreenToggle() {
        gameSettings.fullscreen =   Screen.fullScreen = fullScreenToggle.isOn; 

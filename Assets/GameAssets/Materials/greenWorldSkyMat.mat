@@ -75,10 +75,10 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _BotColor: {r: 0.078987174, g: 0.36857623, b: 0.6698113, a: 1}
+    - _BotColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MidColor: {r: 0.138303, g: 0.007787468, b: 0.3301887, a: 1}
     - _Orange: {r: 0, g: 0, b: 0, a: 0}
     - _Player: {r: 0, g: 0, b: 0, a: 0}
-    - _TopColor: {r: 0.33045566, g: 0.8428503, b: 0.8867924, a: 1}
+    - _TopColor: {r: 0.23137254, g: 0.99304605, b: 1, a: 1}

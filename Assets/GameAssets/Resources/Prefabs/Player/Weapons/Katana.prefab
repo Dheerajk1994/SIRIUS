@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4464816337531120}
   - component: {fileID: 212912522226009238}
   - component: {fileID: 70844636192502772}
+  - component: {fileID: 114839671898493536}
   m_Layer: 0
   m_Name: katana1
   m_TagString: Untagged
@@ -51,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1044170862390426}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.23, y: 0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4548125800556294}
@@ -64,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1939648194908410}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 10, z: 0}
+  m_LocalPosition: {x: 186.95227, y: 504.65958, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4464816337531120}
@@ -102,7 +103,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   damage: 8
-  attackSpeed: 3.2
+  attackSpeed: 9.2
+--- !u!114 &114839671898493536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1044170862390426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c76e7c7f5324e5438954c2979e7fe34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212912522226009238
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -135,8 +147,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 537305065
-  m_SortingLayer: 2
+  m_SortingLayerID: -900194317
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d00ab297025c7b24fb47924e42ad9356, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
