@@ -29,6 +29,7 @@ public class CameraScript : MonoBehaviour
     public Material moonWorldSkyMat;
     public Material desertWorldSkyMat;
     public Material snowWorldSkyMat;
+    public Material shipWorldSkyMat;
 
     public Sprite clouds;
     public Sprite asteroids;
@@ -114,6 +115,14 @@ public class CameraScript : MonoBehaviour
             cloud1_m.gameObject.GetComponent<SpriteRenderer>().sprite = clouds;
             planet.GetComponent<SpriteRenderer>().sprite = snowPlanetSprite;
             terrain.gameObject.GetComponent<SpriteRenderer>().sprite = snowWorldTerrainBG;
+        }
+        else if (worldType == (ushort)EnumClass.TerrainType.SHIP)
+        {
+            sky.gameObject.GetComponent<SpriteRenderer>().material = shipWorldSkyMat;
+            cloud1_l.gameObject.GetComponent<SpriteRenderer>().sprite = null;
+            cloud1_m.gameObject.GetComponent<SpriteRenderer>().sprite = null;
+            planet.GetComponent<SpriteRenderer>().sprite = null;
+            terrain.gameObject.GetComponent<SpriteRenderer>().sprite = null;
         }
 
     }

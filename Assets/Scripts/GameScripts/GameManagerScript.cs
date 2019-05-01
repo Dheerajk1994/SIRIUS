@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class GameManagerScript : MonoBehaviour
@@ -73,12 +74,14 @@ public class GameManagerScript : MonoBehaviour
         {
             Destroy(this);
         }
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     //START
     private void Start()
     {
+        currentWorld = (ushort)TheImmortalScript.instance.WorldTypeToGenerate;
+
         //INITIALIZE ALL THE PREFABS AND SCRIPT REFERENCES
         terrainManager            = Instantiate(TerrainManagerPrefab);
         terrainManagerScript      = terrainManager.GetComponent<TerrainManagerScript>();
@@ -139,16 +142,15 @@ public class GameManagerScript : MonoBehaviour
             {
                 //Debug.Log("player transform pos: " + player.transform.position);
                 //Debug.Log("playerpos: " + playerPos);
-                terrainManagerScript.DisplayChunks(player.transform.position);
+                StartCoroutine(terrainManagerScript.DisplayChunks(player.transform.position));
                 playerPos = player.transform.position;
-                terrainManagerScript.DisplayChunks(player.transform.position);
+                //terrainManagerScript.DisplayChunks(player.transform.position);
             }
         }
     }
 
     public void StartNewGame()
     {
-        currentWorld =  (ushort)EnumClass.TerrainType.SHIP;//TEST
 
         if(currentWorld == (ushort)EnumClass.TerrainType.SHIP)
         {
@@ -168,6 +170,17 @@ public class GameManagerScript : MonoBehaviour
     public void LoadGame()
     {
         GameDataHandler.LoadGame(currentWorldSavePath, this, terrainManagerScript);
+    }
+
+    public void TeleportToShip()
+    {
+        TheImmortalScript.instance.WorldTypeToGenerate = EnumClass.TerrainType.SHIP;
+        SceneManager.LoadSceneAsync("ShipScene");
+    }
+
+    public void TeleportToTerrain()
+    {
+        SceneManager.LoadSceneAsync("TerrainScene");
     }
 
 

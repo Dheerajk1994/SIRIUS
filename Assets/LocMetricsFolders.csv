@@ -1,0 +1,36 @@
+Folder,Files,LOC,SLOC-P,SLOC-L,MVG,BLOC,C&SLOC,CLOC,CWORD,HCLOC,HCWORD
+Total,148,14700,10335,6332,880,2760,145,1605,8837,0,2
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets,148,14700,10335,6332,880,2760,145,1605,8837,0,2
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets,34,5051,3128,2101,243,1167,43,756,4888,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro,34,5051,3128,2101,243,1167,43,756,4888,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras,33,4735,2815,1935,243,1164,43,756,4888,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts,33,4735,2815,1935,243,1164,43,756,4888,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Sprites,1,316,313,166,0,3,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts,103,8466,6292,3999,609,1444,102,730,3344,0,2
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\AIScripts,5,675,464,299,46,114,3,97,419,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\CameraScripts,1,135,110,86,4,25,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\EnemyStates,5,246,177,103,11,51,1,18,117,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\GameScripts,8,620,483,281,35,106,16,31,212,0,2
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\GameScripts\DialogueScripts,1,61,47,31,3,11,0,3,12,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\GameScripts\QuestScripts,1,10,5,4,0,5,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InputManager,3,236,196,115,27,34,0,6,27,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2,13,962,593,368,81,154,8,215,832,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Items,9,231,171,104,12,51,0,9,43,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Items\Weapons,4,120,89,50,8,25,0,6,32,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\LIQUIDS_TEMP_FOLDER,5,223,194,113,20,28,11,1,48,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts,13,1100,761,460,77,201,18,138,731,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\DroppedTiles,1,51,42,27,4,8,0,1,4,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Quests,3,357,309,179,47,43,2,5,38,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Serialization,2,220,161,97,11,48,2,11,48,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShaderScripts,1,32,23,17,0,8,1,1,12,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts,14,732,589,375,30,129,1,14,32,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\ShipUI,4,375,299,199,15,64,1,12,28,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\StaticObjScripts,1,10,6,5,0,4,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\TerrainScripts,4,1432,1116,787,151,218,30,98,513,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts,15,1070,791,521,43,200,9,79,246,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\InventoryAndStatsPanel,5,234,147,100,8,54,4,33,90,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\tempFolder,4,372,281,184,14,65,1,26,74,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\StreamingAssets,5,669,619,53,0,50,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\_NewStructure,6,514,296,179,28,99,0,119,605,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\_NewStructure\_AnimationBehaviours,4,149,58,38,3,32,0,59,455,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\_NewStructure\_Scripts,2,365,238,141,25,67,0,60,150,0,0

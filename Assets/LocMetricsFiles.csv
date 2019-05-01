@@ -1,0 +1,149 @@
+File,LOC,SLOC-P,SLOC-L,MVG,BLOC,C&SLOC,CLOC,CWORD,HCLOC,HCWORD
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\Benchmark01.cs,129,63,42,6,37,3,29,122,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\Benchmark01_UGUI.cs,136,59,38,6,40,3,37,165,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\Benchmark02.cs,95,62,48,2,27,0,6,17,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\Benchmark03.cs,80,42,28,2,21,2,17,80,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\Benchmark04.cs,86,41,29,3,19,0,26,111,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\CameraController.cs,291,198,125,29,68,0,25,178,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\ChatController.cs,45,25,18,0,18,0,2,14,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\EnvMapAnimator.cs,37,23,16,1,10,0,4,33,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\ObjectSpin.cs,69,50,36,1,15,2,4,33,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\ShaderPropAnimator.cs,52,33,21,1,14,0,5,30,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\SimpleScript.cs,59,24,16,0,20,0,15,80,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\SkewTextExample.cs,159,95,76,6,46,6,18,157,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TeleType.cs,83,40,28,2,28,2,15,83,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TextConsoleSimulator.cs,121,79,48,6,29,8,13,125,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TextMeshProFloatingText.cs,214,125,95,7,57,4,32,176,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TextMeshSpawner.cs,80,46,32,2,21,2,13,64,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TMPro_InstructionOverlay.cs,85,55,41,6,24,0,6,18,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TMP_DigitValidator.cs,27,18,9,3,4,0,5,37,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TMP_ExampleScript_01.cs,65,37,26,2,19,0,9,101,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TMP_FrameRateCounter.cs,133,92,68,9,31,0,10,54,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TMP_PhoneNumberValidator.cs,106,93,54,32,6,0,7,54,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TMP_TextEventCheck.cs,63,50,28,2,13,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TMP_TextEventHandler.cs,247,163,86,15,54,0,30,190,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TMP_TextInfoDebugTool.cs,503,293,206,21,127,0,83,433,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TMP_TextSelector_A.cs,157,101,65,10,40,3,16,144,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TMP_TextSelector_B.cs,548,250,183,16,107,3,191,979,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\TMP_UiFrameRateCounter.cs,125,96,72,9,28,0,1,6,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\VertexColorCycler.cs,82,47,31,3,23,0,12,155,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\VertexJitter.cs,175,105,73,8,44,0,26,286,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\VertexShakeA.cs,161,99,66,10,39,0,23,229,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\VertexShakeB.cs,185,112,79,10,44,0,29,293,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\VertexZoom.cs,192,112,84,7,48,0,32,300,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Examples & Extras\Scripts\WarpTextExample.cs,145,87,68,6,43,5,15,141,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\GameAssets\TextMesh Pro\Sprites\EmojiOne.json,316,313,166,0,3,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Pivot.cs,185,148,89,14,30,0,7,26,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\AIScripts\AIPathManagerScript.cs,113,86,57,5,22,0,5,40,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\AIScripts\AStar.cs,303,217,137,27,47,3,39,210,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\AIScripts\ExplorerScript.cs,85,18,16,0,14,0,53,169,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\AIScripts\Heap.cs,122,106,63,12,16,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\AIScripts\PathQueue.cs,52,37,26,2,15,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\CameraScripts\CameraScript.cs,135,110,86,4,25,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\EnemyStates\IdleState.cs,52,37,21,2,11,0,4,39,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\EnemyStates\IEnemyState.cs,13,10,8,0,3,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\EnemyStates\MeleeState.cs,59,46,26,3,11,0,2,9,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\EnemyStates\PatrolState.cs,55,36,21,2,12,0,7,44,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\EnemyStates\RangedState.cs,67,48,27,4,14,1,5,25,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\GameScripts\EnumClass.cs,79,62,7,0,11,1,6,10,0,2
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\GameScripts\EvenSystemNoDestroyOnLoadScript.cs,12,9,6,0,3,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\GameScripts\GameManagerScript.cs,180,133,95,4,37,1,10,33,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\GameScripts\InputManagerScript.cs,191,158,93,18,24,10,9,63,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\GameScripts\MobSpawnerScript.cs,57,45,24,9,9,4,3,94,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\GameScripts\TheImmortalScript.cs,30,24,21,1,6,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\GameScripts\DialogueScripts\DialogueController.cs,61,47,31,3,11,0,3,12,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\GameScripts\QuestScripts\QuestManager.cs,10,5,4,0,5,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InputManager\ExampleInputScript.cs,82,72,38,16,6,0,4,17,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InputManager\InputManager.cs,79,67,43,6,12,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InputManager\MenuScript.cs,75,57,34,5,16,0,2,10,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2\EngineSlot.cs,20,14,10,0,6,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2\GenericInvoHandlerScript.cs,111,80,48,8,19,4,12,110,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2\Hotbar.cs,9,5,4,0,4,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2\HotbarHandlerScript.cs,13,5,4,0,3,0,5,9,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2\Inventory.cs,8,5,4,0,3,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2\InventoryControllerScript.cs,122,95,62,16,25,0,2,8,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2\InventoryHandlerScript.cs,197,22,15,0,12,0,163,422,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2\InventoryItem.cs,68,48,33,0,16,0,4,8,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2\InventorySlot.cs,34,20,14,0,9,0,5,42,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2\InventorySpritesScript.cs,26,19,14,3,6,0,1,8,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2\ItemDictionary.cs,146,115,67,17,27,0,4,26,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2\ItemHolder.cs,203,162,92,37,22,4,19,199,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\InventoryScripts_v2\SpriteEnum.cs,5,3,1,0,2,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Items\Bullet.cs,37,26,17,2,8,0,3,11,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Items\ItemClass.cs,10,7,5,0,3,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Items\MeleeWeapon.cs,25,21,12,1,4,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Items\RangeWeapon.cs,25,19,13,1,6,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Items\WeaponClass.cs,14,9,7,0,5,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Items\Weapons\Katana.cs,17,9,6,0,6,0,2,10,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Items\Weapons\Lavagun.cs,43,36,19,4,6,0,1,6,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Items\Weapons\Spacegun.cs,43,35,19,4,7,0,1,6,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Items\Weapons\Sword.cs,17,9,6,0,6,0,2,10,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\LIQUIDS_TEMP_FOLDER\LiquidManagerScript.cs,62,53,32,6,9,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\LIQUIDS_TEMP_FOLDER\LiquidScript.cs,27,20,15,0,6,0,1,3,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\LIQUIDS_TEMP_FOLDER\LooseDirtScript.cs,66,60,30,9,6,3,0,16,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\LIQUIDS_TEMP_FOLDER\MagmaScript.cs,13,9,6,0,4,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\LIQUIDS_TEMP_FOLDER\WaterScript.cs,55,52,30,5,3,8,0,29,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\Character.cs,64,43,28,1,17,0,4,14,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\CharacterController2D.cs,158,111,65,17,24,12,23,299,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\DoggoMovement.cs,124,86,55,6,22,0,16,62,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\Enemy.cs,311,216,126,30,44,5,51,184,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\EnemyLOS.cs,27,21,11,2,5,0,1,7,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\EnemySpawnerScript.cs,46,29,21,1,6,1,11,41,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\Humanoid.cs,31,18,10,0,10,0,3,12,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\IgnoreCollision.cs,16,11,7,0,3,0,2,18,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\Monsters.cs,24,13,8,0,9,0,2,10,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\NonStaticClassScript.cs,65,46,28,4,11,0,8,33,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\NPC.cs,21,14,8,0,7,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\PlayerScript.cs,162,111,66,12,35,0,16,47,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\NonStaticObjScripts\DroppedTiles\TilePickUpScript.cs,51,42,27,4,8,0,1,4,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Quests\Quest.cs,162,138,88,21,23,1,1,12,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Quests\QuestGenerator.cs,48,41,28,3,6,0,1,3,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Quests\QuestManagerScript.cs,147,130,63,23,14,1,3,23,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Serialization\GameDataHandler.cs,121,88,53,8,23,0,10,45,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\Serialization\SaveManager.cs,99,73,44,3,25,2,1,3,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShaderScripts\NightBehavior.cs,32,23,17,0,8,1,1,12,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\Bed.cs,46,37,21,3,9,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\Chest.cs,39,32,19,1,7,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\Door.cs,27,22,13,1,5,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\Engine.cs,56,47,28,2,9,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\HealState.cs,24,20,13,1,4,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\Interactable.cs,35,30,18,2,5,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\Navigation.cs,36,28,17,1,6,0,2,4,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\ShipScript.cs,34,26,19,2,8,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\Teleporter.cs,34,28,17,1,6,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\WTAF.cs,26,20,11,1,6,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\ShipUI\ChestScript.cs,37,29,19,0,7,0,1,1,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\ShipUI\EngineScript.cs,88,69,49,3,16,1,3,7,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\ShipUI\ExitShipScript.cs,48,37,25,0,10,0,1,1,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\ShipScripts\ShipUI\NavigationScript.cs,202,164,106,12,31,0,7,19,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\StaticObjScripts\TileScript.cs,10,6,5,0,4,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\TerrainScripts\GenerateTerrainScript.cs,498,410,264,64,75,12,13,79,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\TerrainScripts\TerrainManagerScript.cs,775,579,434,76,113,18,83,428,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\TerrainScripts\TerrainVariableReader.cs,97,78,59,5,19,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\TerrainScripts\TilePoolScript.cs,62,49,30,6,11,0,2,6,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\CraftingPanelScript.cs,288,248,162,19,37,0,3,4,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\GameSettings.cs,7,5,3,0,2,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\MainMenuSceneScript.cs,55,42,29,1,13,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\MainMenuScript.cs,94,56,36,1,23,4,15,68,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\pauseMenu.cs,3,3,1,0,0,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\ToolBarPanelScript.cs,17,9,6,0,6,0,2,10,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\InventoryAndStatsPanel\GenericInvoPanelScript.cs,25,15,10,0,8,0,2,7,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\InventoryAndStatsPanel\InventoryAndStatsPanelScript.cs,42,31,21,0,11,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\InventoryAndStatsPanel\PlayerHotbarPanelScript.cs,106,60,41,6,18,3,28,65,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\InventoryAndStatsPanel\PlayerInventoryPanelScript.cs,44,32,22,2,11,1,1,8,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\InventoryAndStatsPanel\PlayerStatsPanelScript.cs,17,9,6,0,6,0,2,10,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\tempFolder\DialoguePanelScript.cs,48,37,24,0,11,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\tempFolder\PlayerAttributesPanelScript.cs,57,28,19,0,9,0,20,45,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\tempFolder\QuestPanelScript.cs,191,164,99,14,24,1,3,21,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\Scripts\UIScripts\tempFolder\UIScript.cs,76,52,42,0,21,0,3,8,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\StreamingAssets\itemDescription.json,385,384,39,0,1,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\StreamingAssets\itemRecipe.json,17,16,3,0,1,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\StreamingAssets\quests.json,44,40,5,0,4,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\StreamingAssets\terrainVariables.json,198,156,5,0,42,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\StreamingAssets\tutorialDialogues.json,25,23,1,0,2,0,0,0,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\_NewStructure\_AnimationBehaviours\AttackBehaviour.cs,45,22,14,2,9,0,14,111,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\_NewStructure\_AnimationBehaviours\DamageBehaviour.cs,32,11,8,0,7,0,14,111,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\_NewStructure\_AnimationBehaviours\JumpBehaviour.cs,35,13,8,0,8,0,14,111,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\_NewStructure\_AnimationBehaviours\LandBehaviour.cs,37,12,8,1,8,0,17,122,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\_NewStructure\_Scripts\CharacterFinal.cs,95,61,36,2,25,0,9,35,0,0
+C:\Users\Dheeraj\Documents\UnityProjects\SIRIUS\Assets\_NewStructure\_Scripts\Player.cs,270,177,105,23,42,0,51,115,0,0

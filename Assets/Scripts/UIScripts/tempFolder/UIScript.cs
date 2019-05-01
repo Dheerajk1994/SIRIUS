@@ -18,6 +18,8 @@ public class UIScript : MonoBehaviour
     public GameObject EnginePanel;
     public GameObject NavPanel;
     public GameObject ChestPanel;
+    public Button teleportButton;
+    public Transform loadingScreen;
 
     public GameManagerScript gameManagerScript;
     public InputManagerScript inputManagerScript;
@@ -35,6 +37,8 @@ public class UIScript : MonoBehaviour
         player = p;
 
         //PlayerCraftingPanel.SetActive(false);
+
+        teleportButton.onClick.AddListener(TeleportButtonClicked);
         SetUIReferences();
     }
 
@@ -66,6 +70,11 @@ public class UIScript : MonoBehaviour
 
         //ChestPanel.GetComponent<ChestScript>().SetChestPanel(this);
 
+    }
+
+    public void TeleportButtonClicked()
+    {
+        gameManagerScript.TeleportToShip();
     }
 
 

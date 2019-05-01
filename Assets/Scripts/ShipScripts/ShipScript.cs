@@ -26,4 +26,9 @@ public class ShipScript : MonoBehaviour {
         return Engine;
     }
 
+    public GameObject GetNavigationReference()
+    {
+        return Navigation;
+    }
+
 }

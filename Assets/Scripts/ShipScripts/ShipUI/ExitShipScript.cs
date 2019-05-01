@@ -19,7 +19,9 @@ public class ExitShipScript : MonoBehaviour
         exitButn.onClick.AddListener(ClosePanelClicked);
         noButn.onClick.AddListener(ClosePanelClicked);
         uiScript = uScript;
+        
         audiomanager = uScript.audioManager.GetComponent<AudioManagerScript>();
+        yesButn.onClick.AddListener(ExitShipPressed);
     }
 
     private void Start()
@@ -52,8 +54,9 @@ public class ExitShipScript : MonoBehaviour
     public void YesBtnClicked()
     {
         // handle scene change
-
         audiomanager.Play("btn-confirm");
+        TheImmortalScript.instance.WorldTypeToGenerate = uiScript.NavPanel.GetComponent<NavigationScript>().currentPlanet;
+        uiScript.gameManagerScript.TeleportToTerrain();
     }
 
 }

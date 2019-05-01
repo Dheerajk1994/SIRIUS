@@ -62,9 +62,14 @@ public class NavigationScript : MonoBehaviour {
         Debug.Log("toggle 1 called");
         isOpen = toggle;
         navPanelAnimator.SetBool("isOpen", toggle);
+
         audiomanager.Play("ui-animation");
-        if(isOpen)
-            GreenPlanetClicked();
+
+        if (isOpen)
+        {
+            currentPlanet = TheImmortalScript.instance.TerrainGenerated;
+            UpdateMarkerPosition();
+        }
     }
 
     public void ToggleNavPanel()
@@ -72,9 +77,15 @@ public class NavigationScript : MonoBehaviour {
         Debug.Log("toggle 2 called");
         isOpen = !isOpen;
         navPanelAnimator.SetBool("isOpen", isOpen);
+
         audiomanager.Play("ui-animation");
-        if (isOpen)
-            GreenPlanetClicked();
+
+
+        if(isOpen)
+        {
+            currentPlanet = TheImmortalScript.instance.TerrainGenerated;
+            UpdateMarkerPosition();
+        }
     }
 
     public void ClosePanelClicked(){
@@ -160,15 +171,19 @@ public class NavigationScript : MonoBehaviour {
         {
             case EnumClass.TerrainType.GREEN:
                 currentPlanetIcon.transform.position = greenIconPos.position;
+                GreenPlanetClicked();
                 break;
             case EnumClass.TerrainType.MOON:
                 currentPlanetIcon.transform.position = moonIconPos.position;
+                MoonPlanetClicked();
                 break;
             case EnumClass.TerrainType.DESERT:
                 currentPlanetIcon.transform.position = desertIconPos.position;
+                DesertPlanetClicked();
                 break;
             case EnumClass.TerrainType.SNOW:
                 currentPlanetIcon.transform.position = snowIconPos.position;
+                IcePlanetClicked();
                 break;
             case EnumClass.TerrainType.ASTEROID:
                 //currentPlanetIcon.transform.position = greenIconPos;
@@ -190,6 +205,7 @@ public class NavigationScript : MonoBehaviour {
 
         //hange current planet
         currentPlanet = planetToMoveTo;
+        TheImmortalScript.instance.TerrainGenerated = currentPlanet;
         UpdateMarkerPosition();
         UpdateSetSailButton();
 

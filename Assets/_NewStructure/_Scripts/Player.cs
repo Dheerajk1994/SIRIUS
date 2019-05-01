@@ -182,9 +182,9 @@ public class Player : CharacterFinal
         MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
 
-    public override IEnumerator TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
-        yield return null;
+        Debug.Log("Player.TakeDamage: not implemented");
     } 
     
     public void HandleEquip()

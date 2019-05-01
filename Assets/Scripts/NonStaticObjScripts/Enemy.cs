@@ -262,7 +262,7 @@ public class Enemy : CharacterFinal
 
 
 
-    public override IEnumerator TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         currentHealth -= damage;
 
@@ -275,7 +275,7 @@ public class Enemy : CharacterFinal
         {
             MyAnimator.SetTrigger("die");
             //Destroy(this, 2f);
-            yield return null;  
+              
         }
     }
 

@@ -11,10 +11,15 @@ public class MainMenuSceneScript : MonoBehaviour {
     public Button loadGameButn;
     public Button exitButn;
 
-    public string MainGameString = "MainGame";
+    public Transform loadingScreen;
+
+    public string MainGameString = "ShipScene";
+
+    int waitCounter = 0;
 
     private void Start()
     {
+        loadingScreen.gameObject.SetActive(false);
         newGameButn.onClick.AddListener(NewGame);
         loadGameButn.onClick.AddListener(LoadGame);
         exitButn.onClick.AddListener(ExitGame);
@@ -22,12 +27,15 @@ public class MainMenuSceneScript : MonoBehaviour {
 
     private void NewGame()
     {
-        GameObject.Find("GameManager").GetComponent<GameManagerScript>().StartNewGame();
+        loadingScreen.gameObject.SetActive(true);
+        TheImmortalScript.instance.WorldTypeToGenerate = EnumClass.TerrainType.SHIP;
+        TheImmortalScript.instance.TerrainGenerated = EnumClass.TerrainType.GREEN;
+        TheImmortalScript.instance.IsNewGame = true;
+        StartCoroutine(LoadAsynchronously("ShipScene"));
     }
 
     private void LoadGame()
     {
-        GameObject.Find("GameManager").GetComponent<GameManagerScript>().LoadGame();
     }
 
     private void ExitGame()
@@ -35,5 +43,12 @@ public class MainMenuSceneScript : MonoBehaviour {
 
     }
 
-
+    IEnumerator LoadAsynchronously(string loadScene)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(loadScene);
+        while (!operation.isDone)
+        {
+            yield return null;
+        }
+    }
 }
