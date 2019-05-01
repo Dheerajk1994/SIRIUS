@@ -20,14 +20,17 @@ public class UIScript : MonoBehaviour
 
     public GameManagerScript gameManagerScript;
     public InputManagerScript inputManagerScript;
+    public GameObject audioManager;
     public GameObject player;
     #endregion
 
     //should be called by the gamemanager
-    public void SetUIPanel(GameManagerScript gManagerS, InputManagerScript iManagerS, GameObject p)
+    public void SetUIPanel(GameManagerScript gManagerS, InputManagerScript iManagerS, GameObject aManager, GameObject p)
     {
         gameManagerScript = gManagerS;
         inputManagerScript = iManagerS;
+        audioManager = aManager;
+
         player = p;
 
         //PlayerCraftingPanel.SetActive(false);

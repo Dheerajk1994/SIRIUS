@@ -5373,6 +5373,7 @@ MonoBehaviour:
   ChestPanel: {fileID: 0}
   gameManagerScript: {fileID: 0}
   inputManagerScript: {fileID: 0}
+  audioManager: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &114513882534397274
 MonoBehaviour:
@@ -9676,7 +9677,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -5, y: 0}
+  m_AnchoredPosition: {x: 362, y: 3}
   m_SizeDelta: {x: 270, y: 300}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!224 &224480054742210956

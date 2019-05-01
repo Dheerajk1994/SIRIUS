@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ExitShipScript : MonoBehaviour
 {
+    public AudioManagerScript audiomanager;
     private Animator exitShipPanelAnimator;
     public Button exitButn;
     public Button yesButn;
@@ -15,7 +16,10 @@ public class ExitShipScript : MonoBehaviour
 
     public void SetExitShipPanel(UIScript uScript)
     {
+        exitButn.onClick.AddListener(ClosePanelClicked);
+        noButn.onClick.AddListener(ClosePanelClicked);
         uiScript = uScript;
+        audiomanager = uScript.audioManager.GetComponent<AudioManagerScript>();
     }
 
     private void Start()
@@ -28,13 +32,21 @@ public class ExitShipScript : MonoBehaviour
     {
         isOpen = toggle;
         exitShipPanelAnimator.SetBool("isOpen", toggle);
+        audiomanager.Play("ui-animation");
     }
 
     public void ToggleExitShipPanel()
     {
         isOpen = !isOpen;
         exitShipPanelAnimator.SetBool("isOpen", isOpen);
+        audiomanager.Play("ui-animation");
 
+    }
+
+    public void ClosePanelClicked()
+    {
+        ToggleExitShipPanel(false);
+        audiomanager.Play("btn-confirm");
     }
 
 }

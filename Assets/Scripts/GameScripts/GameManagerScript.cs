@@ -26,6 +26,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject AIManagerPrefab;
     public GameObject QuestManagerPrefab;
     public GameObject ShipPrefab;
+    public GameObject AudioManagerPrefab;
 
     #endregion
 
@@ -39,6 +40,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject aiManager;
     public GameObject questManager;
     public GameObject ship;
+    public GameObject audioManager;
     #endregion
 
     #region SCRIPT_REFERENCES
@@ -50,6 +52,8 @@ public class GameManagerScript : MonoBehaviour
     public InventoryControllerScript inventoryControllerScript;
     public QuestManagerScript questManagerScript;   
     public ShipScript shipScript;
+    public AudioManagerScript audioManagerScript;
+
     #endregion
 
     #region LOCAL_VARIABLES
@@ -98,6 +102,10 @@ public class GameManagerScript : MonoBehaviour
 
         questManager              = Instantiate(QuestManagerPrefab);
         questManagerScript        = questManager.GetComponent<QuestManagerScript>();
+
+        audioManager              = Instantiate(AudioManagerPrefab);
+        audioManagerScript        = audioManager.GetComponent<AudioManagerScript>();
+
         //ship                      = Instantiate(ShipPrefab);
         //shipScript                = ship.GetComponent<ShipScript>();
 
@@ -119,7 +127,7 @@ public class GameManagerScript : MonoBehaviour
 
 
         StartNewGame();
-        uiScript                      .SetUIPanel(this, inputManagerScript, player);
+        uiScript                      .SetUIPanel(this, inputManagerScript, audioManager, player);
     }
 
     private void Update()

@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1166885939089366}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.4, y: 76.2, z: 0}
+  m_LocalPosition: {x: -21.650225, y: 15.0695715, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -72,6 +72,7 @@ MonoBehaviour:
   QuestManagerPrefab: {fileID: 1232580355102106, guid: d3832af4cbdd8774eaa4be3b4192b58f,
     type: 2}
   ShipPrefab: {fileID: 1143345085434036, guid: d91b34b446d065b4eaf127ad4f25307c, type: 2}
+  AudioManagerPrefab: {fileID: 0}
   terrainManager: {fileID: 0}
   ui: {fileID: 0}
   player: {fileID: 0}
@@ -81,6 +82,7 @@ MonoBehaviour:
   aiManager: {fileID: 0}
   questManager: {fileID: 0}
   ship: {fileID: 0}
+  audioManager: {fileID: 0}
   terrainManagerScript: {fileID: 0}
   uiScript: {fileID: 0}
   playerScript: {fileID: 0}
