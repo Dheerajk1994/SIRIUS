@@ -20,6 +20,7 @@ public class Pivot : MonoBehaviour
     public GameObject lavagunPrefab;
     private GameObject lavagun;
 
+    public float rotationZ;
     [SerializeField] private Transform equipmentPosition;
 
     private bool isAttacking = false;
@@ -172,9 +173,9 @@ public class Pivot : MonoBehaviour
             spacegun = Instantiate(spacegunPrefab, new Vector3(), Quaternion.identity) as GameObject;
             spacegun.transform.parent = equipmentPosition.transform;
             spacegun.transform.position = equipmentPosition.position;
-            //spacegun.transform.localPosition = new Vector3(0.359f,-0.421f);
-            //spacegun.transform.rotation = Quaternion.Euler(.48f, -180, -268);
-        }
+            spacegun.transform.localRotation = Quaternion.Euler(0f, 0f, -60f);
+        }  
+
     }
     public void equipLavagun()
     {
@@ -184,8 +185,8 @@ public class Pivot : MonoBehaviour
             lavagun = Instantiate(lavagunPrefab, new Vector3(), Quaternion.identity) as GameObject;
             lavagun.transform.parent = equipmentPosition.transform;
             lavagun.transform.position = equipmentPosition.position;
-            //lavagun.transform.localPosition = new Vector3(0.312f, -0.536f);
-            //lavagun.transform.rotation = Quaternion.Euler(0, 0, -86);
+            lavagun.transform.localRotation = Quaternion.Euler(0f, 0f, -60f);
+
         }
     }
 
