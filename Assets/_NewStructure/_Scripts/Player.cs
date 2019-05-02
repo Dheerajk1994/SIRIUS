@@ -27,7 +27,7 @@ public class Player : CharacterFinal
     //     }
     // }
 
-    public void SetPlayerScript(GameManagerScript gmScript, UIScript uScript, InputManagerScript inputScript)
+    public void SetPlayerScript(GameManagerScript gmScript, UIScript uScript, InputManagerScript inputScript, AudioManagerScript aManager)
     {
         gameManagerScript = gmScript;
         uiScript = uScript;

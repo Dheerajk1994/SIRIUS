@@ -116,7 +116,7 @@ public class GameManagerScript : MonoBehaviour
         player.  gameObject.SetActive(false);
 
         terrainManagerScript          .SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
-        playerScript                  .SetPlayerScript(this, uiScript,inputManagerScript);
+        playerScript                  .SetPlayerScript(this, uiScript,inputManagerScript, audioManagerScript);
         inputManagerScript            .SetInputManager(this, uiScript, terrainManagerScript);
         inventoryControllerScript     .SetInventoryController(this, uiScript);
         questManagerScript            .SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>());
@@ -156,7 +156,7 @@ public class GameManagerScript : MonoBehaviour
         {
             ship = Instantiate(ShipPrefab);
             shipScript = ship.GetComponent<ShipScript>();
-            shipScript.SetShip(uiScript);
+            shipScript.SetShip(uiScript, audioManagerScript);
         }
 
         GameDataHandler.NewGame(this, terrainManagerScript, currentWorld);

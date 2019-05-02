@@ -664,6 +664,7 @@ MonoBehaviour:
   isInteracting: 0
   panelOpen: 0
   interactText: Press E to Interact
+  audiomanager: {fileID: 0}
   destination: {fileID: 1938500411338168}
 --- !u!114 &114162836072644668
 MonoBehaviour:
@@ -697,6 +698,7 @@ MonoBehaviour:
   isInteracting: 0
   panelOpen: 0
   interactText: Press E to Interact
+  audiomanager: {fileID: 0}
   destination: {fileID: 1785246841266026}
 --- !u!114 &114286450490008922
 MonoBehaviour:
@@ -714,6 +716,9 @@ MonoBehaviour:
   Navigation: {fileID: 1385680063904670}
   Bed: {fileID: 1901692159518330}
   Chest: {fileID: 1450299133684860}
+  DownStairs: {fileID: 1785246841266026}
+  UpStairs: {fileID: 1938500411338168}
+  audioManager: {fileID: 0}
   spawnPosition: {fileID: 4395889196759800}
 --- !u!114 &114421684113572526
 MonoBehaviour:
