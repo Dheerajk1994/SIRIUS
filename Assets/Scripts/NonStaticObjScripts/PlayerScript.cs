@@ -13,7 +13,6 @@ public class PlayerScript : Character
     [SerializeField]
     private EdgeCollider2D BarkCollider;
     private PlayerScript playerScript;
-
     // private Rigidbody2D rigidbody;
 
     /*----------- PLAYER STATS -----------*/
@@ -48,7 +47,6 @@ public class PlayerScript : Character
     private void Update()
     {
 
-
     }
 
     //called by game manager
@@ -77,9 +75,10 @@ public class PlayerScript : Character
         // Check states
         if (healState)
         {
-            if (currentHealth < maxHealth)
+            if (currentHealth < maxHealth || currentStamina < maxStamina)
             {
-                ChangeHealth(healthRecoveryRate * 2);
+                ChangeHealth(healthRecoveryRate * 10f);
+                ChangeStamina(staminaRecoveryRate * 10f);
             }
         }
     }

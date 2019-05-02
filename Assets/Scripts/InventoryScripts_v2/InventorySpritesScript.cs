@@ -6,11 +6,15 @@ using UnityEngine;
 public class InventorySpritesScript : MonoBehaviour {
 
     public Sprite[] itemSprites;
+    public static InventorySpritesScript instance;
 
     private void Awake()
     {
+        instance = this;
         ItemDictionary.GenerateDictionary(this);
+        instance = this;
     }
+
 
     public Sprite GetSprite(ushort index){
         if(index < itemSprites.Length){

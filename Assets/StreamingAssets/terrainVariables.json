@@ -1,0 +1,197 @@
+{
+  "Terrains": [
+    {
+      "terrainType": 0,
+      "terrainTypeName": "Green World",
+
+      "heightMultiple": 10,
+      "smoothness": 10,
+
+      "caveChanceVal": 480,
+      "caveSimRep": 2,
+      "caveMinNeighReq": 2,
+      "caveMaxNeighReq": 6,
+      "caveChangeInHeight": 0,
+
+      "stoneChanceVal": 480,
+      "stoneSimRep": 3,
+      "stoneMinNeighReq": 4,
+      "stoneMaxNeighReq": 5,
+      "stoneChangeInHeight": 0,
+
+      "coalChance": 70,
+      "coalNeighChance": 500,
+      "coalChangeInHeight": 0,
+
+      "copperChance": 70,
+      "copperNeighChance": 400,
+      "copperChangeInHeight": 0,
+
+      "ironChance": 60,
+      "ironNeighChance": 400,
+      "ironChangeInHeight": 0,
+
+      "silverChance": 50,
+      "silverNeighChance": 350,
+      "silverChangeInHeight": 0,
+
+      "goldChance": 100,
+      "goldNeighChance": 100,
+      "goldChangeInHeight": 0,
+
+      "diamondChance": 100,
+      "diamondNeighChance": 50,
+      "diamondChangeInHeight": 0,
+
+      "flowerChance": 900,
+      "treeChance": 15,
+      "minTreeHeight": 7,
+      "maxTreeHeight": 12
+    },
+    {
+      "terrainType": 1,
+      "terrainTypeName": "Moon World",
+
+      "heightMultiple": 10,
+      "smoothness": 100,
+
+      "caveChanceVal": 480,
+      "caveSimRep": 2,
+      "caveMinNeighReq": 2,
+      "caveMaxNeighReq": 6,
+      "caveChangeInHeight": 0,
+
+      "stoneChanceVal": 480,
+      "stoneSimRep": 3,
+      "stoneMinNeighReq": 4,
+      "stoneMaxNeighReq": 5,
+      "stoneChangeInHeight": 0,
+
+      "coalChance": 70,
+      "coalNeighChance": 500,
+      "coalChangeInHeight": 0,
+
+      "copperChance": 70,
+      "copperNeighChance": 400,
+      "copperChangeInHeight": 0,
+
+      "ironChance": 60,
+      "ironNeighChance": 400,
+      "ironChangeInHeight": 0,
+
+      "silverChance": 50,
+      "silverNeighChance": 350,
+      "silverChangeInHeight": 0,
+
+      "goldChance": 100,
+      "goldNeighChance": 100,
+      "goldChangeInHeight": 0,
+
+      "diamondChance": 100,
+      "diamondNeighChance": 50,
+      "diamondChangeInHeight": 0,
+
+      "flowerChance": 0,
+      "treeChance": 0,
+      "minTreeHeight": 7,
+      "maxTreeHeight": 12
+    },
+    {
+      "terrainType": 2,
+      "terrainTypeName": "Desert World",
+
+      "heightMultiple": 10,
+      "smoothness": 100,
+
+      "caveChanceVal": 480,
+      "caveSimRep": 2,
+      "caveMinNeighReq": 2,
+      "caveMaxNeighReq": 6,
+      "caveChangeInHeight": 0,
+
+      "stoneChanceVal": 480,
+      "stoneSimRep": 3,
+      "stoneMinNeighReq": 4,
+      "stoneMaxNeighReq": 5,
+      "stoneChangeInHeight": 0,
+
+      "coalChance": 70,
+      "coalNeighChance": 500,
+      "coalChangeInHeight": 0,
+
+      "copperChance": 70,
+      "copperNeighChance": 400,
+      "copperChangeInHeight": 0,
+
+      "ironChance": 60,
+      "ironNeighChance": 400,
+      "ironChangeInHeight": 0,
+
+      "silverChance": 50,
+      "silverNeighChance": 350,
+      "silverChangeInHeight": 0,
+
+      "goldChance": 100,
+      "goldNeighChance": 100,
+      "goldChangeInHeight": 0,
+
+      "diamondChance": 100,
+      "diamondNeighChance": 50,
+      "diamondChangeInHeight": 0,
+
+      "flowerChance": 900,
+      "treeChance": 15,
+      "minTreeHeight": 7,
+      "maxTreeHeight": 12
+    },
+
+    {
+      "terrainType": 3,
+      "terrainTypeName": "Snow World",
+
+      "heightMultiple": 10,
+      "smoothness": 100,
+
+      "caveChanceVal": 480,
+      "caveSimRep": 2,
+      "caveMinNeighReq": 2,
+      "caveMaxNeighReq": 6,
+      "caveChangeInHeight": 0,
+
+      "stoneChanceVal": 480,
+      "stoneSimRep": 3,
+      "stoneMinNeighReq": 4,
+      "stoneMaxNeighReq": 5,
+      "stoneChangeInHeight": 0,
+
+      "coalChance": 70,
+      "coalNeighChance": 500,
+      "coalChangeInHeight": 0,
+
+      "copperChance": 70,
+      "copperNeighChance": 400,
+      "copperChangeInHeight": 0,
+
+      "ironChance": 60,
+      "ironNeighChance": 400,
+      "ironChangeInHeight": 0,
+
+      "silverChance": 50,
+      "silverNeighChance": 350,
+      "silverChangeInHeight": 0,
+
+      "goldChance": 100,
+      "goldNeighChance": 100,
+      "goldChangeInHeight": 0,
+
+      "diamondChance": 100,
+      "diamondNeighChance": 50,
+      "diamondChangeInHeight": 0,
+
+      "flowerChance": 900,
+      "treeChance": 15,
+      "minTreeHeight": 7,
+      "maxTreeHeight": 12
+    }
+  ]
+}

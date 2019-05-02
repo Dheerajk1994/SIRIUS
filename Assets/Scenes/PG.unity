@@ -652,18 +652,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9fca0c5c89921409e6ee0f42fb82a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  greenWorldSavePath: greenWorld
+  moonWorldSavePath: moonWorld
+  currentWorld: 0
+  currentWorldSavePath: greenWorld
+  TerrainManagerPrefab: {fileID: 0}
+  UIPrefab: {fileID: 0}
+  PlayerPrefab: {fileID: 0}
+  MainCameraPrefab: {fileID: 0}
+  InputManagerPrefab: {fileID: 0}
+  InventoryControllerPrefab: {fileID: 0}
+  terrainManager: {fileID: 0}
+  ui: {fileID: 0}
   player: {fileID: 865069210}
-  TerrainManager: {fileID: 680721632}
-  stone: {fileID: 1857664707528882, guid: 166ee35a87d2b0348b0cfb1f8b47cd8c, type: 2}
-  UI: {fileID: 1754475266}
-  playerInvoPanel: {fileID: 2034062956}
-  craftingPanel: {fileID: 1722750632}
-  attributePanel: {fileID: 946410183}
-  healthBar: {fileID: 1203198494}
-  staminaBar: {fileID: 270483662}
-  hungerBar: {fileID: 85322978}
-  mainCamera: {fileID: 2124198272}
-  isInDemoMode: 1
+  mainCameraObject: {fileID: 0}
+  inputManager: {fileID: 0}
+  inventoryController: {fileID: 0}
+  terrainManagerScript: {fileID: 0}
+  uiScript: {fileID: 0}
+  playerScript: {fileID: 0}
+  cameraScript: {fileID: 0}
+  inputManagerScript: {fileID: 0}
+  inventoryControllerScript: {fileID: 0}
+  readyToGo: 0
+  worldPresent: 0
+  playerPos: {x: 0, y: 0, z: 0}
 --- !u!4 &134921671
 Transform:
   m_ObjectHideFlags: 0
@@ -1693,43 +1706,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xDimension: 160
   heightAddition: 80
-  stoneObjects:
-  - {fileID: 1601765989645798, guid: 467e9a3d2970a944e8193e1fa213e9cc, type: 2}
-  - {fileID: 1477336892249200, guid: 04567c25720eac9448298994879ee8d1, type: 2}
-  - {fileID: 1830568133484256, guid: 78eaec09892be0248b80a85e527b6201, type: 2}
-  - {fileID: 1857664707528882, guid: 166ee35a87d2b0348b0cfb1f8b47cd8c, type: 2}
-  dirtObjects:
-  - {fileID: 1778954574826284, guid: d74d01affa2cf2c4393720e158f6d4fc, type: 2}
-  - {fileID: 1961061265238306, guid: 2653318181896214aad51859f55bff11, type: 2}
-  - {fileID: 1388234397514544, guid: 3a9975e031f7803469ef91b0f91809bc, type: 2}
-  - {fileID: 1935891212128696, guid: 1b9b2cf9906d089418e2bdf7b5d91e71, type: 2}
-  grass:
-  - {fileID: 1147847452662578, guid: 81cbd5df97638ba48bfbbaee79c72d02, type: 2}
-  - {fileID: 1289579156322202, guid: 99e943bd32e79b1419600cffdb727a05, type: 2}
-  - {fileID: 1336601157171444, guid: 5300c59c3b8797a43a53721b88cd8291, type: 2}
-  - {fileID: 1086542754000140, guid: 496e17bb383c45b41a60d921fd22c996, type: 2}
-  flowers:
-  - {fileID: 1288983557608434, guid: 8ed66addb64b8e848b08626cf19ae1d6, type: 2}
-  - {fileID: 1460683419082884, guid: 633cb3294d61ab9458226947fbab72fa, type: 2}
-  - {fileID: 1336119762759380, guid: 9380ad20009851046915824a7ce32167, type: 2}
-  - {fileID: 1888704002428804, guid: cee269f056e123049929a7a66df2d5bf, type: 2}
-  tree1Base: {fileID: 1576205482675570, guid: 90f89ced8b0f05f4b821a3ba78956b60, type: 2}
-  tree1Top: {fileID: 1624293563353494, guid: 73d2d3f843e63c542aa0858fee3635cf, type: 2}
-  tree1Core:
-  - {fileID: 1877179025606374, guid: 9162fed3ecd8a404f9154e6eb7794fdb, type: 2}
-  - {fileID: 1929804583520076, guid: d106d517efa3e0a40bd0c602b92ef7ae, type: 2}
-  - {fileID: 1160366329413018, guid: 495031f0fd0050944a58f8a6d21ea7c2, type: 2}
-  - {fileID: 1830711470946446, guid: 64d5a5aa8e5ed6a4c90668713b0e33e6, type: 2}
-  coal: {fileID: 1002037512885184, guid: ed3e464f8ec7af94ab1c0a09c8001c6a, type: 2}
-  copper: {fileID: 1816122398459096, guid: ee1a2de691c5c054d9ae8cdcae81db8b, type: 2}
-  silver: {fileID: 1342432692097644, guid: f6f0328eb5ea6fb4f8af5b0425a8eddc, type: 2}
-  gold: {fileID: 1444934275431416, guid: ddabd6119e182a543a683fbc5e62b7d0, type: 2}
-  diamond: {fileID: 1895697507877374, guid: cef27dcd248af8c4191a4ffc5db32161, type: 2}
+  TileObjectPrefab: {fileID: 0}
+  PickupTilePrefab: {fileID: 0}
+  regularStoneSprites: []
+  moonStoneSprites: []
+  regularDirtSprites: []
+  moonDirtSprites: []
+  regularSandSprites: []
+  moonSandSprite: []
+  regularGrassSprites: []
+  regularFlowerSprites: []
+  regularTreeBaseSprite: []
+  regularTreeTopSprite: []
+  regularTreeCoreSprite: []
+  coalSprites: []
+  copperSprites: []
+  ironSprites: []
+  silverSprites: []
+  goldSprites: []
+  diamondSprites: []
   chunkSize: 40
-  backTileLayerID: 12
-  frontTileLayerID: 13
-  grassLayerID: 15
   player: {fileID: 865069210}
+  gameManager: {fileID: 0}
 --- !u!1001 &713593823
 Prefab:
   m_ObjectHideFlags: 0
@@ -2329,23 +2327,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 783534929}
   m_CullTransparentMesh: 0
---- !u!1 &797621711 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1907069868250898, guid: a9a4147d467f348a19aa3d42ae30a066,
-    type: 2}
-  m_PrefabInternal: {fileID: 1649844885}
---- !u!114 &797621712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 797621711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8ad4731f359f4874a661c4874353eb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  other: {fileID: 1890383446}
 --- !u!1 &837532441
 GameObject:
   m_ObjectHideFlags: 0
@@ -2431,7 +2412,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resolut: 0
   GameManager: {fileID: 134921669}
-  myDropdown: {fileID: 0}
+  resDropdown: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  fullScreenToggle: {fileID: 0}
 --- !u!1 &865069210 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1394551640246998, guid: 1c56dfe61d63a4929b1a3012fe5c4595,
@@ -3301,36 +3284,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1505906421}
   m_CullTransparentMesh: 0
---- !u!1 &1630559799 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1125447937737668, guid: a9a4147d467f348a19aa3d42ae30a066,
-    type: 2}
-  m_PrefabInternal: {fileID: 1649844885}
---- !u!61 &1630559801
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1630559799}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.006743431, y: -0.33716202}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.5}
-    newSize: {x: 1, y: 1.5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.60889626, y: 0.71778107}
-  m_EdgeRadius: 0
 --- !u!1001 &1649844885
 Prefab:
   m_ObjectHideFlags: 0
@@ -3338,75 +3291,50 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114593263005720332, guid: a9a4147d467f348a19aa3d42ae30a066,
-        type: 2}
-      propertyPath: damageSources.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4896729686178512, guid: a9a4147d467f348a19aa3d42ae30a066, type: 2}
+    - target: {fileID: 4737412787420464, guid: d0a64995459e12d48948b15a760f8f60, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 52
+      value: 25.64
       objectReference: {fileID: 0}
-    - target: {fileID: 4896729686178512, guid: a9a4147d467f348a19aa3d42ae30a066, type: 2}
+    - target: {fileID: 4737412787420464, guid: d0a64995459e12d48948b15a760f8f60, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 104.4
+      value: 108.65
       objectReference: {fileID: 0}
-    - target: {fileID: 4896729686178512, guid: a9a4147d467f348a19aa3d42ae30a066, type: 2}
+    - target: {fileID: 4737412787420464, guid: d0a64995459e12d48948b15a760f8f60, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4896729686178512, guid: a9a4147d467f348a19aa3d42ae30a066, type: 2}
+    - target: {fileID: 4737412787420464, guid: d0a64995459e12d48948b15a760f8f60, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4896729686178512, guid: a9a4147d467f348a19aa3d42ae30a066, type: 2}
+    - target: {fileID: 4737412787420464, guid: d0a64995459e12d48948b15a760f8f60, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4896729686178512, guid: a9a4147d467f348a19aa3d42ae30a066, type: 2}
+    - target: {fileID: 4737412787420464, guid: d0a64995459e12d48948b15a760f8f60, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4896729686178512, guid: a9a4147d467f348a19aa3d42ae30a066, type: 2}
+    - target: {fileID: 4737412787420464, guid: d0a64995459e12d48948b15a760f8f60, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4896729686178512, guid: a9a4147d467f348a19aa3d42ae30a066, type: 2}
+    - target: {fileID: 4737412787420464, guid: d0a64995459e12d48948b15a760f8f60, type: 2}
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 95563258164028710, guid: a9a4147d467f348a19aa3d42ae30a066,
-        type: 2}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: e571da4357d4c43189b3aa6d98237397, type: 2}
-    - target: {fileID: 114080580319497974, guid: a9a4147d467f348a19aa3d42ae30a066,
+    - target: {fileID: 114875988750149644, guid: d0a64995459e12d48948b15a760f8f60,
         type: 2}
       propertyPath: other
       value: 
       objectReference: {fileID: 865069211}
-    - target: {fileID: 1125447937737668, guid: a9a4147d467f348a19aa3d42ae30a066, type: 2}
-      propertyPath: m_Icon
+    - target: {fileID: 114898696261022356, guid: d0a64995459e12d48948b15a760f8f60,
+        type: 2}
+      propertyPath: other
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 68306641299651446, guid: a9a4147d467f348a19aa3d42ae30a066,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114593263005720332, guid: a9a4147d467f348a19aa3d42ae30a066,
-        type: 2}
-      propertyPath: damageSources.Array.data[0]
-      value: Bark
-      objectReference: {fileID: 0}
-    - target: {fileID: 114593263005720332, guid: a9a4147d467f348a19aa3d42ae30a066,
-        type: 2}
-      propertyPath: currentHealth
-      value: 30
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 68306641299651446, guid: a9a4147d467f348a19aa3d42ae30a066, type: 2}
-  m_SourcePrefab: {fileID: 100100000, guid: a9a4147d467f348a19aa3d42ae30a066, type: 2}
+      objectReference: {fileID: 1890383446}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d0a64995459e12d48948b15a760f8f60, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1690336355
 GameObject:
@@ -3477,11 +3405,6 @@ RectTransform:
   m_AnchoredPosition: {x: 11.5, y: 0}
   m_SizeDelta: {x: 124, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1722750632 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1806725974249758, guid: ea9732d6fc0431947a6eaf517ce6502e,
-    type: 2}
-  m_PrefabInternal: {fileID: 713593823}
 --- !u!224 &1722750633 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224572778705071982, guid: ea9732d6fc0431947a6eaf517ce6502e,
@@ -3600,14 +3523,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 684e14666438ece4ab27d7560599ff51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 134921669}
-  attributeIcon: {fileID: 1690336356}
-  attributePanelStatusSprite:
-  - {fileID: 21300000, guid: 8973ec37efd075d468cfe8e1e6c398a7, type: 3}
-  - {fileID: 21300000, guid: 5d9dcaf3ee7378e48a4df0664336a015, type: 3}
-  - {fileID: 21300000, guid: e1cc1af1cb1020b40bc3c136c0dd7842, type: 3}
-  - {fileID: 21300000, guid: a3651e327b994784cbe59932f50aeffb, type: 3}
-  - {fileID: 21300000, guid: 24791bb5908a4be4ab50dcef88813e33, type: 3}
+  PlayerInventoryAndStatsPanel: {fileID: 0}
+  PlayerHotBarPanel: {fileID: 0}
+  PlayerAttributePanel: {fileID: 0}
+  PlayerCraftingPanel: {fileID: 0}
+  QuestPanel: {fileID: 0}
+  BottomDialoguePanel: {fileID: 0}
+  MainMenuPanel: {fileID: 0}
+  gameManagerScript: {fileID: 0}
+  inputManagerScript: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &1772961458
 GameObject:
   m_ObjectHideFlags: 0
@@ -5808,11 +5733,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2003560195}
   m_CullTransparentMesh: 0
---- !u!1 &2034062956 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1532270483130082, guid: d7f14c729c7474d4ba2e2fa7ebd9cdfb,
-    type: 2}
-  m_PrefabInternal: {fileID: 1827670253}
 --- !u!224 &2034062957 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224165441335401490, guid: d7f14c729c7474d4ba2e2fa7ebd9cdfb,
@@ -5946,5 +5866,17 @@ MonoBehaviour:
   cameraOffset: {x: 0, y: 0, z: -7}
   cloud1_l: {fileID: 319091798}
   cloud1_m: {fileID: 92625681}
+  sky: {fileID: 0}
+  planet: {fileID: 0}
+  stars: {fileID: 0}
+  terrain: {fileID: 0}
+  greenWorldSprite: {fileID: 0}
+  moonWorldSprite: {fileID: 0}
+  greenWorldSkyMat: {fileID: 0}
+  moonWorldSkyMat: {fileID: 0}
+  clouds: {fileID: 0}
+  asteroids: {fileID: 0}
+  greenWorldTerrainBG: {fileID: 0}
+  moonWorldTerrainBG: {fileID: 0}
   cloud1Speed: 0.001
   cloud2Speed: 0.05

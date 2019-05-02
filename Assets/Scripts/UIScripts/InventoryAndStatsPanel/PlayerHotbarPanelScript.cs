@@ -13,9 +13,12 @@ public class PlayerHotbarPanelScript : GenericInvoPanelScript {
     public  Sprite selectedSlotSprite;
     private Sprite defaultSprite;
 
+    Player playerScript;
 
-    public void SetPlayerHotbarPanel(Hotbar phr)
+
+    public void SetPlayerHotbarPanel(Hotbar phr, Player player)
     {
+        playerScript = player;
         playerHotbarReference = phr;
 
         numberOfSlots = playerHotbarReference.GetInventorySize();
@@ -51,6 +54,7 @@ public class PlayerHotbarPanelScript : GenericInvoPanelScript {
         slots[equippedSlot].GetComponent<Image>().sprite = defaultSprite;//set the old slot back to default sprite
         equippedSlot = slotIndex;
         slots[equippedSlot].GetComponent<Image>().sprite = selectedSlotSprite;//view selected sprite on new slot
+        playerScript.HandleEquip();
     }
 
     //return ID of item in slot
@@ -59,7 +63,13 @@ public class PlayerHotbarPanelScript : GenericInvoPanelScript {
         //Debug.Log("Equipped Slot variable: " + equippedSlot);
         if (slots[equippedSlot].GetComponent<InventorySlot>().isHoldingAnItem)
         {
-            return slots[equippedSlot].transform.GetChild(0).GetComponent<InventoryItem>().completeItem.itemDescription.id;
+
+            if (slots[equippedSlot].transform.childCount > 0)
+            {
+                return slots[equippedSlot].transform.GetChild(0).GetComponent<InventoryItem>().completeItem.itemDescription.id;
+            }
+
+            return 0;
         }
         else
         {

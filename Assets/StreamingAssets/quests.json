@@ -1,0 +1,44 @@
+{
+    "IntroQuests":[
+      {
+        "questID": 1,
+        "type": 0,
+        "prerequisiteID": [],
+        "questName": "Land Ahoy!",
+        "questDescription": "Talk to WTAF for Sam's first quest!",
+        "itemsRequired": [],
+        "itemRewards": []
+
+      },
+
+      {
+        "questID": 2,
+        "type": 1,
+        "prerequisiteID": [ 1 ],
+        "questName": "Heigh Ho! Heigh Ho!",
+        "questDescription": "We need to rebuild the engine, WTAF suggests the player to mine for some silver, copper and gold",
+        "itemsRequired": [ 21, 5, 22, 5, 24, 5 ],
+        "itemRewards": []
+      },
+
+      {
+        "questID": 3,
+        "type": 1,
+        "prerequisiteID": [ 2 ],
+        "questName": "I Hope This Doesn't Get Stuck on My Face...",
+        "questDescription": "We need to rebuild the engine, and we need alien goo for that... But since we dont have alien goo in game just collect some stone.",
+        "itemsRequired": [ 2, 20 ],
+        "itemRewards": []
+      },
+
+      {
+        "questID": 4,
+        "type": 0,
+        "prerequisiteID": [ 2, 3 ],
+        "questName": "A Whole New World.",
+        "questDescription": "The engine is done! Smash that LAUNCH button, and we're outta here! But we dont have the engine to smash thos. So gotta wait.",
+        "itemsRequired": [],
+        "itemRewards": []
+      }
+    ]
+}
