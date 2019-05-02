@@ -8,6 +8,14 @@ public class TheImmortalScript : MonoBehaviour {
     private EnumClass.TerrainType terrainGenerated;
     private bool isNewGame;
 
+    private ushort [,] playerInventoryItems;
+    private ushort [,] playerHotbarItems;
+    private ushort activeHotbarSlot;
+
+
+
+
+
     public EnumClass.TerrainType WorldTypeToGenerate{ get { return worldTypeToGenerate; } set { worldTypeToGenerate = value; } }
     public EnumClass.TerrainType TerrainGenerated{ get { return terrainGenerated; } set { terrainGenerated = value; } }
     public bool IsNewGame { get; set; }
@@ -26,4 +34,9 @@ public class TheImmortalScript : MonoBehaviour {
             Destroy(this);
         }
     }
+
+
+
+
+
 }
