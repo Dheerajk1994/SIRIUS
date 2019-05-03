@@ -1,0 +1,26 @@
+{
+  "WTAFDialogues": [
+    {
+      "dialogueID": 1,
+      "dialogueGiverName": "WTAF",
+      "dialogueLines": [
+        "Hi first sentence",
+        "second sentence",
+        "third sentence"
+      ],
+      "questsNeededToActivateDialogue": [ 0 ],
+      "questsActivatedByDialgue": [ 0 ]
+    },
+    {
+      "dialogueID": 2,
+      "dialogueGiverName": "WTAF",
+      "dialogueLines": [
+        "Hi first sentence of second dialogue",
+        "second sentence",
+        "third sentence"
+      ],
+      "questsNeededToActivateDialogue": [ 0 ],
+      "questsActivatedByDialgue": [ 0 ]
+    }
+  ]
+ }
