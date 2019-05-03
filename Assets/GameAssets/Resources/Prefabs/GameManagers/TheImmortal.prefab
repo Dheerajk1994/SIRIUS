@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4780778431247350}
   - component: {fileID: 114944543043505896}
+  - component: {fileID: 114850173433799900}
   m_Layer: 0
   m_Name: TheImmortal
   m_TagString: Untagged
@@ -40,6 +41,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114850173433799900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1662717799341054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fea6b8210052ec4f98c4fdfec68ead8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilePrefab: {fileID: 1212904404968698, guid: 5ac034eac9cfea74fbf2d9dc890db054, type: 2}
+  tilePoolSize: 60000
 --- !u!114 &114944543043505896
 MonoBehaviour:
   m_ObjectHideFlags: 1

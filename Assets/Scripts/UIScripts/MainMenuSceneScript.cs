@@ -28,9 +28,7 @@ public class MainMenuSceneScript : MonoBehaviour {
     private void NewGame()
     {
         loadingScreen.gameObject.SetActive(true);
-        TheImmortalScript.instance.WorldTypeToGenerate = EnumClass.TerrainType.SHIP;
-        TheImmortalScript.instance.TerrainGenerated = EnumClass.TerrainType.GREEN;
-        TheImmortalScript.instance.IsNewGame = true;
+        SetUpTheImmortal();
         StartCoroutine(LoadAsynchronously("ShipScene"));
     }
 
@@ -40,6 +38,21 @@ public class MainMenuSceneScript : MonoBehaviour {
 
     private void ExitGame()
     {
+
+    }
+
+    private void SetUpTheImmortal()
+    {
+        TheImmortalScript.instance.WorldTypeToGenerate = EnumClass.TerrainType.SHIP;
+        TheImmortalScript.instance.TerrainGenerated = EnumClass.TerrainType.GREEN;
+        TheImmortalScript.instance.IsNewGame = true;
+        TheImmortalScript.instance.PlayerHotbarItems = new ushort[10, 10];
+        TheImmortalScript.instance.PlayerInventoryItems = new ushort[40, 40];
+
+        TheImmortalScript.instance.GreenWorldStatus = TheImmortalScript.TerrainStatus.NOT_GENERATED;
+        TheImmortalScript.instance.MoonWorldStatus = TheImmortalScript.TerrainStatus.NOT_GENERATED;
+        TheImmortalScript.instance.SnowWorldStatus = TheImmortalScript.TerrainStatus.NOT_GENERATED;
+        TheImmortalScript.instance.DesertWorldStatus = TheImmortalScript.TerrainStatus.NOT_GENERATED;
 
     }
 

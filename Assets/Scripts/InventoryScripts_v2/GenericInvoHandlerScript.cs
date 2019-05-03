@@ -80,6 +80,19 @@ public class GenericInvoHandlerScript : MonoBehaviour {
         } 
     }
 
+    //populate inventory
+    public void PopulateInventory(ushort [,] inventoryItems)
+    {
+        genericInventory.PopulateInventory(inventoryItems);
+        UpdatePanelSlots();
+    }
+
+    //fetch items in inventory
+    public ushort[,] FetchAllItemsInInventory()
+    {
+        return genericInventory.FetchItemsInInventory();
+    }
+
     //for updating the associated slots
     public void UpdatePanelSlots()
     {
