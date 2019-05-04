@@ -13,7 +13,7 @@ public class GameManagerScript : MonoBehaviour
     public string greenWorldSavePath = "greenWorld";
     public string moonWorldSavePath = "moonWorld";
 
-    public ushort currentWorld;         
+    public ushort currentWorld;
     public string currentWorldSavePath = "greenWorld";
     #endregion
 
@@ -51,14 +51,14 @@ public class GameManagerScript : MonoBehaviour
     public CameraScript cameraScript;
     public InputManagerScript inputManagerScript;
     public InventoryControllerScript inventoryControllerScript;
-    public QuestManagerScript questManagerScript;   
+    public QuestManagerScript questManagerScript;
     public ShipScript shipScript;
     public AudioManagerScript audioManagerScript;
 
-    #endregion
+#endregion
 
-    #region LOCAL_VARIABLES
-    public bool readyToGo = false;
+#region LOCAL_VARIABLES
+public bool readyToGo = false;
     public bool worldPresent = false;
     public Vector3 playerPos;
     #endregion
@@ -118,7 +118,7 @@ public class GameManagerScript : MonoBehaviour
         terrainManagerScript          .SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
         playerScript                  .SetPlayerScript(this, uiScript,inputManagerScript, audioManagerScript);
         inputManagerScript            .SetInputManager(this, uiScript, terrainManagerScript);
-        inventoryControllerScript     .SetInventoryController(this, uiScript);
+        inventoryControllerScript     .SetInventoryController(this, uiScript, audioManagerScript);
         questManagerScript            .SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>());
         //audioManagerScript
 
@@ -181,6 +181,11 @@ public class GameManagerScript : MonoBehaviour
     public void TeleportToTerrain()
     {
         SceneManager.LoadSceneAsync("TerrainScene");
+    }
+
+    public AudioManagerScript getAudioManager()
+    {
+        return audioManagerScript;
     }
 
 

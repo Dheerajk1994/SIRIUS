@@ -7,6 +7,7 @@ public class Player : CharacterFinal
     public GameManagerScript gameManagerScript;
     public UIScript uiScript;
     public InputManagerScript inputManagerScript;
+    public AudioManagerScript audioManagerScript;
 
     //public GameObject rotatingArmPrefab;
     //public GameObject rotatingArmObject;
@@ -32,6 +33,7 @@ public class Player : CharacterFinal
         gameManagerScript = gmScript;
         uiScript = uScript;
         inputManagerScript = inputScript;
+        audioManagerScript = aManager;
     }
 
     public static Player Instance
@@ -116,6 +118,7 @@ public class Player : CharacterFinal
         if (Input.GetKeyDown(KeyCode.Space))
         {
             MyAnimator.SetTrigger("jump");
+            audioManagerScript.Play("sam-jump");
             //jump = true;
         }
     }
@@ -184,6 +187,7 @@ public class Player : CharacterFinal
 
     public override void TakeDamage(float damage)
     {
+        audioManagerScript.Play("sam-hurt");
         Debug.Log("Player.TakeDamage: not implemented");
     } 
     
@@ -243,6 +247,7 @@ public class Player : CharacterFinal
     public void MeleeAttack()
     {
         rotatingArmScript.MeleeRotate(equippedItem.GetComponent<WeaponClass>().attackSpeed);
+        audioManagerScript.Play("melee-swing");
     }
 
     //public void GenerateRotatingArm()

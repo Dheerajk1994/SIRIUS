@@ -12,7 +12,7 @@ public class Door : Interactable
         base.Interact();
         isInteracting = !isInteracting;
         player.transform.position = new Vector2(destination.transform.position.x, destination.transform.position.y);
-        audiomanager.Play("btn-deny");
+        audiomanager.Play("teleport");
         Debug.Log("Teleporting...");
     }
 

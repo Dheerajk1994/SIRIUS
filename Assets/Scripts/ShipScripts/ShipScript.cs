@@ -29,6 +29,11 @@ public class ShipScript : MonoBehaviour {
 
     }
 
+    public void Start()
+    {
+        audioManager.Play("bgm-1");
+    }
+
     public GameObject GetEngineReference()
     {
         return Engine;
