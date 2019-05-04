@@ -9,8 +9,8 @@ public class Bullet : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
-	}
+        Destroy(gameObject, 7);
+    }
 	
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
@@ -19,12 +19,25 @@ public class Bullet : MonoBehaviour {
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), hitInfo.GetComponent<Collider2D>());
         }
         Enemy enemy = hitInfo.GetComponent<Enemy>();
-        if(enemy != null)
+        if (enemy != null)
         {
             enemy.TakeDamage(BulletDamage);
         }
+        else if (hitInfo.name.Equals("Sam(Clone)"))
+        {
 
-        Destroy(gameObject);
+        }
+        else if(hitInfo.name.Equals("LOS"))
+        {
+
+        }
+        else
+        {
+            Debug.Log(hitInfo.name);
+            Destroy(gameObject);
+        }
+
+       
 
     }
 	// Update is called once per frame

@@ -88,15 +88,18 @@ public class GameManagerScript : MonoBehaviour
                                   
         ui                        = Instantiate(UIPrefab);
         uiScript                  = ui.GetComponent<UIScript>();
-                                  
-        player                    = Instantiate(PlayerPrefab);
+
+        inputManager              = Instantiate(InputManagerPrefab);
+        inputManagerScript        = inputManager.GetComponent<InputManagerScript>();
+
+        player = Instantiate(PlayerPrefab);
         playerScript              = player.GetComponent<Player>();
                                   
         mainCameraObject          = Instantiate(MainCameraPrefab);
         cameraScript              = mainCameraObject.GetComponent<CameraScript>();
                                   
-        inputManager              = Instantiate(InputManagerPrefab);
-        inputManagerScript        = inputManager.GetComponent<InputManagerScript>();
+        //inputManager              = Instantiate(InputManagerPrefab);
+        //inputManagerScript        = inputManager.GetComponent<InputManagerScript>();
 
         inventoryController       = Instantiate(InventoryControllerPrefab);
         inventoryControllerScript = inventoryController.GetComponent<InventoryControllerScript>();
