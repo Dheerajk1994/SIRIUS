@@ -10,6 +10,7 @@ public class MainMenuSceneScript : MonoBehaviour {
     public Button newGameButn;
     public Button loadGameButn;
     public Button exitButn;
+    private AudioSource menuBGM;
 
     public Transform loadingScreen;
 
@@ -23,6 +24,8 @@ public class MainMenuSceneScript : MonoBehaviour {
         newGameButn.onClick.AddListener(NewGame);
         loadGameButn.onClick.AddListener(LoadGame);
         exitButn.onClick.AddListener(ExitGame);
+        menuBGM = this.GetComponent<AudioSource>();
+        menuBGM.Play();
     }
 
     private void NewGame()

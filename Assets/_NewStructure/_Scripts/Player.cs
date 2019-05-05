@@ -188,7 +188,14 @@ public class Player : CharacterFinal
     public override void TakeDamage(float damage)
     {
         audioManagerScript.Play("sam-hurt");
+        currentHealth -= damage;
+        if(IsDead)
+        {
+            audioManagerScript.Play("sam-die");
+            Debug.Log("Player died");
+        }
         Debug.Log("Player.TakeDamage: not implemented");
+
     } 
     
     public void HandleEquip()

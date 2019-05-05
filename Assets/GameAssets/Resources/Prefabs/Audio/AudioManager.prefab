@@ -84,7 +84,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: teleport
     clip: {fileID: 8300000, guid: 134fa1e1f6e298b4eab9de7c5e4ace1a, type: 3}
-    volume: 0.15
+    volume: 0.25
     pitch: 1
     loop: 0
     source: {fileID: 0}

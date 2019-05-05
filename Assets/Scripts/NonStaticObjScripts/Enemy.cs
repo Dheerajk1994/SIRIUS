@@ -5,6 +5,9 @@ using UnityEngine;
 public class Enemy : CharacterFinal
 {
     private IEnemyState currentState;
+    private AudioSource[] enemySounds;
+    private AudioSource deathSound;
+    private AudioSource damageSound;
 
     [SerializeField]
     private float meleeRange;
@@ -30,6 +33,9 @@ public class Enemy : CharacterFinal
         this.GetComponent<SpriteRenderer>().sortingOrder = 13;
         path = new List<Vector2>();
         targetPos = new Vector2();
+        enemySounds = this.GetComponents<AudioSource>();
+        deathSound = enemySounds[0];
+        damageSound = enemySounds[1];
     }
 
     // Update is called once per frame
@@ -268,11 +274,13 @@ public class Enemy : CharacterFinal
 
         if(!IsDead)
         {
+            damageSound.Play();
             Debug.Log("Taken Damage");
             MyAnimator.SetTrigger("damage");  
         }
         else
         {
+            deathSound.Play();
             MyAnimator.SetTrigger("die");
             //Destroy(this, 2f);
               
