@@ -16,6 +16,9 @@ public class Player : CharacterFinal
     [SerializeField]private GameObject rotatingArm;
     private Pivot rotatingArmScript;
 
+    [SerializeField]
+    public PlayerAttributesPanelScript attributes;
+
 
     private static Player instance;
     //there should be only one player
@@ -197,6 +200,9 @@ public class Player : CharacterFinal
 //<<<<<<< ryan
         audioManagerScript.Play("sam-hurt");
         currentHealth -= damage;
+//<<<<<<< louis
+        attributes.UpdateHealth(currentHealth);
+//=======
         if(IsDead)
         {
             audioManagerScript.Play("sam-die");
@@ -207,6 +213,7 @@ public class Player : CharacterFinal
 //=======
   //      Debug.Log("Player.TakeDamage: called");
    //     currentHealth -= damage;
+//>>>>>>> dtemp
 //>>>>>>> dtemp
     } 
     

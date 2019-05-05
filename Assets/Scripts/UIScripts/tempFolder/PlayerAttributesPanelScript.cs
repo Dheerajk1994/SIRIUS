@@ -21,6 +21,7 @@ public class PlayerAttributesPanelScript : MonoBehaviour {
 
     public void UpdateHealth(float health)
     {
+        Debug.Log("PlayerAttributesPanelScript.UpdateHealth called");
         healthBar.value = health;
         //if (health <= 0)
         //{
