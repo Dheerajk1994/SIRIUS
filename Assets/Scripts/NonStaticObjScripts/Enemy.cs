@@ -254,11 +254,11 @@ public class Enemy : CharacterFinal
         return facingRight ? Vector2.left : Vector2.right;
     }
 
-    public override void OnTriggerEnter2D(Collider2D other)
-    {
-        base.OnTriggerEnter2D(other);
-        currentState.OnTriggerEnter(other);
-    }
+    //public override void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    base.OnTriggerEnter2D(other);
+    //    currentState.OnTriggerEnter(other);
+    //}
 
 
 
@@ -274,12 +274,10 @@ public class Enemy : CharacterFinal
         else
         {
             MyAnimator.SetTrigger("die");
-            //Destroy(this, 2f);
+            Destroy(this, 2f);
               
         }
     }
-
-
 
     //private void OnDrawGizmos()
     //{
