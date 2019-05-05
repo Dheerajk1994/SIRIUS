@@ -9,13 +9,23 @@ public class TilePoolScript : MonoBehaviour {
 
     public uint tilePoolSize;
 
-    private Queue<GameObject> tilePoolQueue;
+    private static Queue<GameObject> tilePoolQueue;
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            tilePoolQueue = new Queue<GameObject>();
+            GameObject tempTile;
+            for (ushort i = 0; i < tilePoolSize; ++i)
+            {
+                tempTile = Instantiate(tilePrefab);
+                //tempTile.name = i.ToString();
+                tempTile.gameObject.SetActive(false);
+                tempTile.transform.parent = this.transform;
+                tilePoolQueue.Enqueue(tempTile);
+            }
         }
         else if (instance != this)
         {
@@ -25,16 +35,7 @@ public class TilePoolScript : MonoBehaviour {
 
     private void Start()
     {
-        tilePoolQueue = new Queue<GameObject>();
-        GameObject tempTile;
-        for (ushort i = 0; i < tilePoolSize; ++i)
-        {
-            tempTile = Instantiate(tilePrefab);
-            //tempTile.name = i.ToString();
-            tempTile.gameObject.SetActive(false);
-            tempTile.transform.parent = this.transform;
-            tilePoolQueue.Enqueue(tempTile);
-        }
+        
     }
 
     public GameObject FetchTileFromPool()

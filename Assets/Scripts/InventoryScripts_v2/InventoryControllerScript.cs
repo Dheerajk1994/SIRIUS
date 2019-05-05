@@ -111,6 +111,32 @@ public class InventoryControllerScript : MonoBehaviour {
 
     }
 
+    //populate playerinventory with items
+    public void PopulatePlayerInventory(ushort [,] items)
+    {
+        Debug.Log("populate inventory called");
+        playerInventoryPanelScript.genericInvoHandler.PopulateInventory(items);
+    }
+    //fetch items in player inventory
+    public ushort[,] FetchItemsInPlayerInventory()
+    {
+        Debug.Log("fetch inventory called");
+        return playerInventoryPanelScript.genericInvoHandler.FetchAllItemsInInventory();
+    }
+
+    //populate player hotbar with items
+    public void PopulatePlayerHotbar(ushort[,] items)
+    {
+        playerHotbarPanelScript.genericInvoHandler.PopulateInventory(items);
+    }
+    //fetch items in player hotbar
+    public ushort[,] FetchItemsInPlayerHotbar()
+    {
+        return playerHotbarPanelScript.genericInvoHandler.FetchAllItemsInInventory();
+    }
+
+
+
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))

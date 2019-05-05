@@ -80,11 +80,11 @@ public class CameraScript : MonoBehaviour
         cloud1_m.transform.localPosition = new Vector3(cloud1_m.localPosition.x + cloud1Speed, cloud1_m.localPosition.y, 3f);
     }
 
-    public void SetCamera(Transform player, ushort worldType)
+    public void SetCamera(Transform player, EnumClass.TerrainType worldType)
     {
         playerToFollow = player;
 
-        if (worldType == (ushort)EnumClass.TerrainType.GREEN)
+        if (worldType == EnumClass.TerrainType.GREEN)
         {
             sky.gameObject.GetComponent<SpriteRenderer>().material = greenWorldSkyMat;
             cloud1_l.gameObject.GetComponent<SpriteRenderer>().sprite = clouds;
@@ -92,7 +92,7 @@ public class CameraScript : MonoBehaviour
             planet.GetComponent<SpriteRenderer>().sprite = moonPlanetSprite;
             terrain.gameObject.GetComponent<SpriteRenderer>().sprite = greenWorldTerrainBG;
         }
-        else if (worldType == (ushort)EnumClass.TerrainType.MOON)
+        else if (worldType == EnumClass.TerrainType.MOON)
         {
             sky.gameObject.GetComponent<SpriteRenderer>().material = moonWorldSkyMat;
             cloud1_l.gameObject.GetComponent<SpriteRenderer>().sprite = asteroids;
@@ -100,23 +100,23 @@ public class CameraScript : MonoBehaviour
             planet.GetComponent<SpriteRenderer>().sprite = greenPlanetSprite;
             terrain.gameObject.GetComponent<SpriteRenderer>().sprite = moonWorldTerrainBG;
         }
-        else if (worldType == (ushort)EnumClass.TerrainType.DESERT)
+        else if (worldType == EnumClass.TerrainType.DESERT)
         {
             sky.gameObject.GetComponent<SpriteRenderer>().material = desertWorldSkyMat;
             cloud1_l.gameObject.GetComponent<SpriteRenderer>().sprite = clouds;
             cloud1_m.gameObject.GetComponent<SpriteRenderer>().sprite = clouds;
-            planet.GetComponent<SpriteRenderer>().sprite = desertPlanetSprite;
+            planet.GetComponent<SpriteRenderer>().sprite = snowPlanetSprite;
             terrain.gameObject.GetComponent<SpriteRenderer>().sprite = desertWorldTerrainBG;
         }
-        else if (worldType == (ushort)EnumClass.TerrainType.SNOW)
+        else if (worldType == EnumClass.TerrainType.SNOW)
         {
             sky.gameObject.GetComponent<SpriteRenderer>().material = snowWorldSkyMat;
             cloud1_l.gameObject.GetComponent<SpriteRenderer>().sprite = clouds;
             cloud1_m.gameObject.GetComponent<SpriteRenderer>().sprite = clouds;
-            planet.GetComponent<SpriteRenderer>().sprite = snowPlanetSprite;
+            planet.GetComponent<SpriteRenderer>().sprite = desertPlanetSprite;
             terrain.gameObject.GetComponent<SpriteRenderer>().sprite = snowWorldTerrainBG;
         }
-        else if (worldType == (ushort)EnumClass.TerrainType.SHIP)
+        else if (worldType == EnumClass.TerrainType.SHIP)
         {
             sky.gameObject.GetComponent<SpriteRenderer>().material = shipWorldSkyMat;
             cloud1_l.gameObject.GetComponent<SpriteRenderer>().sprite = null;

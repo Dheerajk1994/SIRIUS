@@ -13,8 +13,8 @@ public class QuestPanelScript : MonoBehaviour {
     [SerializeField] private Sprite questCompletedIcon;
     [SerializeField] private Sprite questOngoingIcon;
 
-
     private GameManagerScript gameManagerScript;
+    private AudioManagerScript audiomanager;
 
     [SerializeField] private Text questTitleTxt;
     [SerializeField] private Text questDescriptionTxt;
@@ -29,6 +29,7 @@ public class QuestPanelScript : MonoBehaviour {
     public void ToggleQuestPanel()
     {
         this.gameObject.SetActive(!this.gameObject.activeSelf);
+        audiomanager.Play("ui-animation");
         if (this.gameObject.activeSelf)
         {
             List<Quest> quests = QuestManagerScript.instance.GetListOfActiveQuests();
@@ -43,6 +44,7 @@ public class QuestPanelScript : MonoBehaviour {
     public void SetQuestPanel(GameManagerScript gms)//called by gamemanager with required references
     {
         gameManagerScript = gms;
+        audiomanager = gms.audioManagerScript;
         abandonQuestButton.onClick.AddListener(QuestAbandonButtonClicked);
         turnInQuestButton.onClick.AddListener(QuestTurnInButtonClicked);
     }
@@ -114,11 +116,12 @@ public class QuestPanelScript : MonoBehaviour {
     public void QuestTurnInButtonClicked()
     {
         QuestManagerScript.instance.QuestCompleted(idOfQuestCurrentlyDisplaying);
+        audiomanager.Play("btn-refuel");
     }
 
     public void QuestAbandonButtonClicked()
     {
-
+        audiomanager.Play("btn-confirm");
     }
 
     private void ClearPanel(Transform panel)
@@ -143,6 +146,33 @@ public class QuestPanelScript : MonoBehaviour {
                 reqObject.GetComponentInChildren<Image>().sprite = InventorySpritesScript.instance.GetSprite(itemsRequirement.itemID);
                 uiText.text = itemsRequirement.requiredAmnt.ToString();
                 if(itemsRequirement.currentAmnt < itemsRequirement.requiredAmnt)
+                {
+                    uiText.color = Color.red;
+                }
+                else
+                {
+                    uiText.color = Color.green;
+                }
+                reqObject.transform.SetParent(questRequirementsPanel, false);
+            }
+        }
+        if(quest.questGoal.requiredMobs != null)
+        {
+            foreach (QuestMobRequirement mobRequirement in quest.questGoal.requiredMobs)
+            {
+                GameObject reqObject = Instantiate(questRewReqPrefab);
+                Text uiText = reqObject.GetComponentInChildren<Text>();
+
+                switch (mobRequirement.name)
+                {
+                    case "Blob":
+                        reqObject.GetComponentInChildren<Image>().sprite = InventorySpritesScript.instance.GetEnemieSrite(EnumClass.EnemyEnum.BLOB);
+                        break;
+                    default:
+                        break;
+                }
+                uiText.text = mobRequirement.requiredKillCount.ToString();
+                if (mobRequirement.currentKillCount < mobRequirement.requiredKillCount)
                 {
                     uiText.color = Color.red;
                 }
@@ -178,6 +208,7 @@ public class QuestPanelScript : MonoBehaviour {
         try
         {
             SetQuestDescription(QuestManagerScript.instance.GetQuestOfID(clickedButn.GetComponent<QuestListButtonScript>().mappedQuestID));
+            audiomanager.Play("btn-quick-ui");
         }
         catch(Exception e)
         {

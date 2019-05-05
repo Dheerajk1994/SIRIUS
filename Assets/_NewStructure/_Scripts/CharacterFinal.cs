@@ -70,7 +70,7 @@ public abstract class CharacterFinal : MonoBehaviour {
 
     public void BarkAttack()
     {
-        BarkCollider.enabled = !BarkCollider.enabled;
+       // BarkCollider.enabled = !BarkCollider.enabled;
     }
 
     public bool getFacingDirection()
@@ -82,13 +82,13 @@ public abstract class CharacterFinal : MonoBehaviour {
     {
         if (damageSources.Contains(other.tag))
         {
-            StartCoroutine(TakeDamage(standardDamage));
+            TakeDamage(standardDamage);
         }
     }
 
 
 
-    public abstract IEnumerator TakeDamage(float damage);
+    public abstract void TakeDamage(float damage);
 
 
 }

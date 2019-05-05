@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : CharacterFinal
 {
+    public string thisEnemiesName;
     private IEnemyState currentState;
 
     [SerializeField]
@@ -254,15 +255,15 @@ public class Enemy : CharacterFinal
         return facingRight ? Vector2.left : Vector2.right;
     }
 
-    public override void OnTriggerEnter2D(Collider2D other)
-    {
-        base.OnTriggerEnter2D(other);
-        currentState.OnTriggerEnter(other);
-    }
+    //public override void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    base.OnTriggerEnter2D(other);
+    //    currentState.OnTriggerEnter(other);
+    //}
 
 
 
-    public override IEnumerator TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         currentHealth -= damage;
 
@@ -274,12 +275,11 @@ public class Enemy : CharacterFinal
         else
         {
             MyAnimator.SetTrigger("die");
-            //Destroy(this, 2f);
-            yield return null;  
+            QuestManagerScript.instance.KilledMob(thisEnemiesName, 1);
+            Destroy(this, 2f);
+              
         }
     }
-
-
 
     //private void OnDrawGizmos()
     //{

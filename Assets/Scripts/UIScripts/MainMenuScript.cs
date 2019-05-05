@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour {
+
+    //private AudioManagerScript audiomanager;
     public int resolut;
     public GameObject GameManager;
     public Dropdown resDropdown;
@@ -19,6 +21,8 @@ public class MainMenuScript : MonoBehaviour {
     public void SetMainMenuPanel(UIScript uScript)
     {
         uiScript = uScript;
+        //audiomanager = uScript.audioManager.GetComponent<AudioManagerScript>();
+
     }
 
     /*private void OnEnable()
@@ -55,7 +59,7 @@ public class MainMenuScript : MonoBehaviour {
 
     public void NewGameButton() // when the new button has been clicked, the game will begin
     {
-        GameManager.GetComponent<GameManagerScript>().StartNewGame();
+        //GameManager.GetComponent<GameManagerScript>().StartNewGame();
         this.gameObject.SetActive(false);
     }
 

@@ -96,6 +96,12 @@ public class Player : CharacterFinal
         base.Update();
         HandleInput();
         //generateRotatingArm();
+        if(IsDead)
+        {
+            Debug.LogError("Game Over!" +
+                "\nSam Died!");
+            Destroy(this.gameObject);
+        }
 
     }
 
@@ -182,9 +188,10 @@ public class Player : CharacterFinal
         MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
 
-    public override IEnumerator TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
-        yield return null;
+        Debug.Log("Player.TakeDamage: called");
+        currentHealth -= damage;
     } 
     
     public void HandleEquip()
@@ -204,12 +211,14 @@ public class Player : CharacterFinal
             case 800:
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().EquipSword();
+                MyAnimator.SetBool("rotatingArm", true);
                 equippedItem = Instantiate(rotatingArmScript.swordPrefab);
                 Debug.Log("Sword equipped");
                 break;
             case 801:
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().EquipKatana();
+                MyAnimator.SetBool("rotatingArm", true);
                 equippedItem = Instantiate(rotatingArmScript.katanaPrefab);
                 Debug.Log("Katana equipped");
                 break;
@@ -217,19 +226,23 @@ public class Player : CharacterFinal
                 //GenerateRotatingArm();
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().equipSpacegun();
+                MyAnimator.SetBool("rotatingArm", true);
                 Debug.Log("Spacegun equipped");
                 break;
             case 901:
                 //GenerateRotatingArm();
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().equipLavagun();
+                MyAnimator.SetBool("rotatingArm", true);
                 Debug.Log("Lavagun equipped");
                 break;
             default:
                 GameObject obj = new GameObject();
                 obj.AddComponent<SpriteRenderer>().sprite = InventorySpritesScript.instance.GetSprite(2);
+                obj.GetComponent<SpriteRenderer>().sortingLayerName = "frontLayer";
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().EquipItem(obj);
+                MyAnimator.SetBool("rotatingArm", true);
                 break;
 
         }   

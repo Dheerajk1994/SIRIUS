@@ -15,11 +15,10 @@ public class Engine : Interactable
 
     public override void Interact()
     {
-        base.Interact();
         isInteracting = !isInteracting;
         panelOpen = !panelOpen;
-        EnginePanel.GetComponent<Animator>().SetBool("isOpen", isInteracting);
-        Debug.Log("Fuel: " + currentFuel.ToString() + "/1000");
+        EnginePanel.GetComponent<EngineScript>().ToggleEnginePanel(isInteracting);
+        base.Interact();
     }
 
     private void Start()

@@ -25,6 +25,7 @@ public class CraftingPanelScript : MonoBehaviour {
     #region REFERENCES
     private PlayerInventoryPanelScript playerInventoryPanelScript;
     private PlayerHotbarPanelScript playerHotbarPanelScript;
+    private AudioManagerScript audiomanager;
     #endregion
 
     #region LOCAL_VARIABLES
@@ -43,6 +44,7 @@ public class CraftingPanelScript : MonoBehaviour {
     public void SetCraftingPanel(UIScript uScript, PlayerInventoryPanelScript pips, PlayerHotbarPanelScript phps)
     {                                              
         uiScript = uScript;
+        audiomanager = uScript.audioManager.GetComponent<AudioManagerScript>();
         playerInventoryPanelScript = pips;
         playerHotbarPanelScript = phps;
 
@@ -68,6 +70,7 @@ public class CraftingPanelScript : MonoBehaviour {
         //this.gameObject.SetActive(!this.gameObject.activeSelf);
         craftingPanelIsDisplaying = !craftingPanelIsDisplaying;
         this.gameObject.SetActive(craftingPanelIsDisplaying);
+        audiomanager.Play("ui-animation");
         if (craftingPanelIsDisplaying)
         {
             if(itemInItemDescription != null)
@@ -75,7 +78,21 @@ public class CraftingPanelScript : MonoBehaviour {
                 SetItemDescription(itemInItemDescription.itemDescription.id);
             }
         }
+    }
 
+    public void ToggleCraftingPanel(bool toggle)
+    {
+        //this.gameObject.SetActive(!this.gameObject.activeSelf);
+        craftingPanelIsDisplaying = toggle;
+        this.gameObject.SetActive(craftingPanelIsDisplaying);
+        audiomanager.Play("ui-animation");
+        if (craftingPanelIsDisplaying)
+        {
+            if (itemInItemDescription != null)
+            {
+                SetItemDescription(itemInItemDescription.itemDescription.id);
+            }
+        }
     }
 
     public void SwitchTier(ushort tier)
@@ -149,6 +166,7 @@ public class CraftingPanelScript : MonoBehaviour {
                 InventoryControllerScript.instance.RemoveItemFromInventoryWithType(script.type, script.currentAmnt);
             }
             UpdateRecipeAmnt();
+            audiomanager.Play("btn-refuel");
         }
     }
 
@@ -206,23 +224,28 @@ public class CraftingPanelScript : MonoBehaviour {
     public void Tier1Clicked()
     {
         SwitchTier((ushort)itemTier.TIER1);
+        audiomanager.Play("btn-quick-ui");
     }
     public void Tier2Clicked()
     {
         //SwitchTier((ushort)itemTier.TIER2);
         SwitchTier(1);
+        audiomanager.Play("btn-quick-ui");
     }
     public void Tier3Clicked()
     {
         SwitchTier((ushort)itemTier.TIER3);
+        audiomanager.Play("btn-quick-ui");
     }
     public void Tier4Clicked()
     {
         SwitchTier((ushort)itemTier.TIER4);
+        audiomanager.Play("btn-quick-ui");
     }
     public void Tier5Clicked()
     {
         SwitchTier((ushort)itemTier.TIER5);
+        audiomanager.Play("btn-quick-ui");
     }
     #endregion
 
@@ -232,6 +255,7 @@ public class CraftingPanelScript : MonoBehaviour {
         try
         {
             SetItemDescription(clickedButton.GetComponent<CraftingPanelItemScript>().id);
+            audiomanager.Play("btn-quick-ui");
         }
         catch (Exception e)
         {
@@ -239,6 +263,11 @@ public class CraftingPanelScript : MonoBehaviour {
         }
     }
 
+    public void ClosePanelClicked()
+    {
+        ToggleCraftingPanel(false);
+        audiomanager.Play("btn-confirm");
+    }
 }
 
 public class CraftingPanelItemScript : MonoBehaviour

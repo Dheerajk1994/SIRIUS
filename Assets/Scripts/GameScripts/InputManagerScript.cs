@@ -29,6 +29,7 @@ public class InputManagerScript : MonoBehaviour {
     }
     private void Start()
     {
+        hotbarPanel.EquipSlot(0);
     }
     private void Update()
     {
@@ -50,15 +51,23 @@ public class InputManagerScript : MonoBehaviour {
                 case 4:
                     PlaceTileFrontLayer(4);
                     break;
-                case 800:
-                case 801:
-                    playerScript.MeleeAttack();
-                    break;
                 case 1000:  // Pickaxe   
                     MineFrontLayer();
                     break;
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.Mouse0) && !EventSystem.current.IsPointerOverGameObject())
+        {
+            switch (hotbarPanel.GetEquippedSlot())
+            {
+                case 800:
+                case 801:
+                    playerScript.MeleeAttack();
+                    break;
+            }
+        }
+
         else if (Input.GetKey(KeyCode.Mouse1) && !EventSystem.current.IsPointerOverGameObject())
         {
             switch (hotbarPanel.GetEquippedSlot())

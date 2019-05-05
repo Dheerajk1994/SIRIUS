@@ -74,6 +74,11 @@ public static class EnumClass {
         GRASS = 20
     };
 
+    public enum EnemyEnum
+    {
+        BLOB = 0
+    };
+
 
 }
     
