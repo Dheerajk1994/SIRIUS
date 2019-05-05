@@ -7,6 +7,12 @@ public class Enemy : CharacterFinal
     private IEnemyState currentState;
 
     [SerializeField]
+    private InventoryControllerScript inventoryControllerScript;
+
+    [SerializeField]
+    private InventorySpritesScript inventorySprites;
+
+    [SerializeField]
     private float meleeRange;
 
     [SerializeField]
@@ -17,6 +23,9 @@ public class Enemy : CharacterFinal
     [SerializeField]
     private bool isRangedAI;
     public GameObject Target { get; set; }
+
+    [SerializeField]
+    private GameObject LootPrefab;
 
     //test
     private ushort[,] terrain;
@@ -273,10 +282,20 @@ public class Enemy : CharacterFinal
         }
         else
         {
-            MyAnimator.SetTrigger("die");
-            Destroy(this, 2f);
-              
+            
+            Destroy(this.gameObject, 2f);
+            MyAnimator.SetTrigger("Enemy.TakeDamage: Destroying this.GameObject and Calling SetLootDrop");
+            SetLootDrop(700, 1, inventorySprites.itemSprites[700], this.gameObject.transform.localPosition);
+
         }
+    }
+
+    private void SetLootDrop(ushort id, ushort amnt, Sprite img, Vector2 pos)
+    {
+        GameObject lootDrop = Instantiate(LootPrefab);
+        lootDrop.GetComponent<TilePickUpScript>().SetTilePickup(inventoryControllerScript, id, amnt, img);
+        lootDrop.transform.position = pos;
+        lootDrop.GetComponent<Rigidbody2D>().AddForce((this.gameObject.transform.localPosition - lootDrop.transform.localPosition) * 50f);
     }
 
     //private void OnDrawGizmos()

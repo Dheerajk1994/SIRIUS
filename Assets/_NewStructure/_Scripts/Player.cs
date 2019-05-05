@@ -15,6 +15,9 @@ public class Player : CharacterFinal
     [SerializeField]private GameObject rotatingArm;
     private Pivot rotatingArmScript;
 
+    [SerializeField]
+    public PlayerAttributesPanelScript attributes;
+
 
     private static Player instance;
     //there should be only one player
@@ -192,6 +195,7 @@ public class Player : CharacterFinal
     {
         Debug.Log("Player.TakeDamage: called");
         currentHealth -= damage;
+        attributes.UpdateHealth(currentHealth);
     } 
     
     public void HandleEquip()
