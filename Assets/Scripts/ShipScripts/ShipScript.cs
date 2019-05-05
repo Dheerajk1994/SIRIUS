@@ -9,6 +9,12 @@ public class ShipScript : MonoBehaviour {
     [SerializeField] private GameObject Navigation;
     [SerializeField] private GameObject Bed;
     [SerializeField] private GameObject Chest;
+//<<<<<<< ryan
+    [SerializeField] private GameObject DownStairs;
+    [SerializeField] private GameObject UpStairs;
+
+//=======
+//>>>>>>> dtemp
 
     public AudioManagerScript audioManager;
     private GameManagerScript gameManager;
@@ -16,13 +22,30 @@ public class ShipScript : MonoBehaviour {
 
     public Transform spawnPosition;
 
-    public void SetShip(GameManagerScript gm, UIScript uiscript)
+//<<<<<<< ryan
+    public void SetShip(UIScript uiscript, AudioManagerScript aManager)
+//=======
+   // public void SetShip(GameManagerScript gm, UIScript uiscript)
+//>>>>>>> dtemp
     {
         gameManager = gm;
         Teleporter.GetComponent<Teleporter>().ExitShipPanel = uiscript.ExitShipPanel;
         Engine.GetComponent<Engine>().EnginePanel = uiscript.EnginePanel;
         Navigation.GetComponent<Navigation>().NavigationPanel = uiscript.NavPanel;
+//<<<<<<< ryan
+        Chest.GetComponent<Chest>().ChestPanel = uiscript.ChestPanel;
+        audioManager = aManager;
+        DownStairs.GetComponent<Door>().SetDoor(audioManager);
+        UpStairs.GetComponent<Door>().SetDoor(audioManager);
+
+   // }
+
+   // public void Start()
+   // {
+        audioManager.Play("bgm-1");
+//=======
         Chest.GetComponent<Chest>().SetChest(uiscript);
+//>>>>>>> dtemp
     }
 
     public GameObject GetEngineReference()

@@ -91,6 +91,7 @@ public class TerrainManagerScript : MonoBehaviour
     public GameObject gameManager;
     private TilePoolScript tilePool;
     private InventoryControllerScript inventoryControllerScript;
+    private AudioSource mineSound;
 
     #endregion 
 
@@ -100,11 +101,12 @@ public class TerrainManagerScript : MonoBehaviour
         tilePool = tp;
         player = plyr;
         inventoryControllerScript = ics;
+        //audioManager = gScript.audioManagerScript;
     }
 
     private void Start()
     {
-
+        mineSound = this.GetComponent<AudioSource>();
     }
 
     public void StartTerrainGen(EnumClass.TerrainType terrainType)
@@ -596,9 +598,11 @@ public class TerrainManagerScript : MonoBehaviour
         {
             case (ushort)EnumClass.LayerIDEnum.FRONTLAYER:
                 MineFrontTile(relativeX, (ushort)y, inputManager);
+                //audioManager.Play("mine");
                 break;
             case (ushort)EnumClass.LayerIDEnum.BACKLAYER:
                 MineBackTile(relativeX, (ushort)y, inputManager);
+                //audioManager.Play("mine");
                 break;
             default:
                 break;
@@ -625,6 +629,8 @@ public class TerrainManagerScript : MonoBehaviour
         Destroy(frontTilesResources[x, y]);
         Destroy(vegetationTiles[x, y]);
         Destroy(vegetationTiles[x, y + 1]);
+
+        mineSound.Play();
     }
 
     private void MineBackTile(ushort x, ushort y, InputManagerScript inputManager)
@@ -641,6 +647,8 @@ public class TerrainManagerScript : MonoBehaviour
 
         Destroy(backTiles[x, y]);
         Destroy(backTilesResources[x, y]);
+
+        mineSound.Play();
     }
 
     //CREATE TILE DROP

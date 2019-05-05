@@ -7,6 +7,7 @@ public class InventoryControllerScript : MonoBehaviour {
     GameManagerScript gameManagerScript;
     PlayerInventoryPanelScript playerInventoryPanelScript;
     PlayerHotbarPanelScript playerHotbarPanelScript;
+    public AudioManagerScript audioManagerScript;
     //need chest panel here
 
     public static InventoryControllerScript instance;
@@ -16,11 +17,12 @@ public class InventoryControllerScript : MonoBehaviour {
         instance = this;
     }
 
-    public void SetInventoryController(GameManagerScript gms, UIScript uiScript)
+    public void SetInventoryController(GameManagerScript gms, UIScript uiScript, AudioManagerScript aManager)
     {
         this.gameManagerScript = gms;
         this.playerInventoryPanelScript = uiScript.PlayerInventoryAndStatsPanel.GetComponent<PlayerInventoryPanelScript>();
         this.playerHotbarPanelScript = uiScript.PlayerHotBarPanel.GetComponent<PlayerHotbarPanelScript>();
+        audioManagerScript = aManager;
     }
 
     public bool CheckForItemInInventoryWithId(ushort id, ushort neededAmount)

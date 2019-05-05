@@ -13,6 +13,7 @@ public class GameManagerScript : MonoBehaviour
     public string moonWorldSavePath = "moonWorld";
 
     public EnumClass.TerrainType currentWorld;         
+
     public string currentWorldSavePath = "greenWorld";
     #endregion
 
@@ -52,15 +53,17 @@ public class GameManagerScript : MonoBehaviour
     public CameraScript cameraScript;
     public InputManagerScript inputManagerScript;
     public InventoryControllerScript inventoryControllerScript;
+
     public QuestManagerScript questManagerScript;   
     public DialogueManagerScript dialogueManagerScript;   
+
     public ShipScript shipScript;
     public AudioManagerScript audioManagerScript;
 
-    #endregion
+#endregion
 
-    #region LOCAL_VARIABLES
-    public bool readyToGo = false;
+#region LOCAL_VARIABLES
+public bool readyToGo = false;
     public bool worldPresent = false;
     public Vector3 playerPos;
     #endregion
@@ -150,7 +153,16 @@ public class GameManagerScript : MonoBehaviour
 
         inventoryControllerScript.SetInventoryController(this, uiScript);
 
+//<<<<<<< ryan
+//        terrainManagerScript          .SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
+//        playerScript                  .SetPlayerScript(this, uiScript,inputManagerScript, audioManagerScript);
+//        inputManagerScript            .SetInputManager(this, uiScript, terrainManagerScript);
+//        inventoryControllerScript     .SetInventoryController(this, uiScript, audioManagerScript);
+//        questManagerScript            .SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>());
+        //audioManagerScript
+//=======
         
+//>>>>>>> dtemp
 
         if (currentWorld == EnumClass.TerrainType.SHIP)
         {
@@ -203,8 +215,14 @@ public class GameManagerScript : MonoBehaviour
 
         if (currentWorld == EnumClass.TerrainType.SHIP)
         {
+//<<<<<<< ryan
+//            ship = Instantiate(ShipPrefab);
+//            shipScript = ship.GetComponent<ShipScript>();
+//            shipScript.SetShip(uiScript, audioManagerScript);
+//=======
             ship.transform.position = new Vector2(0f, 0f);
             playerPos = ship.GetComponent<ShipScript>().spawnPosition.position;
+//>>>>>>> dtemp
         }
 
         cameraScript.SetCamera(player.transform, currentWorld);
@@ -261,6 +279,11 @@ public class GameManagerScript : MonoBehaviour
         {
             yield return null;
         }
+    }
+
+    public AudioManagerScript getAudioManager()
+    {
+        return audioManagerScript;
     }
 
 
