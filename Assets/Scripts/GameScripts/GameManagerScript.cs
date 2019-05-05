@@ -112,6 +112,7 @@ public bool readyToGo = false;
 
     private void PopulateSceneObjects()
     {
+
         ////
         currentWorld = TheImmortalScript.instance.WorldTypeToGenerate;
 
@@ -134,6 +135,7 @@ public bool readyToGo = false;
         inputManagerScript = inputManager.GetComponent<InputManagerScript>();
 
         inventoryController = Instantiate(InventoryControllerPrefab);
+
         inventoryControllerScript = inventoryController.GetComponent<InventoryControllerScript>();
 
         aiManager = Instantiate(AIManagerPrefab);

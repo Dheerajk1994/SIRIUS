@@ -89,7 +89,8 @@ public class Player : CharacterFinal
         base.Start();
         MyRigidbody = GetComponent<Rigidbody2D>();
         rotatingArmScript = rotatingArm.GetComponent<Pivot>();
-
+        MyAnimator.SetBool("rotatingArm", false);
+        rotatingArm.gameObject.SetActive(false);
 
     }
 
@@ -211,17 +212,17 @@ public class Player : CharacterFinal
     
     public void HandleEquip()
     {
+        ushort itemID = inputManagerScript.hotbarPanel.GetEquippedSlot();
         if (equippedItem != null)
             Destroy(equippedItem.gameObject);
-
-
-       switch(inputManagerScript.hotbarPanel.GetEquippedSlot())
+       
+       switch(itemID)
         {
             case 0:
-                MyAnimator.SetBool("rotatingArm", false);
                 //clearArm();
                 rotatingArm.gameObject.SetActive(false);
                 Debug.Log("Nothing equipped");
+                MyAnimator.SetBool("rotatingArm", false);
                 break;
             case 800:
                 rotatingArm.gameObject.SetActive(true);
@@ -253,8 +254,12 @@ public class Player : CharacterFinal
                 break;
             default:
                 GameObject obj = new GameObject();
-                obj.AddComponent<SpriteRenderer>().sprite = InventorySpritesScript.instance.GetSprite(2);
-                obj.GetComponent<SpriteRenderer>().sortingLayerName = "frontLayer";
+//<<<<<<< will
+                obj.AddComponent<SpriteRenderer>().sprite = InventorySpritesScript.instance.GetSprite(itemID);
+//=======
+///                obj.AddComponent<SpriteRenderer>().sprite = InventorySpritesScript.instance.GetSprite(2);
+//                obj.GetComponent<SpriteRenderer>().sortingLayerName = "frontLayer";
+//>>>>>>> dtemp
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().EquipItem(obj);
                 MyAnimator.SetBool("rotatingArm", true);
