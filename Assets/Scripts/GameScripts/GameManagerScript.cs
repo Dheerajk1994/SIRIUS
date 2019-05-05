@@ -92,7 +92,7 @@ public bool readyToGo = false;
     {
         if (readyToGo && currentWorld != EnumClass.TerrainType.SHIP)
         {
-            if (Vector2.Distance(player.transform.position, playerPos) > 20.0f)
+            if (Vector2.Distance(player.transform.position, playerPos) > 10.0f)
             {
                 StartCoroutine(terrainManagerScript.DisplayChunks(player.transform.position, true));
                 playerPos = player.transform.position;
@@ -148,10 +148,10 @@ public bool readyToGo = false;
         dialogueManagerScript = dialogueManager.GetComponent<DialogueManagerScript>();
 
         terrainManagerScript.SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
-        playerScript.SetPlayerScript(this, uiScript, inputManagerScript);
+        playerScript.SetPlayerScript(this, uiScript, inputManagerScript, audioManagerScript);
         inputManagerScript.SetInputManager(this, uiScript, terrainManagerScript);
 
-        inventoryControllerScript.SetInventoryController(this, uiScript);
+        inventoryControllerScript.SetInventoryController(this, uiScript, audioManagerScript);
 
 //<<<<<<< ryan
 //        terrainManagerScript          .SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
@@ -168,7 +168,7 @@ public bool readyToGo = false;
         {
             ship = Instantiate(ShipPrefab);
             shipScript = ship.GetComponent<ShipScript>();
-            shipScript.SetShip(this, uiScript);
+            shipScript.SetShip(uiScript, audioManagerScript);
             shipScript.GetChestReference().GetComponent<InventoryHandlerScript>().PopulateInventory(TheImmortalScript.instance.ShipInventoryItems);
         }
 

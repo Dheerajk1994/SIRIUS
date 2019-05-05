@@ -197,6 +197,7 @@ MonoBehaviour:
   chaseSpeed: 5
   patrolSpeed: 2
   standardDamage: 10
+  thisEnemiesName: Scorpion
   meleeRange: 2
   rangedAttackRange: 6
   isRangedAI: 0

@@ -9,12 +9,8 @@ public class ShipScript : MonoBehaviour {
     [SerializeField] private GameObject Navigation;
     [SerializeField] private GameObject Bed;
     [SerializeField] private GameObject Chest;
-//<<<<<<< ryan
     [SerializeField] private GameObject DownStairs;
     [SerializeField] private GameObject UpStairs;
-
-//=======
-//>>>>>>> dtemp
 
     public AudioManagerScript audioManager;
     private GameManagerScript gameManager;
@@ -28,7 +24,7 @@ public class ShipScript : MonoBehaviour {
    // public void SetShip(GameManagerScript gm, UIScript uiscript)
 //>>>>>>> dtemp
     {
-        gameManager = gm;
+        //gameManager = gm;
         Teleporter.GetComponent<Teleporter>().ExitShipPanel = uiscript.ExitShipPanel;
         Engine.GetComponent<Engine>().EnginePanel = uiscript.EnginePanel;
         Navigation.GetComponent<Navigation>().NavigationPanel = uiscript.NavPanel;

@@ -33,7 +33,7 @@ public class Player : CharacterFinal
         gameManagerScript = gmScript;
         uiScript = uScript;
         inputManagerScript = inputScript;
-        audioManagerScript = aManager;
+        audioManagerScript = aManager; 
     }
 
     public static Player Instance

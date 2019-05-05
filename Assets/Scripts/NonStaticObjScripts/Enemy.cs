@@ -50,7 +50,7 @@ public class Enemy : CharacterFinal
             currentState.Execute();
         }
 
-        LookAtTarget();
+        //LookAtTarget();
         // }
 
     }
@@ -281,10 +281,10 @@ public class Enemy : CharacterFinal
         }
         else
         {
-            deathSound.Play();
-            MyAnimator.SetTrigger("die");
+            //deathSound.Play();
+            //MyAnimator.SetTrigger("die");
             QuestManagerScript.instance.KilledMob(thisEnemiesName, 1);
-            Destroy(this, 2f);
+            Destroy(this.gameObject);
               
         }
     }

@@ -64,6 +64,8 @@ public class TilePickUpScript : MonoBehaviour {
 
     IEnumerator Wait1Second()
     {
+        this.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        this.GetComponent<BoxCollider2D>().enabled = false;
         yield return new WaitForSeconds(1);
         Destroy(this.gameObject);
     }
