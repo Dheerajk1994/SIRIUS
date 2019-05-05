@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Enemy : CharacterFinal
 {
+    public string thisEnemiesName;
     private IEnemyState currentState;
+    private AudioSource[] enemySounds;
+    private AudioSource deathSound;
+    private AudioSource damageSound;
 
     [SerializeField]
     private float meleeRange;
@@ -30,6 +34,9 @@ public class Enemy : CharacterFinal
         this.GetComponent<SpriteRenderer>().sortingOrder = 13;
         path = new List<Vector2>();
         targetPos = new Vector2();
+        enemySounds = this.GetComponents<AudioSource>();
+        deathSound = enemySounds[0];
+        damageSound = enemySounds[1];
     }
 
     // Update is called once per frame
@@ -43,7 +50,7 @@ public class Enemy : CharacterFinal
             currentState.Execute();
         }
 
-        LookAtTarget();
+        //LookAtTarget();
         // }
 
     }
@@ -254,11 +261,11 @@ public class Enemy : CharacterFinal
         return facingRight ? Vector2.left : Vector2.right;
     }
 
-    public override void OnTriggerEnter2D(Collider2D other)
-    {
-        base.OnTriggerEnter2D(other);
-        currentState.OnTriggerEnter(other);
-    }
+    //public override void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    base.OnTriggerEnter2D(other);
+    //    currentState.OnTriggerEnter(other);
+    //}
 
 
 
@@ -268,18 +275,19 @@ public class Enemy : CharacterFinal
 
         if(!IsDead)
         {
+            damageSound.Play();
             Debug.Log("Taken Damage");
             MyAnimator.SetTrigger("damage");  
         }
         else
         {
-            MyAnimator.SetTrigger("die");
-            //Destroy(this, 2f);
+            //deathSound.Play();
+            //MyAnimator.SetTrigger("die");
+            QuestManagerScript.instance.KilledMob(thisEnemiesName, 1);
+            Destroy(this.gameObject);
               
         }
     }
-
-
 
     //private void OnDrawGizmos()
     //{

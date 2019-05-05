@@ -6,10 +6,10 @@ public class Bed : Interactable {
 
     public override void Interact()
     {
-        base.Interact();
         isInteracting = !isInteracting;
         playerScript.healState = true;
         Debug.Log("ZZZ");
+        base.Interact();
     }
 
     public void Start()

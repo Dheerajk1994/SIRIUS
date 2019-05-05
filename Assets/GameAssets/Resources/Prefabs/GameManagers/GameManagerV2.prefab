@@ -71,6 +71,8 @@ MonoBehaviour:
     type: 2}
   QuestManagerPrefab: {fileID: 1232580355102106, guid: d3832af4cbdd8774eaa4be3b4192b58f,
     type: 2}
+  DialogueManagerPrefab: {fileID: 1604679227476600, guid: 829ba7c8bddd25644982cfcccf3d2e07,
+    type: 2}
   ShipPrefab: {fileID: 1143345085434036, guid: d91b34b446d065b4eaf127ad4f25307c, type: 2}
   AudioManagerPrefab: {fileID: 1284041147680346, guid: ae76f382af8798e4cb4e3c93f95a6700,
     type: 2}
@@ -82,6 +84,7 @@ MonoBehaviour:
   inventoryController: {fileID: 0}
   aiManager: {fileID: 0}
   questManager: {fileID: 0}
+  dialogueManager: {fileID: 0}
   ship: {fileID: 0}
   audioManager: {fileID: 0}
   terrainManagerScript: {fileID: 0}
@@ -91,6 +94,7 @@ MonoBehaviour:
   inputManagerScript: {fileID: 0}
   inventoryControllerScript: {fileID: 0}
   questManagerScript: {fileID: 0}
+  dialogueManagerScript: {fileID: 0}
   shipScript: {fileID: 0}
   audioManagerScript: {fileID: 0}
   readyToGo: 0

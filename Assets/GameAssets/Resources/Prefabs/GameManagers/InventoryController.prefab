@@ -1564,3 +1564,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  enemieSprites:
+  - {fileID: 21300000, guid: d9fcdf9d94f7d40bf81180d83968fcb3, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
