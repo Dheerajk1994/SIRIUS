@@ -19,6 +19,7 @@ public class UIScript : MonoBehaviour
     public GameObject NavPanel;
     public GameObject ChestPanel;
     public Button teleportButton;
+    public GameObject EscapePanel;
     public Transform loadingScreen;
 
     public GameManagerScript gameManagerScript;

@@ -157,7 +157,6 @@ public bool readyToGo = false;
 
 //<<<<<<< ryan
 //        terrainManagerScript          .SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
-//        playerScript                  .SetPlayerScript(this, uiScript,inputManagerScript, audioManagerScript);
 //        inputManagerScript            .SetInputManager(this, uiScript, terrainManagerScript);
 //        inventoryControllerScript     .SetInventoryController(this, uiScript, audioManagerScript);
 //        questManagerScript            .SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>());
@@ -191,6 +190,7 @@ public bool readyToGo = false;
         questManagerScript.SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>(), TheImmortalScript.instance.QuestsCompleted, TheImmortalScript.instance.ActiveQuests);
         dialogueManagerScript.SetDialogueManager(this, uiScript.BottomDialoguePanel.GetComponent<DialoguePanelScript>(), TheImmortalScript.instance.DialoguesCompleted);
 
+        playerScript                  .SetPlayerScript(this, uiScript,inputManagerScript, audioManagerScript);
         player.transform.position = playerPos;
         player.SetActive(false);
         bool stat = true;
@@ -271,6 +271,11 @@ public bool readyToGo = false;
     public void SaveGame()
     {
 
+    }
+
+    public void ExitSceneIntoMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 
     private IEnumerator LoadScene(string scene)

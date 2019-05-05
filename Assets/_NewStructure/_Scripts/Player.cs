@@ -128,7 +128,10 @@ public class Player : CharacterFinal
         if (Input.GetKeyDown(KeyCode.Space))
         {
             MyAnimator.SetTrigger("jump");
-            audioManagerScript.Play("sam-jump");
+            if (audioManagerScript)
+            {
+                audioManagerScript.Play("sam-jump");
+            }
             //jump = true;
         }
     }
@@ -197,24 +200,15 @@ public class Player : CharacterFinal
 
     public override void TakeDamage(float damage)
     {
-//<<<<<<< ryan
         audioManagerScript.Play("sam-hurt");
         currentHealth -= damage;
-//<<<<<<< louis
         attributes.UpdateHealth(currentHealth);
-//=======
         if(IsDead)
         {
             audioManagerScript.Play("sam-die");
             Debug.Log("Player died");
         }
         Debug.Log("Player.TakeDamage: not implemented");
-
-//=======
-  //      Debug.Log("Player.TakeDamage: called");
-   //     currentHealth -= damage;
-//>>>>>>> dtemp
-//>>>>>>> dtemp
     } 
     
     public void HandleEquip()
