@@ -96,6 +96,7 @@ public class QuestManagerScript : MonoBehaviour {
                 break;
             }
         }
+        DialogueManagerScript.instance.QuestCompletedUpdateDialogues(completedQuestsID);
         UpdateActiveQuests();
     }
 

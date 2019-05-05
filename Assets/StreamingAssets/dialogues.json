@@ -65,7 +65,7 @@
 
     {
       "dialogueID": 4,
-      "autoDisplayDialogue": false,
+      "autoDisplayDialogue": true,
       "dialogueGiverName": "WTAF",
       "dialogueLines": [
         "Finally, we have everything we need.",

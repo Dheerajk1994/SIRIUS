@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : CharacterFinal
 {
+    public string thisEnemiesName;
     private IEnemyState currentState;
 
     [SerializeField]
@@ -274,6 +275,7 @@ public class Enemy : CharacterFinal
         else
         {
             MyAnimator.SetTrigger("die");
+            QuestManagerScript.instance.KilledMob(thisEnemiesName, 1);
             Destroy(this, 2f);
               
         }

@@ -253,7 +253,8 @@ MonoBehaviour:
   movementSpeed: 2
   chaseSpeed: 5
   patrolSpeed: 2
-  standardDamage: 10
+  standardDamage: 1
+  thisEnemiesName: Blob
   meleeRange: 2
   rangedAttackRange: 6
   isRangedAI: 0
