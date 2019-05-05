@@ -22,7 +22,8 @@ public class TilePickUpScript : MonoBehaviour {
     public void SetTilePickup(InventoryControllerScript ics, ushort cid, ushort camnt, Sprite img)
     {
         this.GetComponentInChildren<SpriteRenderer>().sprite = img;
-        inventoryController = ics;
+        //inventoryController = ics;
+        inventoryController = InventoryControllerScript.instance;
         contentId = cid;
         currentStackAmount = camnt;
     }

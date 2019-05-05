@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120e6a9afbe857b459a156e5353d934d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManagerScript: {fileID: 0}
 --- !u!114 &114644132490902792
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -764,8 +765,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: cb3ed244d2eb47f46a991acdfbe4b2c1, type: 3}
+  - {fileID: 21300000, guid: 4029100419839b04e9553bac85d039f5, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

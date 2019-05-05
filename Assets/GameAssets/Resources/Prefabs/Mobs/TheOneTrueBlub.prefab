@@ -450,6 +450,7 @@ MonoBehaviour:
   meleeRange: 2
   rangedAttackRange: 6
   isRangedAI: 0
+  LootPrefab: {fileID: 1672008991011400, guid: d5b16e1d919e3d64a93d6c8af75755de, type: 2}
 --- !u!114 &114875988750149644
 MonoBehaviour:
   m_ObjectHideFlags: 1
