@@ -59,7 +59,7 @@ public static class GameDataHandler {
                 }
                 break;
             default:
-                Debug.LogError("game data handler handleterraindatagen called with invalid terraintype");
+                Debug.Log("game data handler handleterraindatagen called with invalid terraintype");
                 break;
         }
 

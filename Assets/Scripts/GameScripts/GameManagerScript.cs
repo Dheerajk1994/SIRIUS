@@ -25,6 +25,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject InventoryControllerPrefab;
     public GameObject AIManagerPrefab;
     public GameObject QuestManagerPrefab;
+    public GameObject DialogueManagerPrefab;
     public GameObject ShipPrefab;
     public GameObject AudioManagerPrefab;
 
@@ -39,6 +40,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject inventoryController;
     public GameObject aiManager;
     public GameObject questManager;
+    public GameObject dialogueManager;
     public GameObject ship;
     public GameObject audioManager;
     #endregion
@@ -51,6 +53,7 @@ public class GameManagerScript : MonoBehaviour
     public InputManagerScript inputManagerScript;
     public InventoryControllerScript inventoryControllerScript;
     public QuestManagerScript questManagerScript;   
+    public DialogueManagerScript dialogueManagerScript;   
     public ShipScript shipScript;
     public AudioManagerScript audioManagerScript;
 
@@ -131,13 +134,15 @@ public class GameManagerScript : MonoBehaviour
         inventoryControllerScript = inventoryController.GetComponent<InventoryControllerScript>();
 
         aiManager = Instantiate(AIManagerPrefab);
-
-        questManager = Instantiate(QuestManagerPrefab);
-        questManagerScript = questManager.GetComponent<QuestManagerScript>();
         
         audioManager = Instantiate(AudioManagerPrefab);
         audioManagerScript = audioManager.GetComponent<AudioManagerScript>();
-        
+
+        questManager = Instantiate(QuestManagerPrefab);
+        questManagerScript = questManager.GetComponent<QuestManagerScript>();
+
+        dialogueManager = Instantiate(DialogueManagerPrefab);
+        dialogueManagerScript = dialogueManager.GetComponent<DialogueManagerScript>();
 
         terrainManagerScript.SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
         playerScript.SetPlayerScript(this, uiScript, inputManagerScript);
@@ -145,13 +150,14 @@ public class GameManagerScript : MonoBehaviour
 
         inventoryControllerScript.SetInventoryController(this, uiScript);
 
-        questManagerScript.SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>());
+        
 
         if (currentWorld == EnumClass.TerrainType.SHIP)
         {
             ship = Instantiate(ShipPrefab);
             shipScript = ship.GetComponent<ShipScript>();
-            shipScript.SetShip(uiScript);
+            shipScript.SetShip(this, uiScript);
+            shipScript.GetChestReference().GetComponent<InventoryHandlerScript>().PopulateInventory(TheImmortalScript.instance.ShipInventoryItems);
         }
 
         readyToGo = false;
@@ -162,10 +168,14 @@ public class GameManagerScript : MonoBehaviour
 
         GenerateScene();
 
+        //UI
         uiScript.SetUIPanel(this, inputManagerScript, audioManagerScript, player);
         inventoryControllerScript.PopulatePlayerHotbar(TheImmortalScript.instance.PlayerHotbarItems);
         inventoryControllerScript.PopulatePlayerInventory(TheImmortalScript.instance.PlayerInventoryItems);
 
+        //QUEST AND DIALOGUE
+        questManagerScript.SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>(), TheImmortalScript.instance.QuestsCompleted, TheImmortalScript.instance.ActiveQuests);
+        dialogueManagerScript.SetDialogueManager(this, uiScript.BottomDialoguePanel.GetComponent<DialoguePanelScript>(), TheImmortalScript.instance.DialoguesCompleted);
 
         player.transform.position = playerPos;
         player.SetActive(false);
@@ -205,8 +215,8 @@ public class GameManagerScript : MonoBehaviour
     {
         uiScript.loadingScreen.gameObject.SetActive(true);
         TheImmortalScript.instance.WorldTypeToGenerate = EnumClass.TerrainType.SHIP;
-        TheImmortalScript.instance.PlayerHotbarItems = inventoryControllerScript.FetchItemsInPlayerHotbar();
-        TheImmortalScript.instance.PlayerInventoryItems = inventoryControllerScript.FetchItemsInPlayerInventory();
+        SaveInventory();
+        SaveQuestsAndDialogues();
         GameDataHandler.HandleTerrainSaving(this, terrainManagerScript, TheImmortalScript.instance);
         StartCoroutine(LoadScene("ShipScene"));
         //operation.allowSceneActivation = true;
@@ -215,10 +225,32 @@ public class GameManagerScript : MonoBehaviour
     public void TeleportToTerrain()
     {
         uiScript.loadingScreen.gameObject.SetActive(true);
-        TheImmortalScript.instance.PlayerHotbarItems = inventoryControllerScript.FetchItemsInPlayerHotbar();
-        TheImmortalScript.instance.PlayerInventoryItems = inventoryControllerScript.FetchItemsInPlayerInventory();
+        SaveInventory();
+        SaveQuestsAndDialogues();
         StartCoroutine(LoadScene("TerrainScene"));
         //operation.allowSceneActivation = true;
+    }
+
+    private void SaveInventory()
+    {
+        TheImmortalScript.instance.PlayerHotbarItems = inventoryControllerScript.FetchItemsInPlayerHotbar();
+        TheImmortalScript.instance.PlayerInventoryItems = inventoryControllerScript.FetchItemsInPlayerInventory();
+        if(currentWorld == EnumClass.TerrainType.SHIP)
+        {
+            TheImmortalScript.instance.ShipInventoryItems = ship.GetComponent<ShipScript>().GetChestReference().GetComponent<InventoryHandlerScript>().FetchAllItemsInInventory();
+        }
+    }
+
+    private void SaveQuestsAndDialogues()
+    {
+        TheImmortalScript.instance.QuestsCompleted = questManagerScript.completedQuestsID;
+        TheImmortalScript.instance.ActiveQuests = questManagerScript.activeQuestsId;
+        TheImmortalScript.instance.DialoguesCompleted = dialogueManagerScript.completedDialogues;
+    }
+
+    public void SaveGame()
+    {
+
     }
 
     private IEnumerator LoadScene(string scene)

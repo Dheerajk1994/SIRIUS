@@ -84,7 +84,10 @@ public class GenericInvoHandlerScript : MonoBehaviour {
     public void PopulateInventory(ushort [,] inventoryItems)
     {
         genericInventory.PopulateInventory(inventoryItems);
-        UpdatePanelSlots();
+        if(slots != null)
+        {
+            UpdatePanelSlots();
+        }
     }
 
     //fetch items in inventory
@@ -97,6 +100,7 @@ public class GenericInvoHandlerScript : MonoBehaviour {
     public void UpdatePanelSlots()
     {
         //go through each inventory index
+        if (slots.Length == 0) return;
         for (ushort i = 0; i < genericInventory.GetInventorySize(); ++i)
         {
             ushort id = genericInventory.FetchItemIdInInventorySlot(i);

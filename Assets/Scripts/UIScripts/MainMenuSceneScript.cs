@@ -46,8 +46,20 @@ public class MainMenuSceneScript : MonoBehaviour {
         TheImmortalScript.instance.WorldTypeToGenerate = EnumClass.TerrainType.SHIP;
         TheImmortalScript.instance.TerrainGenerated = EnumClass.TerrainType.GREEN;
         TheImmortalScript.instance.IsNewGame = true;
+
         TheImmortalScript.instance.PlayerHotbarItems = new ushort[10, 10];
         TheImmortalScript.instance.PlayerInventoryItems = new ushort[40, 40];
+
+        TheImmortalScript.instance.QuestsCompleted = new List<int>();
+        TheImmortalScript.instance.ActiveQuests = new List<int>();
+        TheImmortalScript.instance.DialoguesCompleted = new List<int>();
+
+        //add some stuff to ship chest
+        ushort [,] items = new ushort[40, 40];
+        items[0, 0] = (ushort)EnumClass.TileEnum.REGULAR_WOOD;
+        items[1, 0] = 60;
+        TheImmortalScript.instance.ShipInventoryItems = new ushort[40,40];
+        TheImmortalScript.instance.ShipInventoryItems = items;
 
         TheImmortalScript.instance.GreenWorldStatus = TheImmortalScript.TerrainStatus.NOT_GENERATED;
         TheImmortalScript.instance.MoonWorldStatus = TheImmortalScript.TerrainStatus.NOT_GENERATED;

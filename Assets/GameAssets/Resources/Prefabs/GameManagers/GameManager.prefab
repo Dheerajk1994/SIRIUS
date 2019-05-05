@@ -66,6 +66,7 @@ MonoBehaviour:
   InventoryControllerPrefab: {fileID: 0}
   AIManagerPrefab: {fileID: 0}
   QuestManagerPrefab: {fileID: 0}
+  DialogueManagerPrefab: {fileID: 0}
   ShipPrefab: {fileID: 0}
   AudioManagerPrefab: {fileID: 0}
   terrainManager: {fileID: 0}
@@ -76,6 +77,8 @@ MonoBehaviour:
   inventoryController: {fileID: 0}
   aiManager: {fileID: 0}
   questManager: {fileID: 0}
+  dialogueManager: {fileID: 1604679227476600, guid: 829ba7c8bddd25644982cfcccf3d2e07,
+    type: 2}
   ship: {fileID: 0}
   audioManager: {fileID: 0}
   terrainManagerScript: {fileID: 0}
@@ -85,6 +88,7 @@ MonoBehaviour:
   inputManagerScript: {fileID: 0}
   inventoryControllerScript: {fileID: 0}
   questManagerScript: {fileID: 0}
+  dialogueManagerScript: {fileID: 0}
   shipScript: {fileID: 0}
   audioManagerScript: {fileID: 0}
   readyToGo: 0

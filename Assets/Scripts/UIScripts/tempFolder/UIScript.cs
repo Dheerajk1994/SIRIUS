@@ -69,6 +69,8 @@ public class UIScript : MonoBehaviour
             EnginePanel.GetComponent<EngineScript>().SetEnginePanel(this);
 
             NavPanel.GetComponent<NavigationScript>().SetNavPanel(this);
+
+            ChestPanel.GetComponent<ChestPanelScript>().SetChestPanel(this);
         }
 
     }

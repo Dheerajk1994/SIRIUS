@@ -5,6 +5,7 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public GameObject player;
+    public string thisItemsName;
     public bool canInteract = false;
     public bool isInteracting = false;
     public bool panelOpen = false;
@@ -12,7 +13,10 @@ public class Interactable : MonoBehaviour
 
     public virtual void Interact()
     {
-        
+        if (isInteracting)
+        {
+            QuestManagerScript.instance.InteractedWithItem(thisItemsName);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

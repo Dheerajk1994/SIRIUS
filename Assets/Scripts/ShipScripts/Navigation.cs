@@ -8,12 +8,12 @@ public class Navigation : Interactable
 
     public override void Interact()
     {
-        base.Interact();
         isInteracting = !isInteracting;
         panelOpen = !panelOpen;
         //NavigationPanel.GetComponent<Animator>().SetBool("isOpen", isInteracting);
         NavigationPanel.GetComponent<NavigationScript>().ToggleNavPanel(isInteracting);
         Debug.Log("where ya travelin?");
+        base.Interact();
     }
 
     private void Start()
