@@ -73,6 +73,8 @@ GameObject:
   - component: {fileID: 4029874901419994}
   - component: {fileID: 61662249930042968}
   - component: {fileID: 114772819540615980}
+  - component: {fileID: 114567367574080708}
+  - component: {fileID: 114525155144780896}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -660,6 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: 
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
@@ -678,6 +681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: WTAF
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
@@ -694,6 +698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: 
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
@@ -732,11 +737,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: Engine
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
   interactText: Press E to Interact
   EnginePanel: {fileID: 0}
+--- !u!114 &114525155144780896
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1450299133684860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614b65b7f24e2b3428003c87c04c4a45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: []
+  genericInventory: {fileID: 114567367574080708}
+  genericInventoryPanel: {fileID: 0}
+  inventoryItemPrefab: {fileID: 1586053091211532, guid: 1ac93c43f04919c42993edfbfa6e1356,
+    type: 2}
+--- !u!114 &114567367574080708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1450299133684860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64553648ac8e32d49af54bbe10c97fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySize: 40
 --- !u!114 &114683188126147568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -749,6 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: Teleporter
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
@@ -766,6 +801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: Chest
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
@@ -783,6 +819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: Bed
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
@@ -815,6 +852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: Navigation
   canInteract: 0
   isInteracting: 0
   panelOpen: 0

@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4748559636230222}
   - component: {fileID: 114888729210291936}
-  - component: {fileID: 114453845437811778}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -41,19 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114453845437811778
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1469663368980514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fea6b8210052ec4f98c4fdfec68ead8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tilePrefab: {fileID: 1212904404968698, guid: 5ac034eac9cfea74fbf2d9dc890db054, type: 2}
-  tilePoolSize: 60000
 --- !u!114 &114888729210291936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -65,29 +51,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9fca0c5c89921409e6ee0f42fb82a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stone: {fileID: 1857664707528882, guid: 166ee35a87d2b0348b0cfb1f8b47cd8c, type: 2}
-  UIPrefab: {fileID: 1518751177635052, guid: 154739a86ed85c14ca66bda78837b093, type: 2}
-  MainMenuPrefab: {fileID: 1196171191109542, guid: fe65a7e5815db40fb87a09296d7c79ac,
-    type: 2}
-  PlayerPrefab: {fileID: 1976911743273556, guid: 75332c875b310674a974b00fbe4d71ed,
-    type: 2}
+  greenWorldSavePath: greenWorld
+  moonWorldSavePath: moonWorld
+  currentWorld: 0
+  currentWorldSavePath: greenWorld
   TerrainManagerPrefab: {fileID: 1692291654787358, guid: 49d8fbf2f65393446ab4cb1c2c234172,
+    type: 2}
+  UIPrefab: {fileID: 1518751177635052, guid: 154739a86ed85c14ca66bda78837b093, type: 2}
+  PlayerPrefab: {fileID: 1976911743273556, guid: 75332c875b310674a974b00fbe4d71ed,
     type: 2}
   MainCameraPrefab: {fileID: 20422774771720070, guid: 461be19241647e04786f222d2316d27c,
     type: 2}
+  InputManagerPrefab: {fileID: 0}
+  InventoryControllerPrefab: {fileID: 0}
+  AIManagerPrefab: {fileID: 0}
+  QuestManagerPrefab: {fileID: 0}
+  DialogueManagerPrefab: {fileID: 0}
+  ShipPrefab: {fileID: 0}
+  AudioManagerPrefab: {fileID: 0}
+  terrainManager: {fileID: 0}
+  ui: {fileID: 0}
   player: {fileID: 0}
-  playerInvoPanel: {fileID: 0}
-  craftingPanel: {fileID: 0}
-  TerrainManager: {fileID: 0}
-  mainCamera: {fileID: 0}
-  MainMenu: {fileID: 0}
-  mainMenuScript: {fileID: 0}
-  UI: {fileID: 0}
+  mainCameraObject: {fileID: 0}
+  inputManager: {fileID: 0}
+  inventoryController: {fileID: 0}
+  aiManager: {fileID: 0}
+  questManager: {fileID: 0}
+  dialogueManager: {fileID: 1604679227476600, guid: 829ba7c8bddd25644982cfcccf3d2e07,
+    type: 2}
+  ship: {fileID: 0}
+  audioManager: {fileID: 0}
+  terrainManagerScript: {fileID: 0}
   uiScript: {fileID: 0}
-  healthBar: {fileID: 0}
-  staminaBar: {fileID: 0}
-  hungerBar: {fileID: 0}
-  isInDemoMode: 1
+  playerScript: {fileID: 0}
+  cameraScript: {fileID: 0}
+  inputManagerScript: {fileID: 0}
+  inventoryControllerScript: {fileID: 0}
+  questManagerScript: {fileID: 0}
+  dialogueManagerScript: {fileID: 0}
+  shipScript: {fileID: 0}
+  audioManagerScript: {fileID: 0}
   readyToGo: 0
   worldPresent: 0
   playerPos: {x: 0, y: 0, z: 0}

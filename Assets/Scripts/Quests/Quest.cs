@@ -17,16 +17,16 @@ public class Quest {
     public List<QuestRewardItems> rewards;
 
     public GameObject objectToActivate;
-    public QuestGoal questGoal;
+    public QuestGoal questGoal; 
 
-    public Quest(int id, int qType, int[] pID, string name, string description, int[] reqItems, string[] mobs, int[] killAmnt, int[] questRewards){
+    public Quest(int id, int qType, int[] pID, string name, string description, int[] reqItems, string[] mobs, int[] killAmnt, string[] itemsToInteractWith, int[] questRewards){
         questID = id;
         
         prerequisiteID = pID;
         questName = name;
         questDescription = description;
 
-        questGoal = new QuestGoal(qType, reqItems, mobs, killAmnt);
+        questGoal = new QuestGoal(qType, reqItems, mobs, killAmnt, itemsToInteractWith);
         if(questRewards != null)
         {
             rewards = new List<QuestRewardItems>();
@@ -45,13 +45,26 @@ public class QuestGoal{
     public QuestType questType;
     public List<QuestItemsRequirement> requiredItems;
     public List<QuestMobRequirement> requiredMobs;
+    public List<QuestInteractionsRequirement> requiredInteractions;
     public bool interacted;
 
-    public QuestGoal(int type, int[] reqItems, string[] mobs, int[] killAmnt){
+    public QuestGoal(int type, int[] reqItems, string[] mobs, int[] killAmnt, string[] itemsToInteractWith)
+    {
         requiredItems = new List<QuestItemsRequirement>();
         requiredMobs = new List<QuestMobRequirement>();
+        requiredInteractions = new List<QuestInteractionsRequirement>();
         questType = (QuestType)type;
-        if(reqItems != null)
+
+        if (itemsToInteractWith != null)
+        {
+            for (int i = 0; i < itemsToInteractWith.Length; ++i)
+            {
+                string name = itemsToInteractWith[i];
+                requiredInteractions.Add(new QuestInteractionsRequirement(name));
+            }
+        }
+
+        if (reqItems != null)
         {
             for (int i = 0; i < reqItems.Length; ++i)
             {
@@ -71,11 +84,25 @@ public class QuestGoal{
                 requiredMobs.Add(new QuestMobRequirement(name, amnt));
             }
         }
+
+        
     }
 
     public bool IsReached()
     {
-        if(questType == QuestType.KILLING){
+        if (questType == QuestType.INTERACTING)
+        {
+            foreach(QuestInteractionsRequirement interactions in requiredInteractions)
+            {
+                if (!interactions.currentInteractionStatus)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        if (questType == QuestType.KILLING){
             foreach(QuestMobRequirement mobs in requiredMobs){
                 if(mobs.currentKillCount < mobs.requiredKillCount){
                     return false;
@@ -115,6 +142,17 @@ public class QuestGoal{
             }
         }
     }
+
+    public void ItemInteractedWith(string name)
+    {
+        foreach(QuestInteractionsRequirement items in requiredInteractions)
+        {
+            if(items.interactionItemName == name)
+            {
+                items.currentInteractionStatus = true;
+            }
+        }
+    }
 }
 
 public class QuestItemsRequirement
@@ -143,6 +181,17 @@ public class QuestMobRequirement{
     }
 }
 
+public class QuestInteractionsRequirement{
+    public string interactionItemName;
+    public bool currentInteractionStatus;
+
+    public QuestInteractionsRequirement(string iName)
+    {
+        interactionItemName = iName;
+        currentInteractionStatus = false;
+    }
+}
+
 public class QuestRewardItems
 {
     public ushort itemId;
@@ -154,6 +203,7 @@ public class QuestRewardItems
         rewardAmnt = amnt;
     }
 }
+
 
 public enum QuestType {
      INTERACTING = 0, 

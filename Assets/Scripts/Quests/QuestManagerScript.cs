@@ -10,6 +10,8 @@ public class QuestManagerScript : MonoBehaviour {
 
     public List<Quest> listOfQuests;
     public List<Quest> listOfActiveQuests;
+    public List<int> completedQuestsID;
+    public List<int> activeQuestsId;
 
 
     private void Awake()
@@ -24,10 +26,13 @@ public class QuestManagerScript : MonoBehaviour {
         }
     }
 
-    public void SetQuestManager(QuestPanelScript qpanel)
+    public void SetQuestManager(QuestPanelScript qpanel, List<int> completedQsts, List<int> activeQuests)
     {
         questPanel = qpanel;
+        this.completedQuestsID = completedQsts;
+        this.activeQuestsId = activeQuests;
         GenerateQuests();
+        GenerateActiveQuests(activeQuests);
     }
 
     public void GenerateQuests(){
@@ -49,6 +54,7 @@ public class QuestManagerScript : MonoBehaviour {
                     questDescription.itemsRequired,
                     questDescription.mobName,
                     questDescription.mobKillAmnt,
+                    questDescription.itemsToInteractWith,
                     questDescription.itemRewards));
             }
             catch(Exception e)
@@ -56,11 +62,8 @@ public class QuestManagerScript : MonoBehaviour {
                 throw e;
             }
         }
-        listOfActiveQuests.Add(GetQuestOfID(2));
-        if (questPanel.isActiveAndEnabled)
-        {
-            questPanel.SetQuestListPanel(listOfActiveQuests);
-        }
+        //UpdateActiveQuests();
+        //CallQuestPanelToUpdateListedQuests();
     }
 
     public List<Quest> GetListOfActiveQuests()
@@ -87,19 +90,26 @@ public class QuestManagerScript : MonoBehaviour {
             if (quest.questID == id)
             {
                 quest.isComplete = true;
+                completedQuestsID.Add(quest.questID);
                 listOfActiveQuests.Remove(quest);
+                activeQuestsId.Remove(quest.questID);
                 break;
             }
         }
-        
-        foreach(Quest quest in listOfQuests)
+        DialogueManagerScript.instance.QuestCompletedUpdateDialogues(completedQuestsID);
+        UpdateActiveQuests();
+    }
+
+    private void UpdateActiveQuests()
+    {
+        foreach (Quest quest in listOfQuests)
         {
-            if(quest.prerequisiteID.Length > 0)
+            if (quest.prerequisiteID.Length > 0)
             {
                 bool questPrereqComplete = true;
-                foreach(int pID in quest.prerequisiteID)
+                foreach (int pID in quest.prerequisiteID)
                 {
-                    if (!GetQuestOfID(pID).isComplete)
+                    if (pID == 0 || !GetQuestOfID(pID).isComplete)
                     {
                         questPrereqComplete = false;
                         break;
@@ -108,27 +118,93 @@ public class QuestManagerScript : MonoBehaviour {
                 if (questPrereqComplete && !quest.isComplete)//if all the prereqs are done and the quest is not repeat
                 {
                     listOfActiveQuests.Add(quest);
+                    activeQuestsId.Add(quest.questID);
                 }
             }
         }
+        CallQuestPanelToUpdateListedQuests();
+    }
+
+    private void GenerateActiveQuests(List<int> id)//called at the start to show saved quests between scene switches
+    {
+        foreach (int qID in id)
+        {
+            foreach (Quest quest in listOfQuests)
+            {
+                if (quest.questID == qID)
+                {
+                    listOfActiveQuests.Add(quest);
+                }
+            }
+        }
+        CallQuestPanelToUpdateListedQuests();
+    }
+
+    public void RemoveQuestsOfID(List<int> id)
+    {
+        foreach (int qID in id)
+        {
+            foreach (Quest quest in listOfQuests)
+            {
+                if (quest.questID == qID)
+                {
+                    listOfActiveQuests.Remove(quest);
+                    activeQuestsId.Remove(quest.questID);
+                }
+            }
+        }
+        CallQuestPanelToUpdateListedQuests();
+    }
+
+    public void AddQuestsOfID(List<int> id)
+    {
+        foreach(int qID in id)
+        {
+            foreach (Quest quest in listOfQuests)
+            {   
+                if (quest.questID == qID)
+                {
+                    listOfActiveQuests.Add(quest);
+                    activeQuestsId.Add(quest.questID);
+                }
+            }
+        }
+        CallQuestPanelToUpdateListedQuests();
+    }
+
+    private void CallQuestPanelToUpdateListedQuests()
+    {
         if (questPanel.isActiveAndEnabled)
         {
             questPanel.SetQuestListPanel(listOfActiveQuests);
         }
     }
 
-    public void RemoveQuestOfID(int id)
+    //QUEST TRACKING
+    public void InteractedWithItem(string name)
     {
-        foreach(Quest quest in listOfQuests)
+        Debug.Log("interacted with object called");
+        foreach (Quest quest in listOfActiveQuests)
         {
-            if (quest.questID == id)
+            if (quest.questGoal.questType == QuestType.INTERACTING)
             {
-                listOfActiveQuests.Remove(quest);
+                quest.questGoal.ItemInteractedWith(name);
+                
+                if (quest.questGoal.IsReached())
+                {
+                    Debug.Log("interact quest completed");
+                    completedQuestsID.Add(quest.questID);
+                    QuestCompleted(quest.questID);
+                    DialogueManagerScript.instance.QuestCompletedUpdateDialogues(completedQuestsID);
+                }
+                else if (questPanel.isActiveAndEnabled)
+                {
+                    questPanel.UpdateShowingQuest(quest);
+                }
             }
         }
     }
 
-    //QUEST TRACKING
     public void PickedUpItem(ushort id, int amnt)
     {
         foreach(Quest quest in listOfActiveQuests)
@@ -143,4 +219,20 @@ public class QuestManagerScript : MonoBehaviour {
             }
         }
     }
+
+    public void KilledMob(string name, int amnt)
+    {
+        foreach (Quest quest in listOfActiveQuests)
+        {
+            if (quest.questGoal.questType == QuestType.KILLING)
+            {
+                quest.questGoal.EnemyKilled(name, amnt);
+                if (questPanel.isActiveAndEnabled)
+                {
+                    questPanel.UpdateShowingQuest(quest);
+                }
+            }
+        }
+    }
+
 }

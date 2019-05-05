@@ -7,9 +7,9 @@ public class WTAF : Interactable
 
     public override void Interact()
     {
-        base.Interact();
         isInteracting = !isInteracting;
         Debug.Log("Beep boop quest shit...");
+        base.Interact();
     }
 
     private void Start()

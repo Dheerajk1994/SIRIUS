@@ -12,17 +12,20 @@ public class DialoguePanelScript : MonoBehaviour {
     public Button dialogueNextButn;
     public Button dialogueCloseButn;
 
+    int dialogueID;
+    string[] dialogueStrings;
+    int currentDialogueStringIndex;
+
     UIScript uiScript;
 
     public void SetDialoguePanel(UIScript uScript)
     {
         uiScript = uScript;
-    }
-
-    private void Start()
-    {
+        dialogueNextButn.onClick.AddListener(DialogueNextClicked);
+        dialogueCloseButn.onClick.AddListener(DialogueCloseClicked);
         dialoguePanelAnimator = this.GetComponent<Animator>();
     }
+    
 
     public void ToggleDialoguePanel(bool toggle)
     {
@@ -31,7 +34,16 @@ public class DialoguePanelScript : MonoBehaviour {
 
     private void DialogueNextClicked()
     {
-        DialogueController.NextDialogue();
+        currentDialogueStringIndex++;
+        if(currentDialogueStringIndex < dialogueStrings.Length)
+        {
+            dialogueMainText.text = dialogueStrings[currentDialogueStringIndex];
+        }
+        else
+        {
+            ToggleDialoguePanel(false);
+            DialogueManagerScript.instance.FinishedReadingDialogue();
+        }
     }
 
     private void DialogueCloseClicked()
@@ -39,9 +51,14 @@ public class DialoguePanelScript : MonoBehaviour {
         dialoguePanelAnimator.SetBool("isShowing", false);
     }
 
-    public void SetDialoguePanelText(string title, string dialogue)
+    public void SetDialoguePanelText(int id, string title, string[] dialogue)
     {
+        dialogueID = id;
         dialogueTitleText.text = title;
-        dialogueMainText.text = dialogue;
+        dialogueStrings = dialogue;
+        currentDialogueStringIndex = 0;
+
+        dialogueMainText.text = dialogue[currentDialogueStringIndex];
+
     }
 }

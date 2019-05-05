@@ -4,7 +4,8 @@ using UnityEngine;
 using System.IO;
 
 public static class QuestGenerator {
-	private static QuestLists listOfQuests;
+
+    private static QuestLists listOfQuests;
 
 	private static string path;
 
@@ -20,7 +21,7 @@ public static class QuestGenerator {
 		}
 		else
 		{
-			Debug.LogError("path couldn't be opened");
+			Debug.LogError("quest path couldn't be opened");
 			return null;
 		}
 	}
@@ -39,9 +40,10 @@ public class QuestDescription
 	public int[] prerequisiteID;
     public string questName;
     public string questDescription;
-    public int[] itemsRequired;
+    public int[] itemsRequired; 
 	public string[] mobName;
 	public int[] mobKillAmnt;
+    public string[] itemsToInteractWith;
     public int[] itemRewards;
 }
 

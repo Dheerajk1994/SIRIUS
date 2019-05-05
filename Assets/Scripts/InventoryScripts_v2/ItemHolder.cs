@@ -201,6 +201,7 @@ public class ItemHolder : MonoBehaviour
 
     public ushort [,] FetchItemsInInventory()
     {
+        //Debug.Log("generic holder " + inventoryArray[ROW_ID,0]);
         ushort[,] items = new ushort[inventoryArray.GetLength(0), inventoryArray.GetLength(1)];
         items = inventoryArray;
         return items;

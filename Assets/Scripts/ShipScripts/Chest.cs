@@ -5,19 +5,23 @@ using UnityEngine;
 public class Chest : Interactable
 {
     public GameObject ChestPanel;
+    private Inventory chestInventory;
+    private GenericInvoHandlerScript chestInvoHandler;
 
-    public void SetChestPanel(GameObject cp)
+    public void SetChest(UIScript uiScript)
     {
-        ChestPanel = cp;   
+        ChestPanel = uiScript.ChestPanel;
+        chestInventory = this.GetComponent<Inventory>();
+        chestInvoHandler = this.GetComponent<GenericInvoHandlerScript>();
     }
 
     public override void Interact()
     {
-        base.Interact();
         isInteracting = !isInteracting;
         panelOpen = !panelOpen;
-        ChestPanel.GetComponent<ChestScript>().ToggleChestPanel(isInteracting);
+        ChestPanel.GetComponent<ChestPanelScript>().ToggleChestPanel(isInteracting, chestInventory, chestInvoHandler);
         Debug.Log("opening chest");
+        base.Interact();
     }
 
     private void Start()

@@ -109,7 +109,7 @@ public class TerrainManagerScript : MonoBehaviour
         mineSound = this.GetComponent<AudioSource>();
     }
 
-    public void StartTerrainGen(ushort terrainType)
+    public void StartTerrainGen(EnumClass.TerrainType terrainType)
     {
         //Debug.Log(terrainType);
         this.GetComponentInParent<GenerateTerrainScript>().StartTerrainGeneration(this, xDimension, heightAddition, chunkSize, terrainType);
@@ -153,9 +153,9 @@ public class TerrainManagerScript : MonoBehaviour
         //Debug.Log("values received");
     }
 
-    public IEnumerator DisplayChunks(Vector2 playerPos)
+    public IEnumerator DisplayChunks(Vector2 playerPos, bool status)
     {
-        //Debug.Log("Display chunk called");
+        status = false;
         ushort chunkPosY = (ushort)Mathf.Clamp((ushort)Mathf.Floor(playerPos.y / chunkSize), 0, chunks.GetLength(1) - 1);
 
         int xRelativell = Mathf.FloorToInt(((playerPos.x - chunkSize * 2 )% worldXDimension + worldXDimension) % worldXDimension);
@@ -274,6 +274,7 @@ public class TerrainManagerScript : MonoBehaviour
         }
 
         yield return null;
+        status = true;
     }
 
     private void DisplayChunk(ushort cx, ushort cy)        //LOADS A CHUNK - USE WHEN CHUNK IS NOT POPULATED YET
@@ -590,6 +591,7 @@ public class TerrainManagerScript : MonoBehaviour
 
     public ushort MineTile(int x, int y, ushort tileLayer, InputManagerScript inputManager)
     {
+        if (worldXDimension == 0) return 0;
         ushort relativeX = (ushort)Mathf.Floor((x % worldXDimension + worldXDimension) % worldXDimension);
 
         switch (tileLayer)

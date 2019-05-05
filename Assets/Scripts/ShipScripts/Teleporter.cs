@@ -8,11 +8,11 @@ public class Teleporter : Interactable
 
     public override void Interact()
     {
-        base.Interact();
         isInteracting = !isInteracting;
         panelOpen = !panelOpen;
         ExitShipPanel.GetComponent<ExitShipScript>().ToggleExitShipPanel(isInteracting);
         Debug.Log("leaving da shep");
+        base.Interact();
     }
 
     private void Start()

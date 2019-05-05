@@ -16,13 +16,12 @@ public static class SaveManager {
         ushort[,] fRValue, 
         ushort[,] bTilesValue, 
         ushort[,] bRValue, 
-        ushort[,] vTilesValue,
-        Vector3 playerPos
+        ushort[,] vTilesValue
         )
     {
         path = Application.persistentDataPath + "/" + savePath;
 
-        SerializedSaveData data = new SerializedSaveData(fTilesValue, fRValue, bTilesValue, bRValue, vTilesValue, playerPos);
+        SerializedTerrainData data = new SerializedTerrainData(fTilesValue, fRValue, bTilesValue, bRValue, vTilesValue);
 
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream;
@@ -30,22 +29,21 @@ public static class SaveManager {
         stream = new FileStream(path, FileMode.Create);
         formatter.Serialize(stream, data);
         stream.Close();
-
     }
 
-    public static SerializedSaveData LoadGame(string loadPath)
+    public static SerializedTerrainData LoadTerrain(string loadPath)
     {
         path = Application.persistentDataPath + "/" + loadPath;
 
         if (File.Exists(path))
         {
-            SerializedSaveData data;
+            SerializedTerrainData data;
 
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream;
 
             stream = new FileStream(path, FileMode.Open);
-            data = (SerializedSaveData)formatter.Deserialize(stream);
+            data = (SerializedTerrainData)formatter.Deserialize(stream);
             stream.Close();
 
             return data;
@@ -60,10 +58,8 @@ public static class SaveManager {
 
 
 [Serializable]
-public class SerializedSaveData
+public class SerializedTerrainData
 {
-    public float playerPosX, playerPosY, playerPosZ;
-
     public ushort[,] ftileData;
     public ushort[,] fResourceData; 
 
@@ -73,14 +69,13 @@ public class SerializedSaveData
     public ushort[,] vtileData;
 
     //CONSTRUCTOR
-    public SerializedSaveData(//-  
+    public SerializedTerrainData(
         ushort[,] ftileValues, 
         ushort[,] fRValues, 
         ushort[,] btileValues, 
         ushort[,] bRValues, 
-        ushort[,] vtileValues,
-        Vector3 playerPos
-        )//-
+        ushort[,] vtileValues
+        )
     {
         ftileData = ftileValues;
         fResourceData = fRValues;
@@ -89,10 +84,6 @@ public class SerializedSaveData
         bResourceData = bRValues;
 
         vtileData = vtileValues;
-
-        playerPosX = playerPos.x;
-        playerPosY = playerPos.y;
-        playerPosZ = playerPos.z;
     }
 }
 
