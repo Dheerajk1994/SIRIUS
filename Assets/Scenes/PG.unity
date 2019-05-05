@@ -662,18 +662,26 @@ MonoBehaviour:
   MainCameraPrefab: {fileID: 0}
   InputManagerPrefab: {fileID: 0}
   InventoryControllerPrefab: {fileID: 0}
+  AIManagerPrefab: {fileID: 0}
+  QuestManagerPrefab: {fileID: 0}
+  ShipPrefab: {fileID: 0}
   terrainManager: {fileID: 0}
   ui: {fileID: 0}
   player: {fileID: 865069210}
   mainCameraObject: {fileID: 0}
   inputManager: {fileID: 0}
   inventoryController: {fileID: 0}
+  aiManager: {fileID: 0}
+  questManager: {fileID: 0}
+  ship: {fileID: 0}
   terrainManagerScript: {fileID: 0}
   uiScript: {fileID: 0}
   playerScript: {fileID: 0}
   cameraScript: {fileID: 0}
   inputManagerScript: {fileID: 0}
   inventoryControllerScript: {fileID: 0}
+  questManagerScript: {fileID: 0}
+  shipScript: {fileID: 0}
   readyToGo: 0
   worldPresent: 0
   playerPos: {x: 0, y: 0, z: 0}
@@ -757,8 +765,7 @@ Prefab:
     - target: {fileID: 1394551640246998, guid: 1c56dfe61d63a4929b1a3012fe5c4595, type: 2}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 114611975300918918, guid: 1c56dfe61d63a4929b1a3012fe5c4595,
         type: 2}
       propertyPath: BarkCollider
@@ -1644,42 +1651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159f0d9f7f94efe4f830aa99754ca1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDimension: 42
-  smoothness: 40
-  heightMultiple: 20
-  heightAddition: 50
-  backTileLayerID: 12
-  frontTileLayerID: 13
-  grassLayerID: 15
-  caveChanceVal: 48
-  caveSimRep: 2
-  caveMinNeighReq: 2
-  caveMaxNeighReq: 6
-  caveChangeInHeight: 0
-  stoneChanceVal: 48
-  stoneSimRep: 3
-  stoneMinNeighReq: 4
-  stoneMaxNeighReq: 5
-  stoneChangeInHeight: 0
-  coalChance: 20
-  coalNeighChance: 30
-  coalChangeInHeight: 0
-  copperChance: 15
-  copperNeighChance: 15
-  copperChangeInHeight: 0
-  silverChance: 15
-  silverNeighChance: 15
-  silverChangeInHeight: 0.5
-  goldChance: 10
-  goldNeighChance: 10
-  goldChangeInHeight: 0.7
-  diamondChance: 5
-  diamondNeighChance: 5
-  diamondChangeInHeight: 1
-  flowerChance: 100
-  treeChance: 10
-  minTreeHeight: 15
-  maxTreeHeight: 20
+  maxRandomRange: 1000
 --- !u!4 &680721634
 Transform:
   m_ObjectHideFlags: 0
@@ -1710,15 +1682,30 @@ MonoBehaviour:
   PickupTilePrefab: {fileID: 0}
   regularStoneSprites: []
   moonStoneSprites: []
+  desertStoneSprites: []
+  snowStoneSprites: []
+  bedRockSprites: []
   regularDirtSprites: []
   moonDirtSprites: []
+  desertDirtSprites: []
+  snowDirtSprites: []
   regularSandSprites: []
   moonSandSprite: []
   regularGrassSprites: []
+  desertGrassSprites: []
+  snowGrassSprites: []
   regularFlowerSprites: []
+  desertFlowerSprites: []
+  snowFlowerSprites: []
   regularTreeBaseSprite: []
   regularTreeTopSprite: []
   regularTreeCoreSprite: []
+  desertTreeBaseSprite: []
+  desertTreeTopSprite: []
+  desertTreeCoreSprite: []
+  snowTreeBaseSprite: []
+  snowTreeTopSprite: []
+  snowTreeCoreSprite: []
   coalSprites: []
   copperSprites: []
   ironSprites: []
@@ -1894,9 +1881,49 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224978646535480978, guid: ea9732d6fc0431947a6eaf517ce6502e,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 224457449172756462, guid: ea9732d6fc0431947a6eaf517ce6502e,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224457449172756462, guid: ea9732d6fc0431947a6eaf517ce6502e,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224457449172756462, guid: ea9732d6fc0431947a6eaf517ce6502e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224457449172756462, guid: ea9732d6fc0431947a6eaf517ce6502e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224457449172756462, guid: ea9732d6fc0431947a6eaf517ce6502e,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224457449172756462, guid: ea9732d6fc0431947a6eaf517ce6502e,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea9732d6fc0431947a6eaf517ce6502e, type: 2}
   m_IsPrefabAsset: 0
+--- !u!224 &713593824 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224978646535480978, guid: ea9732d6fc0431947a6eaf517ce6502e,
+    type: 2}
+  m_PrefabInternal: {fileID: 713593823}
 --- !u!1001 &743445104
 Prefab:
   m_ObjectHideFlags: 0
@@ -3321,7 +3348,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4737412787420464, guid: d0a64995459e12d48948b15a760f8f60, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114875988750149644, guid: d0a64995459e12d48948b15a760f8f60,
         type: 2}
@@ -3405,11 +3432,6 @@ RectTransform:
   m_AnchoredPosition: {x: 11.5, y: 0}
   m_SizeDelta: {x: 124, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!224 &1722750633 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224572778705071982, guid: ea9732d6fc0431947a6eaf517ce6502e,
-    type: 2}
-  m_PrefabInternal: {fileID: 713593823}
 --- !u!1 &1754475266
 GameObject:
   m_ObjectHideFlags: 0
@@ -3502,7 +3524,7 @@ RectTransform:
   - {fileID: 757743943}
   - {fileID: 111459399}
   - {fileID: 1926172427}
-  - {fileID: 1722750633}
+  - {fileID: 713593824}
   - {fileID: 2034062957}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -3530,6 +3552,12 @@ MonoBehaviour:
   QuestPanel: {fileID: 0}
   BottomDialoguePanel: {fileID: 0}
   MainMenuPanel: {fileID: 0}
+  ExitShipPanel: {fileID: 0}
+  EnginePanel: {fileID: 0}
+  NavPanel: {fileID: 0}
+  ChestPanel: {fileID: 0}
+  teleportButton: {fileID: 0}
+  loadingScreen: {fileID: 0}
   gameManagerScript: {fileID: 0}
   inputManagerScript: {fileID: 0}
   player: {fileID: 0}
@@ -5031,7 +5059,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 865069213}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1926172426
 GameObject:
@@ -5870,13 +5898,20 @@ MonoBehaviour:
   planet: {fileID: 0}
   stars: {fileID: 0}
   terrain: {fileID: 0}
-  greenWorldSprite: {fileID: 0}
-  moonWorldSprite: {fileID: 0}
+  greenPlanetSprite: {fileID: 0}
+  moonPlanetSprite: {fileID: 0}
+  desertPlanetSprite: {fileID: 0}
+  snowPlanetSprite: {fileID: 0}
   greenWorldSkyMat: {fileID: 0}
   moonWorldSkyMat: {fileID: 0}
+  desertWorldSkyMat: {fileID: 0}
+  snowWorldSkyMat: {fileID: 0}
+  shipWorldSkyMat: {fileID: 0}
   clouds: {fileID: 0}
   asteroids: {fileID: 0}
   greenWorldTerrainBG: {fileID: 0}
   moonWorldTerrainBG: {fileID: 0}
+  desertWorldTerrainBG: {fileID: 0}
+  snowWorldTerrainBG: {fileID: 0}
   cloud1Speed: 0.001
   cloud2Speed: 0.05

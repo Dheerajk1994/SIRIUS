@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Enemy : CharacterFinal
 {
+    public string thisEnemiesName;
     private IEnemyState currentState;
+    private AudioSource[] enemySounds;
+    private AudioSource deathSound;
+    private AudioSource damageSound;
 
     [SerializeField]
     private InventoryControllerScript inventoryControllerScript;
@@ -39,6 +43,9 @@ public class Enemy : CharacterFinal
         this.GetComponent<SpriteRenderer>().sortingOrder = 13;
         path = new List<Vector2>();
         targetPos = new Vector2();
+        enemySounds = this.GetComponents<AudioSource>();
+        deathSound = enemySounds[0];
+        damageSound = enemySounds[1];
     }
 
     // Update is called once per frame
@@ -52,7 +59,7 @@ public class Enemy : CharacterFinal
             currentState.Execute();
         }
 
-        LookAtTarget();
+        //LookAtTarget();
         // }
 
     }
@@ -277,16 +284,25 @@ public class Enemy : CharacterFinal
 
         if(!IsDead)
         {
+            damageSound.Play();
             Debug.Log("Taken Damage");
             MyAnimator.SetTrigger("damage");  
         }
         else
         {
+//<<<<<<< louis
             
             Destroy(this.gameObject, 2f);
             MyAnimator.SetTrigger("Enemy.TakeDamage: Destroying this.GameObject and Calling SetLootDrop");
             SetLootDrop(700, 1, inventorySprites.itemSprites[700], this.gameObject.transform.localPosition);
 
+//=======
+            //deathSound.Play();
+            //MyAnimator.SetTrigger("die");
+            QuestManagerScript.instance.KilledMob(thisEnemiesName, 1);
+            Destroy(this.gameObject);
+              
+//>>>>>>> dtemp
         }
     }
 

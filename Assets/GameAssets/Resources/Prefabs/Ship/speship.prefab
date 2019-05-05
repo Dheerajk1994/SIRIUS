@@ -73,6 +73,8 @@ GameObject:
   - component: {fileID: 4029874901419994}
   - component: {fileID: 61662249930042968}
   - component: {fileID: 114772819540615980}
+  - component: {fileID: 114567367574080708}
+  - component: {fileID: 114525155144780896}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -660,10 +662,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: 
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
   interactText: Press E to Interact
+  audiomanager: {fileID: 0}
   destination: {fileID: 1938500411338168}
 --- !u!114 &114162836072644668
 MonoBehaviour:
@@ -677,6 +681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: WTAF
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
@@ -693,10 +698,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: 
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
   interactText: Press E to Interact
+  audiomanager: {fileID: 0}
   destination: {fileID: 1785246841266026}
 --- !u!114 &114286450490008922
 MonoBehaviour:
@@ -714,6 +721,9 @@ MonoBehaviour:
   Navigation: {fileID: 1385680063904670}
   Bed: {fileID: 1901692159518330}
   Chest: {fileID: 1450299133684860}
+  DownStairs: {fileID: 1785246841266026}
+  UpStairs: {fileID: 1938500411338168}
+  audioManager: {fileID: 0}
   spawnPosition: {fileID: 4395889196759800}
 --- !u!114 &114421684113572526
 MonoBehaviour:
@@ -727,11 +737,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: Engine
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
   interactText: Press E to Interact
   EnginePanel: {fileID: 0}
+--- !u!114 &114525155144780896
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1450299133684860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614b65b7f24e2b3428003c87c04c4a45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: []
+  genericInventory: {fileID: 114567367574080708}
+  genericInventoryPanel: {fileID: 0}
+  inventoryItemPrefab: {fileID: 1586053091211532, guid: 1ac93c43f04919c42993edfbfa6e1356,
+    type: 2}
+--- !u!114 &114567367574080708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1450299133684860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64553648ac8e32d49af54bbe10c97fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySize: 40
 --- !u!114 &114683188126147568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -744,6 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: Teleporter
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
@@ -761,6 +801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: Chest
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
@@ -778,6 +819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: Bed
   canInteract: 0
   isInteracting: 0
   panelOpen: 0
@@ -794,6 +836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3154243d8d230a347ba6f9387fec98de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audiomanager: {fileID: 0}
   exitButn: {fileID: 0}
   yesButn: {fileID: 0}
   noButn: {fileID: 0}
@@ -809,6 +852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  thisItemsName: Navigation
   canInteract: 0
   isInteracting: 0
   panelOpen: 0

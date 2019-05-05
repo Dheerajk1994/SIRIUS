@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ExitShipScript : MonoBehaviour
 {
-    private AudioManagerScript audiomanager;
+    public AudioManagerScript audiomanager;
     private Animator exitShipPanelAnimator;
     public Button exitButn;
     public Button yesButn;

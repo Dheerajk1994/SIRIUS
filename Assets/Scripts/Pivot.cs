@@ -94,7 +94,7 @@ public class Pivot : MonoBehaviour
             }
             else
             {
-                Debug.Log("rotate facing left");
+                //Debug.Log("rotate facing left");
                 //rotation += (float)(attackSpeed - (2 * Time.deltaTime));
                 rotation -= (float)(attackSpeed - (2 * Time.deltaTime));
                 transform.rotation = Quaternion.Euler(0f, 180f, rotation);
@@ -194,11 +194,10 @@ public class Pivot : MonoBehaviour
     {
         EmptyCurrentHand();
         obj.transform.parent = equipmentPosition.transform;
-        obj.transform.position = equipmentPosition.position;
-        obj.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
-        obj.GetComponent<SpriteRenderer>().sortingLayerName = "frontTileLayer";
-
-        //obj.transform.SetParent()
+        //obj.transform.position = equipmentPosition.position;
+        obj.transform.localPosition = new Vector3(0.3f, 0, 0);
+        obj.transform.localRotation = Quaternion.Euler(0f, 0f, -103f);
+        obj.GetComponent<SpriteRenderer>().sortingOrder = 17;
     }
 
     private void EmptyCurrentHand()
