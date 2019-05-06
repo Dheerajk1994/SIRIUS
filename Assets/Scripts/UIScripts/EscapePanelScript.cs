@@ -10,10 +10,20 @@ public class EscapePanelScript : MonoBehaviour {
     [SerializeField] private Button escapeButton;
     [SerializeField] private Toggle toggleSoundButton;
 
+    private bool active;
+
     public void SetEscapePanel(GameManagerScript gm)
     {
+        active = false;
+        this.gameObject.SetActive(active);
         gameManager = gm;
         escapeButton.onClick.AddListener(EscapeButtonClicked);
+    }
+
+    public void ToggleEscapePanel()
+    {
+        active = !active;
+        this.gameObject.SetActive(active);
     }
 
     public void EscapeButtonClicked()

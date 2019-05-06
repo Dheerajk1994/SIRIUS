@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4780778431247350}
   - component: {fileID: 114944543043505896}
   - component: {fileID: 114850173433799900}
+  - component: {fileID: 114469535967944952}
   m_Layer: 0
   m_Name: TheImmortal
   m_TagString: Untagged
@@ -41,6 +42,96 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114469535967944952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1662717799341054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dca941ee3293534b8ccf682f7711ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: btn-confirm
+    clip: {fileID: 8300000, guid: 777f374f36a3d8c48b7339194cb6bbfb, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: btn-deny
+    clip: {fileID: 8300000, guid: 6af5d51a68258a14995134a12dfe292d, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ui-animation
+    clip: {fileID: 8300000, guid: 5920d8c495050f14681129d58a3ddab2, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: btn-refuel
+    clip: {fileID: 8300000, guid: 763307c181d5a624e9bf44ea37c15cdf, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: btn-quick-ui
+    clip: {fileID: 8300000, guid: b3fb79743016f894985c0d3feeca0074, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: teleport
+    clip: {fileID: 8300000, guid: 134fa1e1f6e298b4eab9de7c5e4ace1a, type: 3}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: sam-jump
+    clip: {fileID: 8300000, guid: c6d2d4906ed3dd1408ac60a8b301bdbe, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: sam-bark
+    clip: {fileID: 8300000, guid: dea872eaee335ee4ab11241879704e3e, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: sam-die
+    clip: {fileID: 8300000, guid: 55b17445cafdc364ca0e76a115422007, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: sam-hurt
+    clip: {fileID: 8300000, guid: 265b0766000282a4db09b942d170ede9, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: mine
+    clip: {fileID: 8300000, guid: d8d7f0d3095f62d45b477c7f3a812d8b, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: melee-swing
+    clip: {fileID: 8300000, guid: 136acc7d932b7364b91d05376f0bde71, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: bgm-1
+    clip: {fileID: 8300000, guid: 9ded6992fd3688744ac943a779c1db9e, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!114 &114850173433799900
 MonoBehaviour:
   m_ObjectHideFlags: 1

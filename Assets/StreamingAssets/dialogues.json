@@ -88,7 +88,7 @@
 
     {
       "dialogueID": 5,
-      "autoDisplayDialogue": false,
+      "autoDisplayDialogue": true,
       "dialogueGiverName": "",
       "dialogueLines": [
         "*plays in the arms of an angel*",
@@ -116,14 +116,16 @@
 
     {
       "dialogueID": 7,
-      "autoDisplayDialogue": false,
+      "autoDisplayDialogue": true,
       "dialogueGiverName": "WTAF",
       "dialogueLines": [
         "Good we’re almost set.",
-        "Go over to the navigation paenl. Its upstairs.",
+        "Deposit some fuel in here.",
+        "Then go over to the navigation paenl. Its upstairs.",
         "You’ll need to pick the next planet.",
         "Just pick anything that looks pretty. This place is giving me the creeps.",
-        "When you are there come back and talk to me."
+        "Just select a planet and hit 'SET SAIL'.",
+        "Come talk to me when are somewhere new."
       ],
       "dialogueActivated": 0,
       "questsNeededToActivateDialogue": [ 8 ],
@@ -133,7 +135,7 @@
 
     {
       "dialogueID": 8,
-      "autoDisplayDialogue": false,
+      "autoDisplayDialogue": true,
       "dialogueGiverName": "WTAF",
       "dialogueLines": [
         "Alright...",
@@ -142,7 +144,7 @@
         "Yer all on yer own now bud"
       ],
       "dialogueActivated": 0,
-      "questsNeededToActivateDialogue": [ 9 ],
+      "questsNeededToActivateDialogue": [ 10 ],
       "questsActivatedByDialgue": [ 0 ]
 
     }

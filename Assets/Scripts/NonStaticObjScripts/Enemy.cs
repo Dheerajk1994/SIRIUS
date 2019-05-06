@@ -285,7 +285,7 @@ public class Enemy : CharacterFinal
         if(!IsDead)
         {
             damageSound.Play();
-            Debug.Log("Taken Damage");
+            //Debug.Log("Taken Damage");
             MyAnimator.SetTrigger("damage");  
         }
         else

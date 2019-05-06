@@ -5902,13 +5902,12 @@ MonoBehaviour:
   PlayerCraftingPanel: {fileID: 1473935419754050}
   QuestPanel: {fileID: 1601000781442578}
   BottomDialoguePanel: {fileID: 1219507421809250}
-  MainMenuPanel: {fileID: 1574834416022254}
   ExitShipPanel: {fileID: 1343318348683826}
   EnginePanel: {fileID: 1055248827248480}
   NavPanel: {fileID: 1811633998624822}
   ChestPanel: {fileID: 1252433135141248}
   teleportButton: {fileID: 114941307611204476}
-  EscapePanel: {fileID: 0}
+  EscapePanel: {fileID: 1999333823766420}
   loadingScreen: {fileID: 224647796486370426}
   gameManagerScript: {fileID: 0}
   inputManagerScript: {fileID: 0}
@@ -7912,8 +7911,12 @@ MonoBehaviour:
   healthBar: {fileID: 114237979082639728}
   staminaBar: {fileID: 114233701551090978}
   hungerBar: {fileID: 114014373415543650}
-  attributeIcon: {fileID: 0}
-  attributePanelStatusSprite: []
+  attributeIcon: {fileID: 114397793082347470}
+  attributePanelStatusSprite:
+  - {fileID: 21300000, guid: 5d9dcaf3ee7378e48a4df0664336a015, type: 3}
+  - {fileID: 21300000, guid: e1cc1af1cb1020b40bc3c136c0dd7842, type: 3}
+  - {fileID: 21300000, guid: a3651e327b994784cbe59932f50aeffb, type: 3}
+  - {fileID: 21300000, guid: 24791bb5908a4be4ab50dcef88813e33, type: 3}
   uiScript: {fileID: 0}
 --- !u!114 &114936671429591996
 MonoBehaviour:

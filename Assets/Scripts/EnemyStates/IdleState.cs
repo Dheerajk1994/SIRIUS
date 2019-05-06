@@ -22,7 +22,7 @@ public class IdleState : IEnemyState
         // since patrol state already making the subject move we will use this 
         if (enemy.Target != null)
         {
-            Debug.Log("Target Acquired");
+            //Debug.Log("Target Acquired");
             enemy.ChangeState(new PatrolState()); 
         }
     }

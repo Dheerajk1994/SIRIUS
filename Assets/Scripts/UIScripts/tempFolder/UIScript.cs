@@ -13,7 +13,6 @@ public class UIScript : MonoBehaviour
     public GameObject PlayerCraftingPanel;
     public GameObject QuestPanel;
     public GameObject BottomDialoguePanel;
-    public GameObject MainMenuPanel;
     public GameObject ExitShipPanel;
     public GameObject EnginePanel;
     public GameObject NavPanel;
@@ -61,7 +60,9 @@ public class UIScript : MonoBehaviour
 
         BottomDialoguePanel.GetComponent<DialoguePanelScript>().SetDialoguePanel(this);
 
-        MainMenuPanel.GetComponent<MainMenuScript>().SetMainMenuPanel(this);
+        //MainMenuPanel.GetComponent<MainMenuScript>().SetMainMenuPanel(this);
+
+        EscapePanel.GetComponent<EscapePanelScript>().SetEscapePanel(gameManagerScript);
 
         if(gameManagerScript.ship != null)
         {

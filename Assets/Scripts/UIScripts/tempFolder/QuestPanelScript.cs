@@ -44,7 +44,7 @@ public class QuestPanelScript : MonoBehaviour {
     public void SetQuestPanel(GameManagerScript gms)//called by gamemanager with required references
     {
         gameManagerScript = gms;
-        audiomanager = gms.audioManagerScript;
+        audiomanager = AudioManagerScript.instance;
         abandonQuestButton.onClick.AddListener(QuestAbandonButtonClicked);
         turnInQuestButton.onClick.AddListener(QuestTurnInButtonClicked);
     }

@@ -17,7 +17,7 @@ public class Player : CharacterFinal
     private Pivot rotatingArmScript;
 
     [SerializeField]
-    public PlayerAttributesPanelScript attributes;
+    public PlayerAttributesPanelScript playerAttributes;
 
 
     private static Player instance;
@@ -33,6 +33,7 @@ public class Player : CharacterFinal
 
     public void SetPlayerScript(GameManagerScript gmScript, UIScript uScript, InputManagerScript inputScript, AudioManagerScript aManager)
     {
+        playerAttributes = uScript.PlayerAttributePanel.GetComponent<PlayerAttributesPanelScript>();
         gameManagerScript = gmScript;
         uiScript = uScript;
         inputManagerScript = inputScript;
@@ -202,7 +203,7 @@ public class Player : CharacterFinal
     {
         audioManagerScript.Play("sam-hurt");
         currentHealth -= damage;
-        attributes.UpdateHealth(currentHealth);
+        playerAttributes.UpdateHealth(currentHealth);
         if(IsDead)
         {
             audioManagerScript.Play("sam-die");
