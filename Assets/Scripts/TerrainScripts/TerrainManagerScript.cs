@@ -14,6 +14,7 @@ public class TerrainManagerScript : MonoBehaviour
     public GameObject TileObjectPrefab;
     public GameObject PickupTilePrefab;
 
+
     //STONES
     [SerializeField] private Sprite[] regularStoneSprites;
     [SerializeField] private Sprite[] moonStoneSprites;
@@ -83,6 +84,7 @@ public class TerrainManagerScript : MonoBehaviour
     public ushort[,] backTilesValue;
     public ushort[,] backTilesResourceValue;
     public ushort[,] vegetationTilesValue;
+    public ushort[,] darknessValue;
 
     public GameObject player;
     //private InventoryScript playerInventoryScript;
@@ -581,16 +583,27 @@ public class TerrainManagerScript : MonoBehaviour
      
     private void PlaceTileInVegetationtLayer(GameObject tile)
     {
-        tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.GRASS;
+        ushort tileId = tile.GetComponent<TileScript>().tileId;
+        if (tileId == (ushort)EnumClass.TileEnum.DESERT_TREE_LEAF ||
+            tileId == (ushort)EnumClass.TileEnum.REGULAR_TREELEAF ||
+            tileId == (ushort)EnumClass.TileEnum.SNOW_TREE_LEAF)
+        {
+            tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.GRASS + 1;
+        }
+        else
+        {
+            tile.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.GRASS;
+        }
         tile.GetComponent<Collider2D>().enabled = false;
         tile.GetComponent<SpriteRenderer>().color = Color.white;
     }
+
 
     //FUNCTIONS CALLED BY INPUT MANAGER
     
     public IEnumerator ChopWood(int x, int y, InputManagerScript inputManager)
     {
-        if (worldXDimension == 0) yield return null;
+        if (worldXDimension == 0) yield break;
         ushort relativeX = (ushort)Mathf.Floor((x % worldXDimension + worldXDimension) % worldXDimension);
 
         while(vegetationTilesValue[relativeX, y] == (ushort)EnumClass.TileEnum.DESERT_TREE_TRUNK ||

@@ -55,15 +55,11 @@ public class Enemy : CharacterFinal
     protected override void Update()
     {
         base.Update();
-        //if (!IsDead)
-        //{
+        
         if (!TakingDamage)
         {
             currentState.Execute();
         }
-
-        //LookAtTarget();
-        // }
 
     }
 
@@ -216,7 +212,8 @@ public class Enemy : CharacterFinal
         if (Vector2.Distance(currentPosition, targetPos) < 0.5f) path.Remove(targetPos);
         if (path.Count == 0) return;
         targetPos = path[0];
-        if (targetPos.y > currentPosition.y) this.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 50f);
+        if (Vector2.Distance(targetPos, currentPosition) > 3f) path.Clear();//so it wont jump
+        if (targetPos.y > currentPosition.y) this.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 30f);
         transform.position = Vector2.MoveTowards(currentPosition, targetPos, Time.deltaTime * movementSpeed);
         //if (!Attack)
         //{
@@ -241,7 +238,7 @@ public class Enemy : CharacterFinal
         if (leftOrRight == 0)//left
         {
             relXPos -= UnityEngine.Random.Range(0, xLook);
-            terrainManagerScript.GetRelativeXPos(relXPos);
+            relXPos = terrainManagerScript.GetRelativeXPos(relXPos);
             for (int yPos = yLook / 2; yPos > -yLook/2; --yPos)
             {
                 if(terrainManagerScript.frontTilesValue[relXPos,y + yPos] == 0 && terrainManagerScript.frontTilesValue[relXPos, y + yPos - 1] != 0)

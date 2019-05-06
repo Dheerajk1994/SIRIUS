@@ -9,7 +9,7 @@ public class NavigationScript : MonoBehaviour {
     private Animator navPanelAnimator;
     private bool isOpen = false;
 
-    public int requiredFuelForTravel;
+    public int requiredFuelForTravel = 10;
 
     [SerializeField] private Button exitButn;
     [SerializeField] private Button setSailButton;

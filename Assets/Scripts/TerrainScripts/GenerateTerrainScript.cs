@@ -494,4 +494,48 @@ public class GenerateTerrainScript : MonoBehaviour
         }
         return neighbors;
     }
+
+    private ushort GetSmallestNeighborValue(ushort[,] neighArray, int x, int y)
+    {
+        ushort min = 10;
+
+
+        if ((x - 1) >= 0 && (y - 1) >= 0 && (x + 2) < neighArray.GetLength(0) && (y + 2) < neighArray.GetLength(1))
+        {
+            if (neighArray[x - 1, y - 1] < min)//left bottom
+            {
+                min = neighArray[x - 1, y - 1];
+            }
+            if (neighArray[x - 1, y] < min)//left center
+            {
+                min = neighArray[x - 1, y];
+            }
+            if (neighArray[x - 1, y + 1] < min)//left top
+            {
+                min = neighArray[x - 1, y + 1];
+            }
+            if (neighArray[x, y - 1] < min)//center bottom
+            {
+                min = neighArray[x, y - 1];
+            }
+            if (neighArray[x, y + 1] < min)//center top
+            {
+                min = neighArray[x, y + 1];
+            }
+            if (neighArray[x + 1, y - 1] < min)//right bottom
+            {
+                min = neighArray[x + 1, y - 1];
+            }
+            if (neighArray[x + 1, y] < min)//right center
+            {
+                min = neighArray[x + 1, y];
+            }
+            if (neighArray[x + 1, y + 1] < min)//right top
+            {
+                min = neighArray[x + 1, y + 1];
+            }
+        }
+
+        return min;
+    }
 }

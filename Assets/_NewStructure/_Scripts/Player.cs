@@ -126,35 +126,37 @@ public class Player : CharacterFinal
 
     private void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
-            MyAnimator.SetTrigger("jump");
-            if (audioManagerScript)
-            {
-                audioManagerScript.Play("sam-jump");
-            }
+            this.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce);
+            //MyAnimator.SetTrigger("jump");
+            //if (audioManagerScript)
+            //{
+            //    audioManagerScript.Play("sam-jump");
+            //}
             //jump = true;
         }
     }
 
     private bool IsGrounded()
     {
-        if (MyRigidbody.velocity.y <= 0)
+        if (MyRigidbody.velocity.y <= 0.01f)
         {
-            foreach (Transform point in groundPoints)
-            {
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(point.position, groundRadius, whatIsGround);
-
-                for (int i = 0; i < colliders.Length; i++)
-                {
-                    if (colliders[i].gameObject != gameObject)
-                    {
-                        //myAnimator.ResetTrigger("jump");
-                        //myAnimator.SetBool("land", false);
-                        return true;
-                    }
-                }
-            }
+            return true;
+            //foreach (Transform point in groundPoints)
+            //{
+            //    Collider2D[] colliders = Physics2D.OverlapCircleAll(point.position, groundRadius, whatIsGround);
+            //
+            //    for (int i = 0; i < colliders.Length; i++)
+            //    {
+            //        if (colliders[i].gameObject != gameObject)
+            //        {
+            //            //myAnimator.ResetTrigger("jump");
+            //            //myAnimator.SetBool("land", false);
+            //            return true;
+            //        }
+            //    }
+            //}
         }
         return false;
     }

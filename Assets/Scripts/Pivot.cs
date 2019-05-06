@@ -170,7 +170,11 @@ public class Pivot : MonoBehaviour
             katana.transform.position = equipmentPosition.position;
             katana.transform.parent = equipmentPosition.transform;
             //if (!PlayerScript.getFacingDirection())
+//<<<<<<< louis
                 //katana.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+//=======
+              //  katana.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+//>>>>>>> dtemp
         }
     }
 
