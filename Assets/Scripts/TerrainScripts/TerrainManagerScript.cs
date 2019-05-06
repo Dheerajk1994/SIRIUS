@@ -91,6 +91,7 @@ public class TerrainManagerScript : MonoBehaviour
     public GameObject gameManager;
     private TilePoolScript tilePool;
     private InventoryControllerScript inventoryControllerScript;
+    private AudioSource mineSound;
 
     #endregion 
 
@@ -100,14 +101,15 @@ public class TerrainManagerScript : MonoBehaviour
         tilePool = tp;
         player = plyr;
         inventoryControllerScript = ics;
+        //audioManager = gScript.audioManagerScript;
     }
 
     private void Start()
     {
-
+        mineSound = this.GetComponent<AudioSource>();
     }
 
-    public void StartTerrainGen(ushort terrainType)
+    public void StartTerrainGen(EnumClass.TerrainType terrainType)
     {
         //Debug.Log(terrainType);
         this.GetComponentInParent<GenerateTerrainScript>().StartTerrainGeneration(this, xDimension, heightAddition, chunkSize, terrainType);
@@ -151,9 +153,9 @@ public class TerrainManagerScript : MonoBehaviour
         //Debug.Log("values received");
     }
 
-    public IEnumerator DisplayChunks(Vector2 playerPos)
+    public IEnumerator DisplayChunks(Vector2 playerPos, bool status)
     {
-        //Debug.Log("Display chunk called");
+        status = false;
         ushort chunkPosY = (ushort)Mathf.Clamp((ushort)Mathf.Floor(playerPos.y / chunkSize), 0, chunks.GetLength(1) - 1);
 
         int xRelativell = Mathf.FloorToInt(((playerPos.x - chunkSize * 2 )% worldXDimension + worldXDimension) % worldXDimension);
@@ -272,6 +274,7 @@ public class TerrainManagerScript : MonoBehaviour
         }
 
         yield return null;
+        status = true;
     }
 
     private void DisplayChunk(ushort cx, ushort cy)        //LOADS A CHUNK - USE WHEN CHUNK IS NOT POPULATED YET
@@ -588,15 +591,18 @@ public class TerrainManagerScript : MonoBehaviour
 
     public ushort MineTile(int x, int y, ushort tileLayer, InputManagerScript inputManager)
     {
+        if (worldXDimension == 0) return 0;
         ushort relativeX = (ushort)Mathf.Floor((x % worldXDimension + worldXDimension) % worldXDimension);
 
         switch (tileLayer)
         {
             case (ushort)EnumClass.LayerIDEnum.FRONTLAYER:
                 MineFrontTile(relativeX, (ushort)y, inputManager);
+                //audioManager.Play("mine");
                 break;
             case (ushort)EnumClass.LayerIDEnum.BACKLAYER:
                 MineBackTile(relativeX, (ushort)y, inputManager);
+                //audioManager.Play("mine");
                 break;
             default:
                 break;
@@ -623,6 +629,8 @@ public class TerrainManagerScript : MonoBehaviour
         Destroy(frontTilesResources[x, y]);
         Destroy(vegetationTiles[x, y]);
         Destroy(vegetationTiles[x, y + 1]);
+
+        mineSound.Play();
     }
 
     private void MineBackTile(ushort x, ushort y, InputManagerScript inputManager)
@@ -639,6 +647,8 @@ public class TerrainManagerScript : MonoBehaviour
 
         Destroy(backTiles[x, y]);
         Destroy(backTilesResources[x, y]);
+
+        mineSound.Play();
     }
 
     //CREATE TILE DROP

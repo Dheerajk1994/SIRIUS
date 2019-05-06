@@ -7,6 +7,7 @@ public class Player : CharacterFinal
     public GameManagerScript gameManagerScript;
     public UIScript uiScript;
     public InputManagerScript inputManagerScript;
+    public AudioManagerScript audioManagerScript;
 
     //public GameObject rotatingArmPrefab;
     //public GameObject rotatingArmObject;
@@ -14,6 +15,9 @@ public class Player : CharacterFinal
 
     [SerializeField]private GameObject rotatingArm;
     private Pivot rotatingArmScript;
+
+    [SerializeField]
+    public PlayerAttributesPanelScript attributes;
 
 
     private static Player instance;
@@ -27,11 +31,12 @@ public class Player : CharacterFinal
     //     }
     // }
 
-    public void SetPlayerScript(GameManagerScript gmScript, UIScript uScript, InputManagerScript inputScript)
+    public void SetPlayerScript(GameManagerScript gmScript, UIScript uScript, InputManagerScript inputScript, AudioManagerScript aManager)
     {
         gameManagerScript = gmScript;
         uiScript = uScript;
         inputManagerScript = inputScript;
+        audioManagerScript = aManager; 
     }
 
     public static Player Instance
@@ -97,6 +102,12 @@ public class Player : CharacterFinal
         base.Update();
         HandleInput();
         //generateRotatingArm();
+        if(IsDead)
+        {
+            Debug.LogError("Game Over!" +
+                "\nSam Died!");
+            Destroy(this.gameObject);
+        }
 
     }
 
@@ -117,6 +128,7 @@ public class Player : CharacterFinal
         if (Input.GetKeyDown(KeyCode.Space))
         {
             MyAnimator.SetTrigger("jump");
+            audioManagerScript.Play("sam-jump");
             //jump = true;
         }
     }
@@ -185,7 +197,24 @@ public class Player : CharacterFinal
 
     public override void TakeDamage(float damage)
     {
+//<<<<<<< ryan
+        audioManagerScript.Play("sam-hurt");
+        currentHealth -= damage;
+//<<<<<<< louis
+        attributes.UpdateHealth(currentHealth);
+//=======
+        if(IsDead)
+        {
+            audioManagerScript.Play("sam-die");
+            Debug.Log("Player died");
+        }
         Debug.Log("Player.TakeDamage: not implemented");
+
+//=======
+  //      Debug.Log("Player.TakeDamage: called");
+   //     currentHealth -= damage;
+//>>>>>>> dtemp
+//>>>>>>> dtemp
     } 
     
     public void HandleEquip()
@@ -239,7 +268,12 @@ public class Player : CharacterFinal
                 break;
             default:
                 GameObject obj = new GameObject();
+//<<<<<<< will
                 obj.AddComponent<SpriteRenderer>().sprite = InventorySpritesScript.instance.GetSprite(itemID);
+//=======
+///                obj.AddComponent<SpriteRenderer>().sprite = InventorySpritesScript.instance.GetSprite(2);
+//                obj.GetComponent<SpriteRenderer>().sortingLayerName = "frontLayer";
+//>>>>>>> dtemp
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().EquipItem(obj);
                 MyAnimator.SetBool("rotatingArm", true);
@@ -251,6 +285,7 @@ public class Player : CharacterFinal
     public void MeleeAttack()
     {
         rotatingArmScript.MeleeRotate(equippedItem.GetComponent<WeaponClass>().attackSpeed);
+        audioManagerScript.Play("melee-swing");
     }
 
     //public void GenerateRotatingArm()

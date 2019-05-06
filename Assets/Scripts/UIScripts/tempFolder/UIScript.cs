@@ -62,13 +62,16 @@ public class UIScript : MonoBehaviour
 
         MainMenuPanel.GetComponent<MainMenuScript>().SetMainMenuPanel(this);
 
-        ExitShipPanel.GetComponent<ExitShipScript>().SetExitShipPanel(this);
+        if(gameManagerScript.ship != null)
+        {
+            ExitShipPanel.GetComponent<ExitShipScript>().SetExitShipPanel(this);
 
-        EnginePanel.GetComponent<EngineScript>().SetEnginePanel(this);
+            EnginePanel.GetComponent<EngineScript>().SetEnginePanel(this);
 
-        NavPanel.GetComponent<NavigationScript>().SetNavPanel(this);
+            NavPanel.GetComponent<NavigationScript>().SetNavPanel(this);
 
-        //ChestPanel.GetComponent<ChestScript>().SetChestPanel(this);
+            ChestPanel.GetComponent<ChestPanelScript>().SetChestPanel(this);
+        }
 
     }
 

@@ -67,7 +67,7 @@ public class GenerateTerrainScript : MonoBehaviour
     private ushort DIRT_ID, STONE_ID, SAND_ID, GRASS_ID, FLOWER_ID, TREE_CORE_ID, TREE_TOP_ID;
     private ushort worldXDimension, worldYDimension;
 
-    public void StartTerrainGeneration(TerrainManagerScript terrainManager, ushort xDim, ushort heightA, ushort chunkSize, ushort terrainType)
+    public void StartTerrainGeneration(TerrainManagerScript terrainManager, ushort xDim, ushort heightA, ushort chunkSize, EnumClass.TerrainType terrainType)
     {
         //Debug.Log(terrainType);
         this.heightAddition = heightA;
@@ -96,7 +96,7 @@ public class GenerateTerrainScript : MonoBehaviour
         GenerateResources((ushort)EnumClass.TileEnum.DIAMOND, diamondChance, diamondNeighChance, diamondChangeInHeight);
 
 
-        if(terrainType != (ushort)EnumClass.TerrainType.MOON && terrainType != (ushort)EnumClass.TerrainType.ASTEROID)
+        if(terrainType != EnumClass.TerrainType.MOON && terrainType != EnumClass.TerrainType.ASTEROID)
         {
             GenerateGrass();
         }
@@ -105,9 +105,9 @@ public class GenerateTerrainScript : MonoBehaviour
         terrainManager.SetTiles(frontTilesValue, frontTilesResourceValues, backTilesValue, backTilesResourceValue, vegetationTilesValue);
     }
 
-    private void SetVariables(ushort terrainType)
+    private void SetVariables(EnumClass.TerrainType terrainType)
     {
-        TerrainInfo terrain = TerrainVariableReader.GetTerrainInfo(terrainType);
+        TerrainInfo terrain = TerrainVariableReader.GetTerrainInfo((ushort)terrainType);
         //Debug.Log(terrainType);
         if (terrain != null)
         {
@@ -159,12 +159,12 @@ public class GenerateTerrainScript : MonoBehaviour
 }
     }
 
-    private void GenerateIDs(ushort terrainType)
+    private void GenerateIDs(EnumClass.TerrainType terrainType)
     {
         //Debug.Log("TERRAIN TYPE: " + terrainType);
         switch (terrainType)
         {
-            case (ushort)EnumClass.TerrainType.GREEN:
+            case EnumClass.TerrainType.GREEN:
                 DIRT_ID = (ushort)EnumClass.TileEnum.REGULAR_DIRT;
                 STONE_ID = (ushort)EnumClass.TileEnum.REGULAR_STONE;
                 SAND_ID = (ushort)EnumClass.TileEnum.REGULAR_SAND;
@@ -173,7 +173,7 @@ public class GenerateTerrainScript : MonoBehaviour
                 TREE_CORE_ID = (ushort)EnumClass.TileEnum.REGULAR_TREETRUNK;
                 TREE_TOP_ID = (ushort)EnumClass.TileEnum.REGULAR_TREELEAF;
                 break;
-            case (ushort)EnumClass.TerrainType.DESERT:
+            case EnumClass.TerrainType.DESERT:
                 DIRT_ID = (ushort)EnumClass.TileEnum.DESERT_DIRT;
                 STONE_ID = (ushort)EnumClass.TileEnum.DESERT_STONE;
                 SAND_ID = (ushort)EnumClass.TileEnum.REGULAR_SAND;
@@ -182,7 +182,7 @@ public class GenerateTerrainScript : MonoBehaviour
                 TREE_CORE_ID = (ushort)EnumClass.TileEnum.DESERT_TREE_TRUNK;
                 TREE_TOP_ID = (ushort)EnumClass.TileEnum.DESERT_TREE_LEAF;
                 break;
-            case (ushort)EnumClass.TerrainType.SNOW:
+            case EnumClass.TerrainType.SNOW:
                 DIRT_ID = (ushort)EnumClass.TileEnum.SNOW_DIRT;
                 STONE_ID = (ushort)EnumClass.TileEnum.SNOW_STONE;
                 SAND_ID = (ushort)EnumClass.TileEnum.REGULAR_SAND;
@@ -191,7 +191,7 @@ public class GenerateTerrainScript : MonoBehaviour
                 TREE_CORE_ID = (ushort)EnumClass.TileEnum.SNOW_TREE_TRUNK;
                 TREE_TOP_ID = (ushort)EnumClass.TileEnum.SNOW_TREE_LEAF;
                 break;
-            case (ushort)EnumClass.TerrainType.MOON:
+            case EnumClass.TerrainType.MOON:
                 DIRT_ID = (ushort)EnumClass.TileEnum.MOON_DIRT;
                 STONE_ID = (ushort)EnumClass.TileEnum.MOON_STONE;
                 SAND_ID = (ushort)EnumClass.TileEnum.MOON_SAND;
@@ -200,7 +200,7 @@ public class GenerateTerrainScript : MonoBehaviour
                 TREE_CORE_ID = (ushort)EnumClass.TileEnum.REGULAR_TREETRUNK;
                 TREE_TOP_ID = (ushort)EnumClass.TileEnum.REGULAR_TREELEAF;
                 break;
-            case (ushort)EnumClass.TerrainType.ASTEROID:
+            case EnumClass.TerrainType.ASTEROID:
                 Debug.LogError("Asteroid biome generation not set.");
                 break;
             default:

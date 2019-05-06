@@ -5,6 +5,7 @@ using UnityEngine;
 public class TilePickUpScript : MonoBehaviour {
 
     private InventoryControllerScript inventoryController;
+    private AudioSource tilePickupSound;
 
     public ushort contentId = 0;
     public ushort currentStackAmount = 0;
@@ -13,10 +14,16 @@ public class TilePickUpScript : MonoBehaviour {
     internal bool isMerging = false;
     internal bool hasMerged = false;
 
+    public void Start()
+    {
+        tilePickupSound = this.GetComponent<AudioSource>();
+    }
+
     public void SetTilePickup(InventoryControllerScript ics, ushort cid, ushort camnt, Sprite img)
     {
         this.GetComponentInChildren<SpriteRenderer>().sprite = img;
-        inventoryController = ics;
+        //inventoryController = ics;
+        inventoryController = InventoryControllerScript.instance;
         contentId = cid;
         currentStackAmount = camnt;
     }
@@ -39,12 +46,28 @@ public class TilePickUpScript : MonoBehaviour {
             Player player = collision.gameObject.GetComponent<Player>();
             if (player)
             {
+                tilePickupSound.Play();
                 //Debug.Log("pickup touched by player");
-                if((currentStackAmount = inventoryController.PickeupTile(this)) <= 0)
+                if ((currentStackAmount = inventoryController.PickeupTile(this)) <= 0)
                 {
-                    Destroy(this.gameObject);
+                    if (!tilePickupSound.isPlaying)
+                        Destroy(this.gameObject);
+                    else
+                    {
+                        //this.gameObject.GetComponent<Renderer>().enabled = false;
+                        StartCoroutine("Wait1Second");
+                        // i had to do this cus theres an error when u delete a gameobject while its playing a sound
+                    }
                 }
             }
         }
+    }
+
+    IEnumerator Wait1Second()
+    {
+        this.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        this.GetComponent<BoxCollider2D>().enabled = false;
+        yield return new WaitForSeconds(1);
+        Destroy(this.gameObject);
     }
 }

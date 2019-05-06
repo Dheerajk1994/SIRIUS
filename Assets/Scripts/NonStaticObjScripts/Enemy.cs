@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class Enemy : CharacterFinal
 {
+    public string thisEnemiesName;
     private IEnemyState currentState;
+    private AudioSource[] enemySounds;
+    private AudioSource deathSound;
+    private AudioSource damageSound;
+
+    //[SerializeField]
+    //private InventoryControllerScript inventoryControllerScript;
+    //
+    //[SerializeField]
+    //private InventorySpritesScript inventorySprites;
 
     [SerializeField]
     private float meleeRange;
@@ -18,6 +28,9 @@ public class Enemy : CharacterFinal
     private bool isRangedAI;
     public GameObject Target { get; set; }
 
+    [SerializeField]
+    private GameObject LootPrefab;
+
     //test
     private ushort[,] terrain;
     private bool waitingForPath;
@@ -30,6 +43,9 @@ public class Enemy : CharacterFinal
         this.GetComponent<SpriteRenderer>().sortingOrder = 13;
         path = new List<Vector2>();
         targetPos = new Vector2();
+        enemySounds = this.GetComponents<AudioSource>();
+        deathSound = enemySounds[0];
+        damageSound = enemySounds[1];
     }
 
     // Update is called once per frame
@@ -43,7 +59,7 @@ public class Enemy : CharacterFinal
             currentState.Execute();
         }
 
-        LookAtTarget();
+        //LookAtTarget();
         // }
 
     }
@@ -254,11 +270,11 @@ public class Enemy : CharacterFinal
         return facingRight ? Vector2.left : Vector2.right;
     }
 
-    public override void OnTriggerEnter2D(Collider2D other)
-    {
-        base.OnTriggerEnter2D(other);
-        currentState.OnTriggerEnter(other);
-    }
+    //public override void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    base.OnTriggerEnter2D(other);
+    //    currentState.OnTriggerEnter(other);
+    //}
 
 
 
@@ -268,18 +284,29 @@ public class Enemy : CharacterFinal
 
         if(!IsDead)
         {
+            damageSound.Play();
             Debug.Log("Taken Damage");
             MyAnimator.SetTrigger("damage");  
         }
         else
         {
-            MyAnimator.SetTrigger("die");
-            //Destroy(this, 2f);
-              
+            
+            //MyAnimator.SetTrigger("Enemy.TakeDamage: Destroying this.GameObject and Calling SetLootDrop");
+            SetLootDrop(700, 1, InventorySpritesScript.instance.GetSprite(700), this.gameObject.transform.localPosition);
+
+            //deathSound.Play();
+            QuestManagerScript.instance.KilledMob(thisEnemiesName, 1);
+            Destroy(this.gameObject); 
         }
     }
 
-
+    private void SetLootDrop(ushort id, ushort amnt, Sprite img, Vector2 pos)
+    {
+        GameObject lootDrop = Instantiate(LootPrefab);
+        lootDrop.GetComponent<TilePickUpScript>().SetTilePickup(null, id, amnt, img);
+        lootDrop.transform.position = pos;
+        //lootDrop.GetComponent<Rigidbody2D>().AddForce((this.gameObject.transform.localPosition - lootDrop.transform.localPosition) * 50f);
+    }
 
     //private void OnDrawGizmos()
     //{

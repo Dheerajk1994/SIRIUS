@@ -5,12 +5,19 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
     public float speed = 200f;
     public Rigidbody2D rb;
-    public float BulletDamage = 10f; 
+    public float BulletDamage = 10f;
+    private AudioSource fireGunSound;
 
 	// Use this for initialization
 	void Start () {
+//<<<<<<< will
         Destroy(gameObject, 7);
-    }
+    //}
+//=======
+        fireGunSound = this.GetComponent<AudioSource>();
+        fireGunSound.Play();
+	}
+//>>>>>>> dtemp
 	
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
