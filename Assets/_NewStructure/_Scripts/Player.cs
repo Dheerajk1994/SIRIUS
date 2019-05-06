@@ -204,12 +204,13 @@ public class Player : CharacterFinal
         audioManagerScript.Play("sam-hurt");
         currentHealth -= damage;
         playerAttributes.UpdateHealth(currentHealth);
+        Debug.Log("Player.TakeDamage: Player took damage");
+
         if(IsDead)
         {
             audioManagerScript.Play("sam-die");
             Debug.Log("Player died");
         }
-        Debug.Log("Player.TakeDamage: not implemented");
     } 
     
     public void HandleEquip()

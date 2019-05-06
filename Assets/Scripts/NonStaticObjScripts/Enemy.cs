@@ -20,6 +20,9 @@ public class Enemy : CharacterFinal
     private float meleeRange;
 
     [SerializeField]
+    private float knockBackForce = 100f;
+
+    [SerializeField]
     private float rangedAttackRange;
 
     private Vector2 targetPos;
@@ -281,7 +284,6 @@ public class Enemy : CharacterFinal
     public override void TakeDamage(float damage)
     {
         currentHealth -= damage;
-
         if(!IsDead)
         {
             damageSound.Play();
@@ -297,6 +299,32 @@ public class Enemy : CharacterFinal
             //deathSound.Play();
             QuestManagerScript.instance.KilledMob(thisEnemiesName, 1);
             Destroy(this.gameObject); 
+        }
+    }
+
+    public void TakeDamage(Vector3 attackerPosition, float damage)
+    {
+        currentHealth -= damage;
+       
+
+        if (!IsDead)
+        {
+            damageSound.Play();
+            Vector2 knockBackDirection =  new Vector2(transform.position.x - attackerPosition.x, 0);
+            GetComponent<Rigidbody2D>().AddForce(knockBackDirection * knockBackForce);
+            Debug.Log("Enemy.TakeDamage: Enemey was knocked back");
+            //Debug.Log("Taken Damage");
+            MyAnimator.SetTrigger("damage");
+        }
+        else
+        {
+
+            //MyAnimator.SetTrigger("Enemy.TakeDamage: Destroying this.GameObject and Calling SetLootDrop");
+            SetLootDrop(700, 1, InventorySpritesScript.instance.GetSprite(700), this.gameObject.transform.localPosition);
+
+            //deathSound.Play();
+            QuestManagerScript.instance.KilledMob(thisEnemiesName, 1);
+            Destroy(this.gameObject);
         }
     }
 
