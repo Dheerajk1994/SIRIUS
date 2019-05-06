@@ -150,8 +150,8 @@ public class Pivot : MonoBehaviour
 
             sword.transform.position = equipmentPosition.transform.position;
             sword.transform.SetParent(equipmentPosition);
-            if (!PlayerScript.getFacingDirection())
-                sword.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            //if (!PlayerScript.getFacingDirection())
+                //sword.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             
             
         }
@@ -168,8 +168,8 @@ public class Pivot : MonoBehaviour
 
             katana.transform.position = equipmentPosition.position;
             katana.transform.parent = equipmentPosition.transform;
-            if (!PlayerScript.getFacingDirection())
-                katana.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            //if (!PlayerScript.getFacingDirection())
+              //  katana.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
     }
 

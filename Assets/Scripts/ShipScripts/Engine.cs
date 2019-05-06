@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Engine : Interactable
 {
-    private readonly int maxFuel = 1000;
+    private readonly int maxFuel = 100;
     public int currentFuel { get; set; }
     public GameObject EnginePanel;
 

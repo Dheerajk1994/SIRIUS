@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1166885939089366}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.650225, y: 15.0695715, z: 0}
+  m_LocalPosition: {x: 30.4, y: 76.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -74,8 +74,6 @@ MonoBehaviour:
   DialogueManagerPrefab: {fileID: 1604679227476600, guid: 829ba7c8bddd25644982cfcccf3d2e07,
     type: 2}
   ShipPrefab: {fileID: 1143345085434036, guid: d91b34b446d065b4eaf127ad4f25307c, type: 2}
-  AudioManagerPrefab: {fileID: 1284041147680346, guid: ae76f382af8798e4cb4e3c93f95a6700,
-    type: 2}
   terrainManager: {fileID: 0}
   ui: {fileID: 0}
   player: {fileID: 0}
@@ -86,8 +84,7 @@ MonoBehaviour:
   questManager: {fileID: 0}
   dialogueManager: {fileID: 0}
   ship: {fileID: 0}
-  audioManager: {fileID: 0}
-  mobSpawner: {fileID: 0}
+  mobSpawner: {fileID: 1454690488043132, guid: 04751bf7561bafd4facf096a3b193a7d, type: 2}
   terrainManagerScript: {fileID: 0}
   uiScript: {fileID: 0}
   playerScript: {fileID: 0}
@@ -97,7 +94,6 @@ MonoBehaviour:
   questManagerScript: {fileID: 0}
   dialogueManagerScript: {fileID: 0}
   shipScript: {fileID: 0}
-  audioManagerScript: {fileID: 0}
   mobSpawnerScript: {fileID: 0}
   readyToGo: 0
   worldPresent: 0
