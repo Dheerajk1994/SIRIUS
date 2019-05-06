@@ -9,7 +9,7 @@ public class MeleeHurtBox : MonoBehaviour {
         Enemy enemy = collision.GetComponent<Enemy>();
         if (enemy != null)
         {
-            enemy.TakeDamage(GetComponentInParent<MeleeWeapon>().damage);
+            enemy.TakeDamage(transform.position, GetComponentInParent<MeleeWeapon>().damage);
         }
     }
 }
