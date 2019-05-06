@@ -20,6 +20,9 @@ public class Pivot : MonoBehaviour
     public GameObject lavagunPrefab;
     private GameObject lavagun;
 
+    public GameObject gyrogunPrefab;
+    private GameObject gyrogun;
+
     public float rotationZ;
     [SerializeField] private Transform equipmentPosition;
 
@@ -189,7 +192,18 @@ public class Pivot : MonoBehaviour
 
         }
     }
+    public void equipGyrogun()
+    {
+        if (gyrogun == null)
+        {
+            EmptyCurrentHand();
+            gyrogun = Instantiate(gyrogunPrefab, new Vector3(), Quaternion.identity) as GameObject;
+            gyrogun.transform.parent = equipmentPosition.transform;
+            gyrogun.transform.position = equipmentPosition.position;
+            gyrogun.transform.localRotation = Quaternion.Euler(0f, 0f, -60f);
 
+        }
+    }
     public void EquipItem(GameObject obj)
     {
         EmptyCurrentHand();
