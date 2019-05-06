@@ -98,6 +98,12 @@ public class Player : CharacterFinal
         base.Update();
         HandleInput();
         //generateRotatingArm();
+        if(IsDead)
+        {
+            Debug.LogError("Game Over!" +
+                "\nSam Died!");
+            Destroy(this.gameObject);
+        }
 
     }
 
@@ -187,6 +193,7 @@ public class Player : CharacterFinal
 
     public override void TakeDamage(float damage)
     {
+//<<<<<<< ryan
         audioManagerScript.Play("sam-hurt");
         currentHealth -= damage;
         if(IsDead)
@@ -196,6 +203,10 @@ public class Player : CharacterFinal
         }
         Debug.Log("Player.TakeDamage: not implemented");
 
+//=======
+  //      Debug.Log("Player.TakeDamage: called");
+   //     currentHealth -= damage;
+//>>>>>>> dtemp
     } 
     
     public void HandleEquip()
@@ -243,6 +254,7 @@ public class Player : CharacterFinal
             default:
                 GameObject obj = new GameObject();
                 obj.AddComponent<SpriteRenderer>().sprite = InventorySpritesScript.instance.GetSprite(2);
+                obj.GetComponent<SpriteRenderer>().sortingLayerName = "frontLayer";
                 rotatingArm.gameObject.SetActive(true);
                 rotatingArm.GetComponent<Pivot>().EquipItem(obj);
                 MyAnimator.SetBool("rotatingArm", true);

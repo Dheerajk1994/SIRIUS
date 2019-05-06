@@ -59,7 +59,7 @@ public class MainMenuScript : MonoBehaviour {
 
     public void NewGameButton() // when the new button has been clicked, the game will begin
     {
-        GameManager.GetComponent<GameManagerScript>().StartNewGame();
+        //GameManager.GetComponent<GameManagerScript>().StartNewGame();
         this.gameObject.SetActive(false);
     }
 

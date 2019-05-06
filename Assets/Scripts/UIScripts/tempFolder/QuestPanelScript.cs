@@ -156,6 +156,33 @@ public class QuestPanelScript : MonoBehaviour {
                 reqObject.transform.SetParent(questRequirementsPanel, false);
             }
         }
+        if(quest.questGoal.requiredMobs != null)
+        {
+            foreach (QuestMobRequirement mobRequirement in quest.questGoal.requiredMobs)
+            {
+                GameObject reqObject = Instantiate(questRewReqPrefab);
+                Text uiText = reqObject.GetComponentInChildren<Text>();
+
+                switch (mobRequirement.name)
+                {
+                    case "Blob":
+                        reqObject.GetComponentInChildren<Image>().sprite = InventorySpritesScript.instance.GetEnemieSrite(EnumClass.EnemyEnum.BLOB);
+                        break;
+                    default:
+                        break;
+                }
+                uiText.text = mobRequirement.requiredKillCount.ToString();
+                if (mobRequirement.currentKillCount < mobRequirement.requiredKillCount)
+                {
+                    uiText.color = Color.red;
+                }
+                else
+                {
+                    uiText.color = Color.green;
+                }
+                reqObject.transform.SetParent(questRequirementsPanel, false);
+            }
+        }
     }
 
     private void PopulateRewardsPanel(Quest quest)

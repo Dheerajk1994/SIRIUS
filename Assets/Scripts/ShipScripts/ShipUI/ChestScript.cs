@@ -21,7 +21,7 @@ public class ChestScript : MonoBehaviour
         chestPanelAnimator = this.GetComponent<Animator>();
         //enginePanelToggleButn.onClick.AddListener(ToggleEnginePanel);
     }
-
+     
     public void ToggleChestPanel(bool toggle)
     {
         isOpen = toggle;

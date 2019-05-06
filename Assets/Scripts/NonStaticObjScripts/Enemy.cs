@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : CharacterFinal
 {
+    public string thisEnemiesName;
     private IEnemyState currentState;
     private AudioSource[] enemySounds;
     private AudioSource deathSound;
@@ -260,11 +261,11 @@ public class Enemy : CharacterFinal
         return facingRight ? Vector2.left : Vector2.right;
     }
 
-    public override void OnTriggerEnter2D(Collider2D other)
-    {
-        base.OnTriggerEnter2D(other);
-        currentState.OnTriggerEnter(other);
-    }
+    //public override void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    base.OnTriggerEnter2D(other);
+    //    currentState.OnTriggerEnter(other);
+    //}
 
 
 
@@ -282,12 +283,11 @@ public class Enemy : CharacterFinal
         {
             deathSound.Play();
             MyAnimator.SetTrigger("die");
-            //Destroy(this, 2f);
+            QuestManagerScript.instance.KilledMob(thisEnemiesName, 1);
+            Destroy(this, 2f);
               
         }
     }
-
-
 
     //private void OnDrawGizmos()
     //{
