@@ -254,6 +254,13 @@ public class Player : CharacterFinal
                 MyAnimator.SetBool("rotatingArm", true);
                 Debug.Log("Lavagun equipped");
                 break;
+            case 902:
+                //GenerateRotatingArm();
+                rotatingArm.gameObject.SetActive(true);
+                rotatingArm.GetComponent<Pivot>().equipGyrogun();
+                MyAnimator.SetBool("rotatingArm", true);
+                Debug.Log("Gyrogun equipped");
+                break;
             default:
                 GameObject obj = new GameObject();
 //<<<<<<< will

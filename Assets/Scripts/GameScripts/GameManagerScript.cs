@@ -43,7 +43,12 @@ public class GameManagerScript : MonoBehaviour
     public GameObject questManager;
     public GameObject dialogueManager;
     public GameObject ship;
+//<<<<<<< will
     //public GameObject audioManager;
+    public GameObject mobSpawner;
+//=======
+    //public GameObject audioManager;
+//>>>>>>> dtemp
     #endregion
 
     #region SCRIPT_REFERENCES
@@ -59,6 +64,8 @@ public class GameManagerScript : MonoBehaviour
 
     public ShipScript shipScript;
     //public AudioManagerScript audioManagerScript;
+
+    public MobSpawnerScript mobSpawnerScript;
 
 #endregion
 
@@ -86,8 +93,11 @@ public bool readyToGo = false;
     private void Start()
     {
         PopulateSceneObjects();
+        posTillMobSpawn = playerPos;
     }
 
+
+    Vector2 posTillMobSpawn;
     private void Update()
     {
         if (readyToGo && currentWorld != EnumClass.TerrainType.SHIP)
@@ -96,6 +106,11 @@ public bool readyToGo = false;
             {
                 StartCoroutine(terrainManagerScript.DisplayChunks(player.transform.position, true));
                 playerPos = player.transform.position;
+            }
+            if(Vector2.Distance(player.transform.position, posTillMobSpawn) > 15f)
+            {
+                StartCoroutine(mobSpawnerScript.SpawnBlobs(terrainManagerScript.frontTilesValue, 10, GameObject.Find("PlayArea")));
+                posTillMobSpawn = playerPos;
             }
         }
     }
@@ -152,6 +167,22 @@ public bool readyToGo = false;
 
         inventoryControllerScript.SetInventoryController(this, uiScript, AudioManagerScript.instance);
 
+//<<<<<<< will
+        mobSpawnerScript = mobSpawner.GetComponent<MobSpawnerScript>();
+        mobSpawnerScript.SetMobSpawner(this);
+
+//<<<<<<< ryan
+//        terrainManagerScript          .SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
+//        playerScript                  .SetPlayerScript(this, uiScript,inputManagerScript, audioManagerScript);
+//        inputManagerScript            .SetInputManager(this, uiScript, terrainManagerScript);
+//        inventoryControllerScript     .SetInventoryController(this, uiScript, audioManagerScript);
+//        questManagerScript            .SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>());
+        //audioManagerScript
+//=======
+        
+//>>>>>>> dtemp
+//=======
+//>>>>>>> dtemp
 
         if (currentWorld == EnumClass.TerrainType.SHIP)
         {
@@ -191,6 +222,14 @@ public bool readyToGo = false;
             player.SetActive(true);
             readyToGo = true;
         }
+
+        if (terrainManagerScript.frontTilesValue != null)
+        {     
+            //mobSpawnerScript.SpawnBlobs(5,PlayArea);
+            //mobSpawnerScript.printNumberOfSpawnLocations();
+            //mobSpawnerScript.printSpawnLocations();
+
+        }
     }
 
     private void GenerateScene()
@@ -214,7 +253,7 @@ public bool readyToGo = false;
             playerPos = ship.GetComponent<ShipScript>().spawnPosition.position;
 //>>>>>>> dtemp
         }
-
+        
         cameraScript.SetCamera(player.transform, currentWorld);
         worldPresent = true;
     }

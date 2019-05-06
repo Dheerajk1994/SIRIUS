@@ -200,7 +200,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1370303781483332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.624069, y: -0.6553955, z: 0}
+  m_LocalPosition: {x: 5.3327208, y: -15.163356, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4401663595381830}
@@ -337,6 +337,8 @@ MonoBehaviour:
   spacegunPrefab: {fileID: 1190977040168042, guid: b93efe566cd177f42aed9f7609b2b48c,
     type: 2}
   lavagunPrefab: {fileID: 1783279463749430, guid: e5b2801dae9b2a64c8e82d3d2d321519,
+    type: 2}
+  gyrogunPrefab: {fileID: 1134347985483722, guid: 57a0f54b7a408084b9b89b4191e406ab,
     type: 2}
   rotationZ: 0
   equipmentPosition: {fileID: 4346868372779818}

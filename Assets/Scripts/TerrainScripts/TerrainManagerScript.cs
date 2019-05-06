@@ -84,7 +84,6 @@ public class TerrainManagerScript : MonoBehaviour
     public ushort[,] backTilesResourceValue;
     public ushort[,] vegetationTilesValue;
 
-
     public GameObject player;
     //private InventoryScript playerInventoryScript;
 
@@ -795,5 +794,13 @@ public class TerrainManagerScript : MonoBehaviour
         }
 
         return surroundTiles;
+    }
+
+    public ushort GetXDimension(){
+        return worldXDimension;
+    }
+
+    public ushort GetYDimension(){
+        return worldYDimension;
     }
 }

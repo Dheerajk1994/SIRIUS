@@ -136,6 +136,9 @@ public class InputManagerScript : MonoBehaviour {
         //test for adding lavagun to hotbar
         else if (Input.GetKeyDown(KeyCode.L))
             hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(901, 1);
+        //test for adding gyrogun to hotbar
+        else if (Input.GetKeyDown(KeyCode.O))
+            hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(902, 1);
         else if (Input.GetKeyDown(KeyCode.Q))
             gameManagerScript.uiScript.QuestPanel.GetComponent<QuestPanelScript>().ToggleQuestPanel();
         else if (Input.GetKeyDown(KeyCode.C))

@@ -87,6 +87,7 @@ MonoBehaviour:
   dialogueManager: {fileID: 0}
   ship: {fileID: 0}
   audioManager: {fileID: 0}
+  mobSpawner: {fileID: 0}
   terrainManagerScript: {fileID: 0}
   uiScript: {fileID: 0}
   playerScript: {fileID: 0}
@@ -97,6 +98,7 @@ MonoBehaviour:
   dialogueManagerScript: {fileID: 0}
   shipScript: {fileID: 0}
   audioManagerScript: {fileID: 0}
+  mobSpawnerScript: {fileID: 0}
   readyToGo: 0
   worldPresent: 0
   playerPos: {x: 0, y: 0, z: 0}
