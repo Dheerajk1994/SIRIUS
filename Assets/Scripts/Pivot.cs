@@ -115,13 +115,12 @@ public class Pivot : MonoBehaviour
 
     }
 
-    public void MeleeRotate(float attackSpeed)
+    public void MeleeRotate()
     {
 
         if (!isAttacking)
         {
             isAttacking = true;
-            this.attackSpeed = attackSpeed;
             equipmentPosition.GetComponentInChildren<MeleeWeapon>().startAttack();
 
             if (PlayerScript.getFacingDirection())
@@ -145,13 +144,14 @@ public class Pivot : MonoBehaviour
         {
             EmptyCurrentHand();
             isMeleeEquipped = true;
+            attackSpeed = swordPrefab.GetComponent<MeleeWeapon>().attackSpeed;
+
             transform.rotation = Quaternion.Euler(0f, 0f, 270f);
             sword = Instantiate(swordPrefab, new Vector3(), Quaternion.identity);
-
             sword.transform.position = equipmentPosition.transform.position;
             sword.transform.SetParent(equipmentPosition);
-            if (!PlayerScript.getFacingDirection())
-                sword.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            //if (!PlayerScript.getFacingDirection())
+                //sword.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             
             
         }
@@ -163,13 +163,14 @@ public class Pivot : MonoBehaviour
         {
             EmptyCurrentHand();
             isMeleeEquipped = true;
+            attackSpeed = katanaPrefab.GetComponent<MeleeWeapon>().attackSpeed;
+
             transform.rotation = Quaternion.Euler(0f, 0f, 270f);
             katana = Instantiate(katanaPrefab, new Vector3(), Quaternion.identity);
-
             katana.transform.position = equipmentPosition.position;
             katana.transform.parent = equipmentPosition.transform;
-            if (!PlayerScript.getFacingDirection())
-                katana.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            //if (!PlayerScript.getFacingDirection())
+                //katana.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
     }
 

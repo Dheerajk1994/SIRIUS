@@ -279,7 +279,7 @@ public class Player : CharacterFinal
 
     public void MeleeAttack()
     {
-        rotatingArmScript.MeleeRotate(equippedItem.GetComponent<WeaponClass>().attackSpeed);
+        rotatingArmScript.MeleeRotate();
         audioManagerScript.Play("melee-swing");
     }
 
