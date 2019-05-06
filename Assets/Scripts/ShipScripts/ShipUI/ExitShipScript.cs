@@ -54,6 +54,7 @@ public class ExitShipScript : MonoBehaviour
     public void YesBtnClicked()
     {
         // handle scene change
+        uiScript.loadingScreen.gameObject.SetActive(true);
         audiomanager.Play("btn-confirm");
         TheImmortalScript.instance.WorldTypeToGenerate = uiScript.NavPanel.GetComponent<NavigationScript>().currentPlanet;
         uiScript.gameManagerScript.TeleportToTerrain();

@@ -16,7 +16,7 @@
       "prerequisiteID": [ 0 ],
       "questName": "Sam the Crafter",
       "questDescription": "WTAF says that there are some spare materials in your bedroom chest. Make a wooden axe, pickaxe, and sword with the materials.",
-      "itemsRequired": [ 1000, 1, 1010, 1 ],
+      "itemsRequired": [ 800, 1, 1000, 1, 1010, 1 ],
       "itemRewards": []
     },
     {

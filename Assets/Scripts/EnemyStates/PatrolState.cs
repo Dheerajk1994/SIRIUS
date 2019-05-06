@@ -24,7 +24,7 @@ public class PatrolState : IEnemyState {
         // if (enemy.Target !=null && enemy.InRangedAttackRange)
         if (enemy.Target !=null)
         {
-            Debug.Log("Target Acquired... Following");
+            //Debug.Log("Target Acquired... Following");
             enemy.ChangeState(new RangedState()); 
         }
     }

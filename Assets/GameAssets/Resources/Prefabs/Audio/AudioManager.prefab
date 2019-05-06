@@ -108,7 +108,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: sam-hurt
     clip: {fileID: 8300000, guid: 265b0766000282a4db09b942d170ede9, type: 3}
-    volume: 0.5
+    volume: 0.197
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -126,7 +126,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: bgm-1
     clip: {fileID: 8300000, guid: 9ded6992fd3688744ac943a779c1db9e, type: 3}
-    volume: 0.4
+    volume: 0.086
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  isMuted: 0

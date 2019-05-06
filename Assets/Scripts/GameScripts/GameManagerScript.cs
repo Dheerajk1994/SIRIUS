@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
-    //public static GameManagerScript instance;
+    //public static GameManagerScript instance; 
 
     #region WORLD_INFO
     public string greenWorldSavePath = "greenWorld";
@@ -302,7 +302,12 @@ public bool readyToGo = false;
 
     public void ExitSceneIntoMainMenu()
     {
-        Debug.Log("exit scene called");
+        uiScript.loadingScreen.gameObject.SetActive(true);
+        SaveInventory();
+        SaveQuestsAndDialogues();
+        GameDataHandler.HandleTerrainSaving(this, terrainManagerScript, TheImmortalScript.instance);
+        SaveManager.SaveGame(TheImmortalScript.instance);
+        Debug.Log(TheImmortalScript.instance.PlayerLandPosInGreen);
         SceneManager.LoadScene("Main Menu");
     }
 

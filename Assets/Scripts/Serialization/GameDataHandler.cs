@@ -112,7 +112,7 @@ public static class GameDataHandler {
 
     private static void SaveTerrain(string path, GameManagerScript gameManager, TerrainManagerScript terrainManager, TheImmortalScript immortal)
     {
-        SaveManager.SaveGame(
+        SaveManager.SaveTerrain(
             path,
             terrainManager.frontTilesValue,
             terrainManager.frontTilesResourceValue,

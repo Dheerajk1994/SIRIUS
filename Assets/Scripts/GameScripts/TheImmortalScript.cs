@@ -14,7 +14,7 @@ public class TheImmortalScript : MonoBehaviour {
     private ushort [,] playerHotbarItems;
 
     private ushort [,] shipInventoryItems;
-    private int shipFuelAmount;
+    private int shipFuelAmount; 
 
     private List<int> questsCompleted;
     private List<int> activeQuests;

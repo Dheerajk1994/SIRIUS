@@ -724,7 +724,7 @@ public class TerrainManagerScript : MonoBehaviour
 
     public bool PlaceTile(int x, int y, ushort id, ushort tileLayer)
     {
-        Debug.Log("place tile called");
+        //Debug.Log("place tile called");
         switch (tileLayer)
         {
             case (ushort)EnumClass.LayerIDEnum.FRONTLAYER:

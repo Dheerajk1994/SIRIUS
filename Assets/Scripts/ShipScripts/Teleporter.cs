@@ -11,7 +11,7 @@ public class Teleporter : Interactable
         isInteracting = !isInteracting;
         panelOpen = !panelOpen;
         ExitShipPanel.GetComponent<ExitShipScript>().ToggleExitShipPanel(isInteracting);
-        Debug.Log("leaving da shep");
+        //Debug.Log("leaving da shep");
         base.Interact();
     }
 

@@ -18,7 +18,10 @@ public class UIScript : MonoBehaviour
     public GameObject NavPanel;
     public GameObject ChestPanel;
     public Button teleportButton;
+    public Button questButton;
+    public Button inventoryButton;
     public GameObject EscapePanel;
+    public GameObject ErrorPanel;
     public Transform loadingScreen;
 
     public GameManagerScript gameManagerScript;
@@ -64,6 +67,11 @@ public class UIScript : MonoBehaviour
 
         EscapePanel.GetComponent<EscapePanelScript>().SetEscapePanel(gameManagerScript);
 
+        ErrorPanel.GetComponent<ErrorPanelScript>().SetErrorPanel();
+
+        inventoryButton.onClick.AddListener(TogglePlayerInvoPanel);
+        questButton.onClick.AddListener(ToggleQuestPanel);
+
         if(gameManagerScript.ship != null)
         {
             ExitShipPanel.GetComponent<ExitShipScript>().SetExitShipPanel(this);
@@ -73,6 +81,8 @@ public class UIScript : MonoBehaviour
             NavPanel.GetComponent<NavigationScript>().SetNavPanel(this);
 
             ChestPanel.GetComponent<ChestPanelScript>().SetChestPanel(this);
+
+            teleportButton.gameObject.SetActive(false);
         }
 
     }
@@ -82,5 +92,14 @@ public class UIScript : MonoBehaviour
         gameManagerScript.TeleportToShip();
     }
 
+    public void TogglePlayerInvoPanel()
+    {
+        InventoryAndStatsPanel.GetComponent<InventoryAndStatsPanelScript>().ToggleInventoryAndStatsPanel();
+    }
+
+    public void ToggleQuestPanel()
+    {
+        QuestPanel.GetComponent<QuestPanelScript>().ToggleQuestPanel();
+    }
 
 }

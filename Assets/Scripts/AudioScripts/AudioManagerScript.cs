@@ -9,10 +9,14 @@ public class AudioManagerScript : MonoBehaviour {
     public static AudioManagerScript instance;
     public Sound[] sounds;
 
+    public bool isMuted;
+
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+        }
         else if (this != instance)
         {
             Destroy(this);
@@ -31,6 +35,7 @@ public class AudioManagerScript : MonoBehaviour {
 
     public void Play(string name)
     {
+        if (isMuted) return;
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
@@ -43,5 +48,11 @@ public class AudioManagerScript : MonoBehaviour {
     public void SetAudioManager()
     {
         //
+    }
+
+    public void ToggleSound(bool toggle)
+    {
+        isMuted = toggle;
+       
     }
 }

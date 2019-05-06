@@ -10,11 +10,6 @@ public class Enemy : CharacterFinal
     private AudioSource deathSound;
     private AudioSource damageSound;
 
-    //[SerializeField]
-    //private InventoryControllerScript inventoryControllerScript;
-    //
-    //[SerializeField]
-    //private InventorySpritesScript inventorySprites;
 
     [SerializeField]
     private float meleeRange;
@@ -56,6 +51,11 @@ public class Enemy : CharacterFinal
     {
         base.Update();
         
+        if(currentPosition.y < 10)
+        {
+            Destroy(this.gameObject);
+        }
+
         if (!TakingDamage)
         {
             currentState.Execute();
@@ -215,12 +215,6 @@ public class Enemy : CharacterFinal
         if (Vector2.Distance(targetPos, currentPosition) > 3f) path.Clear();//so it wont jump
         if (targetPos.y > currentPosition.y) this.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 30f);
         transform.position = Vector2.MoveTowards(currentPosition, targetPos, Time.deltaTime * movementSpeed);
-        //if (!Attack)
-        //{
-        //    movementSpeed = 3;
-        //    MyAnimator.SetFloat("speed", 3); 
-        //    transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));//we might need to change this
-        //}
     }
 
     public Vector2 FindTileToMoveTo()//terrible 
@@ -269,12 +263,6 @@ public class Enemy : CharacterFinal
     {
         return facingRight ? Vector2.left : Vector2.right;
     }
-
-    //public override void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    base.OnTriggerEnter2D(other);
-    //    currentState.OnTriggerEnter(other);
-    //}
 
 
 

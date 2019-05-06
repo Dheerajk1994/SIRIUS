@@ -81,12 +81,12 @@ public class MobSpawnerScript : MonoBehaviour {
                 blob = Instantiate(blobPrefab);
                 blob.transform.parent = playArea.transform;
                 blob.transform.localPosition = pos;
-                Debug.Log(pos);
+                //Debug.Log(pos);
             }
         }
 
-        Debug.Log("position inside spawnlocations " + spawnLocations.Count);
-        Debug.Log("position inside spawnlocationscloseby " + spawnAreasCloseby.Count);
+        //Debug.Log("position inside spawnlocations " + spawnLocations.Count);
+        //Debug.Log("position inside spawnlocationscloseby " + spawnAreasCloseby.Count);
 
 
         //while (count <= numberOfBlobs)

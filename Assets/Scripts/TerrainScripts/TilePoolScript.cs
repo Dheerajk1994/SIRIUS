@@ -44,14 +44,21 @@ public class TilePoolScript : MonoBehaviour {
         {
             return tilePoolQueue.Dequeue();
         }
-        return null;
+        return Instantiate(tilePrefab);
     }
 
     public void AddTileIntoPool(GameObject tileToAdd)
     {
-        tileToAdd.gameObject.SetActive(false);
-        //tileToAdd.transform.parent = this.transform;
-        tilePoolQueue.Enqueue(tileToAdd);
+        if(tilePoolQueue.Count < tilePoolSize)
+        {
+            tileToAdd.gameObject.SetActive(false);
+            tilePoolQueue.Enqueue(tileToAdd);
+        }
+        else
+        {
+            Destroy(tileToAdd.gameObject);
+        }
+        
     }
 
     public int GetPoolSize()
