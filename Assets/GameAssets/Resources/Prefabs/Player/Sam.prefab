@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1370303781483332}
-  PlayerScript: {fileID: 0}
+  PlayerScript: {fileID: 114998045093693882}
   swordPrefab: {fileID: 1390501716720492, guid: 1f6515a3d74da704093a8c54c230a12f,
     type: 2}
   katanaPrefab: {fileID: 1939648194908410, guid: a61096071836f34498a4014a44b549aa,
@@ -419,8 +419,10 @@ MonoBehaviour:
   gameManagerScript: {fileID: 0}
   uiScript: {fileID: 0}
   inputManagerScript: {fileID: 0}
+  audioManagerScript: {fileID: 0}
   equippedItem: {fileID: 0}
   rotatingArm: {fileID: 1396904166721710}
+  attributes: {fileID: 0}
   airControl: 1
   jumpForce: 5000
   groundPoints:

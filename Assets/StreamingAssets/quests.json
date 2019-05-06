@@ -3,10 +3,10 @@
     {
       "questID": 1,
       "type": 0,
-      "prerequisiteID": [0],
+      "prerequisiteID": [ 0 ],
       "questName": "Talk to WTAF",
       "questDescription": "Go find WTAF. She wants to tell you something. You can interact with her using E.",
-      "itemsToInteractWith": ["WTAF"],
+      "itemsToInteractWith": [ "WTAF" ],
       "itemRewards": []
 
     },
@@ -16,7 +16,7 @@
       "prerequisiteID": [ 0 ],
       "questName": "Sam the Crafter",
       "questDescription": "WTAF says that there are some spare materials in your bedroom chest. Make a wooden axe, pickaxe, and sword with the materials.",
-      "itemsRequired": [1000, 1, 1010, 1],
+      "itemsRequired": [ 1000, 1, 1010, 1 ],
       "itemRewards": []
     },
     {
@@ -34,7 +34,7 @@
       "prerequisiteID": [ 3 ],
       "questName": "Sam The Miner",
       "questDescription": "WTAF wants you to collect some resources to fix the engine. You can mine tiles by equipping a pickaxe in your hotbar and left clicking a tile. You can pick up mined tiles by walking over them and it will add them into your inventory. To check the amount of minerals you have, press I to check your inventory.",
-      "itemsRequired": [21, 10],
+      "itemsRequired": [ 21, 1 ],
       "itemRewards": []
     },
     {
@@ -44,7 +44,7 @@
       "questName": "Sam The Killer",
       "questDescription": "WTAF has warned you about the presence of unfriendly beings on the planet. Equip your sword and left click to attack. Kill some enemies to show them you are not to be messed with.",
       "mobName": [ "Blob" ],
-      "mobKillAmnt": [10],
+      "mobKillAmnt": [ 1 ],
       "itemRewards": []
     },
     {
@@ -71,8 +71,17 @@
       "type": 0,
       "prerequisiteID": [ 0 ],
       "questName": "Sam The Traveler",
-      "questDescription": "There should be enough fuel in the engine to take you to another planet. Go to the navigation room and interact with the panel. Go talk to WTAF when you are done.",
+      "questDescription": "There should be enough fuel in the engine to take you to another planet. Go to the navigation room and interact with the panel. Select another planet to go to.",
       "itemsToInteractWith": [ "Navigation" ],
+      "itemRewards": []
+    },
+    {
+      "questID": 10,
+      "type": 0,
+      "prerequisiteID": [ 9 ],
+      "questName": "New land",
+      "questDescription": "Good job you have managed to guide your ship to a new planet. Now go talk to WTAF.",
+      "itemsToInteractWith": [ "WTAF" ],
       "itemRewards": []
     }
   ]

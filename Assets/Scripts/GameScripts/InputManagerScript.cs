@@ -51,13 +51,22 @@ public class InputManagerScript : MonoBehaviour {
                 case 4:
                     PlaceTileFrontLayer(4);
                     break;
-                case 1000:  // Pickaxe   
+                case 1000:  // Pickaxe 
+                case 1001:
+                case 1002:
+                case 1003:
                     MineFrontLayer();
+                    break;
+                case 1010:  //axe
+                case 1011:
+                case 1012:
+                case 1013:
+                    ChopWood();
                     break;
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Mouse0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !EventSystem.current.IsPointerOverGameObject())
         {
             switch (hotbarPanel.GetEquippedSlot())
             {
@@ -136,7 +145,14 @@ public class InputManagerScript : MonoBehaviour {
             craftingPanelScript.ToggleCraftingPanel();
         else if (Input.GetKeyDown(KeyCode.Z))
             hotbarPanel.GetComponent<GenericInvoPanelScript>().genericInvoHandler.AddItemToGenericInventory(21, 10);
+        else if (Input.GetKeyDown(KeyCode.Escape))
+            uiScript.EscapePanel.GetComponent<EscapePanelScript>().ToggleEscapePanel();
 
+    }
+
+    private void ChopWood()
+    {
+        StartCoroutine(terrainManagerScript.ChopWood((int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x, (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y, this));
     }
 
     private void MineFrontLayer()

@@ -587,6 +587,31 @@ public class TerrainManagerScript : MonoBehaviour
     }
 
     //FUNCTIONS CALLED BY INPUT MANAGER
+    
+    public IEnumerator ChopWood(int x, int y, InputManagerScript inputManager)
+    {
+        if (worldXDimension == 0) yield return null;
+        ushort relativeX = (ushort)Mathf.Floor((x % worldXDimension + worldXDimension) % worldXDimension);
+
+        while(vegetationTilesValue[relativeX, y] == (ushort)EnumClass.TileEnum.DESERT_TREE_TRUNK ||
+              vegetationTilesValue[relativeX, y] == (ushort)EnumClass.TileEnum.REGULAR_TREETRUNK ||
+              vegetationTilesValue[relativeX, y] == (ushort)EnumClass.TileEnum.SNOW_TREE_TRUNK )
+        {
+            GenerateTileDrop(vegetationTilesValue[relativeX, y], 1, InventorySpritesScript.instance.GetSprite(vegetationTilesValue[relativeX, y]), new Vector2(relativeX, y));
+            Destroy(vegetationTiles[relativeX, y]);
+            vegetationTilesValue[relativeX, y] = 0;
+            y++;
+        }
+        if(vegetationTilesValue[relativeX, y] == (ushort)EnumClass.TileEnum.DESERT_TREE_LEAF ||
+              vegetationTilesValue[relativeX, y] == (ushort)EnumClass.TileEnum.REGULAR_TREELEAF ||
+              vegetationTilesValue[relativeX, y] == (ushort)EnumClass.TileEnum.SNOW_TREE_LEAF)
+        {
+            Destroy(vegetationTiles[relativeX, y]);
+            vegetationTilesValue[relativeX, y] = 0;
+        }
+        yield return null;
+    }
+
 
     public ushort MineTile(int x, int y, ushort tileLayer, InputManagerScript inputManager)
     {
@@ -722,16 +747,6 @@ public class TerrainManagerScript : MonoBehaviour
         }
 
         return false;
-    }
-
-    private void CutTree(int x, int y)
-    {
-        while(frontTiles[x,y] != null && frontTiles[x,y].GetComponent<TileScript>().tileId == 2 && y < frontTiles.GetLength(1))
-        {
-            //player.GetComponent<InventoryScript>().AddItemToInventory(frontTiles[x, y], 1);
-            Destroy(frontTiles[x, y]);
-            y++;
-        }
     }
 
     public Vector2 GetSafePlaceToSpawnPlayer()

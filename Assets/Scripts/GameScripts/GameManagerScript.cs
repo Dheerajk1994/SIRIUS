@@ -28,7 +28,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject QuestManagerPrefab;
     public GameObject DialogueManagerPrefab;
     public GameObject ShipPrefab;
-    public GameObject AudioManagerPrefab;
+    //public GameObject AudioManagerPrefab;
 
     #endregion
 
@@ -43,8 +43,12 @@ public class GameManagerScript : MonoBehaviour
     public GameObject questManager;
     public GameObject dialogueManager;
     public GameObject ship;
-    public GameObject audioManager;
+//<<<<<<< will
+    //public GameObject audioManager;
     public GameObject mobSpawner;
+//=======
+    //public GameObject audioManager;
+//>>>>>>> dtemp
     #endregion
 
     #region SCRIPT_REFERENCES
@@ -59,7 +63,7 @@ public class GameManagerScript : MonoBehaviour
     public DialogueManagerScript dialogueManagerScript;   
 
     public ShipScript shipScript;
-    public AudioManagerScript audioManagerScript;
+    //public AudioManagerScript audioManagerScript;
 
     public MobSpawnerScript mobSpawnerScript;
 
@@ -151,9 +155,6 @@ public bool readyToGo = false;
 
         aiManager = Instantiate(AIManagerPrefab);
         
-        audioManager = Instantiate(AudioManagerPrefab);
-        audioManagerScript = audioManager.GetComponent<AudioManagerScript>();
-
         questManager = Instantiate(QuestManagerPrefab);
         questManagerScript = questManager.GetComponent<QuestManagerScript>();
 
@@ -161,11 +162,12 @@ public bool readyToGo = false;
         dialogueManagerScript = dialogueManager.GetComponent<DialogueManagerScript>();
 
         terrainManagerScript.SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
-        playerScript.SetPlayerScript(this, uiScript, inputManagerScript, audioManagerScript);
+        playerScript.SetPlayerScript(this, uiScript, inputManagerScript, AudioManagerScript.instance);
         inputManagerScript.SetInputManager(this, uiScript, terrainManagerScript);
 
-        inventoryControllerScript.SetInventoryController(this, uiScript, audioManagerScript);
+        inventoryControllerScript.SetInventoryController(this, uiScript, AudioManagerScript.instance);
 
+//<<<<<<< will
         mobSpawnerScript = mobSpawner.GetComponent<MobSpawnerScript>();
         mobSpawnerScript.SetMobSpawner(this);
 
@@ -179,12 +181,14 @@ public bool readyToGo = false;
 //=======
         
 //>>>>>>> dtemp
+//=======
+//>>>>>>> dtemp
 
         if (currentWorld == EnumClass.TerrainType.SHIP)
         {
             ship = Instantiate(ShipPrefab);
             shipScript = ship.GetComponent<ShipScript>();
-            shipScript.SetShip(uiScript, audioManagerScript);
+            shipScript.SetShip(uiScript, AudioManagerScript.instance);
             shipScript.GetChestReference().GetComponent<InventoryHandlerScript>().PopulateInventory(TheImmortalScript.instance.ShipInventoryItems);
         }
 
@@ -197,7 +201,7 @@ public bool readyToGo = false;
         GenerateScene();
 
         //UI
-        uiScript.SetUIPanel(this, inputManagerScript, audioManagerScript, player);
+        uiScript.SetUIPanel(this, inputManagerScript, AudioManagerScript.instance, player);
         inventoryControllerScript.PopulatePlayerHotbar(TheImmortalScript.instance.PlayerHotbarItems);
         inventoryControllerScript.PopulatePlayerInventory(TheImmortalScript.instance.PlayerInventoryItems);
 
@@ -205,6 +209,7 @@ public bool readyToGo = false;
         questManagerScript.SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>(), TheImmortalScript.instance.QuestsCompleted, TheImmortalScript.instance.ActiveQuests);
         dialogueManagerScript.SetDialogueManager(this, uiScript.BottomDialoguePanel.GetComponent<DialoguePanelScript>(), TheImmortalScript.instance.DialoguesCompleted);
 
+        playerScript                  .SetPlayerScript(this, uiScript, inputManagerScript, AudioManagerScript.instance);
         player.transform.position = playerPos;
         player.SetActive(false);
         bool stat = true;
@@ -295,6 +300,12 @@ public bool readyToGo = false;
 
     }
 
+    public void ExitSceneIntoMainMenu()
+    {
+        Debug.Log("exit scene called");
+        SceneManager.LoadScene("Main Menu");
+    }
+
     private IEnumerator LoadScene(string scene)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
@@ -307,7 +318,7 @@ public bool readyToGo = false;
 
     public AudioManagerScript getAudioManager()
     {
-        return audioManagerScript;
+        return AudioManagerScript.instance;
     }
 
 

@@ -116,13 +116,13 @@ public class InventoryControllerScript : MonoBehaviour {
     //populate playerinventory with items
     public void PopulatePlayerInventory(ushort [,] items)
     {
-        Debug.Log("populate inventory called");
+        //Debug.Log("populate inventory called");
         playerInventoryPanelScript.genericInvoHandler.PopulateInventory(items);
     }
     //fetch items in player inventory
     public ushort[,] FetchItemsInPlayerInventory()
     {
-        Debug.Log("fetch inventory called");
+        //Debug.Log("fetch inventory called");
         return playerInventoryPanelScript.genericInvoHandler.FetchAllItemsInInventory();
     }
 

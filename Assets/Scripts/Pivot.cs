@@ -27,6 +27,7 @@ public class Pivot : MonoBehaviour
     [SerializeField] private Transform equipmentPosition;
 
     private bool isAttacking = false;
+    private bool isMeleeEquipped = false;
 
     float rotation = 90;
     float attackSpeed = 1;
@@ -34,15 +35,14 @@ public class Pivot : MonoBehaviour
     private void Start()
     {
         //player = GameObject.Find("/PlayArea/Sam(Clone)");
-        PlayerScript = player.GetComponent<Player>();
+        //PlayerScript = player.GetComponent<Player>();
     }
 
     private void Update()
     {
         if (!isAttacking)
         {
-            if (PlayerScript.equippedItem != null && PlayerScript.equippedItem.GetComponent<ItemClass>().ID >= 800 &&
-                PlayerScript.equippedItem.GetComponent<ItemClass>().ID < 900)
+            if (isMeleeEquipped)
             {
                 if (PlayerScript.getFacingDirection())
                     transform.rotation = Quaternion.Euler(0f, 0f, 270f);
@@ -144,12 +144,16 @@ public class Pivot : MonoBehaviour
         if (sword == null)
         {
             EmptyCurrentHand();
-            sword = Instantiate(swordPrefab, new Vector3(), Quaternion.identity) as GameObject;
+            isMeleeEquipped = true;
+            transform.rotation = Quaternion.Euler(0f, 0f, 270f);
+            sword = Instantiate(swordPrefab, new Vector3(), Quaternion.identity);
+
+            sword.transform.position = equipmentPosition.transform.position;
+            sword.transform.SetParent(equipmentPosition);
             if (!PlayerScript.getFacingDirection())
                 sword.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-
-            sword.transform.parent = equipmentPosition.transform;
-            sword.transform.position = equipmentPosition.position;
+            
+            
         }
     }
 
@@ -158,13 +162,14 @@ public class Pivot : MonoBehaviour
         if (katana == null)
         {
             EmptyCurrentHand();
-            katana = Instantiate(katanaPrefab, new Vector3(), Quaternion.identity) as GameObject;
+            isMeleeEquipped = true;
+            transform.rotation = Quaternion.Euler(0f, 0f, 270f);
+            katana = Instantiate(katanaPrefab, new Vector3(), Quaternion.identity);
+
+            katana.transform.position = equipmentPosition.position;
+            katana.transform.parent = equipmentPosition.transform;
             if (!PlayerScript.getFacingDirection())
                 katana.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-
-            katana.transform.parent = equipmentPosition.transform;
-            katana.transform.position = equipmentPosition.position;
-
         }
     }
 
@@ -173,6 +178,7 @@ public class Pivot : MonoBehaviour
         if (spacegun == null)
         {
             EmptyCurrentHand();
+            isMeleeEquipped = false;
             spacegun = Instantiate(spacegunPrefab, new Vector3(), Quaternion.identity) as GameObject;
             spacegun.transform.parent = equipmentPosition.transform;
             spacegun.transform.position = equipmentPosition.position;
@@ -185,6 +191,7 @@ public class Pivot : MonoBehaviour
         if (lavagun == null)
         {
             EmptyCurrentHand();
+            isMeleeEquipped = false;
             lavagun = Instantiate(lavagunPrefab, new Vector3(), Quaternion.identity) as GameObject;
             lavagun.transform.parent = equipmentPosition.transform;
             lavagun.transform.position = equipmentPosition.position;
@@ -207,6 +214,7 @@ public class Pivot : MonoBehaviour
     public void EquipItem(GameObject obj)
     {
         EmptyCurrentHand();
+        isMeleeEquipped = false;
         obj.transform.parent = equipmentPosition.transform;
         //obj.transform.position = equipmentPosition.position;
         obj.transform.localPosition = new Vector3(0.3f, 0, 0);
