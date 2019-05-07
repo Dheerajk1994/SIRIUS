@@ -23,7 +23,11 @@ GameObject:
   - component: {fileID: 50506768033079124}
   - component: {fileID: 58992101855463882}
   - component: {fileID: 114566946641421318}
+<<<<<<< HEAD
   - component: {fileID: 82288106237340312}
+=======
+  - component: {fileID: 82735270951161520}
+>>>>>>> bb71ba348c664afcdab615d83116c91a2b57a3af
   m_Layer: 0
   m_Name: GyroBullet
   m_TagString: Untagged
@@ -79,7 +83,11 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.31249997
+<<<<<<< HEAD
 --- !u!82 &82288106237340312
+=======
+--- !u!82 &82735270951161520
+>>>>>>> bb71ba348c664afcdab615d83116c91a2b57a3af
 AudioSource:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,9 +96,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
+<<<<<<< HEAD
   m_audioClip: {fileID: 8300000, guid: e80adce6f2db616449bbd02d3ae82e6f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
+=======
+  m_audioClip: {fileID: 8300000, guid: 8cf7591f87764954d81b71b983782552, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.6
+>>>>>>> bb71ba348c664afcdab615d83116c91a2b57a3af
   m_Pitch: 1
   Loop: 0
   Mute: 0
