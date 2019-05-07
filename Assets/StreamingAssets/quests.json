@@ -1,0 +1,88 @@
+{
+  "IntroQuests": [
+    {
+      "questID": 1,
+      "type": 0,
+      "prerequisiteID": [ 0 ],
+      "questName": "Talk to WTAF",
+      "questDescription": "Go find WTAF. She wants to tell you something. You can interact with her using E.",
+      "itemsToInteractWith": [ "WTAF" ],
+      "itemRewards": []
+
+    },
+    {
+      "questID": 2,
+      "type": 1,
+      "prerequisiteID": [ 0 ],
+      "questName": "Sam the Crafter",
+      "questDescription": "WTAF says that there are some spare materials in your bedroom chest. Make a wooden axe, pickaxe, and sword with the materials.",
+      "itemsRequired": [ 800, 1, 1000, 1, 1010, 1 ],
+      "itemRewards": []
+    },
+    {
+      "questID": 3,
+      "type": 0,
+      "prerequisiteID": [ 2 ],
+      "questName": "Sam the Explorer",
+      "questDescription": "Use the teleporter to leave the ship and explore the planet you crashed on.",
+      "itemsToInteractWith": [ "Teleporter" ],
+      "itemRewards": []
+    },
+    {
+      "questID": 4,
+      "type": 1,
+      "prerequisiteID": [ 3 ],
+      "questName": "Sam The Miner",
+      "questDescription": "WTAF wants you to collect some resources to fix the engine. You can mine tiles by equipping a pickaxe in your hotbar and left clicking a tile. You can pick up mined tiles by walking over them and it will add them into your inventory. To check the amount of minerals you have, press I to check your inventory.",
+      "itemsRequired": [ 21, 1 ],
+      "itemRewards": []
+    },
+    {
+      "questID": 5,
+      "type": 2,
+      "prerequisiteID": [ 3 ],
+      "questName": "Sam The Killer",
+      "questDescription": "WTAF has warned you about the presence of unfriendly beings on the planet. Equip your sword and left click to attack. Kill some enemies to show them you are not to be messed with.",
+      "mobName": [ "Blob" ],
+      "mobKillAmnt": [ 1 ],
+      "itemRewards": []
+    },
+    {
+      "questID": 7,
+      "type": 0,
+      "prerequisiteID": [ 0 ],
+      "questName": "I Want To Go HooOOOoooOOmmmEE",
+      "questDescription": "Time to get back to the ship. Use the button with the UPPPPPPPP ARRROOOOWWWWWW on it in your HUD to teleport back to your ship and talk to WTAF.",
+      "itemsToInteractWith": [ "WTAF" ],
+      "itemRewards": []
+
+    },
+    {
+      "questID": 8,
+      "type": 0,
+      "prerequisiteID": [ 0 ],
+      "questName": "Engine Deposit",
+      "questDescription": "Check out the Engine if we have enough fuel. If not, deposit what you mined from this planet. Go talk to WTAF when done.",
+      "itemsToInteractWith": [ "Engine" ],
+      "itemRewards": []
+    },
+    {
+      "questID": 9,
+      "type": 0,
+      "prerequisiteID": [ 0 ],
+      "questName": "Sam The Traveler",
+      "questDescription": "There should be enough fuel in the engine to take you to another planet. Go to the navigation room and interact with the panel. Select another planet to go to.",
+      "itemsToInteractWith": [ "Navigation" ],
+      "itemRewards": []
+    },
+    {
+      "questID": 10,
+      "type": 0,
+      "prerequisiteID": [ 9 ],
+      "questName": "New land",
+      "questDescription": "Good job you have managed to guide your ship to a new planet. Now go talk to WTAF.",
+      "itemsToInteractWith": [ "WTAF" ],
+      "itemRewards": []
+    }
+  ]
+}

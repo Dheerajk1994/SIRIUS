@@ -1,0 +1,58 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System;
+using UnityEngine;
+using UnityEngine.Audio;
+
+public class AudioManagerScript : MonoBehaviour {
+
+    public static AudioManagerScript instance;
+    public Sound[] sounds;
+
+    public bool isMuted;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (this != instance)
+        {
+            Destroy(this);
+            return;
+        }
+        DontDestroyOnLoad(this.gameObject);
+        foreach (Sound s in sounds)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
+        }
+    }
+
+    public void Play(string name)
+    {
+        if (isMuted) return;
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return;
+        }
+        s.source.Play();
+    }
+
+    public void SetAudioManager()
+    {
+        //
+    }
+
+    public void ToggleSound(bool toggle)
+    {
+        isMuted = toggle;
+       
+    }
+}

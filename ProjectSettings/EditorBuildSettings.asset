@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 7daf74898ef10435485df66ad9ad4139
-  - enabled: 0
-    path: Assets/Scenes/scene1.unity
-    guid: 961e20d39ac6807428d5c366996163a6
+    path: Assets/Scenes/Main Menu.unity
+    guid: 732dcb91d37a64d2386b8df2d21a5287
   - enabled: 1
-    path: Assets/Scenes/EditedCrafting.unity
-    guid: aa4cf29340c074083b0321576d95b81e
+    path: Assets/Scenes/ShipScene.unity
+    guid: feaf7adaa3baefc4496b7896578b8d9e
+  - enabled: 1
+    path: Assets/Scenes/TerrainScene.unity
+    guid: 48ace656f546f404b8b0c686eccbc134
   m_configObjects: {}

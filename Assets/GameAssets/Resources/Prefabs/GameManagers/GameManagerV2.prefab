@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1166885939089366}
+  m_IsPrefabAsset: 1
+--- !u!1 &1166885939089366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4237562081661904}
+  - component: {fileID: 114073495195294774}
+  - component: {fileID: 114925589026297800}
+  m_Layer: 0
+  m_Name: GameManagerV2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4237562081661904
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166885939089366}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.4, y: 76.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114073495195294774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166885939089366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9fca0c5c89921409e6ee0f42fb82a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  greenWorldSavePath: greenWorld
+  moonWorldSavePath: moonWorld
+  currentWorld: 0
+  currentWorldSavePath: greenWorld
+  TerrainManagerPrefab: {fileID: 1692291654787358, guid: 49d8fbf2f65393446ab4cb1c2c234172,
+    type: 2}
+  UIPrefab: {fileID: 1854798513534054, guid: f42fea5cd4cb7b6429366240da94bcce, type: 2}
+  PlayerPrefab: {fileID: 1370303781483332, guid: 75ebd985a83e1b6419e1a66a36394b56,
+    type: 2}
+  MainCameraPrefab: {fileID: 1939834119536744, guid: 461be19241647e04786f222d2316d27c,
+    type: 2}
+  InputManagerPrefab: {fileID: 1352975873008704, guid: 92f34953b7f0c3746865cea836661e87,
+    type: 2}
+  InventoryControllerPrefab: {fileID: 1254821907270186, guid: c238ef9336c24724c806cbdb5593c70a,
+    type: 2}
+  AIManagerPrefab: {fileID: 1728953495709722, guid: 4d28ba06d3a1754438335e96df227730,
+    type: 2}
+  QuestManagerPrefab: {fileID: 1232580355102106, guid: d3832af4cbdd8774eaa4be3b4192b58f,
+    type: 2}
+  DialogueManagerPrefab: {fileID: 1604679227476600, guid: 829ba7c8bddd25644982cfcccf3d2e07,
+    type: 2}
+  ShipPrefab: {fileID: 1143345085434036, guid: d91b34b446d065b4eaf127ad4f25307c, type: 2}
+  terrainManager: {fileID: 0}
+  ui: {fileID: 0}
+  player: {fileID: 0}
+  mainCameraObject: {fileID: 0}
+  inputManager: {fileID: 0}
+  inventoryController: {fileID: 0}
+  aiManager: {fileID: 0}
+  questManager: {fileID: 0}
+  dialogueManager: {fileID: 0}
+  ship: {fileID: 0}
+  mobSpawner: {fileID: 1454690488043132, guid: 04751bf7561bafd4facf096a3b193a7d, type: 2}
+  terrainManagerScript: {fileID: 0}
+  uiScript: {fileID: 0}
+  playerScript: {fileID: 0}
+  cameraScript: {fileID: 0}
+  inputManagerScript: {fileID: 0}
+  inventoryControllerScript: {fileID: 0}
+  questManagerScript: {fileID: 0}
+  dialogueManagerScript: {fileID: 0}
+  shipScript: {fileID: 0}
+  mobSpawnerScript: {fileID: 0}
+  readyToGo: 0
+  worldPresent: 0
+  playerPos: {x: 0, y: 0, z: 0}
+--- !u!114 &114925589026297800
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166885939089366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fea6b8210052ec4f98c4fdfec68ead8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilePrefab: {fileID: 1212904404968698, guid: 5ac034eac9cfea74fbf2d9dc890db054, type: 2}
+  tilePoolSize: 60000

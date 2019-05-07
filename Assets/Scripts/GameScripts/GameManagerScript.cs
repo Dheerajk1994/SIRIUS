@@ -2,72 +2,330 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
+    //public static GameManagerScript instance; 
 
+    #region WORLD_INFO
+    public string greenWorldSavePath = "greenWorld";
+    public string moonWorldSavePath = "moonWorld";
+
+    public EnumClass.TerrainType currentWorld;         
+
+    public string currentWorldSavePath = "greenWorld";
+    #endregion
+
+    #region PREFABS
+    public GameObject TerrainManagerPrefab;
+    public GameObject UIPrefab;
+    public GameObject PlayerPrefab;
+    public GameObject MainCameraPrefab;
+    public GameObject InputManagerPrefab;
+    public GameObject InventoryControllerPrefab;
+    public GameObject AIManagerPrefab;
+    public GameObject QuestManagerPrefab;
+    public GameObject DialogueManagerPrefab;
+    public GameObject ShipPrefab;
+    //public GameObject AudioManagerPrefab;
+
+    #endregion
+
+    #region INSTANTIATED_PREFABS
+    public GameObject terrainManager;
+    public GameObject ui;
     public GameObject player;
-    public GameObject TerrainManager;
-    public GameObject stone;
+    public GameObject mainCameraObject;
+    public GameObject inputManager;
+    public GameObject inventoryController;
+    public GameObject aiManager;
+    public GameObject questManager;
+    public GameObject dialogueManager;
+    public GameObject ship;
+//<<<<<<< will
+    //public GameObject audioManager;
+    public GameObject mobSpawner;
+//=======
+    //public GameObject audioManager;
+//>>>>>>> dtemp
+    #endregion
 
-    public GameObject UI;
-    public GameObject playerInvoPanel;
-    public GameObject craftingPanel;
-    public GameObject attributePanel;
+    #region SCRIPT_REFERENCES
+    public TerrainManagerScript terrainManagerScript;
+    public UIScript uiScript;
+    public Player playerScript;
+    public CameraScript cameraScript;
+    public InputManagerScript inputManagerScript;
+    public InventoryControllerScript inventoryControllerScript;
 
-    public Slider healthBar;
-    public Slider staminaBar;
-    public Slider hungerBar;
+    public QuestManagerScript questManagerScript;   
+    public DialogueManagerScript dialogueManagerScript;   
 
+    public ShipScript shipScript;
+    //public AudioManagerScript audioManagerScript;
 
-    public bool isInDemoMode;
+    public MobSpawnerScript mobSpawnerScript;
 
+#endregion
+
+#region LOCAL_VARIABLES
+public bool readyToGo = false;
+    public bool worldPresent = false;
+    public Vector3 playerPos;
+    #endregion
+
+    //AWAKE
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //    }
+    //    else if (this != instance)
+    //    {
+    //        Destroy(this);
+    //    }
+    //    //DontDestroyOnLoad(this.gameObject);
+    //}
+
+    //START
     private void Start()
     {
-        player.gameObject.SetActive(false);
-        if (isInDemoMode)
+        PopulateSceneObjects();
+        posTillMobSpawn = playerPos;
+    }
+
+
+    Vector2 posTillMobSpawn;
+    private void Update()
+    {
+        if (readyToGo && currentWorld != EnumClass.TerrainType.SHIP)
         {
-            StartNewGame();
+            if (Vector2.Distance(player.transform.position, playerPos) > 10.0f)
+            {
+                StartCoroutine(terrainManagerScript.DisplayChunks(player.transform.position, true));
+                playerPos = player.transform.position;
+            }
+            if(Vector2.Distance(player.transform.position, posTillMobSpawn) > 15f)
+            {
+                StartCoroutine(mobSpawnerScript.SpawnBlobs(terrainManagerScript.frontTilesValue, 10, GameObject.Find("PlayArea")));
+                posTillMobSpawn = playerPos;
+            }
         }
     }
 
-    public void StartNewGame()
+    private void ReceiveFromTheImmortal()
     {
-        TerrainManager.GetComponent<GenerateTerrainScript>().StartTerrainGeneration();
-        Camera.main.gameObject.transform.SetParent(player.transform);
-        player.gameObject.SetActive(true);
-        player.GetComponent<SpriteRenderer>().sortingLayerName = "frontTileLayer";
+
     }
 
-    private void Update()
+    private void GiveToTheImmortal()
     {
-        if (Input.GetMouseButton(0)) LeftMouseClicked();
-        else if (Input.GetMouseButton(1)) RightMouseClicked();
-        else if(Input.GetKeyDown(KeyCode.I)) ToggleInventory();
-        else if (Input.GetKeyDown(KeyCode.C)) ToggleCrafting();
+
     }
 
-    private void LeftMouseClicked()
+    private void PopulateSceneObjects()
     {
-        Vector2 mPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        TerrainManager.GetComponent<TerrainManagerScript>().MineTile(Mathf.RoundToInt(mPos.x), Mathf.RoundToInt(mPos.y));
+
+        ////
+        currentWorld = TheImmortalScript.instance.WorldTypeToGenerate;
+
+        terrainManager = Instantiate(TerrainManagerPrefab);
+        terrainManagerScript = terrainManager.GetComponent<TerrainManagerScript>();
+
+        ui = Instantiate(UIPrefab);
+        uiScript = ui.GetComponent<UIScript>();
+        ui.gameObject.SetActive(false);
+
+        player = Instantiate(PlayerPrefab);
+        playerScript = player.GetComponent<Player>();
+        player.gameObject.SetActive(false);
+
+        mainCameraObject = Instantiate(MainCameraPrefab);
+        cameraScript = mainCameraObject.GetComponent<CameraScript>();
+        mainCameraObject.gameObject.SetActive(false);
+
+        inputManager = Instantiate(InputManagerPrefab);
+        inputManagerScript = inputManager.GetComponent<InputManagerScript>();
+
+        inventoryController = Instantiate(InventoryControllerPrefab);
+
+        inventoryControllerScript = inventoryController.GetComponent<InventoryControllerScript>();
+
+        aiManager = Instantiate(AIManagerPrefab);
+        
+        questManager = Instantiate(QuestManagerPrefab);
+        questManagerScript = questManager.GetComponent<QuestManagerScript>();
+
+        dialogueManager = Instantiate(DialogueManagerPrefab);
+        dialogueManagerScript = dialogueManager.GetComponent<DialogueManagerScript>();
+
+        terrainManagerScript.SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
+        playerScript.SetPlayerScript(this, uiScript, inputManagerScript, AudioManagerScript.instance);
+        inputManagerScript.SetInputManager(this, uiScript, terrainManagerScript);
+
+        inventoryControllerScript.SetInventoryController(this, uiScript, AudioManagerScript.instance);
+
+//<<<<<<< will
+        mobSpawnerScript = mobSpawner.GetComponent<MobSpawnerScript>();
+        mobSpawnerScript.SetMobSpawner(this);
+
+//<<<<<<< ryan
+//        terrainManagerScript          .SetTerrainManager(this, this.GetComponent<TilePoolScript>(), player, inventoryControllerScript);
+//        playerScript                  .SetPlayerScript(this, uiScript,inputManagerScript, audioManagerScript);
+//        inputManagerScript            .SetInputManager(this, uiScript, terrainManagerScript);
+//        inventoryControllerScript     .SetInventoryController(this, uiScript, audioManagerScript);
+//        questManagerScript            .SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>());
+        //audioManagerScript
+//=======
+        
+//>>>>>>> dtemp
+//=======
+//>>>>>>> dtemp
+
+        if (currentWorld == EnumClass.TerrainType.SHIP)
+        {
+            ship = Instantiate(ShipPrefab);
+            shipScript = ship.GetComponent<ShipScript>();
+            shipScript.SetShip(uiScript, AudioManagerScript.instance);
+            shipScript.GetChestReference().GetComponent<InventoryHandlerScript>().PopulateInventory(TheImmortalScript.instance.ShipInventoryItems);
+        }
+
+        readyToGo = false;
+        worldPresent = false;
+
+        GameObject PlayArea = new GameObject("PlayArea");
+        PlayArea.transform.position = new Vector3(0f, 0f, 0f);
+
+        GenerateScene();
+
+        //UI
+        uiScript.SetUIPanel(this, inputManagerScript, AudioManagerScript.instance, player);
+        inventoryControllerScript.PopulatePlayerHotbar(TheImmortalScript.instance.PlayerHotbarItems);
+        inventoryControllerScript.PopulatePlayerInventory(TheImmortalScript.instance.PlayerInventoryItems);
+
+        //QUEST AND DIALOGUE
+        questManagerScript.SetQuestManager(uiScript.QuestPanel.GetComponent<QuestPanelScript>(), TheImmortalScript.instance.QuestsCompleted, TheImmortalScript.instance.ActiveQuests);
+        dialogueManagerScript.SetDialogueManager(this, uiScript.BottomDialoguePanel.GetComponent<DialoguePanelScript>(), TheImmortalScript.instance.DialoguesCompleted);
+
+        playerScript                  .SetPlayerScript(this, uiScript, inputManagerScript, AudioManagerScript.instance);
+        player.transform.position = playerPos;
+        player.SetActive(false);
+        bool stat = true;
+        if(currentWorld != EnumClass.TerrainType.SHIP)
+        {
+            StartCoroutine(terrainManagerScript.DisplayChunks(player.transform.position, stat));
+        }
+        if (stat)
+        {
+            player.SetActive(true);
+            readyToGo = true;
+        }
+
+        if (terrainManagerScript.frontTilesValue != null)
+        {     
+            //mobSpawnerScript.SpawnBlobs(5,PlayArea);
+            //mobSpawnerScript.printNumberOfSpawnLocations();
+            //mobSpawnerScript.printSpawnLocations();
+
+        }
     }
 
-    private void RightMouseClicked()
+    private void GenerateScene()
     {
-        Vector2 mPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        TerrainManager.GetComponent<TerrainManagerScript>().PlaceTile(Mathf.RoundToInt(mPos.x), Mathf.RoundToInt(mPos.y), stone);
+        GameDataHandler.HandleTerrainDataGeneration(this, TheImmortalScript.instance, terrainManagerScript);
+        ui.SetActive(true);
+        mainCameraObject.SetActive(true);
+
+        player.SetActive(true);
+        player.GetComponent<SpriteRenderer>().sortingOrder = (int)EnumClass.LayerIDEnum.FRONTLAYER;
+        player.transform.SetParent(GameObject.Find("PlayArea").transform);
+
+        if (currentWorld == EnumClass.TerrainType.SHIP)
+        {
+//<<<<<<< ryan
+//            ship = Instantiate(ShipPrefab);
+//            shipScript = ship.GetComponent<ShipScript>();
+//            shipScript.SetShip(uiScript, audioManagerScript);
+//=======
+            ship.transform.position = new Vector2(0f, 0f);
+            playerPos = ship.GetComponent<ShipScript>().spawnPosition.position;
+//>>>>>>> dtemp
+        }
+        
+        cameraScript.SetCamera(player.transform, currentWorld);
+        worldPresent = true;
     }
 
-    private void ToggleInventory()
+    public void TeleportToShip()
     {
-        UI.GetComponent<UIScript>().TogglePlayerInventory();
+        uiScript.loadingScreen.gameObject.SetActive(true);
+        TheImmortalScript.instance.WorldTypeToGenerate = EnumClass.TerrainType.SHIP;
+        SaveInventory();
+        SaveQuestsAndDialogues();
+        GameDataHandler.HandleTerrainSaving(this, terrainManagerScript, TheImmortalScript.instance);
+        StartCoroutine(LoadScene("ShipScene"));
+        //operation.allowSceneActivation = true;
     }
 
-    private void ToggleCrafting()
+    public void TeleportToTerrain()
     {
-        UI.GetComponent<UIScript>().ToggleCraftingPanel();
+        uiScript.loadingScreen.gameObject.SetActive(true);
+        SaveInventory();
+        SaveQuestsAndDialogues();
+        StartCoroutine(LoadScene("TerrainScene"));
+        //operation.allowSceneActivation = true;
+    }
+
+    private void SaveInventory()
+    {
+        TheImmortalScript.instance.PlayerHotbarItems = inventoryControllerScript.FetchItemsInPlayerHotbar();
+        TheImmortalScript.instance.PlayerInventoryItems = inventoryControllerScript.FetchItemsInPlayerInventory();
+        if(currentWorld == EnumClass.TerrainType.SHIP)
+        {
+            TheImmortalScript.instance.ShipInventoryItems = ship.GetComponent<ShipScript>().GetChestReference().GetComponent<InventoryHandlerScript>().FetchAllItemsInInventory();
+        }
+    }
+
+    private void SaveQuestsAndDialogues()
+    {
+        TheImmortalScript.instance.QuestsCompleted = questManagerScript.completedQuestsID;
+        TheImmortalScript.instance.ActiveQuests = questManagerScript.activeQuestsId;
+        TheImmortalScript.instance.DialoguesCompleted = dialogueManagerScript.completedDialogues;
+    }
+
+    public void SaveGame()
+    {
+
+    }
+
+    public void ExitSceneIntoMainMenu()
+    {
+        uiScript.loadingScreen.gameObject.SetActive(true);
+        SaveInventory();
+        SaveQuestsAndDialogues();
+        GameDataHandler.HandleTerrainSaving(this, terrainManagerScript, TheImmortalScript.instance);
+        SaveManager.SaveGame(TheImmortalScript.instance);
+        Debug.Log(TheImmortalScript.instance.PlayerLandPosInGreen);
+        SceneManager.LoadScene("Main Menu");
+    }
+
+    private IEnumerator LoadScene(string scene)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
+        //operation.allowSceneActivation = false;
+        while (!operation.isDone)
+        {
+            yield return null;
+        }
+    }
+
+    public AudioManagerScript getAudioManager()
+    {
+        return AudioManagerScript.instance;
     }
 
 
-}
+
+}//END GAME MANAGER

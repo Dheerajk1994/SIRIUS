@@ -1,0 +1,24 @@
+{
+  "aiDialogues": [
+    "BZZZZ BZZZZ...",
+    "SYSTEM ... BZZZ.... CORRUPTED",
+    "REVERTING TO BACKUP MODULE",
+    "CORRUPTED DATA AT 99.9999%",
+    "READING NEAR BY ENTITIY....",
+    "ENTITY DETECTED....",
+    "ENTITIY NAME: SAM",
+    "ENTITIY SPECIES: CANIS LUPUS FAMILIARIS",
+    "ENTITYY INTELLIGENCE: BELOW STUPID",
+    "CURRENT CHANCE OF SURVIVAL: 1.5%",
+    "POTENTIAL CHANCE OF SURVIVAL: ... BZZZ ... ERROR ... BZZZ ... NULL POINTER EXCEPTION .... BZZZZZZZzzzzzzzz .... "
+  ],
+
+  "questDialogues": [
+    "Collect 100 stone",
+    "Collect 50 wood",
+    "collect 50 coal",
+    "Collect 50 copper",
+    "Press I to open inventory",
+    "Press C to open crafting panel"
+  ]
+}

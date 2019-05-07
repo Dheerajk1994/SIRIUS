@@ -1,0 +1,16 @@
+{
+  "ItemRecipe": [
+    {
+      "name": "Wooden Pickaxe",
+      "id": 1000,
+      "tier": 3,
+      "recipe": []
+    },
+    {
+      "name": "Iron Pickaxe",
+      "id": 1000,
+      "tier": 3,
+      "recipe": []
+    }
+  ]
+}

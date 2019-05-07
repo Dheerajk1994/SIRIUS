@@ -1,0 +1,307 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1692291654787358}
+  m_IsPrefabAsset: 1
+--- !u!1 &1692291654787358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4289973376253224}
+  - component: {fileID: 114754101674837374}
+  - component: {fileID: 114922002961065996}
+  - component: {fileID: 82264436594509646}
+  m_Layer: 0
+  m_Name: TerrainManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4289973376253224
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1692291654787358}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &82264436594509646
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1692291654787358}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d8d7f0d3095f62d45b477c7f3a812d8b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &114754101674837374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1692291654787358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad4cd56488e2614459e50ba265c8276c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xDimension: 3000
+  heightAddition: 1000
+  TileObjectPrefab: {fileID: 1212904404968698, guid: 5ac034eac9cfea74fbf2d9dc890db054,
+    type: 2}
+  PickupTilePrefab: {fileID: 1672008991011400, guid: d5b16e1d919e3d64a93d6c8af75755de,
+    type: 2}
+  regularStoneSprites:
+  - {fileID: 21300000, guid: 3aaae0fabe76a12449c31cc70c66c5b7, type: 3}
+  - {fileID: 21300000, guid: 9e1330000bab6884e8a763aa740be1be, type: 3}
+  - {fileID: 21300000, guid: 4990aebc16245804db7529d68853f765, type: 3}
+  - {fileID: 21300000, guid: b909e811c7f3d3f41870f1f90f23a77b, type: 3}
+  moonStoneSprites:
+  - {fileID: 21300000, guid: 84c8e4775caf3104699aa04fca877553, type: 3}
+  - {fileID: 21300000, guid: c28a8bcb5becbd540845d721e7adef23, type: 3}
+  - {fileID: 21300000, guid: fe6aa07c3711dcc4b880a39e3bf53748, type: 3}
+  - {fileID: 21300000, guid: acc0a8dd5b55b1b47a9632503258a113, type: 3}
+  desertStoneSprites:
+  - {fileID: 21300000, guid: d834184f9f86815448208eb458955fde, type: 3}
+  - {fileID: 21300000, guid: ec5fd31431e3dc44282ccff2626390a1, type: 3}
+  - {fileID: 21300000, guid: d210c76aa7cde7c49b340d14b2b5f836, type: 3}
+  - {fileID: 21300000, guid: 1740f76f6b93ccc458772a40e66c15ea, type: 3}
+  snowStoneSprites:
+  - {fileID: 21300000, guid: 2980fb5c330a08c4e8db12dafd24a422, type: 3}
+  - {fileID: 21300000, guid: 1c625147de2c0394f83ecf45a3d0554f, type: 3}
+  - {fileID: 21300000, guid: 17ec07b196c701a428dab8d0e23f5e6d, type: 3}
+  - {fileID: 21300000, guid: c335bdc28d3727046946be1ac5fc5751, type: 3}
+  bedRockSprites:
+  - {fileID: 21300000, guid: 64a437d7658335543a399921c68ea031, type: 3}
+  - {fileID: 21300000, guid: 79ba0ed0e0365664780ba35ef0656056, type: 3}
+  - {fileID: 21300000, guid: 0cb5b5793c86fc24e990a169431d8db9, type: 3}
+  - {fileID: 21300000, guid: 6c40727c82141934e8538a30532e8cd1, type: 3}
+  regularDirtSprites:
+  - {fileID: 21300000, guid: 09edeee814bbdde4ea57fc57c5ac8eae, type: 3}
+  - {fileID: 21300000, guid: ecd6ad2e94c34444b80edd76da231fa3, type: 3}
+  - {fileID: 21300000, guid: 6e24c80b6a2a9504c9fae3e0e72ba866, type: 3}
+  - {fileID: 21300000, guid: ea820fee63b0ef0468dd33da43971512, type: 3}
+  moonDirtSprites:
+  - {fileID: 21300000, guid: 5a632bdb80bfb3649aee4c3ab652459b, type: 3}
+  - {fileID: 21300000, guid: f68b8f63fec60044ea7856579f70e1d4, type: 3}
+  - {fileID: 21300000, guid: d3849b1d88313464f86ac0ed993d2b8a, type: 3}
+  - {fileID: 21300000, guid: aa0df37426961a14b96fef7eca40003a, type: 3}
+  desertDirtSprites:
+  - {fileID: 21300000, guid: 409f34c4b585ce549a16e5e760b6edf0, type: 3}
+  - {fileID: 21300000, guid: 26c4859c8a9df974b97ea395788547af, type: 3}
+  - {fileID: 21300000, guid: e2a02a17b721dfe4da6d1c5bcbf750bd, type: 3}
+  - {fileID: 21300000, guid: d29b4afd0af9dcf4d96d11766da49ae0, type: 3}
+  snowDirtSprites:
+  - {fileID: 21300000, guid: 1cb545d0df8bcd04d92061ea77016470, type: 3}
+  - {fileID: 21300000, guid: 76b11850ae4ca7d4795cfcedddca5470, type: 3}
+  - {fileID: 21300000, guid: 3d35e9563136aed4098fae2c23800b48, type: 3}
+  - {fileID: 21300000, guid: 1da7afb83f420de408f6b25ad1389922, type: 3}
+  regularSandSprites:
+  - {fileID: 21300000, guid: cd049aad2478acf44bfdbfe492001344, type: 3}
+  - {fileID: 21300000, guid: 27d0ce0807773bf42a3c18e8342067b2, type: 3}
+  - {fileID: 21300000, guid: de2bf5e31077d0d40a1d9654fe8d1b68, type: 3}
+  - {fileID: 21300000, guid: 4fe46207f501e5c41b3faf78752c2570, type: 3}
+  moonSandSprite: []
+  regularGrassSprites:
+  - {fileID: 21300000, guid: ebf2ca31d7fa1f046a75494c04d55418, type: 3}
+  - {fileID: 21300000, guid: d6bcbdb2daa54834594166fd7cc9469f, type: 3}
+  - {fileID: 21300000, guid: cc0eb3095df087146a140147fcd6e859, type: 3}
+  - {fileID: 21300000, guid: ecea2e9fcbee50946a4b030f7008962b, type: 3}
+  desertGrassSprites:
+  - {fileID: 21300000, guid: 6a20c62320adeee4487d06ed97c36537, type: 3}
+  - {fileID: 21300000, guid: c01984a196257534c92d4b51dbf4dba6, type: 3}
+  - {fileID: 21300000, guid: f6f4d93ad4d8ef9419213003454f136d, type: 3}
+  - {fileID: 21300000, guid: 4177442290d449b448be5681dc60aba6, type: 3}
+  snowGrassSprites:
+  - {fileID: 21300000, guid: e4ddf15ed0f21574da15e90a38f04317, type: 3}
+  - {fileID: 21300000, guid: 5d346ea5de3d8e147a5bb871d654099c, type: 3}
+  - {fileID: 21300000, guid: 878f839b57fd4f345b39b46e921369cc, type: 3}
+  - {fileID: 21300000, guid: 11de7075d70b8b342be6cd35a07a7bdc, type: 3}
+  regularFlowerSprites:
+  - {fileID: 21300000, guid: 159390351d4f11040be918e31a7dd287, type: 3}
+  - {fileID: 21300000, guid: 0a9479abdc118114ab224df414cb905c, type: 3}
+  - {fileID: 21300000, guid: 63ee27dc53428f1418d7bf8ef6e78469, type: 3}
+  - {fileID: 21300000, guid: 791ddaf855b1f0140948724f9eae57a6, type: 3}
+  desertFlowerSprites:
+  - {fileID: 21300000, guid: e3f526df39a7e9a4c92ddab88f3270d9, type: 3}
+  - {fileID: 21300000, guid: cca0cdbead910df4f9f926cad849b461, type: 3}
+  - {fileID: 21300000, guid: 464276f9f1aa14d40a7d8feb0c3db783, type: 3}
+  - {fileID: 21300000, guid: f19c7e927ac5d72459fb671bdd511652, type: 3}
+  snowFlowerSprites:
+  - {fileID: 21300000, guid: 38d08b7bd9c2b904d801d05632a0f662, type: 3}
+  - {fileID: 21300000, guid: 206e5ffd634eb2d438a8bd3f6e4ff4ac, type: 3}
+  - {fileID: 21300000, guid: 4b4e109d82d13744684812371a329c6e, type: 3}
+  - {fileID: 21300000, guid: 443e0889b10d22b46bfc98ba0c214394, type: 3}
+  regularTreeBaseSprite:
+  - {fileID: 21300000, guid: ddd03f8d35607e44c82c3f4b9e0b69cf, type: 3}
+  regularTreeTopSprite:
+  - {fileID: 21300000, guid: 9419b3ca96bcd974880cd0305a6b055c, type: 3}
+  regularTreeCoreSprite:
+  - {fileID: 21300000, guid: 1839d0ecb04ac0346987e83b725109d3, type: 3}
+  - {fileID: 21300000, guid: f55c3f1f7a8497640a24641111bc9113, type: 3}
+  - {fileID: 21300000, guid: 81bb6d39138940b4995444a28b024603, type: 3}
+  - {fileID: 21300000, guid: 5f755b3a44191f448a5c9c19ac893ae1, type: 3}
+  desertTreeBaseSprite:
+  - {fileID: 21300000, guid: c1ddec1c38699724d9862065ee005273, type: 3}
+  desertTreeTopSprite:
+  - {fileID: 21300000, guid: 903fa1b2a47871943acaad4d6ceb3348, type: 3}
+  desertTreeCoreSprite:
+  - {fileID: 21300000, guid: c1304cab3d0aafd47956f60a9ce811b9, type: 3}
+  - {fileID: 21300000, guid: 4d7c286ae245a5642a066b0dcd69d10d, type: 3}
+  - {fileID: 21300000, guid: c1ddec1c38699724d9862065ee005273, type: 3}
+  snowTreeBaseSprite:
+  - {fileID: 21300000, guid: c1ddec1c38699724d9862065ee005273, type: 3}
+  snowTreeTopSprite:
+  - {fileID: 21300000, guid: 903fa1b2a47871943acaad4d6ceb3348, type: 3}
+  snowTreeCoreSprite:
+  - {fileID: 21300000, guid: c1304cab3d0aafd47956f60a9ce811b9, type: 3}
+  - {fileID: 21300000, guid: 4d7c286ae245a5642a066b0dcd69d10d, type: 3}
+  - {fileID: 21300000, guid: c1ddec1c38699724d9862065ee005273, type: 3}
+  coalSprites:
+  - {fileID: 21300000, guid: cb7aee118edb047499a51a15845649a1, type: 3}
+  - {fileID: 21300000, guid: 485a94980b4b5c84fb7d250e997a384b, type: 3}
+  - {fileID: 21300000, guid: 933b99b8bae44de4f87764a01b270a76, type: 3}
+  - {fileID: 21300000, guid: 794287c99bbb9474289b444ad94863e7, type: 3}
+  copperSprites:
+  - {fileID: 21300000, guid: 8a98c7be89f8b3f45a78031e9f06cc9c, type: 3}
+  - {fileID: 21300000, guid: 713248ba74324f2488cd05912c91fbf5, type: 3}
+  - {fileID: 21300000, guid: 9d5405677d0b88f459b12fefe1082f17, type: 3}
+  - {fileID: 21300000, guid: 059686307052b714493943430368b415, type: 3}
+  ironSprites:
+  - {fileID: 21300000, guid: 1b70a64495ac1344aa4a01e896652b6c, type: 3}
+  - {fileID: 21300000, guid: 461ea7213edd2e546aaab1b4333accc9, type: 3}
+  - {fileID: 21300000, guid: 83683777227363147b562e4ab5f07128, type: 3}
+  - {fileID: 21300000, guid: ad8500ef8845eda428ff617c80ac6559, type: 3}
+  silverSprites:
+  - {fileID: 21300000, guid: b27546d690dc3e74eb6c4d5f54b98b49, type: 3}
+  - {fileID: 21300000, guid: 14121578b60494743a40152bc8ffe960, type: 3}
+  - {fileID: 21300000, guid: 1b0fab1119cfcea4caa352342aa2695a, type: 3}
+  - {fileID: 21300000, guid: 019f502444b987246b041d68d9873ed1, type: 3}
+  goldSprites:
+  - {fileID: 21300000, guid: a2212771dba29da45aa20ef892f60c18, type: 3}
+  - {fileID: 21300000, guid: fdb32ec4d4364cc459e4b3086c03f284, type: 3}
+  - {fileID: 21300000, guid: 6df57c5b218f7814fb8fe58f8606e987, type: 3}
+  - {fileID: 21300000, guid: 4749fb90640eb7b498188d297b070ae2, type: 3}
+  diamondSprites:
+  - {fileID: 21300000, guid: 6a8d41a0e242db34094ce77889b25727, type: 3}
+  - {fileID: 21300000, guid: a2c997556083b244ea0650a5757640eb, type: 3}
+  - {fileID: 21300000, guid: 3de7d154720ef5943a4ae8d2883acd08, type: 3}
+  - {fileID: 21300000, guid: 7fba5b61b35d9af4fab849b6318d6a8b, type: 3}
+  chunkSize: 40
+  player: {fileID: 0}
+  gameManager: {fileID: 0}
+--- !u!114 &114922002961065996
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1692291654787358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159f0d9f7f94efe4f830aa99754ca1cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRandomRange: 1000

@@ -1,0 +1,435 @@
+{
+  "Items": [
+    {
+      "itemName": "Regular Dirt",
+      "id": 1,
+      "description": "Dirty dirt",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 1,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Regular Stone",
+      "id": 2,
+      "description": "It's hard",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 2,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Regular Wood",
+      "id": 3,
+      "description": "Knock knock",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 3,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Regular Sand",
+      "id": 4,
+      "description": "It gets everywhere.",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 4,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Tree Trunk Regular",
+      "id": 17,
+      "description": "It's nothing like an Elephant",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 3,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Tree Leaf Regular",
+      "id": 18,
+      "description": "Dhee spelled it Regalar",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 0,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Flower Regular",
+      "id": 19,
+      "description": "It's a flower",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 0,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Grass Regular",
+      "id": 20,
+      "description": "Why did you pick up some grass?",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 0,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Coal",
+      "id": 21,
+      "description": "Can be used as fuel",
+      "stackAmnt": 100,
+      "cost": 2,
+      "type": 5,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Copper",
+      "id": 22,
+      "description": "I wonder how many pennies this is worth",
+      "stackAmnt": 100,
+      "cost": 5,
+      "type": 22,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Silver",
+      "id": 23,
+      "description": "Ooh, shiny",
+      "stackAmnt": 100,
+      "cost": 8,
+      "type": 23,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Gold",
+      "id": 24,
+      "description": "That's a big nugget",
+      "stackAmnt": 100,
+      "cost": 10,
+      "type": 24,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Diamond",
+      "id": 25,
+      "description": "It's really hard",
+      "stackAmnt": 100,
+      "cost": 12,
+      "type": 25,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Iron",
+      "id": 26,
+      "description": "It's useful.",
+      "stackAmnt": 100,
+      "cost": 12,
+      "type": 26,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Moon Dirt",
+      "id": 40,
+      "description": "Dirty dirt from the moon",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 1,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Moon Stone",
+      "id": 41,
+      "description": "This may be able to evolve certain Pocket Monsters",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 2,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Moon Sand",
+      "id": 42,
+      "description": "why is there sand on the moon?",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 4,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Desert Dirt",
+      "id": 50,
+      "description": "Dirt from a desert.",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 1,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Desert Stone",
+      "id": 51,
+      "description": "Stone from a desert.",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 2,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Desert Grass",
+      "id": 52,
+      "description": "Dry and flammable.",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 0,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Desert Flower",
+      "id": 53,
+      "description": "Dried flowers from the desert.",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 0,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Cacti",
+      "id": 54,
+      "description": "Cactus.",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 3,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Cacti",
+      "id": 55,
+      "description": "Cactus.",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 3,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Cacti",
+      "id": 56,
+      "description": "Cactus.",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 3,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Snow Dirt",
+      "id": 60,
+      "description": "Dirty snow?",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 1,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Snow Stone",
+      "id": 61,
+      "description": "More like hard ice.",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 2,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Snow grass",
+      "id": 62,
+      "description": "Wet useless grass.",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 0,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Snow flowers",
+      "id": 63,
+      "description": "Cold, dying flowers.",
+      "stackAmnt": 100,
+      "cost": 0,
+      "type": 0,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Raw meat",
+      "id": 700,
+      "description": "Not safe to eat uncooked...",
+      "stackAmnt": 999,
+      "cost": 4,
+      "type": 7,
+      "tier": 0,
+      "recipe": []
+    },
+    {
+      "itemName": "Cooked meat",
+      "id": 701,
+      "description": "Delicious...",
+      "stackAmnt": 999,
+      "cost": 4,
+      "type": 8,
+      "tier": 1,
+      "recipe": [ 7, 1, 3, 5 ]
+    },
+    {
+      "itemName": "Sword",
+      "id": 800,
+      "description": "Something something something dark side",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 10,
+      "tier": 1,
+      "recipe": [ 3, 20 ]
+    },
+    {
+      "itemName": "Katana",
+      "id": 801,
+      "description": "Something something something dark side",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 10,
+      "tier": 1,
+      "recipe": [ 26, 10, 3, 15 ]
+    },
+    {
+      "itemName": "Spacegun",
+      "id": 900,
+      "description": "Something something something dark side",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 11,
+      "tier": 2,
+      "recipe": [ 25, 3, 23, 10 ]
+    },
+    {
+      "itemName": "Lavagun",
+      "id": 901,
+      "description": "supah hot",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 11,
+      "tier": 3,
+      "recipe": [ 25, 5, 23, 20 ]
+    },
+    {
+      "itemName": "Gyrogun",
+      "id": 902,
+      "description": "spin spin",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 11,
+      "tier": 4,
+      "recipe": [ 25, 10, 23, 30 ]
+    },
+    {
+      "itemName": "Wooden Pickaxe",
+      "id": 1000,
+      "description": "I will show you mine if you show me yours.",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 12,
+      "tier": 1,
+      "recipe": [ 3, 20 ]
+    },
+    {
+      "itemName": "Copper Pickaxe",
+      "id": 1001,
+      "description": "I will show you mine if you show me yours.",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 12,
+      "tier": 2,
+      "recipe": [ 2, 10, 22, 1 ]
+    },
+    {
+      "itemName": "Iron Pickaxe",
+      "id": 1002,
+      "description": "I will show you mine if you show me yours.",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 12,
+      "tier": 3,
+      "recipe": [ 3, 10, 26, 10 ]
+    },
+    {
+      "itemName": "Diamond Pickaxe",
+      "id": 1003,
+      "description": "I will show you mine if you show me yours.",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 12,
+      "tier": 4,
+      "recipe": [ 3, 10, 25, 10 ]
+    },
+    {
+      "itemName": "Wooden Axe",
+      "id": 1010,
+      "description": "I will show you mine if you show me yours.",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 13,
+      "tier": 1,
+      "recipe": [ 3, 20 ]
+    },
+    {
+      "itemName": "Copper Axe",
+      "id": 1011,
+      "description": "I will show you mine if you show me yours.",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 13,
+      "tier": 2,
+      "recipe": [ 3, 10, 22, 15 ]
+    },
+    {
+      "itemName": "Iron Axe",
+      "id": 1012,
+      "description": "I will show you mine if you show me yours.",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 13,
+      "tier": 3,
+      "recipe": [ 3, 10, 26, 20 ]
+    },
+    {
+      "itemName": "Diamond Axe",
+      "id": 1013,
+      "description": "I will show you mine if you show me yours.",
+      "stackAmnt": 1,
+      "cost": 0,
+      "type": 13,
+      "tier": 4,
+      "recipe": [ 3, 10, 25, 10 ]
+    }
+
+  ]
+}

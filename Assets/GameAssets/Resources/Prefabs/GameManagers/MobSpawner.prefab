@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1454690488043132}
+  m_IsPrefabAsset: 1
+--- !u!1 &1454690488043132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4624501015958482}
+  - component: {fileID: 114335389020758692}
+  m_Layer: 0
+  m_Name: MobSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4624501015958482
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1454690488043132}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 261.82773, y: 55.33499, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114335389020758692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1454690488043132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82cccdb50346b5f4f95bec354f8f39e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnLocations:
+  - {x: 1391, y: 997}
+  - {x: 1391, y: 1005}
+  - {x: 1392, y: 997}
+  - {x: 1392, y: 1005}
+  - {x: 1393, y: 997}
+  - {x: 1393, y: 1005}
+  - {x: 1394, y: 998}
+  - {x: 1394, y: 1005}
+  - {x: 1395, y: 999}
+  - {x: 1395, y: 1005}
+  - {x: 1396, y: 1000}
+  - {x: 1396, y: 1005}
+  - {x: 1397, y: 1000}
+  - {x: 1397, y: 1006}
+  - {x: 1398, y: 1006}
+  - {x: 1399, y: 1006}
+  - {x: 1400, y: 1005}
+  - {x: 1401, y: 1003}
+  - {x: 1402, y: 1002}
+  - {x: 1403, y: 1002}
+  - {x: 1404, y: 1002}
+  - {x: 1405, y: 1004}
+  - {x: 1406, y: 1005}
+  - {x: 1407, y: 995}
+  - {x: 1407, y: 1006}
+  - {x: 1408, y: 996}
+  - {x: 1408, y: 1006}
+  - {x: 1409, y: 996}
+  - {x: 1409, y: 1005}
+  - {x: 1410, y: 1005}
+  - {x: 1411, y: 1004}
+  - {x: 1412, y: 1004}
+  - {x: 1413, y: 1004}
+  - {x: 1414, y: 1004}
+  - {x: 1415, y: 1004}
+  - {x: 1416, y: 1004}
+  - {x: 1417, y: 1004}
+  - {x: 1418, y: 1004}
+  - {x: 1419, y: 1005}
+  - {x: 1420, y: 1005}
+  - {x: 1421, y: 1005}
+  - {x: 1422, y: 1005}
+  - {x: 1423, y: 995}
+  - {x: 1423, y: 1005}
+  - {x: 1424, y: 1005}
+  - {x: 1425, y: 1005}
+  - {x: 1426, y: 1004}
+  - {x: 1427, y: 1004}
+  - {x: 1428, y: 1004}
+  - {x: 1429, y: 1004}
+  - {x: 1430, y: 1005}
+  sizeOfSpawnArea: 7
+  blobPrefab: {fileID: 1688642031937284, guid: d0a64995459e12d48948b15a760f8f60, type: 2}
+  shroomMenPrefab: {fileID: 0}

@@ -1,0 +1,153 @@
+{
+  "WTAFDialogues": [
+    {
+      "dialogueID": 1,
+      "autoDisplayDialogue": true,
+      "dialogueGiverName": "WTAF",
+      "dialogueLines": [
+        "BEEP BEEP BEEP",
+        "WAKE UP YA STUPID IDIOT.",
+        "YOU WON’T FIND YOUR HOOMAN’S IF YOU KEEP SLEEPING.",
+        "COME NEAR ME SO I CAN TALK TO YOU."
+      ],
+      "dialogueActivated" : 0,
+      "questsNeededToActivateDialogue": [ 0 ],
+      "questsActivatedByDialgue": [ 1 ]
+    },
+
+    {
+      "dialogueID": 2,
+      "autoDisplayDialogue": true,
+      "dialogueGiverName": "WTAF",
+      "dialogueLines": [
+        "Yeah yeah yeah you crash landed. Sheesh.",
+        "Your planet got destroyed and while you fled with your hoomans, you got lost.",
+        "I’ll help you find them but you gotta listen.",
+        "First of all, you’re an idiot.",
+        "Let’s get that clear.",
+        "I am the one who makes the rules",
+        "I tell you what to do.",
+        "First, we need to fix the engine.",
+        "Luckily the planet we are orbiting has the necessary resources to repair it.",
+        "So listen up, dum dum.",
+        "You gotta go out into this dang planet that YOU got us stranded on and get us some silver, copper and gold",
+        "I would do it myself but I am merely AI in this dum dum computer",
+        "We need these things so we can fix the engine and LEAVE",
+        "My organic scanner has also picked up traces of hostile alien activity on the planet.",
+        "You might need some starting items. I think there are some materials in the chest in your bedroom.",
+        "Craft some tools before you head down.",
+        "You can press Q if you fogot what you were supposed to do."
+      ],
+      "dialogueActivated": 3,
+      "questsNeededToActivateDialogue": [ 1 ],
+      "questsActivatedByDialgue": [ 2 ]
+    },
+
+    {
+      "dialogueID": 3,
+      "autoDisplayDialogue": false,
+      "dialogueGiverName": "WTAF",
+      "dialogueLines": [
+        "Ok you got everything?",
+        "Of course you don’t you dum dum.",
+        "Just remember to check the quests and I’ll keep track of everything.",
+        "When you’re ready, go to the portal to leave the ship.",
+        "Now don’t come back here until you have everything, dum dum!",
+        "...",
+        "Why are you still standing here?",
+        "...",
+        "Your silence tells me that you really are a dummy."
+      ],
+      "dialogueActivated": 0,
+      "questsNeededToActivateDialogue": [],
+      "questsActivatedByDialgue": []
+    },
+
+    {
+      "dialogueID": 4,
+      "autoDisplayDialogue": true,
+      "dialogueGiverName": "WTAF",
+      "dialogueLines": [
+        "Finally, we have everything we need.",
+        "Now you should go back to the ship so we can fix this dang engine.",
+        "Hmmm...",
+        "You know the way back right?",
+        "We literally have one way back…",
+        "Backwards.",
+        "What did you think this was?",
+        "A 3D open world adventure game?",
+        "The developers made this in college.",
+        "You think they could afford all that?",
+        "They broke...",
+        "You can just press that button with the UPPPPPPPPPP ARRRRROOOOOOOOWWWW on it to teleport back to the ship."
+      ],
+      "dialogueActivated": 0,
+      "questsNeededToActivateDialogue": [ 4, 5 ],
+      "questsActivatedByDialgue": [ 7 ]
+    },
+
+    {
+      "dialogueID": 5,
+      "autoDisplayDialogue": true,
+      "dialogueGiverName": "",
+      "dialogueLines": [
+        "*plays in the arms of an angel*",
+        "*but not really because of copyright*",
+        "*pls join our patreon*",
+        "*we’re begging you*",
+        "*we have student loans…*",
+        "*HALP US. D: *",
+        "Wow you’re actually starting to get the hang of things!",
+        "We’ll be on our way to find the humans in no time!",
+        "I’ll fix the engine from here...",
+        "Don’t ask how.",
+        "I work miracles.",
+        "...",
+        "...",
+        "Ok there done.",
+        "Now go check the engine. It probably has no fuel.",
+        "Add some of that coal you collected into it.",
+        "We can use that as fuel for now."
+      ],
+      "dialogueActivated": 0,
+      "questsNeededToActivateDialogue": [ 7 ],
+      "questsActivatedByDialgue": [ 8 ]
+    },
+
+    {
+      "dialogueID": 7,
+      "autoDisplayDialogue": true,
+      "dialogueGiverName": "WTAF",
+      "dialogueLines": [
+        "Good we’re almost set.",
+        "Deposit some fuel in here.",
+        "Then go over to the navigation paenl. Its upstairs.",
+        "You’ll need to pick the next planet.",
+        "Just pick anything that looks pretty. This place is giving me the creeps.",
+        "Just select a planet and hit 'SET SAIL'.",
+        "Come talk to me when are somewhere new."
+      ],
+      "dialogueActivated": 0,
+      "questsNeededToActivateDialogue": [ 8 ],
+      "questsActivatedByDialgue": [ 9 ]
+    },
+
+
+    {
+      "dialogueID": 8,
+      "autoDisplayDialogue": true,
+      "dialogueGiverName": "WTAF",
+      "dialogueLines": [
+        "Alright...",
+        "Here’s where the adventure begins.",
+        "But for now thats all there is in my memory",
+        "Yer all on yer own now bud"
+      ],
+      "dialogueActivated": 0,
+      "questsNeededToActivateDialogue": [ 10 ],
+      "questsActivatedByDialgue": [ 0 ]
+
+    }
+  ]
+ }
+

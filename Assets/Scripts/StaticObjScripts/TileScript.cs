@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class TileScript : MonoBehaviour {
 
-    public byte tileId;
+    public ushort tileId;
 
 }

@@ -5,55 +5,94 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour {
+
+    //private AudioManagerScript audiomanager;
     public int resolut;
     public GameObject GameManager;
-    public Dropdown myDropdown;
-    public void SetDropdownIndex(Dropdown index)
+    public Dropdown resDropdown;
+    public GameObject pauseMenu;
+    public Toggle fullScreenToggle;
+    public GameSettings gameSettings;
+    public Resolution[] resolution;
+
+
+    UIScript uiScript;
+
+    public void SetMainMenuPanel(UIScript uScript)
     {
-        int res = index.value;
-        resolut = res;
+        uiScript = uScript;
+        //audiomanager = uScript.audioManager.GetComponent<AudioManagerScript>();
+
     }
-public void screenSz()
+
+    /*private void OnEnable()
     {
-        switch (resolut)
+        gameSettings = new GameSettings();
+        fullScreenToggle.onValueChanged.AddListener(delegate { ONfullScreenToggle();  });
+        resDropdown.onValueChanged.AddListener(delegate { OnResChange(); });
+        resolution = Screen.resolutions;
+
+        foreach (Resolution res in resolution) 
         {
-            case 0:
-                Screen.SetResolution(1024, 768, true);
-                Debug.Log("Screen size changed0");
-                break;
+            resDropdown.options.Add(new Dropdown.OptionData(resolution.ToString()));
+          }
+         
+    } */
 
-            case 1:
-                Screen.SetResolution(1280, 720, true);
-                Debug.Log("Screen size changed1");
-                break;
+    public void ONfullScreenToggle() {
+       gameSettings.fullscreen =   Screen.fullScreen = fullScreenToggle.isOn; 
+    }
 
-            case 2:
-                Screen.SetResolution(1600, 900, true);
-                Debug.Log("Screen size changed2");
-                break;
-        }
+    public void OnResChange()
+    {
+        Screen.SetResolution(resolution[resDropdown.value].width, resolution[resDropdown.value].height, Screen.fullScreen );    
+    }
+
+    public void saveSettings() {
+
+    }
+     
+    public void loadSettings() { 
+
     }
 
 
-    public void NewGameButton()
+    public void NewGameButton() // when the new button has been clicked, the game will begin
     {
-        GameManager.GetComponent<GameManagerScript>().StartNewGame();
+        //GameManager.GetComponent<GameManagerScript>().StartNewGame();
         this.gameObject.SetActive(false);
     }
 
-    public void quitGame()
+    public void quitGame() // Ends the game
     {
         Application.Quit();
         Debug.Log("Game Exits");
     }
 
-    public void TogglePanel(GameObject panel)
+    public void TogglePanel(GameObject panel) //Toggles the panels hide or show
     {
         panel.gameObject.SetActive(!panel.gameObject.activeSelf);
     }
 
-    public void LoadScene(int scene)
+    public void LoadScene(int scene) // Loads the different scenes
     {
         SceneManager.LoadScene(scene);
     }
+
+
+
+    void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        // if the esc key is pressed, it toggles the pause menu
+        //during the game
+        {
+
+            bool isActive = pauseMenu.activeSelf;
+
+            pauseMenu.SetActive(!isActive);
+        }
+    }
+
 }
